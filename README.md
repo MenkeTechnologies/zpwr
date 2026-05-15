@@ -44,7 +44,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Main Window](#tmux-main-window----the-cockpit) -- The Cockpit
 - [Personal Config](#personal-config----your-identity-file) -- Your Identity File
 - [ZPWR Verbs](#zpwr-verbs) -- Command Vocabulary
-- [Man Page](#man-page----man-zpwr) -- `man zpwr`
+- [Man Page](#man-page----man-zpwr-and-man-zpwrall) -- `man zpwr` and `man zpwrall`
 - [ZPWR auto menu completion](#auto-list-completions) -- Predictive Completion
 - [Github Account Variable](#zpwr_github_account-variable) -- Network Identity
 - [Adding Zsh Plugins](#adding-more-zinit-plugins) -- Sideloading Modules
@@ -129,7 +129,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 506+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
-- 22k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
+- 28k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
 - 170+ bash, stryke, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
@@ -436,13 +436,28 @@ YCM (vim code completion engine) will source this file (`autocmd filetype * set 
 ## zpwr verbs
 Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verbs (fzf multiselection is enabled).  `zpwr verbsedit` puts selected verbs onto command line for editing.
 
-## Man Page -- `man zpwr`
-ZPWR ships its own UNIX man page at `~/.zpwr/man/man1/zpwr.1`.  Add the directory to your `MANPATH` to view it with the system `man`:
+## Man Page -- `man zpwr` and `man zpwrall`
+ZPWR ships two UNIX man pages at `~/.zpwr/man/man1/`.  Add the directory to your `MANPATH` to view them with the system `man`:
 ```sh
 export MANPATH="$ZPWR/man:$MANPATH"
-man zpwr
+man zpwr        # quick reference
+man zpwrall     # comprehensive meta-page
 ```
-The page covers the `zpwr` dispatcher, `-h`/`-V` flags, a curated verb catalog (diagnostics, profiling, history analytics, snapshot/restore, cache management, navigation, eye-candy, tmux), environment variables, files, and runnable examples.  For the live colorized verb list use `zpwr help`; for the interactive encyclopedia use `zpwr docs`.
+
+`zpwr(1)` is the quick reference: dispatcher overview, `-h`/`-V` flags, a curated verb catalog (diagnostics, profiling, history analytics, snapshot/restore, cache management, navigation, eye-candy, tmux), key environment variables, files, and runnable examples.
+
+`zpwrall(1)` is the comprehensive meta-page -- the equivalent of `zshall(1)` for ZPWR.  It contains:
+- the full alphabetic catalog of all 461 dispatcher verbs with their underlying commands,
+- every documented `ZPWR_*` environment variable grouped by purpose (banner, auto-behaviors, colors, expansion, logging, editor, tmux, plugins, paths),
+- the canonical install layout and per-directory purpose,
+- tmux prefix, key bindings, and synced-pane semantics,
+- zsh keymap layout and the keybinding search verbs,
+- caching and compilation surfaces (`.zwc`, ctags, gtags, env cache, git repo cache),
+- log levels and destinations,
+- plugin/zinit interaction,
+- startup-profile and health-check surfaces.
+
+For the live colorized verb list use `zpwr help`; for the interactive encyclopedia use `zpwr docs`.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 Change in `~/.zpwr/local/.tokens.sh`

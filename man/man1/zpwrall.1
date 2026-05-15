@@ -1,0 +1,2425 @@
+.\" Comprehensive manpage for zpwr — meta page covering everything.
+.\" Contact: https://github.com/MenkeTechnologies/zpwr
+.TH ZPWRALL 1 "2026-05-14" "zpwr v48.7.3" "ZPWR Manual"
+.SH NAME
+zpwrall \- comprehensive ZPWR reference: dispatcher, every verb, every environment variable, file layout, tmux, keybindings, caches
+.SH SYNOPSIS
+.B zpwr
+.RI [ VERB " [" ARGS ...]]
+.br
+.B zpwr
+.BR \-h " | " \-? " | " \-\-help
+.br
+.B zpwr
+.BR \-V " | " \-\-version
+.SH OVERVIEW
+This is the meta-manual for ZPWR \(em the equivalent of
+.BR zshall (1)
+for the
+.B zpwr
+environment. It contains every section of
+.BR zpwr (1)
+plus full enumerations of:
+.IP \(bu 2
+all 461 dispatcher verbs (alphabetic, with short description and the
+underlying command/function);
+.IP \(bu 2
+all 88+ documented
+.B ZPWR_*
+environment variables;
+.IP \(bu 2
+the canonical install layout and per-directory purpose;
+.IP \(bu 2
+tmux prefix, key bindings, and synced-pane semantics;
+.IP \(bu 2
+zsh keymap layout (viins / vicmd / menuselect / visual / listscroll / viopp);
+.IP \(bu 2
+caching and compilation surfaces
+.RB ( .zwc ,
+ctags, gtags, env cache);
+.IP \(bu 2
+log levels and log destinations;
+.IP \(bu 2
+plugin/zinit interaction.
+.PP
+The page is intentionally exhaustive. For a curated cross-section, see
+.BR zpwr (1)
+or run
+.BR "zpwr help" .
+.SH DESCRIPTION
+.B zpwr
+is the master dispatcher for the ZPWR terminal environment \(em a
+high-voltage zsh-on-zinit cockpit weaponized with custom zsh, bash, vimL,
+and
+.I stryke
+code. The
+.B zpwr
+shell function is defined at
+.I $ZPWR/autoload/common/zpwr
+and sources
+.I $ZPWR_VERBS_FILE
+.RI ( $ZPWR/env/zpwr.zsh )
+on every invocation. That file declares the
+.B ZPWR_VERBS
+associative array, looks up
+.IR VERB ,
+splits its value on the literal
+.B =
+into
+.IR command = description ,
+and dispatches the command \(em forwarding any remaining
+.I ARGS
+quoted via
+.BR ${(q)@} .
+.PP
+With no arguments,
+.B zpwr
+.BR cd s
+to
+.BR $ZPWR ,
+the install root (typically
+.IR ~/.zpwr ).
+.PP
+ZPWR ships:
+.IP \(bu 2
+461+ dispatcher verbs across 26 alphabetic groups;
+.IP \(bu 2
+538+ autoloaded zsh functions in
+.IR $ZPWR/autoload/ ;
+.IP \(bu 2
+174+ standalone scripts in
+.IR $ZPWR/scripts/ ;
+.IP \(bu 2
+147+ test cases under
+.IR $ZPWR/tests/ ;
+.IP \(bu 2
+a full tmux cockpit
+.RI ( $ZPWR/tmux/ );
+.IP \(bu 2
+the ZPWR Encyclopedia (LaTeX + HTML +
+.B zpwr docs
+wizard pages) under
+.IR $ZPWR/docs/ .
+.SH DISPATCH MODEL
+For each call
+.RB \(lq "zpwr VERB ARGS..." \(rq:
+.IP 1. 4
+If
+.B VERB
+is empty,
+.BR cd
+to
+.BR $ZPWR .
+.IP 2. 4
+If
+.B VERB
+matches
+.BR \-V " | " \-\-version ,
+print the banner via
+.B zpwrAbout
+piped to a pager.
+.IP 3. 4
+If
+.B VERB
+matches
+.BR \-h " | " \-? " | " \-\-help ,
+list every verb in color via
+.B zpwrListVerbsColor
+piped to a pager.
+.IP 4. 4
+End-of-options
+.B \-\-
+markers are consumed; the next arg becomes
+.IR VERB .
+.IP 5. 4
+.B VERB
+is looked up in
+.BR ZPWR_VERBS .
+The value has the form
+.IR cmd = description ;
+.B cmd
+may be a single command or a
+.B ;
+-separated chain. Each component is dispatched: aliases via
+.BR eval ,
+otherwise via
+.B "eval cmd ${(q)@}"
+to preserve quoting.
+.IP 6. 4
+Unknown verbs print
+.RB \(lq "Unknown subcommand: \(aqVERB\(aq" \(rq
+to stderr and return 1.
+.PP
+Multiple verbs can resolve to the same command (aliases). For example
+.BR doctor ", " doc ", " checkup
+all dispatch to
+.BR zpwrDoctor .
+.SH OPTIONS
+.TP
+.BR \-h ", " \-? ", " \-\-help
+List every verb with colorized descriptions in a pager.
+.TP
+.BR \-V ", " \-\-version
+Show the ZPWR banner / version in a pager.
+.TP
+.B \-\-
+End-of-options marker; next arg is
+.IR VERB .
+.SH VERBS
+The complete verb table follows, alphabetized. Each entry shows the verb
+name, a short description, and the underlying
+.IR command
+or
+.I function
+that backs it. Aliases (multiple verbs sharing one description+command)
+are visible by repetition.
+.SS A
+.TP
+.B a
+banner, counts, clean, refresh zwc, test and update deps \(em \fIzpwrCleanRefreshCountsTestUpdate\fP
+.TP
+.B about
+show $ZPWR_REPO_NAME banner \(em \fIzpwrAbout\fP
+.TP
+.B activity
+visual timeline of shell history grouped by hour and directory \(em \fIzpwrTimeline\fP
+.TP
+.B alacritty
+edit $ZPWR_ALACRITTY_CFG \(em \fIzpwrAlacritty\fP
+.TP
+.B aliasrank
+mine history for alias usage stats \(em \fIzpwrAliasRank\fP
+.TP
+.B aliasusage
+mine history for alias usage stats \(em \fIzpwrAliasRank\fP
+.TP
+.B all
+banner, counts, clean, refresh zwc, test and update deps \(em \fIzpwrCleanRefreshCountsTestUpdate\fP
+.TP
+.B allsearch
+search all keybindings \(em \fIzpwrFzfAllKeybind\fP
+.TP
+.B altprettyprint
+pretty with alternating color \(em \fIzpwrAlternatingPrettyPrint\fP
+.TP
+.B animate
+run terminal animation \(em \fIzpwrAnimate\fP
+.TP
+.B attach
+attach to tmux session \(em \fItmux attach\-session\fP
+.TP
+.B audit
+audit PATH FPATH MANPATH for duplicates and missing dirs \(em \fIzpwrPathaudit\fP
+.TP
+.B autoload
+cd to autoload directory \(em \fIzal\fP
+.TP
+.B autoloadcount
+total number of autoloads in $ZPWR \(em \fIzpwrAutoloadCount\fP
+.TP
+.B autoloadlist
+total list of autoloads in $ZPWR \(em \fIzpwrAutoloadList\fP
+
+.SS B
+.TP
+.B background
+run arg in background \(em \fIb\fP
+.TP
+.B backup
+backup files \(em \fIzpwrBackup\fP
+.TP
+.B backuphistory
+backup $HISTFILE \(em \fIzpwrBackupHistfile\fP
+.TP
+.B banner
+show $ZPWR_REPO_NAME banner \(em \fIzpwrAbout\fP
+.TP
+.B bannercounts
+show $ZPWR_REPO_NAME banner and env counts \(em \fIzpwrBannerCounts\fP
+.TP
+.B bannerlolcat
+show hostname banner with ponysay and lolcat \(em \fIzpwrBannerLolcat\fP
+.TP
+.B bannernopony
+show banner without ponysay \(em \fIzpwrNoPonyBanner\fP
+.TP
+.B bannerpony
+show hostname banner with ponysay \(em \fIzpwrPonyBanner\fP
+.TP
+.B bench
+benchmark startup time with percentiles and baseline diff \(em \fIzpwrBench\fP
+.TP
+.B benchmark
+benchmark startup time with percentiles and baseline diff \(em \fIzpwrBench\fP
+.TP
+.B book
+split\-pane learning: book left, shell right \(em \fIzpwrStudy\fP
+.TP
+.B brc
+shell aliases file vim session \(em \fIbrc\fP
+
+.SS C
+.TP
+.B c
+zpwr cat args \(em \fIzpwrCat\fP
+.TP
+.B callers
+function dependency graph and call chain analysis \(em \fIzpwrDeps\fP
+.TP
+.B cat
+zpwr cat args \(em \fIzpwrCat\fP
+.TP
+.B catcd
+cat and cd to first dir \(em \fIcca\fP
+.TP
+.B catnviminforecentf
+cat custom vim info file then recentf \(em \fIzpwrNvimThenRecentf\fP
+.TP
+.B catrecentfviminfo
+cat recentf then custom vim info file \(em \fIzpwrRecentfThenNvim\fP
+.TP
+.B catviminfo
+cat custom vim info file \(em \fIzpwrCatNvimOrVimInfo\fP
+.TP
+.B cd
+cd to directory arg \(em \fIzpwrCd\fP
+.TP
+.B cdup
+cd up tree to directory arg \(em \fIzpwrCdUp\fP
+.TP
+.B cfasd
+c the fasd frecency ranked file \(em \fIzpwrFasdFListVerb\fP
+.TP
+.B changename
+mv dir into a namespace and sed sub all occurrences \(em \fIzpwrChangeName\fP
+.TP
+.B changenamezpwr
+mv into zpwr namespace and sed sub all occurrences \(em \fIzpwrChangeNameZpwr\fP
+.TP
+.B check
+run shellcheck and zsh \-n on all zpwr scripts and autoloads \(em \fIzpwrLint\fP
+.TP
+.B checkup
+run environment health check diagnostic \(em \fIzpwrDoctor\fP
+.TP
+.B cleanall
+clear all $ZPWR_DIRS_CLEAN, temp and cache \(em \fIzpwrCleanAll\fP
+.TP
+.B cleancache
+clean all zpwr cache files \(em \fIzpwrCleanCache\fP
+.TP
+.B cleancompcache
+clean all zpwr compsys cache files \(em \fIzpwrCleanCompCache\fP
+.TP
+.B cleandirs
+clear all $ZPWR_DIRS_CLEAN \(em \fIzpwrCleanDirs\fP
+.TP
+.B cleandirsandtemp
+clear all $ZPWR_DIRS_CLEAN and temp \(em \fIzpwrCleanDirsAndTemp\fP
+.TP
+.B cleangitcache
+clean all git repo cache files \(em \fIzpwrCleanGitRepoCache\fP
+.TP
+.B cleangitcleancache
+clean all git repo clean cache files \(em \fIzpwrCleanGitRepoCleanCache\fP
+.TP
+.B cleangitdirtycache
+clean all git repo dirty cache files \(em \fIzpwrCleanGitRepoDirtyCache\fP
+.TP
+.B cleanlog
+clear $ZPWR_LOGFILE \(em \fIzpwrCleanLog\fP
+.TP
+.B cleanrefreshupdate
+clean, refresh zwc and update deps \(em \fIzpwrCleanRefreshUpdate\fP
+.TP
+.B cleantemp
+clean all zpwr temp files \(em \fIzpwrCleanTemp\fP
+.TP
+.B cleanupdatedeps
+clean and update deps \(em \fIzpwrCleanUpdateDeps\fP
+.TP
+.B clearlist
+clear and list the files with no args \(em \fIzpwrClearList\fP
+.TP
+.B clearls
+clear and list the files with no args \(em \fIzpwrClearList\fP
+.TP
+.B clone
+clone and cd to arg \(em \fIgcl\fP
+.TP
+.B color2
+turn on stderr filter \(em \fIcolor2\fP
+.TP
+.B colorsdiff
+colorized side diff \(em \fIgsdc\fP
+.TP
+.B colortest
+test colors \(em \fIzpwrColorTest\fP
+.TP
+.B colortest256
+test 256 colors \(em \fIzpwr256ColorTest\fP
+.TP
+.B compile
+recompile all cache comps \(em \fIzpwrRecompile\fP
+.TP
+.B compilefiles
+recompile all files cache comps \(em \fIzpwrRecompileFiles\fP
+.TP
+.B compilefpath
+recompile all fpath cache comps \(em \fIzpwrRecompileFpath\fP
+.TP
+.B completions
+cd to completion directory \(em \fIzco\fP
+.TP
+.B comps
+cd to completion directory \(em \fIzco\fP
+.TP
+.B copycommand
+get the command to copy with system \(em \fIzpwrGetCopyCommand\fP
+.TP
+.B creategif
+create GIF from file with ffmpeg \(em \fIzpwrCreategif\fP
+.TP
+.B cruft
+find stale .zwc files, orphan caches, and broken symlinks \(em \fIzpwrStale\fP
+.TP
+.B curl
+custom curl with cleaned output \(em \fIzpwrMycurl\fP
+
+.SS D
+.TP
+.B dashboard
+live shell resource dashboard \(em \fIzpwrTop\fP
+.TP
+.B decompile
+delete all cache comps \(em \fIzpwrUncompile\fP
+.TP
+.B deduppaths
+deduplicate PATH fpath manpath \(em \fIzpwrDedupPaths\fP
+.TP
+.B deps
+function dependency graph and call chain analysis \(em \fIzpwrDeps\fP
+.TP
+.B detach
+detach from all tmux sessions \(em \fIzpwrDetachall\fP
+.TP
+.B dfimage
+cat Dockerfile from IMAGE_ID \(em \fIzpwrDfimage\fP
+.TP
+.B digs
+run series on networking commands on arg \(em \fIdigs\fP
+.TP
+.B dirsearch
+cd to a sub dir \(em \fIzpwrFzfDirsearchVerb\fP
+.TP
+.B doc
+run environment health check diagnostic \(em \fIzpwrDoctor\fP
+.TP
+.B dockerwipe
+wipe out all docker images or based on name \(em \fIzpwrDockerWipe\fP
+.TP
+.B docs
+interactive guided tour of zpwr \(em \fIzpwrWizard\fP
+.TP
+.B doctor
+run environment health check diagnostic \(em \fIzpwrDoctor\fP
+
+.SS E
+.TP
+.B e
+count all zpwr env \(em \fIzpwrEnvCounts\fP
+.TP
+.B edit
+exec $EDITOR \(em \fIzpwrEditor\fP
+.TP
+.B editor
+exec $EDITOR \(em \fIzpwrEditor\fP
+.TP
+.B emacsall
+emacs all zpwr files for :argdo \(em \fIzpwrEmacsAll\fP
+.TP
+.B emacsalledit
+emacs edit 1 or more configs \(em \fIzpwrEmacsAllEdit\fP
+.TP
+.B emacsallserver
+emacs all zpwr files for :argdo \(em \fIzpwrEmacsAllServer\fP
+.TP
+.B emacsautoload
+emacs all autoloads :argdo \(em \fIzpwrEmacsAutoload\fP
+.TP
+.B emacscd
+emacs edit and cd to first dir \(em \fIce\fP
+.TP
+.B emacsconfig
+emacs all zpwr configs \(em \fIeconf\fP
+.TP
+.B emacsctags
+emacs zpwr ctags tags \(em \fIzpwrEmacsZpwrCtags\fP
+.TP
+.B emacsemacsconfig
+emacs edit emacs zpwr configs \(em \fIzpwrEmacsEmacsConfig\fP
+.TP
+.B emacsfilesearch
+emacs a file in a sub dir \(em \fIzpwrEmacsFzfFilesearchVerb\fP
+.TP
+.B emacsfilesearchedit
+edit emacs a file in a sub dir \(em \fIzpwrEmacsFzfFilesearchVerbEdit\fP
+.TP
+.B emacsfindsearch
+emacs find drive for file \(em \fIzpwrFindFzfNoZLEEmacs\fP
+.TP
+.B emacsfindsearchedit
+emacs edit find drive for file \(em \fIzpwrFindFzfEditNoZLEEmacs\fP
+.TP
+.B emacsgtags
+emacs zpwr GNU global tags \(em \fIzpwrEmacsZpwrGtags\fP
+.TP
+.B emacsgtagsedit
+emacs edit zpwr GNU global tags \(em \fIzpwrEmacsZpwrGtagsEdit\fP
+.TP
+.B emacslocatesearch
+emacs accept locate drive for file \(em \fIzpwrLocateFzfNoZLEEmacs\fP
+.TP
+.B emacslocatesearchedit
+emacs edit locate drive for file \(em \fIzpwrLocateFzfEditNoZLEEmacs\fP
+.TP
+.B emacsplugincount
+total number of emacs plugins in $ZPWR \(em \fIzpwrEmacsPluginCount\fP
+.TP
+.B emacspluginlist
+total list of emacs plugins in $ZPWR \(em \fIzpwrEmacsPluginList\fP
+.TP
+.B emacsrecent
+emacs edit most recent editor files \(em \fIzpwrEmacsRecent\fP
+.TP
+.B emacsrecentcd
+cd and emacs edit most recent editor files \(em \fIzpwrEmacsRecentCd\fP
+.TP
+.B emacsrecentsudo
+sudo emacs edit most recent editor files \(em \fIzpwrSudoEmacsRecent\fP
+.TP
+.B emacsrecentsudocd
+cd and sudo emacs edit most recent editor files \(em \fIzpwrSudoEmacsRecentCd\fP
+.TP
+.B emacsscriptedit
+emacs edit 1 or more scripts \(em \fIzpwrEmacsScriptEdit\fP
+.TP
+.B emacsscripts
+emacs all zpwr scripts for :argdo \(em \fIzpwrEmacsScripts\fP
+.TP
+.B emacstests
+emacs edit all zpwr tests \(em \fIzet\fP
+.TP
+.B emacstokens
+emacs the .tokens.sh file \(em \fIetok\fP
+.TP
+.B emacswordsearch
+emacs a file in a sub dir by word \(em \fIzpwrEmacsFzfWordsearchVerb\fP
+.TP
+.B emacswordsearchedit
+edit emacs a file in a sub dir by word \(em \fIzpwrEmacsFzfWordsearchVerbEdit\fP
+.TP
+.B emacszpwr
+emacs zpwr dir \(em \fIzpwrEmacsZpwr\fP
+.TP
+.B envaccept
+accept from fzf env \(em \fIzpwrFzfEnvVerbAccept\fP
+.TP
+.B envcachesearch
+search all cached aliases, parameters, builtins, keywords and functions \(em \fIzpwrFzfEnv\fP
+.TP
+.B envcounts
+count all zpwr env \(em \fIzpwrEnvCounts\fP
+.TP
+.B envedit
+edit from fzf env \(em \fIzpwrFzfEnvVerbEdit\fP
+.TP
+.B environmentcachesearch
+search all cached aliases, parameters, builtins, keywords and functions \(em \fIzpwrFzfEnv\fP
+.TP
+.B environmentcounts
+count all zpwr env \(em \fIzpwrEnvCounts\fP
+.TP
+.B environmentvariables
+list all zpwr env vars \(em \fIzpwrEnvVars\fP
+.TP
+.B environmentvariablesall
+list all env vars \(em \fIzpwrEnvVarsAll\fP
+.TP
+.B environmentvars
+list all zpwr env vars \(em \fIzpwrEnvVars\fP
+.TP
+.B environmentvarsall
+list all env vars \(em \fIzpwrEnvVarsAll\fP
+.TP
+.B envvars
+list all zpwr env vars \(em \fIzpwrEnvVars\fP
+.TP
+.B envvarsall
+list all env vars \(em \fIzpwrEnvVarsAll\fP
+.TP
+.B ev
+list all zpwr env vars \(em \fIzpwrEnvVars\fP
+.TP
+.B eva
+list all env vars \(em \fIzpwrEnvVarsAll\fP
+.TP
+.B execglob
+exec on globbed files \(em \fIzpwrExecGlob\fP
+.TP
+.B execglobparallel
+parallel exec on globbed files \(em \fIzpwrExecGlobParallel\fP
+.TP
+.B execpy
+exec python script from $ZPWR_PYSCRIPTS \(em \fIzpwrExecpy\fP
+.TP
+.B exercism
+go to Exercism home page \(em \fIzpwrOpenExercism\fP
+.TP
+.B exercismdownload
+download all for track \(em \fIzpwrExercismDownloadAll\fP
+.TP
+.B exercismedit
+edit file in $HOME/Exercism \(em \fIzpwrEditExercism\fP
+.TP
+.B exists
+check if identifier is valid \(em \fIzpwrExists\fP
+.TP
+.B existscommand
+check if command is valid \(em \fIzpwrCommandExists\fP
+.TP
+.B expandstats
+expansion stats dashboard from zsh\-expand \(em \fIzpwrExpandStats\fP
+
+.SS F
+.TP
+.B f
+cd to directory arg \(em \fIzpwrCd\fP
+.TP
+.B figletfonts
+show all figlet fonts \(em \fIzpwrFigletfonts\fP
+.TP
+.B filesearch
+c a file in a sub dir \(em \fIzpwrFzfFilesearchVerb c\fP
+.TP
+.B filesearchedit
+edit c a file in a sub dir \(em \fIzpwrFzfFilesearchVerbEdit c\fP
+.TP
+.B findsearch
+c find drive for file \(em \fIzpwrFindFzfNoZLEC\fP
+.TP
+.B findsearchedit
+c edit find drive for file \(em \fIzpwrFindFzfEditNoZLEC\fP
+.TP
+.B flame
+startup flame chart from zprof data \(em \fIzpwrFlame\fP
+.TP
+.B flamechart
+startup flame chart from zprof data \(em \fIzpwrFlame\fP
+.TP
+.B for
+run first arg times for command \(em \fIfff\fP
+.TP
+.B for10
+run 10 times for command \(em \fIff\fP
+.TP
+.B fordir
+run first arg in following dirs \(em \fIzpwrFordir\fP
+.TP
+.B fordirupdate
+run git updaters in following dirs \(em \fIzpwrFordirUpdate\fP
+.TP
+.B forgitadd
+forgit fzf add \(em \fIforgit::add\fP
+.TP
+.B forgitclean
+forgit fzf clean \(em \fIforgit::clean\fP
+.TP
+.B forgitdiff
+forgit fzf diff \(em \fIforgit::diff\fP
+.TP
+.B forgitignore
+forgit fzf ignore \(em \fIforgit::ignore\fP
+.TP
+.B forgitignoreclean
+forgit fzf ignore clean \(em \fIforgit::ignore::clean\fP
+.TP
+.B forgitignoreget
+forgit fzf ignore get \(em \fIforgit::ignore::get\fP
+.TP
+.B forgitignorelist
+forgit fzf ignore list \(em \fIforgit::ignore::list\fP
+.TP
+.B forgitignoreupdate
+forgit fzf ignoreupdate \(em \fIforgit::ignore::update\fP
+.TP
+.B forgitinfo
+forgit fzf info \(em \fIforgit::info\fP
+.TP
+.B forgitlog
+forgit fzf log \(em \fIforgit::log\fP
+.TP
+.B forgitreset
+forgit fzf reset \(em \fIforgit::reset::head\fP
+.TP
+.B forgitrestore
+forgit fzf restore \(em \fIforgit::restore\fP
+.TP
+.B forgitstash
+forgit fzf stash \(em \fIforgit::stash::show\fP
+.TP
+.B forgitwarn
+forgit fzf warn \(em \fIforgit::warn\fP
+.TP
+.B forked
+cd to $ZPWR_FORKED_DIR \(em \fIfp\fP
+.TP
+.B fortune
+cyberpunk fortune cookies in random figlet fonts \(em \fIzpwrFortune\fP
+.TP
+.B forward
+cd to directory arg \(em \fIzpwrCd\fP
+.TP
+.B fp
+cd to $ZPWR_FORKED_DIR \(em \fIfp\fP
+.TP
+.B funcrank
+rank functions and zpwr verbs by history usage \(em \fIzpwrFuncRank\fP
+.TP
+.B fwd
+cd to directory arg \(em \fIzpwrCd\fP
+
+.SS G
+.TP
+.B gh
+open github profile \(em \fIzpwrOpenmygh\fP
+.TP
+.B ghcontribcount
+count of github contribs in last year \(em \fIcgh\fP
+.TP
+.B ghz
+open zpwr github repo \(em \fIzpwrgh\fP
+.TP
+.B gitaemail
+change author email with git filter\-branch \(em \fIzpwrChangeGitAuthorEmail\fP
+.TP
+.B gitcemail
+change committer email with git filter\-branch \(em \fIzpwrChangeGitCommitterEmail\fP
+.TP
+.B gitclearcache
+clear old git refs and objects \(em \fIzpwrClearGitCache\fP
+.TP
+.B gitclearcommit
+remove matching git commits from history \(em \fIzpwrClearGitCommit\fP
+.TP
+.B gitclearfile
+rm file from all git refs and objects \(em \fIzpwrClearGitFile\fP
+.TP
+.B gitcommit
+commit and push with arg message \(em \fIzsh\-gacp\-CommitAndPush\fP
+.TP
+.B gitcommitcount
+count commits \(em \fIzsh\-gacp\-CommitCount\fP
+.TP
+.B gitcommits
+search git commits with fzf \(em \fIzpwrCommits\fP
+.TP
+.B gitconfig
+edit git config file \(em \fIzpwrGitConfig\fP
+.TP
+.B gitcontribcount
+count of git contributions by author \(em \fIzpwrContribCount\fP
+.TP
+.B gitcontribcountdirs
+count of git contributions by author for list of dirs \(em \fIzpwrContribCountDirs\fP
+.TP
+.B gitcontribcountlines
+count of lines contributed by author \(em \fIzpwrContribCountLines\fP
+.TP
+.B gitcontribs
+aggregate git contributor stats across all cached repos \(em \fIzpwrGitwho\fP
+.TP
+.B gitdir
+check if pwd is git dir \(em \fIzpwrIsGitDir\fP
+.TP
+.B gitedittag
+print tag to $BUFFER \(em \fIzpwrEditTag\fP
+.TP
+.B gitemail
+change email with git filter\-branch \(em \fIzpwrChangeGitEmail\fP
+.TP
+.B gitforalldir
+run cmd in all git dirs \(em \fIzpwrForAllGitDirs\fP
+.TP
+.B gitfordirdevelop
+run git wipe to develop branch in git dirs in $PWD \(em \fIzfgdw\fP
+.TP
+.B gitfordirmain
+run git wipe to main branch in git dirs in $PWD \(em \fIzfgmw\fP
+.TP
+.B gitglobalconfig
+edit git config file \(em \fIzpwrGitConfig\fP
+.TP
+.B gitglobalignores
+edit git ignores file \(em \fIzpwrGitIgnores\fP
+.TP
+.B github
+open github profile \(em \fIzpwrOpenmygh\fP
+.TP
+.B githubcontribcount
+count of github contribs in last year \(em \fIcgh\fP
+.TP
+.B githubcreate
+create remote github repo \(em \fIhc\fP
+.TP
+.B githubdelete
+delete remote github repo \(em \fIhd\fP
+.TP
+.B githubzpwr
+open zpwr github repo \(em \fIzpwrgh\fP
+.TP
+.B gitignore
+$EDITOR ~/.git/info/exclude \(em \fIgil\fP
+.TP
+.B gitignores
+edit git ignores file \(em \fIzpwrGitIgnores\fP
+.TP
+.B gitlargest
+show largest files stored by git in descending order \(em \fIzpwrLargestGitFiles\fP
+.TP
+.B gitremotes
+list all git remotes \(em \fIzpwrAllRemotes\fP
+.TP
+.B gitreposcleancacheexec
+run cmd in clean dirty dirs \(em \fIzpwrForAllGitDirsClean\fP
+.TP
+.B gitreposcleanexec
+refresh clean cache and run cmd in clean git dirs \(em \fIzpwrForAllGitDirsRefreshClean\fP
+.TP
+.B gitreposdirtycacheexec
+run cmd in cached dirty dirs \(em \fIzpwrForAllGitDirsDirty\fP
+.TP
+.B gitreposdirtyexec
+refresh dirty cache and run cmd in dirty git dirs \(em \fIzpwrForAllGitDirsRefreshDirty\fP
+.TP
+.B gitreposexec
+run cmd in cached git dirs \(em \fIzpwrForAllGitDirs\fP
+.TP
+.B gitreposfile
+edit git repos file \(em \fIzpwrGitReposFile\fP
+.TP
+.B gitsearch
+search for regex in git log \(em \fIgse\fP
+.TP
+.B gittotallines
+count of total line count of git files \(em \fIzpwrTotalLines\fP
+.TP
+.B gitupdatefordir
+run git updates in all git dirs \(em \fIzpwrUpdateAllGitDirs\fP
+.TP
+.B gitupdatetag
+print tag and latest msg to $BUFFER \(em \fIlcm\fP
+.TP
+.B gitwho
+aggregate git contributor stats across all cached repos \(em \fIzpwrGitwho\fP
+.TP
+.B gitzfordir
+run git wipe on any branch $1 in git dirs in $PWD and z $2 if present \(em \fIzg\fP
+.TP
+.B gitzfordirdevelop
+z $1 if present and run git wipe to develop branch in git dirs in $PWD \(em \fIzd\fP
+.TP
+.B gitzfordirmain
+z $1 if present and run git wipe to main branch in git dirs in $PWD \(em \fIzm\fP
+.TP
+.B goclean
+clean Go package artifacts \(em \fIzpwrGoclean\fP
+.TP
+.B google
+google clipboard contents in tmux \(em \fIzpwrGoogle\fP
+.TP
+.B grep
+grep through pwd with ag into fzf \(em \fIzpwrAgIntoFzf\fP
+
+.SS H
+.TP
+.B hc
+create remote github repo \(em \fIhc\fP
+.TP
+.B hd
+delete remote github repo \(em \fIhd\fP
+.TP
+.B heatmap
+startup flame chart from zprof data \(em \fIzpwrFlame\fP
+.TP
+.B help
+the subcommands for zpwr <tab> \(em \fIzpwrListVerbsColor\fP
+.TP
+.B hidden
+go to zpwr $ZPWR_HIDDEN_DIR \(em \fIcd $ZPWR_HIDDEN_DIR\fP
+.TP
+.B hist
+exec history command \(em \fIzpwrHistoryVerbAccept\fP
+.TP
+.B histedit
+edit history command \(em \fIzpwrHistoryVerbEdit\fP
+.TP
+.B histfile
+edit history file \(em \fIzpwrHistfile\fP
+.TP
+.B home
+go to zpwr $ZPWR \(em \fIcd $ZPWR\fP
+.TP
+.B homeautoload
+go to zpwr $ZPWR_AUTOLOAD \(em \fIcd $ZPWR_AUTOLOAD\fP
+.TP
+.B homeautoloadcommon
+go to zpwr $ZPWR_AUTOLOAD_COMMON \(em \fIcd $ZPWR_AUTOLOAD_COMMON\fP
+.TP
+.B homecomps
+go to zpwr $ZPWR_COMPS \(em \fIcd $ZPWR_COMPS\fP
+.TP
+.B homeenv
+go to zpwr $ZPWR_ENV \(em \fIcd $ZPWR_ENV\fP
+.TP
+.B homeexercism
+cd to $HOME/Exercism \(em \fIcd $HOME/Exercism\fP
+.TP
+.B homeinstall
+go to zpwr $ZPWR_INSTALL \(em \fIcd $ZPWR_INSTALL\fP
+.TP
+.B homelocal
+go to zpwr $ZPWR_LOCAL \(em \fIcd $ZPWR_LOCAL\fP
+.TP
+.B homescripts
+go to zpwr $ZPWR_SCRIPTS \(em \fIcd $ZPWR_SCRIPTS\fP
+.TP
+.B hometest
+go to zpwr $ZPWR_TEST \(em \fIcd $ZPWR_TEST\fP
+.TP
+.B hometests
+go to zpwr $ZPWR_TEST \(em \fIcd $ZPWR_TEST\fP
+.TP
+.B hometmux
+go to zpwr $ZPWR_TMUX \(em \fIcd $ZPWR_TMUX\fP
+
+.SS I
+.TP
+.B info
+get info on command type with args \(em \fIzpwrClearList\fP
+.TP
+.B install
+run configure, make and make install \(em \fIinst\fP
+.TP
+.B instrument
+run command with full instrumentation \(em \fIzpwrTrace\fP
+
+.SS K
+.TP
+.B kill
+kill from ps output \(em \fIzpwrKillPSVerbAccept\fP
+.TP
+.B killedit
+edit kill from ps output \(em \fIzpwrKillPSVerbEdit\fP
+.TP
+.B killmux
+kill tmux server \(em \fItmux kill\-server\fP
+.TP
+.B killremote
+kill tmux server and ssh \(em \fIzpwrKillRemote\fP
+
+.SS L
+.TP
+.B layoutload
+restore a saved tmux layout \(em \fIzpwrTmuxLoad\fP
+.TP
+.B layoutsave
+save current tmux layout to repeatable script \(em \fIzpwrTmuxSave\fP
+.TP
+.B linecount
+get line count of search term from command \(em \fIzpwrLineCount\fP
+.TP
+.B lint
+run shellcheck and zsh \-n on all zpwr scripts and autoloads \(em \fIzpwrLint\fP
+.TP
+.B list
+list the files with no args \(em \fIzpwrListNoClear\fP
+.TP
+.B listening
+show listening ports with process info \(em \fIzpwrPorts\fP
+.TP
+.B live
+live shell resource dashboard \(em \fIzpwrTop\fP
+.TP
+.B load
+restore terminal environment from snapshot \(em \fIzpwrRestore\fP
+.TP
+.B loadjenv
+lazy load jenv, calls jenv $@ \(em \fIzpwrLoadJenv\fP
+.TP
+.B locatesearch
+accept locate drive for file \(em \fIzpwrLocateFzfNoZLEC\fP
+.TP
+.B locatesearchedit
+edit locate drive for file \(em \fIzpwrLocateFzfEditNoZLEC\fP
+.TP
+.B logdebug
+log debug to $ZPWR_LOGFILE \(em \fIzpwrLogDebug\fP
+.TP
+.B logdebugconsole
+log debug to console \(em \fIzpwrLogConsoleDebug\fP
+.TP
+.B logerror
+log error to $ZPWR_LOGFILE \(em \fIzpwrLogError\fP
+.TP
+.B logerrorconsole
+log error to console \(em \fIzpwrLogConsoleErr\fP
+.TP
+.B logincount
+count of logins by user \(em \fIzpwrLoginCount\fP
+.TP
+.B loginfo
+log info to $ZPWR_LOGFILE \(em \fIzpwrLogInfo\fP
+.TP
+.B loginfoconsole
+log info to console \(em \fIzpwrLogConsoleInfo\fP
+.TP
+.B logs
+colorized tail of $ZPWR_LOGFILE \(em \fIzpwrTailLog\fP
+.TP
+.B logtrace
+log trace to $ZPWR_LOGFILE \(em \fIzpwrLogTrace\fP
+.TP
+.B logtraceconsole
+log trace to console \(em \fIzpwrLogConsoleTrace\fP
+.TP
+.B ls
+list the files with no args \(em \fIzpwrListNoClear\fP
+.TP
+.B lsof
+kill from lsof output \(em \fIzpwrKillLsofVerbAccept\fP
+.TP
+.B lsofedit
+edit kill from lsof output \(em \fIzpwrKillLsofVerbEdit\fP
+
+.SS M
+.TP
+.B makedir
+make a dir tree \(em \fIjd\fP
+.TP
+.B makefile
+make a dir tree with file at end \(em \fIj\fP
+.TP
+.B man
+fzf through man pages \(em \fIfm\fP
+.TP
+.B manual
+interactive guided tour of zpwr \(em \fIzpwrWizard\fP
+.TP
+.B matrix
+fullscreen matrix digital rain screensaver \(em \fIzpwrMatrix\fP
+.TP
+.B modules
+show zsh modules \(em \fIzpwrModulesFZF\fP
+.TP
+.B mygithub
+open github profile \(em \fIzpwrOpenmygh\fP
+
+.SS N
+.TP
+.B netstat
+show listening ports with process info \(em \fIzpwrPorts\fP
+
+.SS O
+.TP
+.B onchange
+watch files and run command on change \(em \fIzpwrWatch\fP
+.TP
+.B open
+open with system \(em \fIo\fP
+.TP
+.B opencommand
+get the command to open with system \(em \fIzpwrGetOpenCommand\fP
+.TP
+.B openurl
+open URL from clipboard in tmux \(em \fIzpwrOpen\fP
+.TP
+.B options
+show zsh options \(em \fIzpwrOptionsFZF\fP
+
+.SS P
+.TP
+.B pastebuffer
+paste clipboard to $BUFFER \(em \fIzpwrPasteToBuffer\fP
+.TP
+.B pastecommand
+get the command to paste with system \(em \fIzpwrGetPasteCommand\fP
+.TP
+.B pastestring
+paste clipboard to stdout \(em \fIzpwrPasteToStdout\fP
+.TP
+.B pathaudit
+audit PATH FPATH MANPATH for duplicates and missing dirs \(em \fIzpwrPathaudit\fP
+.TP
+.B pi
+ping all LAN devices \(em \fIpi\fP
+.TP
+.B ping
+ping all LAN devices \(em \fIpi\fP
+.TP
+.B pir
+run command on all devices \(em \fIpir\fP
+.TP
+.B plugins
+cd to $ZSH_CUSTOM/plugins \(em \fIzpl\fP
+.TP
+.B poll
+poll git remote and run command \(em \fIzpwrPoll\fP
+.TP
+.B ports
+show listening ports with process info \(em \fIzpwrPorts\fP
+.TP
+.B post
+postfix all output \(em \fIpost\fP
+.TP
+.B pre
+prefix all output \(em \fIpre\fP
+.TP
+.B prettyprint
+pretty print with color \(em \fIzpwrPrettyPrint\fP
+.TP
+.B printmap
+pretty print maps \(em \fIzpwrPrintMap\fP
+.TP
+.B profile
+one\-shot zprof startup profile with colorized breakdown \(em \fIzpwrStartup\fP
+.TP
+.B ps
+ps \-ef | grep arg \(em \fIp\fP
+.TP
+.B pstreemonitor
+monitor process tree with watch \(em \fIzpwrPstreemonitor\fP
+.TP
+.B pygmentcolors
+show all pygment colors \(em \fIzpwrPygmentcolors\fP
+
+.SS Q
+.TP
+.B quote
+cyberpunk fortune cookies in random figlet fonts \(em \fIzpwrFortune\fP
+
+.SS R
+.TP
+.B r
+cd up tree to directory arg \(em \fIzpwrCdUp\fP
+.TP
+.B rain
+fullscreen matrix digital rain screensaver \(em \fIzpwrMatrix\fP
+.TP
+.B rank
+rank functions and zpwr verbs by history usage \(em \fIzpwrFuncRank\fP
+.TP
+.B recompile
+recompile all cache comps \(em \fIzpwrRecompile\fP
+.TP
+.B recompilefiles
+recompile all files cache comps \(em \fIzpwrRecompileFiles\fP
+.TP
+.B recompilefpath
+recompile all fpath cache comps \(em \fIzpwrRecompileFpath\fP
+.TP
+.B refreshzwc
+delete then regen compiled zsh word code \(em \fIzpwrRefreshZwc\fP
+.TP
+.B regen
+regen caches except git drive search \(em \fIzpwrRegenMost\fP
+.TP
+.B regenall
+regen all caches \(em \fIzpwrRegenAll\fP
+.TP
+.B regenconfiglinks
+regen sym links from $ZPWR_INSTALL to $HOME \(em \fIzpwrRegenConfigLinks\fP
+.TP
+.B regenctags
+regen ctags files to $HOME \(em \fIzpwrRegenCtags\fP
+.TP
+.B regenenvcache
+regen search env to $ZPWR/zpwrEnv{Key,Value}.txt \(em \fIzpwrRegenSearchEnv\fP
+.TP
+.B regengitdirtyrepocache
+regen list of all dirty git repos to $ZPWR_ALL_GIT_DIRS \(em \fIzsh\-git\-repo\-regenAllGitReposDirty\fP
+.TP
+.B regengitrepocache
+regen list of all git repos to $ZPWR_ALL_GIT_DIRS \(em \fIzsh\-git\-repo\-regenAllGitRepos\fP
+.TP
+.B regengtags
+regen gtags files to $HOME \(em \fIzpwrRegenGtagsCtags\fP
+.TP
+.B regengtagspygments
+regen GNU gtags with pygments parser \(em \fIzpwrRegenGtagsPygments\fP
+.TP
+.B regengtagstype
+regen GNU gtags with specified parser type \(em \fIzpwrRegenGtagsType\fP
+.TP
+.B regenhistory
+regen $HISTFILE \(em \fIzpwrRegenHistory\fP
+.TP
+.B regenkeybindings
+regen all keybindings cache to $ZPWR/zpwr{All,Vim}Keybindings.txt \(em \fIzpwrRegenAllKeybindingsCache\fP
+.TP
+.B regenpdf
+regenerate encyclopedia PDF \(em \fIbash $ZPWR/docs/regenPDF.sh\fP
+.TP
+.B regenpowerline
+regen powerline sym link to $HOME/.tmux/powerline \(em \fIzpwrRegenPowerlineLink\fP
+.TP
+.B regenzsh
+regen compsys cache to $ZSH_COMPDUMP \(em \fIzpwrRegenZshCompCache\fP
+.TP
+.B reload
+reparse env \(em \fIzpwrReload\fP
+.TP
+.B relpath
+get relative path of abs path to $PWD \(em \fIzpwrRelPath\fP
+.TP
+.B rename
+rename files \(em \fIzpwrRename\fP
+.TP
+.B replacer
+find and replace text in files or stdin \(em \fIzpwrReplacer\fP
+.TP
+.B replay
+replay last N commands from history \(em \fIzpwrReplay\fP
+.TP
+.B repo
+cd to $ZPWR_REPO_NAME \(em \fIzp\fP
+.TP
+.B rerun
+replay last N commands from history \(em \fIzpwrReplay\fP
+.TP
+.B reset
+reset $ZPWR_REPO_NAME repo to latest main \(em \fIzpwrReset\fP
+.TP
+.B resolve
+trace command resolution chain: alias \-> function \-> builtin \-> binary \(em \fIzpwrResolve\fP
+.TP
+.B restart
+restart zpwr systemd service \(em \fIrestart\fP
+.TP
+.B restore
+restore terminal environment from snapshot \(em \fIzpwrRestore\fP
+.TP
+.B restorehistory
+restore $HISTFILE \(em \fIzpwrRestoreHistfile\fP
+.TP
+.B return2
+turn off stderr filter \(em \fIreturn2\fP
+.TP
+.B reveal
+show remote repo in browser \(em \fIreveal\fP
+.TP
+.B revealrecurse
+recursively reveal hidden directories \(em \fIzpwrRevealRecurse\fP
+.TP
+.B reverse
+cd up tree to directory arg \(em \fIzpwrCdUp\fP
+.TP
+.B rmconfiglinks
+remove sym links from $ZPWR_INSTALL to $HOME \(em \fIzpwrUnlinkConf\fP
+.TP
+.B rvs
+cd up tree to directory arg \(em \fIzpwrCdUp\fP
+
+.SS S
+.TP
+.B save
+capture full terminal environment snapshot \(em \fIzpwrSnapshot\fP
+.TP
+.B screensaver
+fullscreen matrix digital rain screensaver \(em \fIzpwrMatrix\fP
+.TP
+.B scriptcount
+total number of scripts in $ZPWR \(em \fIzpwrScriptCount\fP
+.TP
+.B scriptlist
+total list of scripts in $ZPWR \(em \fIzpwrScriptList\fP
+.TP
+.B scriptnew
+create new script without opening editor \(em \fIzpwrScnew\fP
+.TP
+.B scripts
+cd to scripts directory \(em \fIzs\fP
+.TP
+.B scripttopdf
+convert script to PDF \(em \fIzpwrScriptToPDF\fP
+.TP
+.B search
+search google for args \(em \fIs\fP
+.TP
+.B search
+recursive grep search with context \(em \fIzpwrSearch\fP
+.TP
+.B servicedown
+stop and disable systemd service \(em \fIssd\fP
+.TP
+.B serviceup
+start and enable systemd service \(em \fIssu\fP
+.TP
+.B snap
+capture full terminal environment snapshot \(em \fIzpwrSnapshot\fP
+.TP
+.B snapshot
+capture full terminal environment snapshot \(em \fIzpwrSnapshot\fP
+.TP
+.B stale
+find stale .zwc files, orphan caches, and broken symlinks \(em \fIzpwrStale\fP
+.TP
+.B start
+start with no tabs \(em \fItmm_notabs\fP
+.TP
+.B startauto
+start autocomplete \(em \fIzpwrStartAutoComplete\fP
+.TP
+.B startsend
+dup some keys to pane \(em \fIzpwrStartSend\fP
+.TP
+.B startsendfull
+dup all keys to pane \(em \fIzpwrStartSendFull\fP
+.TP
+.B starttabs
+start all tabs \(em \fItmm_full\fP
+.TP
+.B startup
+one\-shot zprof startup profile with colorized breakdown \(em \fIzpwrStartup\fP
+.TP
+.B stopauto
+stop autocomplete \(em \fIzpwrStopAutoComplete\fP
+.TP
+.B stopsend
+stop dup keys to pane \(em \fIzpwrStopSend\fP
+.TP
+.B study
+split\-pane learning: book left, shell right \(em \fIzpwrStudy\fP
+.TP
+.B subcommands
+run the subcommands for zpwr <tab> \(em \fIzpwrVerbsNoZLE\fP
+.TP
+.B subcommandscount
+number of choice for zpwr <tab> \(em \fIzpwrNumVerbs\fP
+.TP
+.B subcommandsedit
+edit the subcommands for zpwr <tab> \(em \fIzpwrVerbsEditNoZLE\fP
+.TP
+.B subcommandsfzf
+fzf the subcommands for zpwr <tab> \(em \fIzpwrVerbsFZF\fP
+.TP
+.B subcommandslist
+the subcommands for zpwr <tab> \(em \fIzpwrListVerbs\fP
+
+.SS T
+.TP
+.B taillog
+colorized tail of $ZPWR_LOGFILE \(em \fIzpwrTailLog\fP
+.TP
+.B test
+run all zpwr tests \(em \fIzpwrTest\fP
+.TP
+.B testall
+run all env tests \(em \fIzpwrTestAll\fP
+.TP
+.B tests
+run all zpwr tests \(em \fIzpwrTest\fP
+.TP
+.B testsall
+run all env tests \(em \fIzpwrTestAll\fP
+.TP
+.B timeline
+visual timeline of shell history grouped by hour and directory \(em \fIzpwrTimeline\fP
+.TP
+.B timer
+timer one or more commands \(em \fIzpwrTimer\fP
+.TP
+.B tmuxload
+restore a saved tmux layout \(em \fIzpwrTmuxLoad\fP
+.TP
+.B tmuxsave
+save current tmux layout to repeatable script \(em \fIzpwrTmuxSave\fP
+.TP
+.B to
+toggle external ip \(em \fIto\fP
+.TP
+.B today
+visual timeline of shell history grouped by hour and directory \(em \fIzpwrTimeline\fP
+.TP
+.B toggle
+toggle external ip \(em \fIto\fP
+.TP
+.B tokens
+vim the .tokens.sh file \(em \fItok\fP
+.TP
+.B top
+live shell resource dashboard \(em \fIzpwrTop\fP
+.TP
+.B torip
+get IP address via Tor and whois \(em \fIzpwrTorip\fP
+.TP
+.B toriprenew
+renew Tor identity \(em \fIzpwrToriprenew\fP
+.TP
+.B trace
+run command with full instrumentation \(em \fIzpwrTrace\fP
+.TP
+.B travis
+open current travis project in browser \(em \fItrav\-git\fP
+.TP
+.B travisbranch
+open current travis branches in browser \(em \fItrav\-git\-br\fP
+.TP
+.B travisbuild
+open current travis builds in browser \(em \fItrav\-git\-build\fP
+.TP
+.B travispr
+open current travis PRs in browser \(em \fItrav\-git\-pr\fP
+.TP
+.B trc
+tmux.conf vim session \(em \fItrc\fP
+.TP
+.B tty
+print current tty \(em \fIprint "$ZPWR_TTY"\fP
+.TP
+.B tutorial
+interactive guided tour of zpwr \(em \fIzpwrWizard\fP
+
+.SS U
+.TP
+.B uncompile
+delete all cache comps \(em \fIzpwrUncompile\fP
+.TP
+.B uninstall
+uninstall all zpwr configs \(em \fIzpwrUninstall\fP
+.TP
+.B update
+update zpwr custom configs \(em \fIzpwrGetrc\fP
+.TP
+.B updateall
+update zpwr custom configs and deps \(em \fIzpwrAllUpdates\fP
+.TP
+.B updatedeps
+update all dependencies \(em \fIzpwrUpdateDeps\fP
+.TP
+.B updatedepsclean
+update all dependencies then clean \(em \fIzpwrUpdateDepsClean\fP
+.TP
+.B updatepull
+pull latest config from $ZPWR_REPO_NAME repo \(em \fIzpwrUpdate\fP
+.TP
+.B updatezinit
+update zinit dependencies \(em \fIzpwrZinitUpdates\fP
+.TP
+.B upload
+upload with curl \(em \fIzpwrUpload\fP
+.TP
+.B urlsafe
+base64 encode \(em \fIzpwrUrlSafe\fP
+
+.SS V
+.TP
+.B verbs
+run the subcommands for zpwr <tab> \(em \fIzpwrVerbsNoZLE\fP
+.TP
+.B verbscount
+number of choice for zpwr <tab> \(em \fIzpwrNumVerbs\fP
+.TP
+.B verbsedit
+edit the subcommands for zpwr <tab> \(em \fIzpwrVerbsEditNoZLE\fP
+.TP
+.B verbsfzf
+fzf the subcommands for zpwr <tab> \(em \fIzpwrVerbsFZF\fP
+.TP
+.B verbslist
+list the subcommands for zpwr <tab> \(em \fIzpwrListVerbs\fP
+.TP
+.B vimall
+vim all zpwr files for :argdo \(em \fIzpwrVimAll\fP
+.TP
+.B vimalledit
+vim edit 1 or more configs \(em \fIzpwrVimAllEdit\fP
+.TP
+.B vimautoload
+vim all autoloads :argdo \(em \fIzpwrVimAutoload\fP
+.TP
+.B vimcd
+vim edit and cd to first dir \(em \fIcv\fP
+.TP
+.B vimconfig
+edit all zpwr configs \(em \fIconf\fP
+.TP
+.B vimctags
+vim zpwr ctags tags \(em \fIzpwrVimZpwrCtags\fP
+.TP
+.B vimemacsconfig
+vim edit emacs zpwr configs \(em \fIzpwrVimEmacsConfig\fP
+.TP
+.B vimfilesearch
+vim a file in a sub dir \(em \fIzpwrVimFzfFilesearchVerb\fP
+.TP
+.B vimfilesearchedit
+edit vim a file in a sub dir \(em \fIzpwrVimFzfFilesearchVerbEdit\fP
+.TP
+.B vimfindsearch
+vim accept find drive for file \(em \fIzpwrFindFzfNoZLEVim\fP
+.TP
+.B vimfindsearchedit
+vim edit find drive for file \(em \fIzpwrFindFzfEditNoZLEVim\fP
+.TP
+.B vimgtags
+vim zpwr GNU global tags \(em \fIzpwrVimZpwrGtags\fP
+.TP
+.B vimgtagsedit
+vim edit zpwr GNU global tags \(em \fIzpwrVimZpwrGtagsEdit\fP
+.TP
+.B vimlocatesearch
+vim accept locate drive for file \(em \fIzpwrLocateFzfNoZLEVim\fP
+.TP
+.B vimlocatesearchedit
+vim edit locate drive for file \(em \fIzpwrLocateFzfEditNoZLEVim\fP
+.TP
+.B vimplugincount
+total number of vim plugins in $ZPWR \(em \fIzpwrVimPluginCount\fP
+.TP
+.B vimpluginlist
+total list of vim plugins in $ZPWR \(em \fIzpwrVimPluginList\fP
+.TP
+.B vimrecent
+vim edit most recent editor files \(em \fIzpwrVimRecent\fP
+.TP
+.B vimrecentcd
+cd and vim edit most recent editor files \(em \fIzpwrVimRecentCd\fP
+.TP
+.B vimrecentsudo
+sudo vim edit most recent editor files \(em \fIzpwrSudoVimRecent\fP
+.TP
+.B vimrecentsudocd
+cd and sudo vim edit most recent editor files \(em \fIzpwrSudoVimRecentCd\fP
+.TP
+.B vimscriptedit
+vim edit 1 or more scripts \(em \fIzpwrVimScriptEdit\fP
+.TP
+.B vimscripts
+vim all zpwr scripts for :argdo \(em \fIzpwrVimScripts\fP
+.TP
+.B vimsearch
+search vim keybindings \(em \fIzpwrFzfVimKeybind\fP
+.TP
+.B vimtests
+edit all zpwr tests \(em \fIzvt\fP
+.TP
+.B vimtokens
+vim the .tokens.sh file \(em \fItok\fP
+.TP
+.B vimwordsearch
+vim a file in a sub dir by word \(em \fIzpwrVimFzfWordsearchVerb\fP
+.TP
+.B vimwordsearchedit
+edit vim a file in a sub dir by word \(em \fIzpwrVimFzfWordsearchVerbEdit\fP
+.TP
+.B vrc
+vimrc vim session \(em \fIvrc\fP
+
+.SS W
+.TP
+.B watch
+watch files and run command on change \(em \fIzpwrWatch\fP
+.TP
+.B web
+cd to web dir \(em \fIwe\fP
+.TP
+.B whatis
+trace command resolution chain: alias \-> function \-> builtin \-> binary \(em \fIzpwrResolve\fP
+.TP
+.B which
+trace command resolution chain: alias \-> function \-> builtin \-> binary \(em \fIzpwrResolve\fP
+.TP
+.B whilesleep
+run command and sleep first arg seconds \(em \fIwww\fP
+.TP
+.B whiletrue
+run command forever \(em \fIww\fP
+.TP
+.B who
+aggregate git contributor stats across all cached repos \(em \fIzpwrGitwho\fP
+.TP
+.B wisdom
+cyberpunk fortune cookies in random figlet fonts \(em \fIzpwrFortune\fP
+.TP
+.B wizard
+interactive guided tour of zpwr \(em \fIzpwrWizard\fP
+.TP
+.B wordsearch
+c a file in a sub dir by word \(em \fIzpwrFzfWordsearchVerb c\fP
+.TP
+.B wordsearchedit
+edit c a file in a sub dir by word \(em \fIzpwrFzfWordsearchVerbEdit c\fP
+
+.SS Z
+.TP
+.B z
+cd to z frecency ranked dir \(em \fIz\fP
+.TP
+.B zcd
+list then cd to z frecency ranked dir \(em \fIzpwrFzfZListVerb\fP
+.TP
+.B zcompdump
+edit zcompdump \(em \fIzpwrZcompdump\fP
+.TP
+.B zp
+cd to $ZPWR_REPO_NAME \(em \fIzp\fP
+.TP
+.B zprof
+one\-shot zprof startup profile with colorized breakdown \(em \fIzpwrStartup\fP
+.TP
+.B zpwr
+cd to $ZPWR_REPO_NAME \(em \fIzp\fP
+.TP
+.B zpwrCloneToForked
+clone $ZPWR_REPO_NAME to $ZPWR_FORKED_DIR \(em \fIzpwrCloneToForked\fP
+.TP
+.B zpwrgithub
+open zpwr github \(em \fIzpgh\fP
+.TP
+.B zpz
+cd to $ZPWR_REPO_NAME and git checkout other branch, rebase and push \(em \fIzpz\fP
+.TP
+.B zrc
+zshrc vim session \(em \fIzrc\fP
+.TP
+.B zshplugincount
+total number of zsh plugins in $ZPWR \(em \fIzpwrZshPluginCount\fP
+.TP
+.B zshpluginlist
+total list of zsh plugins in $ZPWR \(em \fIzpwrZshPluginList\fP
+.TP
+.B zshsearch
+search zsh keybindings \(em \fIzpwrFzfZshKeybind\fP
+.TP
+.B zshsearch
+search zshrc for arg \(em \fIzpwrZshrcSearch\fP
+.TP
+.B zstyle
+fuzzy search zstyle \(em \fIzpwrZstyle\fP
+
+.SH ENVIRONMENT
+ZPWR is tuned through
+.B ZPWR_*
+variables defined in
+.IR $ZPWR/env/.zpwr_env.sh
+and
+.IR $ZPWR/env/.zpwr_re_env.sh .
+Override any of them in
+.I $ZPWR/local/.tokens.sh
+(git-ignored).
+.I $ZPWR/env/.zpwr_re_env.sh
+is re-read after the user tokens file so dependent variables update.
+.SS Core paths and identity
+.TP
+.B ZPWR
+Absolute path to the ZPWR install root (typically
+.IR ~/.zpwr ).
+.TP
+.B ZPWR_VERBS_FILE
+Path to the dispatch table
+.RI ( $ZPWR/env/zpwr.zsh ).
+.TP
+.B ZPWR_VERBS
+Associative array
+.RI ( "typeset \-Ag" )
+holding
+.BR verb \(rA cmd=description
+entries.
+.TP
+.B ZPWR_VARS
+Associative array of zpwr internal vars
+.RB ( "VERB_0" ,
+etc).
+.TP
+.B ZPWR_REPO_NAME
+Repository display name (used in banners).
+.TP
+.B ZPWR_GITHUB_ACCOUNT
+GitHub account targeted by clone/update verbs.
+.TP
+.B ZPWR_FORKED_DIR
+Local clone of the user's fork (target for
+.BR fp / forked ).
+.TP
+.B ZPWR_LOGFILE
+Destination for
+.BR "zpwr log{debug,error,info,trace}"
+and
+.BR taillog .
+.TP
+.B ZPWR_DIRS_CLEAN
+Directory list cleared by
+.BR cleandirs / cleanall .
+.TP
+.B ZPWR_PYSCRIPTS
+Python script directory used by
+.BR execpy .
+.TP
+.B ZPWR_OS_TYPE
+Detected OS family (Darwin, Linux, etc.).
+.SS Banner and welcome
+.TP
+.B ZPWR_BANNER_TYPE
+.B ponysay
+banner mode at startup.
+.TP
+.B ZPWR_BANNER_CLEARLIST
+Clear and
+.B ls
+before/after the banner.
+.TP
+.B ZPWR_BANNER_DESKTOP_DARWIN
+.BR cd
+to Desktop after banner on macOS.
+.TP
+.B ZPWR_BANNER_DESKTOP_LINUX
+.BR cd
+to Desktop after banner on Linux.
+.TP
+.B ZPWR_CHAR_LOGO
+Single-character logo glyph for prompts/banners.
+.TP
+.B ZPWR_FZF_LOGO
+Prompt string for all fzf invocations.
+.TP
+.B ZPWR_LOOK_TIME
+Sleep duration after counts in
+.BR "zpwr a" .
+.SS Auto behaviors
+.TP
+.B ZPWR_AUTO_ATTACH
+Auto-attach to tmux on Linux SSH login.
+.TP
+.B ZPWR_AUTO_COMPLETE
+List completion choices automatically.
+.TP
+.B ZPWR_AUTO_COMPLETE_DELAY
+Delay before auto-listing completions.
+.TP
+.B ZPWR_AUTO_LS_CD
+Run
+.B ls
+after every
+.BR cd .
+.TP
+.B ZPWR_AUTO_LS_RM
+Run
+.B ls
+after
+.BR rm / touch
+and other modifying commands.
+.TP
+.B ZPWR_AUTO_SELECT
+Auto-select first item in menuselect.
+.SS Colors and theming
+.TP
+.B ZPWR_COLORS
+Master switch \(em more colorful output.
+.TP
+.B ZPWR_COLORS_SECTIONS
+Colored section headers.
+.TP
+.B ZPWR_COLORS_VERBS
+Colorize
+.BR "zpwr <tab>" .
+.TP
+.B ZPWR_COLOR_BLUE ", " ZPWR_COLOR_RED ", " ZPWR_COLOR_RESET
+Common ANSI colors (overridable).
+.TP
+.B ZPWR_COLORIZER
+Colorizer backend:
+.B bat
+or
+.BR pygmentize .
+.TP
+.B ZPWR_BAT_THEME
+.B bat
+syntax-highlighting theme.
+.TP
+.B ZPWR_PYGMENTIZE_COLOR
+Default
+.B pygmentize
+theme.
+.TP
+.B ZPWR_NAMED_COLORS
+Named compsys colors (zsh patterns + ANSI codes).
+.TP
+.B ZPWR_COMMON_ZSTYLE_OPTS
+File-prefix compsys colors.
+.TP
+.B ZPWR_GIT_COLOR_PREFIX
+Git colored-output cmd prefix.
+.TP
+.B ZPWR_COMMIT_STYLE
+ANSI styling for git commits.
+.TP
+.B ZPWR_MARKER_COLOR
+Marker color in
+.B bat
+output piped through fzf from ag search.
+.TP
+.B ZPWR_DELIMITER_CHAR
+Delimiter for the alternating pretty-printer.
+.SS Description chars (compsys group format)
+.TP
+.B ZPWR_DESC_PRE ", " ZPWR_DESC_PRE_COLOR
+Group description leading chars + color.
+.TP
+.B ZPWR_DESC_POST ", " ZPWR_DESC_POST_COLOR
+Group description trailing chars + color.
+.TP
+.B ZPWR_DESC_TEXT_COLOR
+Group description text color.
+.SS Logging colors
+.TP
+.B ZPWR_LOG_DATE_COLOR
+Timestamp color in
+.B zpwrLogColor .
+.TP
+.B ZPWR_LOG_MSG_COLOR
+Message body color.
+.TP
+.B ZPWR_LOG_QUOTE_COLOR
+Quote color (neon magenta).
+.TP
+.B ZPWR_LOG_UNDER_COLOR
+Underscore color (neon cyan).
+.TP
+.B ZPWR_QUOTE_START_CHAR ", " ZPWR_QUOTE_END_CHAR
+Quote delimiter chars in log messages.
+.TP
+.B ZPWR_DEBUG
+Enable
+.B zpwrLogDebug
+output.
+.TP
+.B ZPWR_TRACE
+Turn on
+.B "set \-x"
+in critical regions.
+.SS Expansion (zsh-expand)
+.TP
+.B ZPWR_EXPAND
+Master switch for all expansion.
+.TP
+.B ZPWR_EXPAND_NATIVE
+Globs/history expand via
+.BR "zle expand-word" .
+.TP
+.B ZPWR_EXPAND_SECOND_POSITION
+Aliases expand in second position (after
+.BR sudo ).
+.TP
+.B ZPWR_EXPAND_PRE_EXEC
+Aliases expand before the line is accepted.
+.TP
+.B ZPWR_EXPAND_PRE_EXEC_NATIVE
+Globs etc. expand before the line is accepted.
+.TP
+.B ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION
+Second-position expand before the line is accepted.
+.TP
+.B ZPWR_EXPAND_QUOTE_DOUBLE
+Expand inside
+.BR \(dq...\(dq .
+.TP
+.B ZPWR_EXPAND_QUOTE_SINGLE
+Expand inside
+.BR \(aq...\(aq .
+.TP
+.B ZPWR_CORRECT
+Spelling correction in zsh-expand.
+.TP
+.B ZPWR_CORRECT_EXPAND
+Aliases expand after spelling correction.
+.TP
+.B ZPWR_SURROUND
+Typing leading quote/paren/bracket inserts the trailing one after the caret.
+.SS Editor / vim / emacs
+.TP
+.B ZPWR_VIM
+Default vim command (override in tokens file).
+.TP
+.B ZPWR_EDITOR_TO_VIM
+Set
+.B EDITOR
+to
+.BR $ZPWR_VIM .
+.TP
+.B ZPWR_EMACS
+Emacs command.
+.TP
+.B ZPWR_EMACS_CLIENT
+Emacs client command.
+.TP
+.B ZPWR_VIM_TEMPLATES
+Add header template to certain filetypes in vim.
+.TP
+.B ZPWR_MAP_C_V_VIM_NORMAL
+When true, vim normal-mode
+.B C-V
+maps to exec current file in right tmux pane.
+.SS Keybindings / interaction
+.TP
+.B ZPWR_BINDKEY_VI
+Use
+.BR "bindkey \-v" .
+.TP
+.B ZPWR_KEYTIMEOUT
+Timeout for keybindings.
+.TP
+.B ZPWR_INTERACTIVE_MENU_SELECT
+Search interactively in menuselect.
+.TP
+.B ZPWR_GLOBAL_ALIAS_PREFIX
+Char that prefixes global aliases (e.g.
+.BR je<space> ).
+.TP
+.B ZPWR_TABSTOP
+String marking a tabstop when expanding aliases.
+.TP
+.B ZPWR_TABSTOP_ALIASES
+Include tabstop aliases.
+.SS Tools
+.TP
+.B ZPWR_FZF
+Command for all fzf invocations.
+.TP
+.B ZPWR_FD
+Command for fd.
+.TP
+.B ZPWR_EXA_EXTENDED
+.B eza
+shows extended attributes from
+.BR zpwrClearList .
+.TP
+.B ZPWR_PSSH_TIMEOUT
+.B pssh
+timeout.
+.TP
+.B ZPWR_THUMBS_REGEX
+Regex for tmux thumbs.
+.TP
+.B ZPWR_SUDO_CMD
+Sudo prefix added on permission denied.
+.TP
+.B ZPWR_FULL_SUDO
+Sudo for aliases and expansion.
+.SS Tmux
+.TP
+.B ZPWR_TMUX_PREFIX_MAC
+Tmux prefix on macOS.
+.TP
+.B ZPWR_TMUX_PREFIX_LINUX
+Tmux prefix on Linux.
+.TP
+.B ZPWR_TMUX_HISTORY_LIMIT
+Tmux copy-mode history limit.
+.TP
+.B ZPWR_SEND_KEYS_FULL
+When false, do not send Enter / Control to synced panes.
+.TP
+.B ZPWR_SEND_KEYS_PANE
+Activate sending to numbered tmux panes.
+.SS Plugin system
+.TP
+.B ZPWR_PLUGIN_MANAGER
+Plugin framework (zinit / OMZ / etc.).
+.TP
+.B ZPWR_ZDHARMA
+Username for zdharma.
+.TP
+.B ZPWR_ZINIT_COMPINIT_DELAY
+Delay between shell start and
+.BR compinit .
+.TP
+.B ZPWR_DEFAULT_OMZ_THEME
+Default OMZ theme if Powerlevel10k not used.
+.TP
+.B ZPWR_PROMPT
+Set to
+.B POWERLEVEL
+to use the powerlevel10k prompt.
+.TP
+.B ZPWR_OPTS
+zsh options set in
+.B precmd
+before the prompt.
+.TP
+.B ZPWR_LEARN
+Include all the zpwr learning functions.
+.TP
+.B ZPWR_COMPLETION_DIR
+Repo name for the more-zsh-compsys completions overlay.
+.SS Other
+.TP
+.B EDITOR
+Used by
+.B "zpwr edit"
+to launch the editor.
+.TP
+.B HISTFILE
+Used by
+.BR backuphistory ", " restorehistory ", " regenhistory .
+.TP
+.B PATH ", " FPATH ", " MANPATH
+Audited and deduplicated by
+.BR pathaudit ", " deduppaths .
+.TP
+.B ZPWR_HIDDEN_DIR ", " ZPWR_AUTOLOAD ", " ZPWR_AUTOLOAD_COMMON ", " ZPWR_COMPS ", " ZPWR_ENV ", " ZPWR_INSTALL ", " ZPWR_LOCAL ", " ZPWR_SCRIPTS ", " ZPWR_TEST ", " ZPWR_TMUX ", " ZPWR_ALL_GIT_DIRS ", " ZPWR_ALACRITTY_CFG
+Computed paths and config locations used by
+.BR home* ,
+.BR regen* ,
+and
+.B alacritty
+verbs.
+.SH FILES
+.TP
+.I ~/.zpwr/
+ZPWR install root
+.RB ( $ZPWR ).
+.TP
+.I ~/.zpwr/env/zpwr.zsh
+Verb-dispatch table; defines the
+.B zpwr
+function and the
+.B ZPWR_VERBS
+associative array.
+.TP
+.I ~/.zpwr/env/.zpwr_env.sh
+Primary
+.B ZPWR_*
+environment variables (read first).
+.TP
+.I ~/.zpwr/env/.zpwr_re_env.sh
+Re-read after user tokens to update dependent vars.
+.TP
+.I ~/.zpwr/env/.shell_aliases_functions.sh
+Shared aliases and helper shell functions.
+.TP
+.I ~/.zpwr/autoload/common/zpwr
+The
+.B zpwr
+shell-function entry point.
+.TP
+.I ~/.zpwr/autoload/
+538+ autoloaded zsh functions, organized into
+.BR common/ ,
+.BR linux/ ,
+.BR darwin/ ,
+.BR fzf/ ,
+.BR comps/ ,
+.BR comp_utils/ ,
+.BR systemctl/ .
+.TP
+.I ~/.zpwr/scripts/
+174+ standalone shell scripts dispatched by verbs.
+.TP
+.I ~/.zpwr/tests/
+147+ zunit test files (
+.B "zpwr test"
+runs them).
+.TP
+.I ~/.zpwr/install/
+Installer scripts and seed dotfiles (54 entries).
+.TP
+.I ~/.zpwr/tmux/
+Tmux config tree (25 files), including powerline themes and
+.BR tmm_*
+scripts.
+.TP
+.I ~/.zpwr/docs/
+Encyclopedia LaTeX/HTML/PDF and 219+ wizard pages used by
+.BR "zpwr docs / wizard" .
+.TP
+.I ~/.zpwr/man/man1/
+Man pages
+.RB ( zpwr.1 ", " zpwrall.1 ).
+.TP
+.I ~/.zpwr/local/
+Per-host overrides (git-ignored).
+.B .tokens.sh
+holds shell aliases and env-var overrides;
+.B .tokens-post.sh
+holds post-init zinit plugins.
+.TP
+.I ~/.zpwr/.zpwr_root
+Marker file pinning the install root.
+.TP
+.I $ZPWR_LOGFILE
+Append-only log; tail with
+.BR "zpwr taillog / logs" .
+.SH TMUX
+ZPWR ships a tmux cockpit. Highlights:
+.IP \(bu 2
+Prefixes default to
+.B ZPWR_TMUX_PREFIX_MAC
+on Darwin and
+.B ZPWR_TMUX_PREFIX_LINUX
+on Linux.
+.IP \(bu 2
+.B "zpwr start"
+brings up the cockpit (no extra tabs);
+.B "zpwr starttabs"
+brings up the full tab set
+.RB ( tmm_notabs " / " tmm_full ).
+.IP \(bu 2
+.BR attach " / " detach
+attach to or detach from all sessions.
+.IP \(bu 2
+Layout snapshots:
+.B "zpwr layoutsave"
+emits a repeatable script;
+.B "zpwr layoutload"
+restores it.
+.IP \(bu 2
+Synced-pane semantics:
+.B ZPWR_SEND_KEYS_FULL
+controls whether Enter/Control replicate;
+.B ZPWR_SEND_KEYS_PANE
+activates per-pane targeting.
+.B "zpwr startsend / startsendfull / stopsend"
+toggle the broadcast.
+.IP \(bu 2
+.B "zpwr killmux / killremote"
+kill the local server / local+remote.
+.SH KEYBINDINGS
+ZPWR sets up zsh keymaps for
+.BR viins ,
+.BR vicmd ,
+.BR menuselect ,
+.BR visual ,
+.BR listscroll ,
+and
+.BR viopp .
+Inspect any of them with
+.B "bindkey \-M <map> \-l"
+or use the search verbs:
+.TP
+.B zpwr allsearch
+Search all keybindings (
+.BR zpwrFzfAllKeybind ).
+.TP
+.B zpwr zshsearch
+Search zsh keybindings (
+.BR zpwrFzfZshKeybind ).
+.TP
+.B zpwr vimsearch
+Search vim keybindings (
+.BR zpwrFzfVimKeybind ).
+.PP
+The cache files
+.IR $ZPWR/zpwrAllKeybindings.txt " and "
+.I $ZPWR/zpwrVimKeybindings.txt
+back the search; regenerate with
+.BR "zpwr regenkeybindings" .
+.SH CACHES AND COMPILATION
+ZPWR maintains several caches; verbs let you regen, refresh, or wipe them.
+.TP
+.B .zwc cache
+.B "zpwr compile"
+recompiles all
+.B .zwc
+caches;
+.B compilefpath
+limits to fpath;
+.B compilefiles
+limits to files;
+.B decompile / uncompile
+delete them;
+.B refreshzwc
+delete-then-regen.
+.TP
+.B compsys cache
+.B "zpwr regenzsh"
+regenerates the compsys cache to
+.BR $ZSH_COMPDUMP ;
+.B cleancompcache
+clears it.
+.TP
+.B git repo cache
+.B "zpwr regengitrepocache"
+and
+.B regengitdirtyrepocache
+populate
+.BR $ZPWR_ALL_GIT_DIRS ;
+.BR cleangitcache " / " cleangitcleancache " / " cleangitdirtycache
+purge subsets.
+.TP
+.B env cache
+.B "zpwr regenenvcache"
+writes
+.IR $ZPWR/zpwrEnvKey.txt " and " $ZPWR/zpwrEnvValue.txt ;
+.B envcachesearch
+queries it via fzf.
+.TP
+.B ctags / gtags
+.B "zpwr regenctags"
+writes
+.IR ~/tags ;
+.B "zpwr regengtags"
+runs the same plus GNU global;
+.B regengtagspygments
+and
+.B regengtagstype
+choose the parser backend.
+.TP
+.B history
+.B "zpwr regenhistory"
+rebuilds
+.BR $HISTFILE ;
+.BR backuphistory " / " restorehistory
+move it sideways.
+.TP
+.B all-in-one
+.B "zpwr regen"
+runs all of the above except git-drive search;
+.B regenall
+also includes that.
+.SH LOGGING
+.B zpwr
+exposes structured log levels that write to
+.B $ZPWR_LOGFILE
+or to the console.
+.TP
+.B logdebug ", " logerror ", " loginfo ", " logtrace
+Append a log line at the named level to
+.BR $ZPWR_LOGFILE .
+.TP
+.B logdebugconsole ", " logerrorconsole ", " loginfoconsole ", " logtraceconsole
+Same levels but to the console (with neon ANSI styling).
+.TP
+.B taillog ", " logs
+Colorized
+.B tail
+of
+.BR $ZPWR_LOGFILE .
+.TP
+.B cleanlog
+Truncate the log.
+.PP
+Log color is governed by
+.BR ZPWR_LOG_DATE_COLOR ", " ZPWR_LOG_MSG_COLOR ", " ZPWR_LOG_QUOTE_COLOR ", " ZPWR_LOG_UNDER_COLOR .
+Quote delimiters come from
+.BR ZPWR_QUOTE_START_CHAR " / " ZPWR_QUOTE_END_CHAR .
+.SH PLUGIN SYSTEM
+ZPWR is built on
+.B zinit
+(the
+.B ZPWR_PLUGIN_MANAGER
+default). Add plugins in
+.IR $ZPWR/local/.tokens-post.sh :
+.PP
+.RS
+.EX
+zinit ice lucid nocompile wait\(aq0a\(aq
+zinit load hlissner/zsh-autopair
+.EE
+.RE
+.PP
+Other relevant verbs:
+.BR updatezinit ,
+.BR zshpluginlist ,
+.BR zshplugincount ,
+.BR vimpluginlist ,
+.BR vimplugincount ,
+.BR emacspluginlist ,
+.BR emacsplugincount ,
+.BR plugins
+(\fIcd\fR to
+.IR $ZSH_CUSTOM/plugins ).
+.SH STARTUP PROFILE
+Three independent surfaces:
+.TP
+.B "zpwr bench"
+N-run startup benchmark with percentiles + diff against the saved baseline
+.RB ( zpwrBench ).
+.TP
+.B "zpwr startup"
+One-shot
+.B zprof
+profile with colorized breakdown
+.RB ( zpwrStartup ).
+Aliases:
+.BR profile ", " zprof .
+.TP
+.B "zpwr flame"
+Flame chart from
+.B zprof
+data
+.RB ( zpwrFlame ).
+Aliases:
+.BR flamechart ", " heatmap .
+.SH HEALTH CHECK
+.B "zpwr doctor"
+runs an environment health-check diagnostic
+.RB ( zpwrDoctor ).
+Aliases:
+.BR doc ", " checkup .
+Companion verbs:
+.TP
+.B pathaudit ", " audit
+Audit
+.BR PATH ", " FPATH ", " MANPATH
+for duplicates and missing dirs.
+.TP
+.B stale ", " cruft
+Find stale
+.B .zwc
+files, orphan caches, and broken symlinks.
+.TP
+.B lint ", " check
+Run
+.B shellcheck
+and
+.B "zsh \-n"
+across all zpwr scripts and autoloads.
+.TP
+.B ports ", " netstat ", " listening
+Listening ports with owning process.
+.SH EXAMPLES
+List every verb in color:
+.PP
+.RS
+.EX
+zpwr help
+.EE
+.RE
+.PP
+Run the environment health check:
+.PP
+.RS
+.EX
+zpwr doctor
+.EE
+.RE
+.PP
+Benchmark shell startup with baseline diff:
+.PP
+.RS
+.EX
+zpwr bench
+.EE
+.RE
+.PP
+Render a startup flame chart:
+.PP
+.RS
+.EX
+zpwr flame
+.EE
+.RE
+.PP
+Audit
+.BR PATH ", " FPATH ", " MANPATH :
+.PP
+.RS
+.EX
+zpwr pathaudit
+.EE
+.RE
+.PP
+Snapshot, then later restore the terminal environment:
+.PP
+.RS
+.EX
+zpwr snapshot
+zpwr restore
+.EE
+.RE
+.PP
+Trace command resolution:
+.PP
+.RS
+.EX
+zpwr resolve ls
+.EE
+.RE
+.PP
+Bring up the encyclopedia / guided tour:
+.PP
+.RS
+.EX
+zpwr docs
+.EE
+.RE
+.PP
+Watch a directory and run a command on change:
+.PP
+.RS
+.EX
+zpwr watch '*.zsh' \(aqzpwr lint\(aq
+.EE
+.RE
+.PP
+Replay the last 10 commands:
+.PP
+.RS
+.EX
+zpwr replay 10
+.EE
+.RE
+.PP
+Override an env var per-host (
+.IR $ZPWR/local/.tokens.sh ):
+.PP
+.RS
+.EX
+export ZPWR_VIM=nvim
+export ZPWR_BAT_THEME=\(aqSolarized (dark)\(aq
+export ZPWR_AUTO_LS_CD=false
+.EE
+.RE
+.SH EXIT STATUS
+.TP
+.B 0
+The verb dispatched and returned success.
+.TP
+.B 1
+Unknown subcommand. Printed as
+.RB \(lq "Unknown subcommand: \(aqVERB\(aq" \(rq
+to stderr.
+.TP
+.I other
+Forwarded from the dispatched verb.
+.SH SEE ALSO
+.BR zpwr (1),
+.BR zsh (1),
+.BR zshall (1),
+.BR zinit (1),
+.BR tmux (1),
+.BR fzf (1),
+.BR shellcheck (1),
+.BR zprof (1),
+.BR ag (1),
+.BR fd (1),
+.BR eza (1),
+.BR bat (1),
+.BR pygmentize (1).
+.PP
+Project home:
+.RB < https://github.com/MenkeTechnologies/zpwr >.
+.br
+Read the Docs:
+.RB < https://menketechnologies.github.io/zpwr/ >.
+.SH AUTHOR
+Written by Jacob Menke
+.RB < https://github.com/MenkeTechnologies >.
+.SH REPORTING BUGS
+Report bugs at
+.RB < https://github.com/MenkeTechnologies/zpwr/issues >.
+.SH COPYRIGHT
+Copyright \(co MenkeTechnologies. Licensed under the project
+.B license.md
+in the ZPWR repository.
