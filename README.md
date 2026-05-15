@@ -44,6 +44,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Main Window](#tmux-main-window----the-cockpit) -- The Cockpit
 - [Personal Config](#personal-config----your-identity-file) -- Your Identity File
 - [ZPWR Verbs](#zpwr-verbs) -- Command Vocabulary
+- [Man Page](#man-page----man-zpwr) -- `man zpwr`
 - [ZPWR auto menu completion](#auto-list-completions) -- Predictive Completion
 - [Github Account Variable](#zpwr_github_account-variable) -- Network Identity
 - [Adding Zsh Plugins](#adding-more-zinit-plugins) -- Sideloading Modules
@@ -434,6 +435,14 @@ YCM (vim code completion engine) will source this file (`autocmd filetype * set 
 
 ## zpwr verbs
 Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verbs (fzf multiselection is enabled).  `zpwr verbsedit` puts selected verbs onto command line for editing.
+
+## Man Page -- `man zpwr`
+ZPWR ships its own UNIX man page at `~/.zpwr/man/man1/zpwr.1`.  Add the directory to your `MANPATH` to view it with the system `man`:
+```sh
+export MANPATH="$ZPWR/man:$MANPATH"
+man zpwr
+```
+The page covers the `zpwr` dispatcher, `-h`/`-V` flags, a curated verb catalog (diagnostics, profiling, history analytics, snapshot/restore, cache management, navigation, eye-candy, tmux), environment variables, files, and runnable examples.  For the live colorized verb list use `zpwr help`; for the interactive encyclopedia use `zpwr docs`.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 Change in `~/.zpwr/local/.tokens.sh`
