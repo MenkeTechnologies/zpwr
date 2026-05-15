@@ -1,0 +1,477 @@
+.\" Manpage for zpwr.
+.\" Contact: https://github.com/MenkeTechnologies/zpwr
+.TH ZPWR 1 "May 2026" "zpwr v48.7.3" "ZPWR Manual"
+.SH NAME
+zpwr \- neon-lit UNIX terminal operating system for the digital underground
+.SH SYNOPSIS
+.B zpwr
+.RI [ VERB " [" ARGS ...]]
+.br
+.B zpwr
+.BR \-h " | " \-? " | " \-\-help
+.br
+.B zpwr
+.BR \-V " | " \-\-version
+.SH DESCRIPTION
+.B zpwr
+is the master dispatcher for the ZPWR terminal environment \-\- a high-voltage
+zsh\-on\-zinit cockpit weaponized with custom zsh, bash, vimL, and
+.I stryke
+code. The
+.B zpwr
+function looks up
+.I VERB
+in the
+.B ZPWR_VERBS
+associative array and dispatches to the corresponding zsh function, alias, or
+binary, forwarding the remaining
+.I ARGS .
+.PP
+With no arguments,
+.B zpwr
+.BR cd s
+to
+.BR $ZPWR ,
+the install root (typically
+.IR ~/.zpwr ).
+.PP
+ZPWR ships 456+ verbs, 2k+ aliases, 17k+ completions, 506+ subcommands, and a
+tmux cockpit. Tab completion on
+.B zpwr
+.RI < TAB >
+lists every verb with its short description, color-coded.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-? ", " \-\-help
+List all verbs with their colorized descriptions in a pager
+.RB ( zpwrListVerbsColor ).
+.TP
+.BR \-V ", " \-\-version
+Show the ZPWR banner and version in a pager
+.RB ( zpwrAbout ).
+.TP
+.B \-\-
+End-of-options marker; the next argument is treated as the verb.
+.SH VERBS
+.B zpwr
+exposes hundreds of verbs. The list below is a curated cross-section;
+.B zpwr help
+shows the full set.
+.SS Diagnostics and profiling
+.TP
+.B doctor
+Run the environment health-check diagnostic
+.RB ( zpwrDoctor ).
+Aliases:
+.BR doc ", " checkup .
+.TP
+.B bench
+Benchmark shell startup with percentile breakdown and baseline diff.
+Alias:
+.BR benchmark .
+.TP
+.B startup
+One-shot
+.I zprof
+startup profile with colorized breakdown.
+.TP
+.B flame
+Render a startup flame chart from
+.I zprof
+data.
+.TP
+.B top
+Live shell resource dashboard.
+Alias:
+.BR dashboard .
+.TP
+.B trace
+Run a command with full instrumentation (
+.IR xtrace ,
+.IR ftrace ,
+timing).
+.TP
+.B lint
+Run
+.B shellcheck
+and
+.B zsh \-n
+across all zpwr scripts and autoloads.
+Alias:
+.BR check .
+.TP
+.B pathaudit
+Audit
+.BR PATH ,
+.BR FPATH ,
+.B MANPATH
+for duplicates and missing directories.
+Alias:
+.BR audit .
+.TP
+.B stale
+Find stale
+.B .zwc
+files, orphan caches, and broken symlinks.
+Alias:
+.BR cruft .
+.TP
+.B ports
+List listening ports with the owning process.
+.SS History and analytics
+.TP
+.B aliasrank
+Mine shell history for alias usage statistics.
+Alias:
+.BR aliasusage .
+.TP
+.B funcrank
+Rank zsh functions and
+.B zpwr
+verbs by history usage.
+.TP
+.B timeline
+Visual timeline of shell history grouped by hour and directory.
+Alias:
+.BR activity .
+.TP
+.B replay
+Replay the last
+.I N
+commands from history.
+.TP
+.B gitwho
+Aggregate
+.B git
+contributor stats across all cached repos.
+.SS Environment state
+.TP
+.B snapshot
+Capture a full terminal environment snapshot.
+.TP
+.B restore
+Restore the terminal environment from a snapshot.
+.TP
+.B deps
+Function dependency graph and call-chain analysis.
+Alias:
+.BR callers .
+.TP
+.B resolve
+Trace command resolution chain: alias \(-> function \(-> builtin \(-> binary.
+.TP
+.B taillog
+Colorized
+.B tail
+of
+.BR $ZPWR_LOGFILE .
+.SS Cache management
+.TP
+.B compile
+Recompile every
+.B .zwc
+cache entry
+.RB ( zpwrRecompile ).
+.TP
+.B decompile
+Delete every
+.B .zwc
+cache entry
+.RB ( zpwrUncompile ).
+.TP
+.B compilefpath
+Recompile only
+.B fpath
+caches.
+.TP
+.B cleanall
+Clear
+.BR $ZPWR_DIRS_CLEAN ,
+temp, and cache.
+.TP
+.B cleantemp
+Clear only zpwr temp files.
+.TP
+.B cleancache
+Clear all zpwr cache files.
+.TP
+.B cleanlog
+Truncate
+.BR $ZPWR_LOGFILE .
+.TP
+.B deduppaths
+Deduplicate
+.BR PATH ", " fpath ", " manpath .
+.SS Navigation and search
+.TP
+.B cd
+.B cd
+to a directory argument with zpwr semantics.
+Aliases:
+.BR f ", " forward ", " fwd .
+.TP
+.B cdup
+.B cd
+up the tree to a directory argument.
+Aliases:
+.BR r ", " reverse ", " rvs .
+.TP
+.B cat
+.B cat
+arguments through zpwr pretty-printing.
+Alias:
+.BR c .
+.TP
+.B search
+Recursive
+.B grep
+search with context.
+.TP
+.B dirsearch
+.B cd
+to a fuzzy-found subdirectory.
+.TP
+.B filesearch
+.B c
+a fuzzy-found file in a subdirectory.
+.SS Updates and lifecycle
+.TP
+.B updatepull
+Pull the latest config from the ZPWR repo.
+.TP
+.B reset
+Reset the ZPWR repo to the latest
+.BR main .
+.TP
+.B backup
+Backup files via the zpwr backup pipeline.
+.TP
+.B backuphistory
+Backup
+.BR $HISTFILE .
+.SS Banner and tour
+.TP
+.B about
+Show the ZPWR banner.
+Alias:
+.BR banner .
+.TP
+.B bannercounts
+Show the banner together with environment counts.
+.TP
+.B docs
+Interactive guided tour of zpwr.
+Alias:
+.BR wizard .
+.TP
+.B help
+Color-listed verb catalog (same as
+.BR \-h ).
+.SS Eye-candy
+.TP
+.B fortune
+Cyberpunk fortune cookies in random
+.B figlet
+fonts.
+.TP
+.B matrix
+Fullscreen Matrix digital-rain screensaver.
+.TP
+.B animate
+Run a terminal animation.
+.SS Tmux
+.TP
+.B attach
+.B tmux attach-session .
+.TP
+.B detach
+Detach from all tmux sessions.
+.PP
+The full verb catalog \(em including networking
+.RB ( digs ", " torip ),
+git
+.RB ( clone ", " colorsdiff ),
+docker
+.RB ( dockerwipe ", " dfimage ),
+encyclopedia regeneration
+.RB ( regenpdf ),
+and hundreds more \(em is enumerated by
+.BR "zpwr help" .
+.SH EXIT STATUS
+.TP
+.B 0
+The verb dispatched and returned success.
+.TP
+.B 1
+Unknown subcommand. Printed as
+.RB \(lq "Unknown subcommand: \(aqVERB\(aq" \(rq
+to stderr.
+.TP
+.I other
+Forwarded from the dispatched verb's command.
+.SH ENVIRONMENT
+.TP
+.B ZPWR
+Absolute path to the ZPWR install root (typically
+.IR ~/.zpwr ).
+.TP
+.B ZPWR_VERBS_FILE
+Path to the verb-dispatch file
+.RI ( $ZPWR/env/zpwr.zsh ).
+.TP
+.B ZPWR_VERBS
+Associative array
+.RI ( "typeset \-Ag" )
+holding
+.BR verb \(rA cmd=description
+entries.
+.TP
+.B ZPWR_LOGFILE
+Destination for
+.BR zpwr " " "logdebug | logerror | loginfo | logwarn"
+and
+.BR taillog .
+.TP
+.B ZPWR_REPO_NAME
+Repository display name (used in banners).
+.TP
+.B ZPWR_GITHUB_ACCOUNT
+GitHub account targeted by clone/update verbs.
+.TP
+.B ZPWR_DIRS_CLEAN
+Directory list cleared by
+.BR cleandirs ", " cleanall .
+.TP
+.B ZPWR_ALACRITTY_CFG
+Alacritty config path edited by
+.BR "zpwr alacritty" .
+.TP
+.B EDITOR
+Used by
+.B "zpwr edit"
+to launch the editor.
+.SH FILES
+.TP
+.I ~/.zpwr/
+ZPWR install root
+.RB ( $ZPWR ).
+.TP
+.I ~/.zpwr/env/zpwr.zsh
+Verb-dispatch table and the
+.B zpwr
+function source.
+.TP
+.I ~/.zpwr/autoload/common/zpwr
+The
+.B zpwr
+shell-function entry point.
+.TP
+.I ~/.zpwr/autoload/
+Autoload tree containing every
+.B zpwr*
+shell function backing the verbs.
+.TP
+.I ~/.zpwr/install/
+Installer scripts and seed dotfiles.
+.TP
+.I ~/.zpwr/docs/
+Encyclopedia LaTeX source, HTML site, and wizard pages.
+.TP
+.I ~/.zpwr/local/.tokens.sh
+Local shell aliases and environment variables (not tracked).
+.TP
+.I ~/.zpwr/scripts/
+Standalone shell scripts dispatched by verbs.
+.SH EXAMPLES
+.PP
+List every verb in color:
+.PP
+.RS
+.EX
+zpwr help
+.EE
+.RE
+.PP
+Run the environment health check:
+.PP
+.RS
+.EX
+zpwr doctor
+.EE
+.RE
+.PP
+Benchmark shell startup with baseline diff:
+.PP
+.RS
+.EX
+zpwr bench
+.EE
+.RE
+.PP
+Render a startup flame chart from
+.IR zprof :
+.PP
+.RS
+.EX
+zpwr flame
+.EE
+.RE
+.PP
+Audit
+.BR PATH ", " FPATH ", " MANPATH :
+.PP
+.RS
+.EX
+zpwr pathaudit
+.EE
+.RE
+.PP
+Snapshot the current terminal environment, then restore it later:
+.PP
+.RS
+.EX
+zpwr snapshot
+zpwr restore
+.EE
+.RE
+.PP
+Trace how
+.B ls
+resolves on this system:
+.PP
+.RS
+.EX
+zpwr resolve ls
+.EE
+.RE
+.PP
+Open the interactive encyclopedia / guided tour:
+.PP
+.RS
+.EX
+zpwr docs
+.EE
+.RE
+.SH AUTHOR
+Written by Jacob Menke
+.RB < https://github.com/MenkeTechnologies >.
+.SH REPORTING BUGS
+Report bugs at
+.RB < https://github.com/MenkeTechnologies/zpwr/issues >.
+.SH SEE ALSO
+.BR zsh (1),
+.BR zshall (1),
+.BR tmux (1),
+.BR fzf (1),
+.BR shellcheck (1),
+.BR zprof (1).
+.PP
+Project home:
+.RB < https://github.com/MenkeTechnologies/zpwr >.
+.br
+Read the Docs:
+.RB < https://menketechnologies.github.io/zpwr/ >.
+.SH COPYRIGHT
+Copyright \(co MenkeTechnologies. Licensed under the project
+.B license.md
+in the ZPWR repository.
