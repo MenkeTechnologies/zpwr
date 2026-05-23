@@ -56,15 +56,16 @@ function zpwrTop(){
     local -i njobs nds nwid nhooks nzf nza nzv nzverbs nzc nopts nmod
     local -i rss vsz nch h m s el mp mf me maxsz bl j
     local -i hb_raw_i hl_raw_i
-    local ps_out mod_out opts_out nch_raw gb gdr
+    local ps_out nch_raw gb gdr
+    local -a mod_out opts_out
     local hb_raw hl_raw ts tw tp
     local rss_raw vsz_raw rss_d vsz_d hs up gd ti
     local df dc da dcm dp dfp dpa mc mb key
     local fn nm sz sd mm mod_line
     local -a fsz lp mod_list
     local -a spark_vals spark_commits spark_chars
-    local spark_line spark_min spark_max spark_avg spark_last frac
-    local -i si sv sn spark_sum srange sidx
+    local spark_line spark_min spark_max spark_avg spark_last frac sv
+    local -i si sn spark_sum srange sidx
     local startup_log="$ZPWR_LOCAL/startup_history.log"
     local hud_plain pad_count
     local -i box_inner=76
@@ -92,8 +93,8 @@ function zpwrTop(){
 
         ps_out="$(command ps -o rss=,vsz= -p $$ 2>/dev/null)"
         # use zsh builtins instead of forking to zmodload/setopt commands
-        mod_out="${(pj:\n:)${(k)modules[(R)loaded]}}"
-        opts_out="${(pj:\n:)${(k)options[(R)on]}}"
+        mod_out=( "${(@k)modules[(R)loaded]}" )
+        opts_out=( "${(@k)options[(R)on]}" )
         # use zsh stat builtin instead of wc fork for file size
         nch_raw="$(pgrep -P $$ 2>/dev/null | wc -l)"
         hb_raw="0" hl_raw="0"
@@ -117,8 +118,8 @@ function zpwrTop(){
         fi
 
         # ── PROCESS (no forks) ────────────────────────────────
-        nmod=${#${(f)mod_out}}
-        nopts=${#${(f)opts_out}}
+        nmod=${#mod_out}
+        nopts=${#opts_out}
 
         rss_raw=${ps_out%% *}; vsz_raw=${ps_out##* }
         rss_raw=${rss_raw//[^0-9]/}; vsz_raw=${vsz_raw//[^0-9]/}
@@ -241,7 +242,7 @@ function zpwrTop(){
         print -r "${K}"
         print -r "  ${C}── LOADED MODULES (${nmod}) ──────────────────────────────────────────────${N}${K}"
         mod_line=""
-        for mm in ${(f)mod_out}; do
+        for mm in "${mod_out[@]}"; do
             mm=${mm##zsh/}
             if [[ -z "$mod_line" ]]; then
                 mod_line="$mm"
@@ -278,15 +279,17 @@ function zpwrTop(){
         # ── SPARKLINE: STARTUP HISTORY ────────────────────────
         spark_vals=()
         if [[ -f "$startup_log" ]]; then
-            spark_vals=( ${${(f)"$(tail -40 "$startup_log" 2>/dev/null)"}##* } )
+            # strip ANSI escapes from historical log entries before splitting
+            spark_vals=( ${${(f)"$(tail -40 "$startup_log" 2>/dev/null | sed $'s/\033\\[[0-9;]*m//g')"}##* } )
         fi
         print -r "${K}"
         print -r "  ${C}── STARTUP HISTORY (last ${#spark_vals}) ────────────────────────────────────────${N}${K}"
         if (( ${#spark_vals} >= 2 )); then
-            # pre-compute all millis values in one pass (avoids duplicate conversion)
             local -a spark_millis=()
             spark_min=999999 spark_max=0 spark_sum=0
             for sv in "${spark_vals[@]}"; do
+                # skip any non-numeric token (defensive against future log contamination)
+                [[ "$sv" != <->(.<->)# ]] && continue
                 if [[ "$sv" == *.* ]]; then
                     frac="${sv#*.}"
                     si=$(( ${sv%.*} * 1000 + 10#${(l:3::0:)frac} ))
@@ -298,9 +301,10 @@ function zpwrTop(){
                 (( si > spark_max )) && spark_max=$si
                 spark_sum=$(( spark_sum + si ))
             done
-            sn=${#spark_vals}
+            sn=${#spark_millis}
+            (( sn < 1 )) && sn=1
             spark_avg=$(( spark_sum / sn ))
-            spark_last=${spark_vals[-1]}
+            (( ${#spark_millis} > 0 )) && spark_last=$(printf '%.3f' $(( spark_millis[-1] / 1000.0 ))) || spark_last="?"
 
             # build sparkline from pre-computed millis array
             spark_line=""
