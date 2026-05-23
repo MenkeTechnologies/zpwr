@@ -1,9 +1,3 @@
-# ![zpwr](https://menketechnologies.github.io/img/zpwr.png?raw=true): Neon-Lit UNIX Terminal Operating System for the Digital Underground
-
-![tmux final](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
-
-#### Main [![CI](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
-
 ```
  _______ _______ _  _  _ ______
 |____   |_____  | |  \| |_____/
@@ -11,17 +5,24 @@
 >>> JACK INTO THE GRID <<<
 ```
 
-> *"The street finds its own uses for things."* -- William Gibson
+[![CI](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml)
+[![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://github.com/MenkeTechnologies/zpwr/tags/)
+[![Commits since v1.0](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://github.com/MenkeTechnologies/zpwr/commit/)
+[![Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+ [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://menketechnologies.github.io/zpwr/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### [`Read the Docs`](https://menketechnologies.github.io/zpwr/)
+### `[NEON-LIT UNIX TERMINAL OS // 506+ VERBS // 172k LOC // STRYKE-POWERED]`
 
-This project began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) and evolved into something far beyond its origins -- a sprawling cyberdeck OS for the command line.
+> *"The street finds its own uses for things."* — William Gibson
 
-ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface -- autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a tmux cockpit that turns your terminal into a multi-pane command center.
+![tmux final](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
 
-ZPWR will migrating to the [zshrs](https://github.com/MenkeTechnologies/zshrs) soon.  The stryke shell (also known as zshrs) is a next gen, highly parallel login shell designed as drop in replacement for zsh.
+ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface — autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a tmux cockpit that turns your terminal into a multi-pane command center. Began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix); evolved into a sprawling cyberdeck OS for the command line. Will be migrating to [zshrs](https://github.com/MenkeTechnologies/zshrs) — a next-gen, highly parallel login shell designed as a drop-in replacement for zsh. If your terminal isn't glowing, you're not running ZPWR.
 
-If your terminal isn't glowing, you're not running ZPWR.
+### [`Read the Docs`](https://menketechnologies.github.io/zpwr/) &middot; [`Engineering Report`](https://menketechnologies.github.io/zpwr/report.html) · [`strykelang`](https://github.com/MenkeTechnologies/strykelang) · [`zshrs`](https://github.com/MenkeTechnologies/zshrs) · [`zsh-more-completions`](https://github.com/MenkeTechnologies/zsh-more-completions)
+
+---
 
 ## System Map
 
