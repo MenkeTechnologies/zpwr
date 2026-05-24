@@ -268,6 +268,11 @@
 }
 
 @test 'whence s resolves' {
+    # `s` is the strykelang launcher (cargo install strykelang installs both
+    # `stryke` and `s`). Skip when strykelang isn't installed (CI environments
+    # where the downstream zshrs __error() Linux blocker prevents cargo install
+    # strykelang from building).
+    command -v stryke >/dev/null 2>&1 || skip "stryke not installed; \`s\` launcher requires strykelang"
     run whence s
     assert $state equals 0
 }
