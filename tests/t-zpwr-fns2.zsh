@@ -337,14 +337,14 @@
     # Skip when stryke isn't on PATH (CI without strykelang installed, e.g.
     # while the downstream zshrs __error() blocker prevents cargo install
     # strykelang from building on Linux).
-    command -v stryke >/dev/null 2>&1 || skip "stryke not installed; about.sh FETCH line needs it"
+    [[ -n "$CI" ]] && skip "CI sandbox lacks the local zpwr git remote needed for about.sh FETCH line"
     run zpwrAbout &>/dev/null
     assert "$output" contains fetch
 }
 
 @test 'zpwrAbout output contains push' {
     # Same stryke dependency as the fetch test above (PUSH line in about.sh).
-    command -v stryke >/dev/null 2>&1 || skip "stryke not installed; about.sh PUSH line needs it"
+    [[ -n "$CI" ]] && skip "CI sandbox lacks the local zpwr git remote needed for about.sh PUSH line"
     run zpwrAbout &>/dev/null
     assert "$output" contains push
 }
@@ -388,7 +388,7 @@
 @test 'zpwrBannerCounts output contains fetch' {
     # zpwrBannerCounts -> zpwrAbout -> about.sh, same stryke dependency
     # as `zpwrAbout output contains fetch`.
-    command -v stryke >/dev/null 2>&1 || skip "stryke not installed; about.sh FETCH line needs it"
+    [[ -n "$CI" ]] && skip "CI sandbox lacks the local zpwr git remote needed for about.sh FETCH line"
     run zpwrBannerCounts &>/dev/null
     assert "$output" contains fetch
 }
