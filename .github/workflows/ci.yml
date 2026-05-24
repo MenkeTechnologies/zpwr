@@ -41,16 +41,15 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install stryke
-        # Soft-fail: strykelang depends on zshrs which currently has a
-        # macOS-only `libc::__error()` call without the `#[cfg(target_os
-        # = "macos")]` guard, breaking the Linux build. Remove this
-        # `continue-on-error` once zshrs publishes a fix to crates.io.
-        # zpwr tests that exercise stryke integration will skip when
-        # the binary isn't on PATH.
-        continue-on-error: true
+        # IMPORTANT: --locked honors the Cargo.lock published with the
+        # strykelang crate, which pins `zshrs = 0.11.4`. Without --locked
+        # Cargo resolves to the latest 0.11.x → 0.11.6 → which has an
+        # unguarded `libc::__error()` call that only compiles on macOS
+        # (Linux libc exposes `__errno_location()` instead). 0.11.4 has
+        # the proper #[cfg(target_os = "macos")] guards.
         run: |
-          cargo install strykelang
-          command -v stryke || echo "stryke not installed (cargo install failed); continuing without it"
+          cargo install --locked strykelang
+          command -v stryke
 
       - name: Checkout repository
         uses: actions/checkout@v4
