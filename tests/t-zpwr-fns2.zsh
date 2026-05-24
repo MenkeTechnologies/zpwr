@@ -333,11 +333,18 @@
 }
 
 @test 'zpwrAbout output contains fetch' {
+    # about.sh derives the FETCH line from `git remote -v | grep fetch | stryke -pe ...`.
+    # Skip when stryke isn't on PATH (CI without strykelang installed, e.g.
+    # while the downstream zshrs __error() blocker prevents cargo install
+    # strykelang from building on Linux).
+    command -v stryke >/dev/null 2>&1 || skip "stryke not installed; about.sh FETCH line needs it"
     run zpwrAbout &>/dev/null
     assert "$output" contains fetch
 }
 
 @test 'zpwrAbout output contains push' {
+    # Same stryke dependency as the fetch test above (PUSH line in about.sh).
+    command -v stryke >/dev/null 2>&1 || skip "stryke not installed; about.sh PUSH line needs it"
     run zpwrAbout &>/dev/null
     assert "$output" contains push
 }
@@ -379,6 +386,9 @@
 }
 
 @test 'zpwrBannerCounts output contains fetch' {
+    # zpwrBannerCounts -> zpwrAbout -> about.sh, same stryke dependency
+    # as `zpwrAbout output contains fetch`.
+    command -v stryke >/dev/null 2>&1 || skip "stryke not installed; about.sh FETCH line needs it"
     run zpwrBannerCounts &>/dev/null
     assert "$output" contains fetch
 }
