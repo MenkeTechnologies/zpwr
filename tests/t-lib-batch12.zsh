@@ -25,13 +25,13 @@
 #--------------------------------------------------------------
 # .github/workflows/ci.yml — action pins and env
 #--------------------------------------------------------------
-@test 'ci.yml uses actions/checkout@v4' {
-    run grep -q 'actions/checkout@v4' "$ZPWR/.github/workflows/ci.yml"
+@test 'ci.yml uses actions/checkout@v6' {
+    run grep -q 'actions/checkout@v6' "$ZPWR/.github/workflows/ci.yml"
     assert $state equals 0
 }
 
-@test 'ci.yml uses actions/cache@v4' {
-    run grep -q 'actions/cache@v4' "$ZPWR/.github/workflows/ci.yml"
+@test 'ci.yml uses actions/cache@v5' {
+    run grep -q 'actions/cache@v5' "$ZPWR/.github/workflows/ci.yml"
     assert $state equals 0
 }
 
