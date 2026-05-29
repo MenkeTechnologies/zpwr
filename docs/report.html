@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="ZPWR — Engineering report. Neon-lit UNIX terminal OS: 1,559 files, ~107k zsh+sh lines, 538 autoload functions, 461 verb keys (373 distinct), 204 aliases, 228 zsh bindkeys, 80 tmux binds, 48 zinit plugins, 643 brew formulas/casks, 146 test files, 79k test lines, 217-page wizard encyclopedia, 6,260 commits, 613 tags, ~9 years.">
+  <meta name="description" content="ZPWR — Engineering report. Neon-lit UNIX terminal OS: 1,559 files, ~107k zsh+sh lines, 533 autoload functions, 463 verb keys (373 distinct), 204 aliases, 228 zsh bindkeys, 80 tmux binds, 48 zinit plugins, 643 brew formulas/casks, 145 test files, 79k test lines, 217-page wizard encyclopedia, 6,260 commits, 613 tags, ~9 years.">
   <title>ZPWR &mdash; Engineering Report</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,7 +75,7 @@
             <a href="https://github.com/MenkeTechnologies/zpwr" target="_blank" rel="noopener noreferrer">GitHub</a>
           </nav>
           <p style="margin:0.35rem 0 0;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.03em;opacity:0.75;">
-            Neon-lit UNIX terminal OS &middot; zsh + tmux + vim/nvim + fzf + git + zinit &middot; 538 autoload functions &middot; 461 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 643 brew formulas
+            Neon-lit UNIX terminal OS &middot; zsh + tmux + vim/nvim + fzf + git + zinit &middot; 533 autoload functions &middot; 461 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 643 brew formulas
           </p>
         </div>
         <div class="tutorial-toolbar">
@@ -92,12 +92,12 @@
       <!-- SECTION 1: EXECUTIVE SUMMARY           -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">&gt;_</span>EXECUTIVE SUMMARY</h2>
-      <p class="tutorial-subtitle">ZPWR is a heavily-instrumented terminal operating environment for zsh: a curated <code>autoload</code> tree, a <code>zinit</code>-managed plugin stack, an interactive tmux cockpit, a unified <code>zpwr &lt;verb&gt;</code> dispatcher, and a self-installing toolchain that pulls down hundreds of CLI utilities on macOS and Linux. The project began as a fork of Hashrocket's Dotmatrix in 2017 and has grown into a single-user cyberdeck: <strong>1,559 files, ~107k zsh+sh lines, 538 autoload functions, 461 verb keys mapping to 373 distinct zpwr functions, 204 aliases, 228 zsh keybindings, 80 tmux bindings, 48 zinit plugins, 643 brew formulas/casks installed, 146 test files / 79k lines of zunit, 217 wizard encyclopedia pages, 39 screenshots, 6,260 commits across 613 tags spanning ~9 years</strong> &mdash; built almost entirely by one engineer (11,209 of 11,211 commits).</p>
+      <p class="tutorial-subtitle">ZPWR is a heavily-instrumented terminal operating environment for zsh: a curated <code>autoload</code> tree, a <code>zinit</code>-managed plugin stack, an interactive tmux cockpit, a unified <code>zpwr &lt;verb&gt;</code> dispatcher, and a self-installing toolchain that pulls down hundreds of CLI utilities on macOS and Linux. The project began as a fork of Hashrocket's Dotmatrix in 2017 and has grown into a single-user cyberdeck: <strong>1,559 files, ~107k zsh+sh lines, 533 autoload functions, 463 verb keys mapping to 373 distinct zpwr functions, 204 aliases, 228 zsh keybindings, 80 tmux bindings, 48 zinit plugins, 643 brew formulas/casks installed, 145 test files / 79k lines of zunit, 217 wizard encyclopedia pages, 39 screenshots, 6,260 commits across 613 tags spanning ~9 years</strong> &mdash; built almost entirely by one engineer (11,209 of 11,211 commits).</p>
 
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-val">1,559</div><div class="stat-label">Total Files</div></div>
         <div class="stat-card"><div class="stat-val">106,927</div><div class="stat-label">Zsh + Sh Lines</div></div>
-        <div class="stat-card"><div class="stat-val accent">538</div><div class="stat-label">Autoload Functions</div></div>
+        <div class="stat-card"><div class="stat-val accent">533</div><div class="stat-label">Autoload Functions</div></div>
         <div class="stat-card"><div class="stat-val accent">461</div><div class="stat-label">Verb Keys (zpwr)</div></div>
         <div class="stat-card"><div class="stat-val green">146</div><div class="stat-label">Test Files</div></div>
         <div class="stat-card"><div class="stat-val">79,177</div><div class="stat-label">Test Lines</div></div>
@@ -136,7 +136,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>autoload/</td><td class="num">538</td><td class="num">22,464</td><td>Per-function autoload tree. <code>fpath</code>-loaded on shell start. 470 in <code>common/</code>, 21 in <code>fzf/</code>, 15 in <code>comps/</code>, 12 in <code>comp_utils/</code>, 6 in <code>darwin/</code>, 5 in <code>linux/</code>, 4 in <code>systemctl/</code>.</td></tr>
+          <tr><td>autoload/</td><td class="num">533</td><td class="num">22,464</td><td>Per-function autoload tree. <code>fpath</code>-loaded on shell start. 470 in <code>common/</code>, 21 in <code>fzf/</code>, 15 in <code>comps/</code>, 12 in <code>comp_utils/</code>, 6 in <code>darwin/</code>, 5 in <code>linux/</code>, 4 in <code>systemctl/</code>.</td></tr>
           <tr><td>env/</td><td class="num">18</td><td class="num">3,401</td><td>Environment, exported vars, p10k config, verb dispatch table (<code>zpwr.zsh</code> &mdash; 554 lines, 463 verb keys).</td></tr>
           <tr><td>install/</td><td class="num">107</td><td class="num">82,152</td><td>One-shot installers: 25 shell scripts, package manifests, <code>casks.sh</code>/<code>formulae.sh</code> with 643 brew formulas/casks, vim/nvim configs, JetBrains/iTerm/Alacritty configs, systemd units.</td></tr>
           <tr><td>local/</td><td class="num">241</td><td class="num">5,512,872</td><td>Runtime cache: <code>.cache/completions</code>, git-repo dirty/clean caches, alias caches, zcompdump, generated keybindings, snapshot tarballs. Regenerated by <code>zpwr regen</code> verbs.</td></tr>
@@ -155,7 +155,7 @@
       <!-- SECTION 2: AUTOLOAD TREE                -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">#</span>AUTOLOAD TREE</h2>
-      <p class="tutorial-subtitle"><code>autoload/</code> is the heart of ZPWR. Every entry in this tree is one function file, picked up by zsh's <code>autoload -Uz</code> mechanism the first time it's called &mdash; so a fresh shell pays no cost for functions it never uses. 538 files across 7 subdirectories partitioned by platform (<code>darwin/</code>, <code>linux/</code>, <code>systemctl/</code>), tooling (<code>fzf/</code>, <code>comps/</code>, <code>comp_utils/</code>), and the catch-all <code>common/</code> (87% of all autoloads).</p>
+      <p class="tutorial-subtitle"><code>autoload/</code> is the heart of ZPWR. Every entry in this tree is one function file, picked up by zsh's <code>autoload -Uz</code> mechanism the first time it's called &mdash; so a fresh shell pays no cost for functions it never uses. 533 files across 7 subdirectories partitioned by platform (<code>darwin/</code>, <code>linux/</code>, <code>systemctl/</code>), tooling (<code>fzf/</code>, <code>comps/</code>, <code>comp_utils/</code>), and the catch-all <code>common/</code> (87% of all autoloads).</p>
 
       <table class="file-table">
         <thead>
@@ -422,7 +422,7 @@
         <div class="stat-card"><div class="stat-val">6,260</div><div class="stat-label">Commits</div></div>
         <div class="stat-card"><div class="stat-val accent">613</div><div class="stat-label">Tags</div></div>
         <div class="stat-card"><div class="stat-val">~9</div><div class="stat-label">Years (2017-05 &rarr; 2026-05)</div></div>
-        <div class="stat-card"><div class="stat-val">v48.8.7</div><div class="stat-label">Latest tag</div></div>
+        <div class="stat-card"><div class="stat-val">v48.9.0</div><div class="stat-label">Latest tag</div></div>
         <div class="stat-card"><div class="stat-val">530,398</div><div class="stat-label">Total insertions</div></div>
         <div class="stat-card"><div class="stat-val">89,973</div><div class="stat-label">Total deletions</div></div>
         <div class="stat-card"><div class="stat-val">74</div><div class="stat-label">Commits in 2026 (YTD)</div></div>
@@ -478,7 +478,7 @@
     </main>
 
     <footer style="text-align:center;padding:2rem;font-size:10px;color:var(--text-muted);font-family:'Orbitron',sans-serif;letter-spacing:2px;">
-      ZPWR ENGINEERING REPORT &middot; 1,559 FILES &middot; 106,927 ZSH+SH LINES &middot; 538 AUTOLOAD FNS &middot; 461 VERBS &middot; 228 ZSH BINDKEYS / 80 TMUX BINDS &middot; 48 ZINIT PLUGINS &middot; 643 BREW FORMULAS &middot; 146 TEST FILES / 79K LINES &middot; 217 WIZARD PAGES &middot; 6,260 COMMITS &middot; 613 TAGS &middot; MENKETECHNOLOGIES
+      ZPWR ENGINEERING REPORT &middot; 1,559 FILES &middot; 106,927 ZSH+SH LINES &middot; 533 AUTOLOAD FNS &middot; 463 VERBS &middot; 228 ZSH BINDKEYS / 80 TMUX BINDS &middot; 48 ZINIT PLUGINS &middot; 643 BREW FORMULAS &middot; 145 TEST FILES / 79K LINES &middot; 217 WIZARD PAGES &middot; 6,260 COMMITS &middot; 613 TAGS &middot; MENKETECHNOLOGIES
     </footer>
   </div>
 
