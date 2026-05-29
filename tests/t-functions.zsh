@@ -635,3 +635,109 @@
     assert "$out" contains 'hello-stdin'
     assert "$out" contains 'header'
 }
+
+#--------------------------------------------------------------
+# zpwrBlocksToSize — exact value pins (1 block = 512 bytes)
+#--------------------------------------------------------------
+@test 'zpwrBlocksToSize 0 blocks = 0 B' {
+    local out
+    out=$(echo 0 | zpwrBlocksToSize)
+    assert "$out" same_as '0 B  '
+}
+
+@test 'zpwrBlocksToSize 1 block = 512 B' {
+    local out
+    out=$(echo 1 | zpwrBlocksToSize)
+    assert "$out" same_as '512 B  '
+}
+
+@test 'zpwrBlocksToSize 2 blocks = 1.00 KiB' {
+    local out
+    out=$(echo 2 | zpwrBlocksToSize)
+    assert "$out" same_as '1.00 KiB'
+}
+
+@test 'zpwrBlocksToSize 2048 blocks = 1.00 MiB' {
+    local out
+    out=$(echo 2048 | zpwrBlocksToSize)
+    assert "$out" same_as '1.00 MiB'
+}
+
+#--------------------------------------------------------------
+# zpwrCommandExists — guard + multi-arg semantics
+#--------------------------------------------------------------
+@test 'zpwrCommandExists no args returns 1 with usage' {
+    run zpwrCommandExists
+    assert $state equals 1
+    assert "$output" contains 'usage'
+}
+
+@test 'zpwrCommandExists zsh returns 0' {
+    run zpwrCommandExists zsh
+    assert $state equals 0
+}
+
+@test 'zpwrCommandExists nonexistent returns 1' {
+    run zpwrCommandExists __zpwr_no_such_cmd_xyz123__
+    assert $state equals 1
+}
+
+@test 'zpwrCommandExists short-circuits on first missing' {
+    # zsh exists, fake doesn't, sh exists — still must return 1 (all-or-nothing)
+    run zpwrCommandExists zsh __zpwr_no_such_cmd_xyz123__ sh
+    assert $state equals 1
+}
+
+@test 'zpwrCommandExists multi-arg all-present returns 0' {
+    run zpwrCommandExists zsh sh ls
+    assert $state equals 0
+}
+
+#--------------------------------------------------------------
+# zpwrLogConsole{Err,Info,Debug,Trace} — usage guards on empty arg
+#--------------------------------------------------------------
+@test 'zpwrLogConsoleErr no args returns 1' {
+    run zpwrLogConsoleErr
+    assert $state equals 1
+}
+
+@test 'zpwrLogConsoleInfo no args returns 1' {
+    run zpwrLogConsoleInfo
+    assert $state equals 1
+}
+
+@test 'zpwrLogConsoleDebug no args returns 1' {
+    run zpwrLogConsoleDebug
+    assert $state equals 1
+}
+
+@test 'zpwrLogConsoleTrace no args returns 1' {
+    run zpwrLogConsoleTrace
+    assert $state equals 1
+}
+
+@test 'zpwrLogColor no args returns 1' {
+    run zpwrLogColor
+    assert $state equals 1
+}
+
+@test 'zpwrLogColor one arg (LVL only) returns 1' {
+    run zpwrLogColor INFO
+    assert $state equals 1
+}
+
+#--------------------------------------------------------------
+# zpwrEscapeRemove — sed filter passthrough for plain text
+#--------------------------------------------------------------
+@test 'zpwrEscapeRemove leaves plain text untouched' {
+    local out
+    out=$(printf 'plain text' | zpwrEscapeRemove)
+    assert "$out" same_as 'plain text'
+}
+
+@test 'zpwrEscapeRemove preserves multiline input' {
+    local out
+    out=$(printf 'line1\nline2\n' | zpwrEscapeRemove)
+    assert "$out" contains 'line1'
+    assert "$out" contains 'line2'
+}
