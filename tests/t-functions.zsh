@@ -562,3 +562,76 @@
     run zpwrIsBinary "$(command -v zsh)"
     assert $state equals 0
 }
+
+#--------------------------------------------------------------
+# zpwrHumanReadable — exact value pins
+#--------------------------------------------------------------
+@test 'zpwrHumanReadable 0 bytes' {
+    local out
+    out=$(echo 0 | zpwrHumanReadable)
+    assert "$out" same_as '0 B  '
+}
+
+@test 'zpwrHumanReadable 1024 KiB' {
+    local out
+    out=$(echo 1024 | zpwrHumanReadable)
+    assert "$out" same_as '1.00 KiB'
+}
+
+@test 'zpwrHumanReadable 1048576 MiB' {
+    local out
+    out=$(echo 1048576 | zpwrHumanReadable)
+    assert "$out" same_as '1.00 MiB'
+}
+
+@test 'zpwrHumanReadable 1073741824 GiB' {
+    local out
+    out=$(echo 1073741824 | zpwrHumanReadable)
+    assert "$out" same_as '1.00 GiB'
+}
+
+#--------------------------------------------------------------
+# zpwrGitRepoUpdater — usage + non-dir guard
+#--------------------------------------------------------------
+@test 'zpwrGitRepoUpdater no args returns 1 with usage on stderr' {
+    run zpwrGitRepoUpdater
+    assert $state equals 1
+    assert "$output" contains 'usage'
+}
+
+@test 'zpwrGitRepoUpdater on nonexistent dir returns 0 silently' {
+    # docs the early-exit behavior: non-dir input is a no-op (return 0)
+    run zpwrGitRepoUpdater /__nonexistent_dir_zpwr_test_9999__
+    assert $state equals 0
+    assert "$output" is_empty
+}
+
+@test 'zpwrGitRepoUpdater on empty dir is a no-op' {
+    local tmpdir
+    tmpdir=$(mktemp -d)
+    run zpwrGitRepoUpdater "$tmpdir"
+    assert $state equals 0
+    assert "$output" is_empty
+    command rmdir "$tmpdir"
+}
+
+#--------------------------------------------------------------
+# zpwrClearGitCache — non-git-dir guard
+#--------------------------------------------------------------
+@test 'zpwrClearGitCache outside git repo returns 1' {
+    local tmpdir
+    tmpdir=$(mktemp -d)
+    run zsh -c "source $ZPWR/scripts/lib.sh; cd $tmpdir && zpwrClearGitCache"
+    assert $state equals 1
+    command rmdir "$tmpdir"
+}
+
+#--------------------------------------------------------------
+# zpwrPrettyPrintBoxStdin — drains stdin through perl box helper
+#--------------------------------------------------------------
+@test 'zpwrPrettyPrintBoxStdin echoes stdin through box' {
+    local out
+    out=$(echo hello-stdin | zpwrPrettyPrintBoxStdin header)
+    assert "$out" contains 'hello-stdin'
+    assert "$out" contains 'header'
+}
