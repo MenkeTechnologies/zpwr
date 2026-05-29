@@ -176,7 +176,7 @@ EOF
 # Dependencies
 # 1) neovim
 # 2) tmux
-# 3) lolcat in go
+# 3) lolcat in rust
 # 4) cmatrix
 # 5) htop
 # 6) cmake

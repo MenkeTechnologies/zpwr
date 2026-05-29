@@ -65,6 +65,9 @@ ins ripgrep rg
 ins thumbs thumbs
 ins temprs tp
 ins git-delta delta
+ins lolcat lolcat
+ins bottom btm
+ins trippy trip
 
 zpwrPrettyPrintBox "Installing cargo-update with Cargo"
 "$HOME/.cargo/bin/cargo" install cargo-update

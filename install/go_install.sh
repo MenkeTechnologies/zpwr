@@ -25,14 +25,3 @@ function goInstall() {
         go get github.com/$1
     fi
 }
-
-zpwrPrettyPrintBox "Installing mylg"
-goInstall mehrdadrad/mylg
-
-( cd "$GOPATH/src/github.com/mehrdadrad/mylg/" && go build mylg.go; )
-
-zpwrPrettyPrintBox "Installing gotop"
-goInstall cjbassi/gotop
-
-zpwrPrettyPrintBox "Installing lolcat in go"
-goInstall MenkeTechnologies/lolcat

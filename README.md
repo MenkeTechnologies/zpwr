@@ -239,7 +239,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - cargo-update
 - go
 - fzf
-- gotop
+- bottom
 - lolcat
 - python3
 - powerline-status for tmux
