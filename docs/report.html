@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="ZPWR — Engineering report. Neon-lit UNIX terminal OS: 1,559 files, ~107k zsh+sh lines, 533 autoload functions, 463 verb keys (373 distinct), 204 aliases, 228 zsh bindkeys, 80 tmux binds, 48 zinit plugins, 643 brew formulas/casks, 145 test files, 79k test lines, 217-page wizard encyclopedia, 6,260 commits, 613 tags, ~9 years.">
+  <meta name="description" content="ZPWR — Engineering report. Neon-lit UNIX terminal OS: 1,559 files, ~107k zsh+sh lines, 533 autoload functions, 463 verb keys (373 distinct), 204 aliases, 228 zsh bindkeys, 80 tmux binds, 48 zinit plugins, 643 brew formulas/casks, 145 test files, 79k test lines, 217-page wizard encyclopedia, 6,277 commits, 615 tags, ~9 years.">
   <title>ZPWR &mdash; Engineering Report</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,7 +92,7 @@
       <!-- SECTION 1: EXECUTIVE SUMMARY           -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">&gt;_</span>EXECUTIVE SUMMARY</h2>
-      <p class="tutorial-subtitle">ZPWR is a heavily-instrumented terminal operating environment for zsh: a curated <code>autoload</code> tree, a <code>zinit</code>-managed plugin stack, an interactive tmux cockpit, a unified <code>zpwr &lt;verb&gt;</code> dispatcher, and a self-installing toolchain that pulls down hundreds of CLI utilities on macOS and Linux. The project began as a fork of Hashrocket's Dotmatrix in 2017 and has grown into a single-user cyberdeck: <strong>1,559 files, ~107k zsh+sh lines, 533 autoload functions, 463 verb keys mapping to 373 distinct zpwr functions, 204 aliases, 228 zsh keybindings, 80 tmux bindings, 48 zinit plugins, 643 brew formulas/casks installed, 145 test files / 79k lines of zunit, 217 wizard encyclopedia pages, 39 screenshots, 6,260 commits across 613 tags spanning ~9 years</strong> &mdash; built almost entirely by one engineer (11,209 of 11,211 commits).</p>
+      <p class="tutorial-subtitle">ZPWR is a heavily-instrumented terminal operating environment for zsh: a curated <code>autoload</code> tree, a <code>zinit</code>-managed plugin stack, an interactive tmux cockpit, a unified <code>zpwr &lt;verb&gt;</code> dispatcher, and a self-installing toolchain that pulls down hundreds of CLI utilities on macOS and Linux. The project began as a fork of Hashrocket's Dotmatrix in 2017 and has grown into a single-user cyberdeck: <strong>1,559 files, ~107k zsh+sh lines, 533 autoload functions, 463 verb keys mapping to 373 distinct zpwr functions, 204 aliases, 228 zsh keybindings, 80 tmux bindings, 48 zinit plugins, 643 brew formulas/casks installed, 145 test files / 79k lines of zunit, 217 wizard encyclopedia pages, 39 screenshots, 6,277 commits across 615 tags spanning ~9 years</strong> &mdash; built almost entirely by one engineer (11,209 of 11,211 commits).</p>
 
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-val">1,559</div><div class="stat-label">Total Files</div></div>
@@ -104,7 +104,7 @@
         <div class="stat-card"><div class="stat-val">228</div><div class="stat-label">Zsh Bindkeys</div></div>
         <div class="stat-card"><div class="stat-val">80</div><div class="stat-label">Tmux Bindings</div></div>
         <div class="stat-card"><div class="stat-val">48</div><div class="stat-label">Zinit Plugins</div></div>
-        <div class="stat-card"><div class="stat-val">6,260</div><div class="stat-label">Git Commits</div></div>
+        <div class="stat-card"><div class="stat-val">6,277</div><div class="stat-label">Git Commits</div></div>
         <div class="stat-card"><div class="stat-val">613</div><div class="stat-label">Git Tags</div></div>
         <div class="stat-card"><div class="stat-val">~9</div><div class="stat-label">Years Active</div></div>
       </div>
@@ -416,10 +416,10 @@
       <!-- SECTION 10: HISTORY                     -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">?</span>HISTORY</h2>
-      <p class="tutorial-subtitle">ZPWR began life as a fork of Hashrocket's Dotmatrix in <strong>May 2017</strong> and has been continuously developed since &mdash; <strong>6,260 commits, 613 tags, 9 years</strong>. <code>git shortlog</code> attributes 11,209 of 11,211 commits (across all branches) to MenkeTechnologies; the remaining 2 are from an early collaborator (MichaelDimmitt). The active version line is <code>v48.x</code>. Recent commits show ongoing migration to the new <code>stryke</code> shell and <code>perlrs</code> (Rust replacement for perl) across helper scripts.</p>
+      <p class="tutorial-subtitle">ZPWR began life as a fork of Hashrocket's Dotmatrix in <strong>May 2017</strong> and has been continuously developed since &mdash; <strong>6,277 commits, 615 tags, 9 years</strong>. <code>git shortlog</code> attributes 11,209 of 11,211 commits (across all branches) to MenkeTechnologies; the remaining 2 are from an early collaborator (MichaelDimmitt). The active version line is <code>v48.x</code>. Recent commits show ongoing migration to the new <code>stryke</code> shell and <code>perlrs</code> (Rust replacement for perl) across helper scripts.</p>
 
       <div class="stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));">
-        <div class="stat-card"><div class="stat-val">6,260</div><div class="stat-label">Commits</div></div>
+        <div class="stat-card"><div class="stat-val">6,277</div><div class="stat-label">Commits</div></div>
         <div class="stat-card"><div class="stat-val accent">613</div><div class="stat-label">Tags</div></div>
         <div class="stat-card"><div class="stat-val">~9</div><div class="stat-label">Years (2017-05 &rarr; 2026-05)</div></div>
         <div class="stat-card"><div class="stat-val">v48.9.0</div><div class="stat-label">Latest tag</div></div>
@@ -478,7 +478,7 @@
     </main>
 
     <footer style="text-align:center;padding:2rem;font-size:10px;color:var(--text-muted);font-family:'Orbitron',sans-serif;letter-spacing:2px;">
-      ZPWR ENGINEERING REPORT &middot; 1,559 FILES &middot; 106,927 ZSH+SH LINES &middot; 533 AUTOLOAD FNS &middot; 463 VERBS &middot; 228 ZSH BINDKEYS / 80 TMUX BINDS &middot; 48 ZINIT PLUGINS &middot; 643 BREW FORMULAS &middot; 145 TEST FILES / 79K LINES &middot; 217 WIZARD PAGES &middot; 6,260 COMMITS &middot; 613 TAGS &middot; MENKETECHNOLOGIES
+      ZPWR ENGINEERING REPORT &middot; 1,559 FILES &middot; 106,927 ZSH+SH LINES &middot; 533 AUTOLOAD FNS &middot; 463 VERBS &middot; 228 ZSH BINDKEYS / 80 TMUX BINDS &middot; 48 ZINIT PLUGINS &middot; 643 BREW FORMULAS &middot; 145 TEST FILES / 79K LINES &middot; 217 WIZARD PAGES &middot; 6,277 COMMITS &middot; 615 TAGS &middot; MENKETECHNOLOGIES
     </footer>
   </div>
 
