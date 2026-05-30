@@ -37,8 +37,6 @@ pip install parse
 pip install parse-type
 pip install pbr
 pip install platformio
-pip install powerline-mem-segment
-pip install powerline-status
 pip install psutil
 pip install Pygments
 pip install pync

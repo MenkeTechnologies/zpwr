@@ -47,16 +47,6 @@ function pipInstallerCommon() {
     zpwrPrettyPrintBox "Installing Virtualenv"
     pipInstallerCommonCmd virtualenv
 
-    zpwrPrettyPrintBox "Installing Powerline..."
-    pipInstallerCommonCmd powerline-status
-
-    zpwrPrettyPrintBox "Installing Tmux Powerline"
-    tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
-    [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-
-    zpwrPrettyPrintBox "Installing Powerline Mem Segment..."
-    pipInstallerCommonCmd powerline-mem-segment
-
     zpwrPrettyPrintBox "Installing PyDf"
     pipInstallerCommonCmd pydf
 
