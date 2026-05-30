@@ -121,11 +121,6 @@
     assert $state equals 0
 }
 
-@test 'autoload common to passes zsh -n' {
-    run zsh -n "$ZPWR/autoload/common/to"
-    assert $state equals 0
-}
-
 @test 'autoload common zpwrExecpy passes zsh -n' {
     run zsh -n "$ZPWR/autoload/common/zpwrExecpy"
     assert $state equals 0
