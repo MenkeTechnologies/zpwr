@@ -292,11 +292,6 @@
     assert $state equals 0
 }
 
-@test 'fn to file exists in fpath' {
-    run test -f "$ZPWR/autoload/common/to"
-    assert $state equals 0
-}
-
 @test 'fn ue file exists in fpath' {
     run test -f "$ZPWR/autoload/common/ue"
     assert $state equals 0

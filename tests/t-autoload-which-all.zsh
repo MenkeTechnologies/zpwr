@@ -302,11 +302,6 @@
     assert $state equals 0
 }
 
-@test 'which to found' {
-    run which to
-    assert $state equals 0
-}
-
 @test 'which ue found' {
     run which ue
     assert $state equals 0

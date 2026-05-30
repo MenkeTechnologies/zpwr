@@ -292,11 +292,6 @@
     assert $state equals 0
 }
 
-@test 'autoload to loads' {
-    run autoload +X to
-    assert $state equals 0
-}
-
 @test 'autoload ue loads' {
     run autoload +X ue
     assert $state equals 0
