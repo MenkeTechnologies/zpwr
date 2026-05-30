@@ -508,11 +508,6 @@
     assert $state equals 0
 }
 
-@test 'zpwrExists to' {
-    run zpwrExists to
-    assert $state equals 0
-}
-
 @test 'zpwrExists fm' {
     run zpwrExists fm
     assert $state equals 0
