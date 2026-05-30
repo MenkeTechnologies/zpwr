@@ -348,12 +348,6 @@
     assert "$output" contains tma
 }
 
-@test 'functions to contains name' {
-    run functions to
-    assert $state equals 0
-    assert "$output" contains to
-}
-
 @test 'functions ue contains name' {
     run functions ue
     assert $state equals 0

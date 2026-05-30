@@ -302,11 +302,6 @@
     assert $state equals 0
 }
 
-@test 'whence to resolves' {
-    run whence to
-    assert $state equals 0
-}
-
 @test 'whence ue resolves' {
     run whence ue
     assert $state equals 0

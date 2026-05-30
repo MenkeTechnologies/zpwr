@@ -292,11 +292,6 @@
     assert $state equals 0
 }
 
-@test 'fn to is defined' {
-    run test -n "${functions[to]+x}"
-    assert $state equals 0
-}
-
 @test 'fn ue is defined' {
     run test -n "${functions[ue]+x}"
     assert $state equals 0

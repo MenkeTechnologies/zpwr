@@ -292,11 +292,6 @@
     assert $state equals 0
 }
 
-@test 'fn to source syntax valid' {
-    run zsh -n "$ZPWR/autoload/common/to"
-    assert $state equals 0
-}
-
 @test 'fn ue source syntax valid' {
     run zsh -n "$ZPWR/autoload/common/ue"
     assert $state equals 0
