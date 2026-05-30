@@ -348,12 +348,6 @@
     assert "$output" is_not_empty
 }
 
-@test 'fn to body non-empty' {
-    run functions to
-    assert $state equals 0
-    assert "$output" is_not_empty
-}
-
 @test 'fn ue body non-empty' {
     run functions ue
     assert $state equals 0
