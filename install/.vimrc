@@ -1548,7 +1548,6 @@ filetype plugin indent on
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-" powerline-status pip package installs to different locations of different OS
 let os = substitute(system('uname'), '\n', '', '')
 
 if os == 'Darwin'
@@ -1677,7 +1676,6 @@ if ! has('nvim')
     set ballooneval
     set balloonevalterm
     set pastetoggle=<F9>
-    set runtimepath+=~/.tmux/powerline/bindings/vim/
     " visual mode automatically copies to system clipboard
     set clipboard=autoselect
     " visual selection automatically into system clipboard

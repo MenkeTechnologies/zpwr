@@ -866,29 +866,9 @@ fi
 # must have zsh at this point
 export SHELL="$(which zsh)"
 
-dir="$(python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
-
-if [[ -z $TMUX_HOME ]]; then
-    TMUX_HOME="$HOME/.tmux"
-fi
-
-if [[ ! -d "$TMUX_HOME" ]]; then
-    zpwrPrettyPrintBox "$TMUX_HOME does not exist"
-else
-    if [[ ! -d "$dir" ]]; then
-        zpwrPrettyPrintBox "$dir does not exist"
-    else
-        if zpwrNeedSudo "$dir"; then
-            zpwrPrettyPrintBox "linking $dir to $TMUX_HOME/powerline with sudo"
-            echo sudo ln -sfn "$dir" "$TMUX_HOME/powerline"
-            sudo ln -sfn "$dir" "$TMUX_HOME/powerline"
-        else
-            zpwrPrettyPrintBox "linking $dir to $TMUX_HOME/powerline"
-            echo ln -sfn "$dir" "$TMUX_HOME/powerline"
-            ln -sfn "$dir" "$TMUX_HOME/powerline"
-        fi
-    fi
-fi
+# powerliners (the Rust port of powerline-status) puts the
+# powerline / powerline-daemon / powerline-config / powerline-render
+# binaries on PATH via cargo install; no site-packages symlink needed.
 
 zpwrPrettyPrintBox "Generating $ZPWR_INSTALLER_OUTPUT/zpwr_log.txt with $ESCAPE_REMOVER from $LOGFILE"
 "$ESCAPE_REMOVER" "$LOGFILE" > "$ZPWR_INSTALLER_OUTPUT/zpwr_log.txt"

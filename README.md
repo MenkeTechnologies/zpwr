@@ -242,7 +242,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - bottom
 - lolcat
 - python3
-- powerline-status for tmux
+- powerliners for tmux
 - vim-airline status bar
 - grc
 - mycli

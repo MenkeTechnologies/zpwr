@@ -135,8 +135,6 @@ python3 -m pip install pip
 python3 -m pip install platformdirs
 python3 -m pip install platformio
 python3 -m pip install pluggy
-python3 -m pip install powerline-mem-segment
-python3 -m pip install powerline-status
 python3 -m pip install prettytable
 python3 -m pip install proglog
 python3 -m pip install prometheus-client
