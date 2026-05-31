@@ -1,12 +1,18 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function zpwrEnvCounts(){
+    local -i n_funcs n_comp_funcs n_comp_defs
+
+    n_funcs=${#${(k)functions:#_*}}
+    n_comp_funcs=${#${(k)functions[(I)_*]}}
+    n_comp_defs=${#_comps}
 
     zpwrPrettyPrint "ENV COUNTS"
     echo "Commands: ${#commands}"
-    echo "Functions: ${#functions}"
-    echo "Completions: ${#_comps}"
-    echo "Functions (not completions): "$(( $#functions - $#_comps ))
+    echo "Functions: $n_funcs"
+    echo "Completion functions: $n_comp_funcs"
+    echo "Completions (_comps): $n_comp_defs"
+    echo "Functions (total): ${#functions}"
     echo "Builtins: ${#builtins}"
     echo "Reserved words: ${#reswords}"
     echo "Parameters: ${#parameters}"
