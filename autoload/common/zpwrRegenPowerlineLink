@@ -10,12 +10,11 @@ function zpwrRegenPowerlineLink(){
         zpwrLogConsoleErr 'cargo not found; install rustup first'
         return 1
     fi
-    zpwrPrettyPrint "Reinstalling powerliners via cargo"
-    command cargo install --force powerliners || {
+    zpwrPrettyPrint "Installing powerliners via cargo"
+    command cargo install powerliners || {
         zpwrLogConsoleErr 'cargo install --force powerliners failed'
         return 1
     }
-    command tmux source-file "$ZPWR_TMUX/init.conf" &>> "$ZPWR_LOGFILE"
 }
 
 zpwrRegenPowerlineLink "$@"
