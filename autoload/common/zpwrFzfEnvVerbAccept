@@ -12,6 +12,10 @@ function zpwrFzfEnvVerbAccept(){
         zpwrLogDebug "regenerating values for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
+    if [[ ! -s "${ZPWR_LOCAL_ENV}Idx.txt" ]]; then
+        zpwrLogDebug "regenerating idx for $ZPWR_LOCAL_ENV"
+        zpwrRegenSearchEnv
+    fi
 
     sel=$(cat "${ZPWR_LOCAL_ENV}Key.txt" | awk '{print $2}' |
         eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS")

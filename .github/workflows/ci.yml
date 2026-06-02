@@ -10,7 +10,7 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   # false: rapid pushes queue; the previous run finishes instead of being cancelled mid-suite
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -180,6 +180,8 @@ zpwrEvalIfNeeded ZPWR_LOGFILE "$ZPWR_LOGFILE" "$ZPWR_LOCAL/zpwrLog.txt" "$ZPWR_L
 zpwrEvalIfNeeded ZPWR_ENV_KEY_FILE "$ZPWR_ENV_KEY_FILE" "${ZPWR_LOCAL_ENV}Key.txt" "$ZPWR_LOCAL_ENV"
 # cache of env values
 zpwrEvalIfNeeded ZPWR_ENV_VALUE_FILE "$ZPWR_ENV_VALUE_FILE" "${ZPWR_LOCAL_ENV}Value.txt" "$ZPWR_LOCAL_ENV"
+# byte-offset index into ZPWR_ENV_VALUE_FILE: lines are name\toffset\tlength
+zpwrEvalIfNeeded ZPWR_ENV_IDX_FILE "$ZPWR_ENV_IDX_FILE" "${ZPWR_LOCAL_ENV}Idx.txt" "$ZPWR_LOCAL_ENV"
 # temp files
 zpwrEvalIfNeeded ZPWR_TEMPFILE "$ZPWR_TEMPFILE" "$ZPWR_LOCAL_TEMP/.temp$$-$USER" "$ZPWR_LOCAL_TEMP" "$USER"
 zpwrEvalIfNeeded ZPWR_TEMPFILE1 "$ZPWR_TEMPFILE1" "$ZPWR_LOCAL_TEMP/.temp$$-1$USER" "$ZPWR_LOCAL_TEMP" "$USER"
