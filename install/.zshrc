@@ -560,29 +560,29 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         zsh-users/zsh-history-substring-search
 
     # late , must come before syntax highlight
-    zinit ice lucid nocompile wait'0d' \
+    zinit ice lucid nocompile wait'0a' \
         atload'_zsh_autosuggest_start; zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
     zinit load \
         zsh-users/zsh-autosuggestions
 
     # late loaded, must be last to load
     # runs ZLE keybindings to override other late loaders
-    zinit ice lucid nocompile wait'0e' atinit'zpwrBindPenultimate; zpwrBindFinal; zpwrTokenPost'
+    zinit ice lucid nocompile wait'0a' atinit'zpwrBindPenultimate; zpwrBindFinal; zpwrTokenPost'
     zinit load \
         MenkeTechnologies/zsh-zinit-final
 
     # use fpath NOT symlinks into ~/.zinit/completions
     # to have more-completions be last resort and not overrride system completions
-    zinit ice lucid nocompile wait'0f' nocompletions
+    zinit ice lucid nocompile wait'0a' nocompletions
     zinit load \
         MenkeTechnologies/zsh-more-completions
 
-    zinit ice lucid nocompile nocd as'null' wait"${ZPWR_ZINIT_COMPINIT_DELAY}g" \
+    zinit ice lucid nocompile nocd as'null' wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" \
         atinit'zicompinit; zicdreplay;zpwrBindOverrideOMZCompdefs'
     zinit light \
         MenkeTechnologies/zsh-zinit-final
 
-    zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}h" nocompletions atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
+    zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" nocompletions atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
     zinit load \
         $ZPWR_ZDHARMA/fast-syntax-highlighting
 
