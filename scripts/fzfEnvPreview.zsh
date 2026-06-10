@@ -18,11 +18,11 @@ zmodload zsh/system   # sysseek / sysread
 # args: $1 = fzf-selected line, $2 = mode ('plain' or 'reg'), $3 = 'verbs' (optional)
 local line="$1"
 local mode="${2:-plain}"
-local source="${3:-env}"
+local src="${3:-env}"
 
 # verbs mode: line looks like 'verbName    targetName=desc' (padded with
 # multiple spaces). Word-split with default IFS and take field 2 up to `=`.
-if [[ $source == verbs ]]; then
+if [[ $src == verbs ]]; then
     local -a parts=( ${=line} )
     if (( ${#parts} >= 2 )); then
         line=${parts[2]%%=*}

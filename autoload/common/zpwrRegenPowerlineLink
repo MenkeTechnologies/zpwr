@@ -12,7 +12,7 @@ function zpwrRegenPowerlineLink(){
     fi
     zpwrPrettyPrint "Installing powerliners via cargo"
     command cargo install powerliners || {
-        zpwrLogConsoleErr 'cargo install --force powerliners failed'
+        zpwrLogConsoleErr 'cargo install powerliners failed'
         return 1
     }
 }

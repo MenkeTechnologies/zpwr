@@ -4,20 +4,20 @@ function zpwrFzfEnvVerbAccept(){
 
     local num sel
 
-    if [[ ! -s "${ZPWR_LOCAL_ENV}Key.txt" ]]; then
+    if [[ ! -s "$ZPWR_ENV_KEY_FILE" ]]; then
         zpwrLogDebug "regenerating keys for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
-    if [[ ! -s "${ZPWR_LOCAL_ENV}Value.txt" ]]; then
+    if [[ ! -s "$ZPWR_ENV_VALUE_FILE" ]]; then
         zpwrLogDebug "regenerating values for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
-    if [[ ! -s "${ZPWR_LOCAL_ENV}Idx.txt" ]]; then
+    if [[ ! -s "$ZPWR_ENV_IDX_FILE" ]]; then
         zpwrLogDebug "regenerating idx for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
 
-    sel=$(cat "${ZPWR_LOCAL_ENV}Key.txt" | awk '{print $2}' |
+    sel=$(awk '{print $2}' "$ZPWR_ENV_KEY_FILE" |
         eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS")
 
     if [[ -n "$sel" ]]; then

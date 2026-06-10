@@ -16,8 +16,8 @@ function zpwrEnvCounts(){
     echo "Builtins: ${#builtins}"
     echo "Reserved words: ${#reswords}"
     echo "Parameters: ${#parameters}"
-    echo "Environment Variables: "${#parameters[(R)scalar-export]}
-    echo "Local Parameters: "${#parameters[(R)^scalar-export]}
+    echo "Environment Variables: "${#parameters[(R)*scalar-export*]}
+    echo "Local Parameters: "${#parameters[(R)^*scalar-export*]}
     echo "Aliases: ${#aliases}"
     echo "Global Aliases: ${#galiases}"
     echo "Git Aliases: "${#aliases[(R)*git*]}
@@ -34,7 +34,7 @@ function zpwrEnvCounts(){
     echo "ZPWR emacs plugins: $(zpwrEmacsPluginCount)"
     echo "ZPWR autoloads: $(zpwrAutoloadCount)"
     echo "ZPWR scripts: $(zpwrScriptCount)"
-    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
+    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)*scalar-export*]}%ZPWR*}}
     echo "ZPWR prompt time: "$ZPWR_VARS[promptTimeMs]
     echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
     echo "ZPWR files count: ${#${(@f)$(zpwrListFiles | stryke -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}')}}"
