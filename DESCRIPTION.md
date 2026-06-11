@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In a world where developers increasingly rely on graphical interfaces, cloud-hosted editors, and browser-based tooling, there exists a countermovement — a digital underground of power users who believe the terminal is not merely a tool but a way of life. ZPWR stands as a monument to that philosophy. Born from a fork of Hashrocket's Dotmatrix project and hand-forged over years into a sprawling system of more than 50,000 lines of code, ZPWR is a cyberpunk-themed terminal operating system built on the trinity of zsh, tmux, and vim. Its tagline captures its ethos with poetic precision: *"If your terminal isn't glowing, you're not running ZPWR."*
+In a world where developers increasingly rely on graphical interfaces, cloud-hosted editors, and browser-based tooling, there exists a countermovement — a digital underground of power users who believe the terminal is not merely a tool but a way of life. ZPWR stands as a monument to that philosophy. Born from a fork of Hashrocket's Dotmatrix project and hand-forged over years into a sprawling system of more than 186,000 lines of code, ZPWR is a cyberpunk-themed terminal operating system built on the trinity of zsh, tmux, and vim. Its tagline captures its ethos with poetic precision: *"If your terminal isn't glowing, you're not running ZPWR."*
 
 ZPWR is not a dotfiles repository in the conventional sense. It is an opinionated, batteries-included distribution for the command line — a neural interface that transforms a blinking cursor into a neon-coded cockpit for software development, system administration, and digital exploration.
 
@@ -12,9 +12,9 @@ The architecture of ZPWR is a study in centralization and modularity held in car
 
 At the foundation lies the **environment system**, a network of over 175 environment variables that act as dials and switches governing every subsystem. These variables — stored in `.zpwr_env.sh` and overridable through a git-ignored `.tokens.sh` file — control everything from colorization to auto-listing behavior to banner display. This parametric architecture means ZPWR can be tuned without modifying source code, and personal customizations survive updates cleanly.
 
-Above this foundation sits the **verb system**, the primary interface through which users interact with ZPWR's capabilities. Over 506 subcommands are registered in a central associative array (`ZPWR_VERBS`), each mapping a verb name to a function and a description. Typing `zpwr` followed by a tab presents a colorized menu of every available command, complete with grouped descriptions and neon-styled separators. This design prioritizes discoverability — a user need not memorize commands but can browse and search them interactively, aided by fzf-powered fuzzy finding via `zpwr verbs`.
+Above this foundation sits the **verb system**, the primary interface through which users interact with ZPWR's capabilities. 461 subcommands are registered in a central associative array (`ZPWR_VERBS`), each mapping a verb name to a function and a description. Typing `zpwr` followed by a tab presents a colorized menu of every available command, complete with grouped descriptions and neon-styled separators. This design prioritizes discoverability — a user need not memorize commands but can browse and search them interactively, aided by fzf-powered fuzzy finding via `zpwr verbs`.
 
-The **autoload system** organizes 510 zsh functions across 14 subdirectories, separated by concern: common utilities, fzf integrations, completion functions, platform-specific logic for Darwin and Linux, and systemd management. These functions are lazily loaded, compiled to `.zwc` bytecode for performance, and automatically available when invoked. This approach mirrors the philosophy of modern plugin architectures while remaining rooted in zsh's native autoload mechanism.
+The **autoload system** organizes 533 zsh functions across 7 subdirectories, separated by concern: common utilities, fzf integrations, completion functions, platform-specific logic for Darwin and Linux, and systemd management. These functions are lazily loaded, compiled to `.zwc` bytecode for performance, and automatically available when invoked. This approach mirrors the philosophy of modern plugin architectures while remaining rooted in zsh's native autoload mechanism.
 
 ## The Plugin Ecosystem
 
@@ -52,6 +52,6 @@ The project embodies several core principles. **Centralization** keeps the syste
 
 ## Conclusion
 
-ZPWR represents a particular vision of what computing can be: fast, visible, integrated, and deeply personal. In an era of electron-wrapped editors and cloud-dependent workflows, it insists that the terminal — the original interface between human and machine — remains the most powerful environment for those willing to invest in mastering it. With its 506 verbs, 14,100 completions, 2,000 aliases, and 50,000 lines of hand-forged code, ZPWR is less a configuration framework and more a manifesto rendered in shell script — a declaration that the command line is not a relic of the past but a cockpit for the future.
+ZPWR represents a particular vision of what computing can be: fast, visible, integrated, and deeply personal. In an era of electron-wrapped editors and cloud-dependent workflows, it insists that the terminal — the original interface between human and machine — remains the most powerful environment for those willing to invest in mastering it. With its 461 verbs, 14,100 completions, 2,000 aliases, and 186,000 lines of hand-forged code, ZPWR is less a configuration framework and more a manifesto rendered in shell script — a declaration that the command line is not a relic of the past but a cockpit for the future.
 
 *If your terminal isn't glowing, you're not running ZPWR.*
