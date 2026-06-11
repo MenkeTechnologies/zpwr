@@ -12,7 +12,7 @@
  [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://menketechnologies.github.io/zpwr/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### `[NEON-LIT UNIX TERMINAL OS // 461 VERBS // 186k LOC // STRYKE-POWERED]`
+### `[NEON-LIT UNIX TERMINAL OS // 461 VERBS // 190k LOC // STRYKE-POWERED]`
 
 > *"The street finds its own uses for things."* — William Gibson
 
@@ -207,7 +207,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
 - 3k+ line README -- you are here, deep in the docs
-- 186k+ LOC -- hand-forged in the neon glow of late-night terminals
+- 190k+ LOC -- hand-forged in the neon glow of late-night terminals
 
 
 ## ZPWR Firmware Stack

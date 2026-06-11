@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In a world where developers increasingly rely on graphical interfaces, cloud-hosted editors, and browser-based tooling, there exists a countermovement — a digital underground of power users who believe the terminal is not merely a tool but a way of life. ZPWR stands as a monument to that philosophy. Born from a fork of Hashrocket's Dotmatrix project and hand-forged over years into a sprawling system of more than 186,000 lines of code, ZPWR is a cyberpunk-themed terminal operating system built on the trinity of zsh, tmux, and vim. Its tagline captures its ethos with poetic precision: *"If your terminal isn't glowing, you're not running ZPWR."*
+In a world where developers increasingly rely on graphical interfaces, cloud-hosted editors, and browser-based tooling, there exists a countermovement — a digital underground of power users who believe the terminal is not merely a tool but a way of life. ZPWR stands as a monument to that philosophy. Born from a fork of Hashrocket's Dotmatrix project and hand-forged over years into a sprawling system of more than 190,000 lines of code, ZPWR is a cyberpunk-themed terminal operating system built on the trinity of zsh, tmux, and vim. Its tagline captures its ethos with poetic precision: *"If your terminal isn't glowing, you're not running ZPWR."*
 
 ZPWR is not a dotfiles repository in the conventional sense. It is an opinionated, batteries-included distribution for the command line — a neural interface that transforms a blinking cursor into a neon-coded cockpit for software development, system administration, and digital exploration.
 
@@ -52,6 +52,6 @@ The project embodies several core principles. **Centralization** keeps the syste
 
 ## Conclusion
 
-ZPWR represents a particular vision of what computing can be: fast, visible, integrated, and deeply personal. In an era of electron-wrapped editors and cloud-dependent workflows, it insists that the terminal — the original interface between human and machine — remains the most powerful environment for those willing to invest in mastering it. With its 461 verbs, 14,100 completions, 2,000 aliases, and 186,000 lines of hand-forged code, ZPWR is less a configuration framework and more a manifesto rendered in shell script — a declaration that the command line is not a relic of the past but a cockpit for the future.
+ZPWR represents a particular vision of what computing can be: fast, visible, integrated, and deeply personal. In an era of electron-wrapped editors and cloud-dependent workflows, it insists that the terminal — the original interface between human and machine — remains the most powerful environment for those willing to invest in mastering it. With its 461 verbs, 14,100 completions, 2,000 aliases, and 190,000 lines of hand-forged code, ZPWR is less a configuration framework and more a manifesto rendered in shell script — a declaration that the command line is not a relic of the past but a cockpit for the future.
 
 *If your terminal isn't glowing, you're not running ZPWR.*
