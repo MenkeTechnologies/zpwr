@@ -116,11 +116,6 @@
     assert $state equals 0
 }
 
-@test 'verb regenpdf registered' {
-    run test -n "${ZPWR_VERBS[regenpdf]+x}"
-    assert $state equals 0
-}
-
 @test 'verb snapshot registered' {
     run test -n "${ZPWR_VERBS[snapshot]+x}"
     assert $state equals 0

@@ -1,7 +1,7 @@
 #!/usr/bin/env zunit
 #{{{                    MARK:Header
 ##### Author: MenkeTechnologies
-##### Purpose: docs/regenPDF.sh, env alias file zsh -n, repo files, z* verbs
+##### Purpose: env alias file zsh -n, repo files, z* verbs
 ##### Notes: Portable; complements batch10 layout tests
 #}}}***********************************************************
 
@@ -12,11 +12,6 @@
 #--------------------------------------------------------------
 # Docs + env alias bundle
 #--------------------------------------------------------------
-@test 'docs/regenPDF.sh passes bash -n' {
-    run bash -n "$ZPWR/docs/regenPDF.sh"
-    assert $state equals 0
-}
-
 @test 'env/.shell_aliases_functions.sh passes zsh -n' {
     run zsh -n "$ZPWR/env/.shell_aliases_functions.sh"
     assert $state equals 0
@@ -177,11 +172,6 @@
 
 @test 'verb regenall registered' {
     run test -n "${ZPWR_VERBS[regenall]+x}"
-    assert $state equals 0
-}
-
-@test 'verb regenpdf registered' {
-    run test -n "${ZPWR_VERBS[regenpdf]+x}"
     assert $state equals 0
 }
 

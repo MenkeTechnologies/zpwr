@@ -118,11 +118,6 @@
     assert $state equals 0
 }
 
-@test 'docs regenPDF.sh passes zsh -n' {
-    run zsh -n "$ZPWR/docs/regenPDF.sh"
-    assert $state equals 0
-}
-
 #--------------------------------------------------------------
 # scripts — zsh -n (first 14 *.sh alphabetically)
 #--------------------------------------------------------------

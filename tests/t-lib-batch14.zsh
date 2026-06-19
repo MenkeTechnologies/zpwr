@@ -1,25 +1,12 @@
 #!/usr/bin/env zunit
 #{{{                    MARK:Header
 ##### Author: MenkeTechnologies
-##### Purpose: docs generators, ZPWR_VARS/REPO, wizard page samples, forgit verb cluster
-##### Notes: Complements batch11 (regenPDF) and batch13 (verb ratio)
+##### Purpose: ZPWR_VARS/REPO, wizard page samples, forgit verb cluster
+##### Notes: Complements batch13 (verb ratio)
 #}}}***********************************************************
 
 @setup {
     load "test_lib.zsh"
-}
-
-#--------------------------------------------------------------
-# docs — Python / TeX sources
-#--------------------------------------------------------------
-@test 'docs/genEncyclopediaTex.py passes python3 -m py_compile' {
-    run python3 -m py_compile "$ZPWR/docs/genEncyclopediaTex.py"
-    assert $state equals 0
-}
-
-@test 'docs/zpwr-encyclopedia.tex exists' {
-    run test -f "$ZPWR/docs/zpwr-encyclopedia.tex"
-    assert $state equals 0
 }
 
 #--------------------------------------------------------------

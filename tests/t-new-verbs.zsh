@@ -104,11 +104,6 @@
     assert $state equals 0
 }
 
-@test 'verb regenpdf registered' {
-    run test -n "${ZPWR_VERBS[regenpdf]+x}"
-    assert $state equals 0
-}
-
 # ── HELP FLAG TESTS ───────────────────────────────────────────
 
 @test 'zpwrBench -h exits 0' {
@@ -236,17 +231,5 @@
 @test 'zpwrMonitorVerbs array exists after zpwrBindVerbs' {
     zpwrBindVerbs
     run test -n "${zpwrMonitorVerbs+x}"
-    assert $state equals 0
-}
-
-# ── PDF AND DOCS ──────────────────────────────────────────────
-
-@test 'genEncyclopediaTex.py exists' {
-    run test -f "$ZPWR/docs/genEncyclopediaTex.py"
-    assert $state equals 0
-}
-
-@test 'regenPDF.sh exists and is executable' {
-    run test -x "$ZPWR/docs/regenPDF.sh"
     assert $state equals 0
 }
