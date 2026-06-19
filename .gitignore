@@ -3,7 +3,15 @@
 !docs/README.md
 
 local/
+
+# Paid encyclopedia source + its generation pipeline live in the private
+# menke-books repo. The free docs/index.html (regenerated there from the
+# encyclopedia) and docs/screenshots stay tracked here.
 zpwr-encyclopedia.pdf
+docs/zpwr-encyclopedia.tex
+docs/genEncyclopediaTex.py
+docs/regenPDF.sh
+docs/tex_to_html.py
 *.aux
 *.log
 *.out
