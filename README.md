@@ -46,6 +46,8 @@ The landscape splits cleanly along these axes, and each rival owns only one:
 
 Closest by spirit -- the famous personal dotfiles repos -- top out at curated configs with a `bin/` of scripts. None expose a namespaced `<tool> <verb>` dispatcher of this breadth, and none ship the full multi-tool cockpit at this scale. ZPWR is the only thing that is simultaneously a verb-CLI, a full-stack terminal environment, and a single-author OS. Category of one.
 
+The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) -- ZPWR's original fork point, and a similar concept in seed form. Dotmatrix is dotfiles for provisioning a dev machine: shell/git/vim/tmux configs plus `hr`, a subcommand utility for developer tasks. ZPWR took that seed to *terminal-OS breadth* -- a verb-dispatcher spanning the entire environment (not just dev chores), a fully wired zsh + tmux + vim/neovim + fzf + spacemacs cockpit, an env-var control plane, and completions at corpus scale. The novelty is not "a shell with a helper command" -- that predecessor existed and is credited here -- it is configuring **every aspect of the terminal as one coherent OS**. That is what ZPWR originated.
+
 ---
 
 ## System Map
