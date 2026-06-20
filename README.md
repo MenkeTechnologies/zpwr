@@ -24,6 +24,30 @@ ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/
 
 ---
 
+## Category Of One -- The Dotfile Super-OS
+> `[ NO DIRECT COMPETITORS // A NEW CLASS OF MACHINE ]`
+
+ZPWR **invented the terminal-OS concept** -- the idea that a shell environment can be a coherent operating system for the command line, not a loose pile of dotfiles. It has no direct competitor because it is not in any existing category; it originated and defines a new one: the **dotfile super-OS**. Every adjacent tool covers exactly one of ZPWR's axes; none integrate all of them in a single installable system:
+
+- **Verb-dispatcher mega-CLI** -- `zpwr <verb>` exposing a discoverable, menucompleted command vocabulary spanning the whole environment.
+- **Full-stack curated cockpit** -- zsh + tmux + fzf + vim/neovim + spacemacs wired together as one coherent machine, not a pile of configs.
+- **Scale** -- thousands of aliases, tens of thousands of completions, thousands of functions, and a custom env-var control plane, all in one repo.
+- **Single-author, single-install OS** -- one `curl` jacks the entire stack in.
+
+The landscape splits cleanly along these axes, and each rival owns only one:
+
+| Class | Examples | What it covers | Why it isn't ZPWR |
+|---|---|---|---|
+| Zsh/Bash config frameworks | oh-my-zsh, Prezto, Zim, bash-it | plugin loading + themes | no verb dispatcher, no command suite |
+| Plugin managers | zinit, antigen, zplug, znap | loading infrastructure | ZPWR is *built on* zinit -- they are a component, not a competitor |
+| Personal dotfiles repos | mathiasbynens, holman, thoughtbot, voidrice | one person's curated config | config snapshots; no dispatched CLI, far smaller scale |
+| CLI builder frameworks | Cobra, oclif, Click | a way to *build* one tool | wrong layer -- they build CLIs, they aren't an environment |
+| Dotfile managers | chezmoi, dotbot, GNU stow, yadm | sync / templating | orthogonal plumbing, not a shipped environment |
+
+Closest by spirit -- the famous personal dotfiles repos -- top out at curated configs with a `bin/` of scripts. None expose a namespaced `<tool> <verb>` dispatcher of this breadth, and none ship the full multi-tool cockpit at this scale. ZPWR is the only thing that is simultaneously a verb-CLI, a full-stack terminal environment, and a single-author OS. Category of one.
+
+---
+
 ## System Map
 
 - [Full Install](#full-installation----jack-into-zpwr) -- Jack In
