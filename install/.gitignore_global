@@ -1429,3 +1429,21 @@ OPENCODE.local.md
 .llm/
 .prompt
 #}}}***********************************************************
+
+#{{{                    MARK:JUCE / audio plugins
+#**************************************************************
+# CMake build trees (Projucer/CMake JUCE plugins)
+build-test/
+build-*/
+/build/
+cmake-build-*/
+# Projucer-generated
+JuceLibraryCode/
+Builds/
+*.jucer~
+# Plugin binary artifacts
+*.vst3
+*.component
+*.clap
+*.au
+#}}}***********************************************************
