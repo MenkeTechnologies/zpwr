@@ -12,7 +12,7 @@
  [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://menketechnologies.github.io/zpwr/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### `[NEON-LIT UNIX TERMINAL OS // 460 VERBS // 190k LOC // STRYKE-POWERED]`
+### `[NEON-LIT UNIX TERMINAL OS // 504 VERBS // 190k LOC // STRYKE-POWERED]`
 
 > *"The street finds its own uses for things."* — William Gibson
 
@@ -153,7 +153,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 460 zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 504 zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 177 centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 40k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
@@ -239,7 +239,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Firmware Stack
 - zsh
 - tmux
-- neovim with 77 plugins and python3/node support
+- neovim with 79 plugins and python3/node support
 - stryke
 - bash (4.0+, 3.2 not supported)
 - zinit with 48 plugins of which 33 are custom
@@ -474,7 +474,7 @@ man zpwrall     # comprehensive meta-page
 `zpwr(1)` is the quick reference: dispatcher overview, `-h`/`-V` flags, a curated verb catalog (diagnostics, profiling, history analytics, snapshot/restore, cache management, navigation, eye-candy, tmux), key environment variables, files, and runnable examples.
 
 `zpwrall(1)` is the comprehensive meta-page -- the equivalent of `zshall(1)` for ZPWR.  It contains:
-- the full alphabetic catalog of all 460 dispatcher verbs with their underlying commands,
+- the full alphabetic catalog of all 504 dispatcher verbs with their underlying commands,
 - every documented `ZPWR_*` environment variable grouped by purpose (banner, auto-behaviors, colors, expansion, logging, editor, tmux, plugins, paths),
 - the canonical install layout and per-directory purpose,
 - tmux prefix, key bindings, and synced-pane semantics,
