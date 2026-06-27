@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zt() {
+function zte() {
 
     if [[ -d "$ZPWR_TEST" ]]; then
         zpwrCd "$ZPWR_TEST"
@@ -10,4 +10,4 @@ function zt() {
 
 }
 
-zt "$@"
+zte "$@"
