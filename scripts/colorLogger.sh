@@ -40,24 +40,24 @@ shopt -s globstar
 #tailVersion="colortail -k $HOME/.colortailconf"
 tailVersion=tail
 
-weHaveCCZE=no
+weHaveZcolorizer=no
 
-type ccze 1>/dev/null 2>&1 && weHaveCCZE=yes
+type zcolorizer 1>/dev/null 2>&1 && weHaveZcolorizer=yes
 
-[[ -n "$1" ]] && weHaveCCZE=no
+[[ -n "$1" ]] && weHaveZcolorizer=no
 
 #dont care about std err
 #exec 2>/dev/null
 
 if [[ "$(uname)" == Darwin ]]; then
-    if [[ "$weHaveCCZE" == yes ]]; then
+    if [[ "$weHaveZcolorizer" == yes ]]; then
 
         zpwrPrettyPrint "Color logging for Darwin"
         #"$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
         #$HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
-        #/Library/Logs/**/*.log $HOMEBREW_PREFIX/var/log/**/*.log | ccze
+        #/Library/Logs/**/*.log $HOMEBREW_PREFIX/var/log/**/*.log | zcolorizer
         "$tailVersion" -F /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
-            /var/log/*beat*/*  2>/dev/null | ccze
+            /var/log/*beat*/*  2>/dev/null | zcolorizer
     else
         zpwrPrettyPrint "Decolorized logging for Darwin"
         "$tailVersion" -F /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
@@ -75,11 +75,11 @@ else
 
     if [[ "$distro" == debian ]]; then
 
-        if [[ "$weHaveCCZE" == yes ]]; then
+        if [[ "$weHaveZcolorizer" == yes ]]; then
             zpwrPrettyPrint "Color logging for $ZPWR_DISTRO_NAME"
             sudo "$tailVersion" -F \
                 /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} \
-                /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/* 2>/dev/null | ccze
+                /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/* 2>/dev/null | zcolorizer
         else
             zpwrPrettyPrint "Decolorized logging for $ZPWR_DISTRO_NAME"
             sudo "$tailVersion" -F /var/log/**/*.log \
@@ -89,11 +89,11 @@ else
 
     elif [[ "$distro" == redhat ]]; then
 
-        if [[ "$weHaveCCZE" == yes ]]; then
+        if [[ "$weHaveZcolorizer" == yes ]]; then
             zpwrPrettyPrint "Color logging for $ZPWR_DISTRO_NAME"
             sudo "$tailVersion" -F \
                 /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} \
-                /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/* 2>/dev/null | ccze
+                /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/* 2>/dev/null | zcolorizer
         else
             zpwrPrettyPrint "Decolorized logging for $ZPWR_DISTRO_NAME"
             sudo "$tailVersion" -F /var/log/**/*.log \
@@ -101,20 +101,20 @@ else
                 /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/* 2>/dev/null 
         fi
     elif [[ "$distro" == suse ]]; then
-        if [[ "$weHaveCCZE" == yes ]]; then
+        if [[ "$weHaveZcolorizer" == yes ]]; then
             zpwrPrettyPrint "Color logging for $ZPWR_DISTRO_NAME"
-            sudo journalctl -f  2>/dev/null | ccze
+            sudo journalctl -f  2>/dev/null | zcolorizer
         else
             zpwrPrettyPrint "Decolorized logging for $ZPWR_DISTRO_NAME"
             sudo journalctl -f 2>/dev/null 
         fi
     else
         printf "Unsupported distro: $ZPWR_DISTRO_NAME...but trying anyways\n" >&2
-        if [[ "$weHaveCCZE" == yes ]]; then
+        if [[ "$weHaveZcolorizer" == yes ]]; then
             zpwrPrettyPrint "Color logging for $ZPWR_DISTRO_NAME"
             sudo "$tailVersion" -F \
                 /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} \
-                /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/* 2>/dev/null | ccze
+                /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/* 2>/dev/null | zcolorizer
         else
             zpwrPrettyPrint "Decolorized logging for $ZPWR_DISTRO_NAME"
             sudo "$tailVersion" -f \
