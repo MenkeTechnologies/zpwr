@@ -2,16 +2,16 @@
 
 STDOUT |> binmode ":encoding(UTF-8)"
 
-my $width = 80
-my $date = qx "date"
-my $widthHalf = $width / 4
+val $width     = 80
+val $date      = qx "date"
+val $widthHalf = $width / 4
 
-fn printD { p "ሕ" x $width }
+fn printD = p "ሕ" x $width
 
 fn printDate {
     p "ሕ" x $width
     p " " x $widthHalf
-    p "${date}"
+    p $date
     p "ሕ" x $width
 }
 

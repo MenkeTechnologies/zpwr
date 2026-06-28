@@ -1,28 +1,28 @@
 #!/usr/bin/env stryke
 
-my $numColumns = qx "tput cols"
-$numColumns |> chomp
-my ($changeColor, $insertColor, $deleteColor) = ("41", "43", "42")
-my $fmt = "1;4"
-my ($file1, $file2) = @ARGV[0, 1]
-open(my $less, "|-", "less -M") or die $!
+var $numColumns = qx "tput cols"
+chomp $numColumns
+val ($changeColor, $insertColor, $deleteColor) = ("41", "43", "42")
+val $fmt = "1;4"
+val ($file1, $file2) = @ARGV[0:1]
+open(val $less, "|-", "less -M") or die $!
 $less |> select
-open(my $fh, "sdiff --expand-tabs -w ${numColumns} ${file1} ${file2} | cat -n |")
+open(val $fh, "sdiff --expand-tabs -w $numColumns $file1 $file2 | cat -n |")
 
-p "\e[1;4m${file1}\e[0m"
-my $numSpaces = ($numColumns / 2 |> int) - ($file1 |> length)
+p "\e[1;4m$file1\e[0m"
+val $numSpaces = ($numColumns / 2 |> int) - len($file1)
 p " " x $numSpaces
-p "\e[1;4m${file2} \e[0m\n"
+p "\e[1;4m$file2 \e[0m\n"
 
 while (<$fh>) {
-    my $len = $_ |> length
+    val $len = len(_)
     if ($len < $numColumns) {
         chomp
-        $_ .= " " x ($numColumns - $len) . "\n"
+        _ .= " " x ($numColumns - $len) . "\n"
     }
-    $_ =~ s/(^.*\|[ ]{1,2}.*$)/\e[${changeColor};${fmt};37m$1\e[0m/g
-    $_ =~ s/(^.*>[ ]{1,2}.*$)/\e[${insertColor};${fmt};37m$1\e[0m/g
-    $_ =~ s/(^.*<[ ]{1,2}.*$)/\e[${deleteColor};${fmt};37m$1\e[0m/g
+    _ =~ s/(^.*\|[ ]{1,2}.*$)/\e[$changeColor;$fmt;37m$1\e[0m/g
+    _ =~ s/(^.*>[ ]{1,2}.*$)/\e[$insertColor;$fmt;37m$1\e[0m/g
+    _ =~ s/(^.*<[ ]{1,2}.*$)/\e[$deleteColor;$fmt;37m$1\e[0m/g
     p
 }
 

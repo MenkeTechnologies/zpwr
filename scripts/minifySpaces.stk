@@ -1,25 +1,27 @@
 #!/usr/bin/env stryke
 
-fn removeSpaces {
-    if (-d$_[0]) {
-        $_ |> removeSpaces for glob("$_[0]/* $_[0]/.[!.]*")
+fn removeSpaces($path) {
+    if (-d $path) {
+        removeSpaces _ for glob("$path/* $path/.[!.]*")
     } else {
-        p "working on $_[0]\n"
-        my $tmp = $_[0] . ".bak"
-        rename($_[0], $tmp)
-        open(my $in, "<${tmp}")
-        open(my $out, ">$_[0]")
+        p "working on $path\n"
+        val $tmp = "$path.bak"
+        rename($path, $tmp)
+        open(val $in, "<$tmp")
+        open(val $out, ">$path")
+        val $old = select $out
         while (<$in>) {
-            $_ =~ s/\s+$/\n/g
-            $_ =~ s/\x20/ /g
-            $_ =~ s/^\s*\n$//
-            $_ =~ s/\x09$/    /g
-            $out |> p $_
+            _ =~ s/\s+$/\n/g
+            _ =~ s/\x20/ /g
+            _ =~ s/^\s*\n$//
+            _ =~ s/\x09$/    /g
+            p
         }
+        select $old
         unlink($tmp)
         $in |> close
         $out |> close
     }
 }
 
-$_ |> removeSpaces for @ARGV
+removeSpaces _ for @ARGV
