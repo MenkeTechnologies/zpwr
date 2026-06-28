@@ -2187,8 +2187,8 @@
     assert $state equals 0
 }
 
-@test 'fn zt is defined' {
-    run test -n "${functions[zt]+x}"
+@test 'fn zte is defined' {
+    run test -n "${functions[zte]+x}"
     assert $state equals 0
 }
 

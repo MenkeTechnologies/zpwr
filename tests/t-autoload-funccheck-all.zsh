@@ -2622,10 +2622,10 @@
     assert "$output" contains zsm
 }
 
-@test 'functions zt contains name' {
-    run functions zt
+@test 'functions zte contains name' {
+    run functions zte
     assert $state equals 0
-    assert "$output" contains zt
+    assert "$output" contains zte
 }
 
 @test 'functions ztl contains name' {

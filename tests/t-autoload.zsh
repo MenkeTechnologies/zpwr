@@ -214,8 +214,8 @@
     assert $? equals 0
 }
 
-@test 'zt' {
-    zt &>/dev/null
+@test 'zte' {
+    zte &>/dev/null
     [[ "$PWD" == "$ZPWR_TEST" ]]
     assert $? equals 0
 }

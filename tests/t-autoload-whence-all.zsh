@@ -2197,8 +2197,8 @@
     assert $state equals 0
 }
 
-@test 'whence zt resolves' {
-    run whence zt
+@test 'whence zte resolves' {
+    run whence zte
     assert $state equals 0
 }
 

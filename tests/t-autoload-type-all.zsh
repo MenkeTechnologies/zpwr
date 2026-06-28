@@ -2610,8 +2610,8 @@
     assert "$output" contains function
 }
 
-@test 'type zt is function' {
-    run type zt
+@test 'type zte is function' {
+    run type zte
     assert $state equals 0
     assert "$output" contains function
 }

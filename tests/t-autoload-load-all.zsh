@@ -2187,8 +2187,8 @@
     assert $state equals 0
 }
 
-@test 'autoload zt loads' {
-    run autoload +X zt
+@test 'autoload zte loads' {
+    run autoload +X zte
     assert $state equals 0
 }
 

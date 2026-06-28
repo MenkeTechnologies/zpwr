@@ -2622,8 +2622,8 @@
     assert "$output" is_not_empty
 }
 
-@test 'fn zt body non-empty' {
-    run functions zt
+@test 'fn zte body non-empty' {
+    run functions zte
     assert $state equals 0
     assert "$output" is_not_empty
 }

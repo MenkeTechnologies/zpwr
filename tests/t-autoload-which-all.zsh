@@ -2197,8 +2197,8 @@
     assert $state equals 0
 }
 
-@test 'which zt found' {
-    run which zt
+@test 'which zte found' {
+    run which zte
     assert $state equals 0
 }
 
