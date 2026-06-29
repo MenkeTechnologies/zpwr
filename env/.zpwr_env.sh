@@ -83,6 +83,17 @@ export ZPWR_DEFAULT_OMZ_THEME=simonoff
 export ZPWR_DELIMITER_CHAR='%'
 # the default vim command, override in tokens file
 export ZPWR_VIM='nvim'
+# the editor opened by the fzf-driven editor widgets/verbs; prefer zemacs, fall
+# back to neovim then vim. override in tokens file to pin a specific editor
+if [[ -z "$ZPWR_ZEMACS" ]]; then
+    if command -v zemacs >/dev/null 2>&1; then
+        export ZPWR_ZEMACS='zemacs'
+    elif command -v nvim >/dev/null 2>&1; then
+        export ZPWR_ZEMACS='nvim'
+    else
+        export ZPWR_ZEMACS='vim'
+    fi
+fi
 # set EDITOR to $ZPWR_VIM command
 export ZPWR_EDITOR_TO_VIM='true'
 # the emacs command

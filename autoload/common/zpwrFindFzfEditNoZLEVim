@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function findFzfEditNoZLEVim(){
 
-    zpwrFindFzfEditNoZLE "$ZPWR_VIM"
+    zpwrFindFzfEditNoZLE "$ZPWR_ZEMACS"
 }
 
 findFzfEditNoZLEVim "$@"

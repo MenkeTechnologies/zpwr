@@ -6,7 +6,7 @@ function zpwrVimAllEdit(){
     if [[ -z "$BUFFER" ]]; then
         return
     fi
-    BUFFER="$ZPWR_VIM $BUFFER"
+    BUFFER="$ZPWR_ZEMACS $BUFFER"
     zpwrLogDebug "builtin cd $ZPWR"
     builtin cd "$ZPWR" || {
         zpwrLogConsoleErr "cannot cd to $ZPWR"
