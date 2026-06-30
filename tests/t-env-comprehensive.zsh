@@ -854,3 +854,8 @@
     run test -n "$ZPWR_GITHUB_URL"
     assert $state equals 0
 }
+
+@test 'ZPWR_ZEMACSINFO is set' {
+    run test -n "$ZPWR_ZEMACSINFO"
+    assert $state equals 0
+}

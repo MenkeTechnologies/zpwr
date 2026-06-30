@@ -47,7 +47,7 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         exit 1'
 fi
 
-ins powerliners powerline
+ins powerliners powerliners
 ins zcolorizer zcolorizer
 ins bat bat
 ins git-delta git-delta

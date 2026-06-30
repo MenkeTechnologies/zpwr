@@ -13,6 +13,13 @@ function zpwrCatNvimOrVimInfo() {
         test -e "$file" || touch "$file"
         tac "$file"
     fi
+
+    # Fold in zemacs recents too. zemacs writes ~/.zemacs/.zemacsinfo in the exact
+    # viminfo format, so its `> path` blocks are harvested by the same downstream
+    # extractor as Vim's — opening a file in zemacs surfaces it in the pickers.
+    if [[ -f $ZPWR_ZEMACSINFO ]]; then
+        tac "$ZPWR_ZEMACSINFO"
+    fi
 }
 
 zpwrCatNvimOrVimInfo "$@"
