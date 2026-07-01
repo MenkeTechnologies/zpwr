@@ -2,8 +2,8 @@
 # vim: set ft=sh:
 function zpwrDetachall(){
 
-    tmux list-clients | tr -d : |
-        stryke -ane '`tmux detach-client -t $F[0]`'
+    $ZPWR_ZTMUX list-clients | tr -d : |
+        stryke -ane '`\$ZPWR_ZTMUX detach-client -t $F[0]`'
 }
 
 zpwrDetachall "$@"

@@ -108,8 +108,8 @@ function refreshers() {
 
     #create new zsh in right pane
     #space for safety as C-c tends to cut off first character
-    tmux send-keys -t right C-c C-c C-c " tmux source-file \"\$ZPWR_TMUX/init.conf\" 2>> \"\$ZPWR_LOGFILE\" 1>&2; exec zsh" C-m
-    tmux display-message "Got the latest code!"
+    $ZPWR_ZTMUX send-keys -t right C-c C-c C-c " $ZPWR_ZTMUX source-file \"\$ZPWR_TMUX/init.conf\" 2>> \"\$ZPWR_LOGFILE\" 1>&2; exec zsh" C-m
+    $ZPWR_ZTMUX display-message "Got the latest code!"
     #tmux kill-server
     #pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
     #sudo kill "$pid"

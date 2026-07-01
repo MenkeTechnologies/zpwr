@@ -38,11 +38,11 @@ function zpwrAcceptLine () {
     else
         if ! [[ $BUFFER == *zpwrStopSend* ]]; then
             for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-                tmux send-keys -t $pane "C-m"
+                $ZPWR_ZTMUX send-keys -t $pane "C-m"
             done
         else
             for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-                tmux send-keys -t $pane "C-u"
+                $ZPWR_ZTMUX send-keys -t $pane "C-u"
             done
         fi
     fi

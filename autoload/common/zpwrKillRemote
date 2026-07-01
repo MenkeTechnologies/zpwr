@@ -3,7 +3,7 @@
 function zpwrKillRemote() {
 
     zpwrPrettyPrint "die tmux and ssh"
-    command tmux kill-server
+    command $ZPWR_ZTMUX kill-server
     command killall ssh autossh
 
 }

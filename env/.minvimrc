@@ -112,7 +112,7 @@ vnoremap > >gv
 "copy to system clipboard and move cursor to end of selection
 vnoremap <C-B> "*y`>
 "copy to tmux clipboard
-vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
+vnoremap <silent><leader>b :w !ztmux set-buffer "$(cat)"<CR><CR>
 noremap <silent><leader>sudo :w !sudo tee % &>/dev/null<CR><CR><CR>
 
 "Ctrl-C exits like in shell

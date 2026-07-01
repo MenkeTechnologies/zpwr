@@ -41,27 +41,27 @@ function zpwrAttachSetup() {
             if (( $num_con <= 1 )); then
                 zpwrLogInfo "no tmux clients"
                 {
-                    out="$(command tmux ls 2>&1)"
+                    out="$(command $ZPWR_ZTMUX ls 2>&1)"
                     ret=$?
                     zpwrLogInfo "tmux ls = ret: '$ret', out: '$out'"
                     if [[ $ret == 0 ]]; then
                         zpwrLogInfo "attaching to existing"
                         zpwrLogInfo command tmux attach
-                        command tmux attach
+                        command $ZPWR_ZTMUX attach
                         ret=$?
                         zpwrLogInfo "tmux attach ret: '$ret'"
                     else
                         zpwrLogInfo "creating new session"
                         zpwrLogInfo tmux new-session \; source-file "$ZPWR_TMUX/control-window.conf"
-                        command tmux new-session \; source-file "$ZPWR_TMUX/control-window.conf"
-                        sid=$(command tmux new-session -P -d 2>> "$ZPWR_LOGFILE") 
+                        command $ZPWR_ZTMUX new-session \; source-file "$ZPWR_TMUX/control-window.conf"
+                        sid=$(command $ZPWR_ZTMUX new-session -P -d 2>> "$ZPWR_LOGFILE")
                         ret=$?
                         zpwrLogInfo "tmux create ret: '$ret'"
                         #2x q C-h to rid copy-mode
-                        command tmux send-keys -t $sid q C-h
-                        command tmux send-keys -t $sid q C-h
-                        command tmux send-keys -t $sid 'command tmux source-file "$ZPWR_TMUX/control-window.conf"' C-m
-                        command tmux attach-session -t $sid
+                        command $ZPWR_ZTMUX send-keys -t $sid q C-h
+                        command $ZPWR_ZTMUX send-keys -t $sid q C-h
+                        command $ZPWR_ZTMUX send-keys -t $sid 'command $ZPWR_ZTMUX source-file "$ZPWR_TMUX/control-window.conf"' C-m
+                        command $ZPWR_ZTMUX attach-session -t $sid
                     fi
                 } &>> "$ZPWR_LOGFILE"
             else

@@ -4,7 +4,7 @@
 # https://github.com/wellle/tmux-complete.vim/blob/main/sh/tmuxcomplete
 function zpwrTmux_capture_paner() {
 
-    tmux capture-pane -J -p -S -100 $@ |
+    $ZPWR_ZTMUX capture-pane -J -p -S -100 $@ |
     col -b |
     tr -s '[:space:]' '\n' |
     sed 's@\^C\S*@ @g;s@:.*$@@' |

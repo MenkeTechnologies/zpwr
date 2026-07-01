@@ -702,7 +702,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (defun zpwr/runner  ()
      "Run current buffer in tmux pane to right"
      (interactive)
-      (let ( (cmd (concat "tmux send-keys -t right C-c '" "bash " (getenv "ZPWR_SCRIPTS") "/runner.sh " (zpwr/get-file-name) "' C-m")) )
+      (let ( (cmd (concat "ztmux send-keys -t right C-c '" "bash " (getenv "ZPWR_SCRIPTS") "/runner.sh " (zpwr/get-file-name) "' C-m")) )
            ;;(message (concat "tmux runner => " (symbol-value 'cmd)))
              (save-window-excursion
               (zpwr/inhibit-sentinel-messages-echo-area #'async-shell-command

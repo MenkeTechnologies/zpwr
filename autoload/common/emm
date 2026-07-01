@@ -3,8 +3,8 @@
 function emm() {
 
     local str endstr
-    tmux selectp -t emacs:0.0
-    tmux send-keys -t emacs:0.0 C-c Escape
+    $ZPWR_ZTMUX selectp -t emacs:0.0
+    $ZPWR_ZTMUX send-keys -t emacs:0.0 C-c Escape
 
     for arg in "$@"; do
         if [[ ${arg:0:1} == "/" ]]; then
@@ -21,10 +21,10 @@ function emm() {
         printf "$endstr" | $ZPWR_COPY_CMD
         sleep 0.3
         zpwrLogInfo tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
-        tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
+        $ZPWR_ZTMUX send-keys -t emacs:0.0 ":e $endstr" ENTER
     fi
 
-    tmux attach-session -t emacs
+    $ZPWR_ZTMUX attach-session -t emacs
 }
 
 emm "$@"

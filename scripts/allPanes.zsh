@@ -8,12 +8,12 @@
 #}}}***********************************************************
 
 if ! type -ap thumbs &>/dev/null; then
-    tmux display-message 'You need thumbs!'
+    $ZPWR_ZTMUX display-message 'You need thumbs!'
     exit 0
 fi
 
 if ! zmodload zsh/net/socket; then
-    tmux display-message "Could NOT load zsh/net/socket"
+    $ZPWR_ZTMUX display-message "Could NOT load zsh/net/socket"
     exit 0
 fi
 
@@ -28,14 +28,14 @@ local active_win new_pane active_pane msg
 
 #tmux wait-for -L fingerl1
 
-active_sess="$(tmux display-message -p '#{session_id}')"
+active_sess="$($ZPWR_ZTMUX display-message -p '#{session_id}')"
 
-active_win="$(tmux display-message -p '#{window_id}')"
+active_win="$($ZPWR_ZTMUX display-message -p '#{window_id}')"
 
-active_pane="$(tmux display-message -p '#{pane_id}')"
+active_pane="$($ZPWR_ZTMUX display-message -p '#{pane_id}')"
 
 
-tmux new-window -n "[zpwr-thumbs-$active_sess-$active_win-$active_pane]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh \\$active_sess $active_win $type $ZPWR_SOCKET$$"
+$ZPWR_ZTMUX new-window -n "[zpwr-thumbs-$active_sess-$active_win-$active_pane]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh \\$active_sess $active_win $type $ZPWR_SOCKET$$"
 
 zsocket -l $ZPWR_SOCKET$$
 fdl=$REPLY
@@ -55,7 +55,7 @@ command rm -f "$ZPWR_SOCKET$$"
 #tmux swap-pane -d -s "$new_pane" -t "$active_pane"
 
 if [[ $action == "open" ]]; then
-    raw="$(tmux save-buffer - | stryke -pe 's@(^\s|\s$)@@')"
+    raw="$($ZPWR_ZTMUX save-buffer - | stryke -pe 's@(^\s|\s$)@@')"
     if [[ -n "$raw" ]]; then
         if ! [[ $raw =~ :// ]]; then
             raw="http://$raw"
@@ -64,15 +64,15 @@ if [[ $action == "open" ]]; then
         ${=ZPWR_OPEN_CMD} "$raw"
     fi
 elif [[ $action == "google" ]]; then
-        raw="$(tmux save-buffer - | stryke -pe 's@(^\s|\s$)@@')"
+        raw="$($ZPWR_ZTMUX save-buffer - | stryke -pe 's@(^\s|\s$)@@')"
         if [[ -n "$raw" ]]; then
             print -rn -- "$raw" | ${=ZPWR_COPY_CMD}
             echo "allPanes.zsh exec: bash \"$ZPWR_TMUX/google.sh\" google" >&2
             bash "$ZPWR_TMUX/google.sh" google
         fi
-elif tmux select-window -t "$active_sess:$active_win"; then
-    if [[ "$msg" == full ]] && tmux select-pane -t "$active_sess:$active_win.$active_pane"; then
-        tmux paste-buffer
+elif $ZPWR_ZTMUX select-window -t "$active_sess:$active_win"; then
+    if [[ "$msg" == full ]] && $ZPWR_ZTMUX select-pane -t "$active_sess:$active_win.$active_pane"; then
+        $ZPWR_ZTMUX paste-buffer
     fi
 fi
 

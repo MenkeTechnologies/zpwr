@@ -47,7 +47,7 @@ if [[ -z "$ZPWR_TEMPFILE4" ]]; then
 fi
 
 {
-    tmux lsk
+    $ZPWR_ZTMUX lsk
     bindkey -M viins -L
     bindkey -M vicmd -L
     bindkey -M menuselect -L

@@ -9,4 +9,4 @@
 
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
-tmux send-keys -t main "id" C-m
+$ZPWR_ZTMUX send-keys -t main "id" C-m

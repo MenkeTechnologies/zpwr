@@ -8,7 +8,7 @@ function zpwrKeySender(){
 
         # tmux send-keys -t learn:0.0 $1
         for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-            tmux send-keys -t $pane "C-u" "$BUFFER" #&>/dev/null
+            $ZPWR_ZTMUX send-keys -t $pane "C-u" "$BUFFER" #&>/dev/null
         done
     fi
 }

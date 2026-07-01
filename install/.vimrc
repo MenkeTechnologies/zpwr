@@ -300,7 +300,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " copy to tmux clipboard
-vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
+vnoremap <silent><leader>b :w !ztmux set-buffer "$(cat)"<CR><CR>
 " for when forgot to do sudo vim <file> and file is readonly
 noremap <silent><leader>sudo :w !sudo tee % &>/dev/null<CR><CR><CR>
 
@@ -930,9 +930,9 @@ function! TmuxRun(...)
     let str = join(a:000, ' ')
     echom str
     if has('gui_running')
-        silent! exec "!tmux send-keys -t vimmers:0. C-c '".str."' C-m"
+        silent! exec "!" . $ZPWR_ZTMUX . " send-keys -t vimmers:0. C-c '".str."' C-m"
     else
-        silent! exec "!tmux send-keys -t right C-c '".str."' C-m"
+        silent! exec "!" . $ZPWR_ZTMUX . " send-keys -t right C-c '".str."' C-m"
     endif
 endfunction
 
@@ -961,43 +961,43 @@ function! TmuxRepeat(type)
             finally
                 let @a = a_save
                 if a:type == 'repl'
-                    silent! exec '!tmux load-buffer -b buffer0099 '.fileName
+                    silent! exec '!'. $ZPWR_ZTMUX .' load-buffer -b buffer0099 '.fileName
                 endif
             endtry
         else
             let fileName=fnameescape(expand('%:p'))
         endif
 
-        let pane_count=Strip(system('tmux list-panes | wc -l'))
+        let pane_count=Strip(system($ZPWR_ZTMUX.' list-panes | wc -l'))
         if pane_count > 1 || has('gui_running')
             if has('gui_running')
-                let output =  system('tmux list-sessions | command grep vimmers')
+                let output =  system($ZPWR_ZTMUX.' list-sessions | command grep vimmers')
                 if v:shell_error != 0
                     echom 'No Vimmers tmux session!'
                     return 0
                 endif
                 if a:type == 'repl'
-                    silent! exec '!tmux paste-buffer -b buffer0099 -t vimmers:0. '
+                    silent! exec '!'. $ZPWR_ZTMUX .' paste-buffer -b buffer0099 -t vimmers:0. '
                     redraw!
                     return 0
                 endif
 
                 if index(supportedTypes, exeFileType) >= 0
-                    silent! exec "!tmux send-keys -t vimmers:0. C-c ' bash \"$ZPWR_SCRIPTS/zpwrRunner.sh\"' ' \"' ".fileName." '\"' C-m"
+                    silent! exec "!" . $ZPWR_ZTMUX . " send-keys -t vimmers:0. C-c ' bash \"$ZPWR_SCRIPTS/zpwrRunner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
-                    silent! exec "!tmux send-keys -t vimmer:1 C-c ' clear' C-m up up C-m"
+                    silent! exec "!" . $ZPWR_ZTMUX . " send-keys -t vimmer:1 C-c ' clear' C-m up up C-m"
                     "echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
                     redraw!
                 endif
             else
                 if a:type == "repl"
-                    silent! exec '!tmux paste-buffer -b buffer0099 -t right'
+                    silent! exec '!'. $ZPWR_ZTMUX .' paste-buffer -b buffer0099 -t right'
                     redraw!
                     return 0
                 endif
                 if index(supportedTypes, exeFileType) >= 0
-                    silent! exec "!tmux send-keys -t right C-c ' bash \"$ZPWR_SCRIPTS/zpwrRunner.sh\"' ' \"' ".fileName." '\"' C-m"
+                    silent! exec "!" . $ZPWR_ZTMUX . " send-keys -t right C-c ' bash \"$ZPWR_SCRIPTS/zpwrRunner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
                     "echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
@@ -1015,7 +1015,7 @@ function! TmuxRepeat(type)
 endfunction
 
 function! TmuxRepeatGeneric()
-    silent! exec "!tmux send-keys -t right C-c ' clear' C-m up up C-m"
+    silent! exec "!" . $ZPWR_ZTMUX . " send-keys -t right C-c ' clear' C-m up up C-m"
     redraw!
     exe 'normal! zz'
 endfunction

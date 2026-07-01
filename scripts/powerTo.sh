@@ -66,7 +66,7 @@ if (($# == 0)); then
     exit 1
 fi
 
-realNum=$(tmux list-panes | wc -l)
+realNum=$($ZPWR_ZTMUX list-panes | wc -l)
 
 if (($# == 2)); then
     num=$1
@@ -79,7 +79,7 @@ else
     num=realNum
 fi
 
-active=$(tmux list-panes | grep active | cut -c1)
+active=$($ZPWR_ZTMUX list-panes | grep active | cut -c1)
 
 for ((i = 0; i < $num; ++i)); do
     if [[ $leavePresentPaneAloneFlag == true ]]; then
@@ -87,9 +87,9 @@ for ((i = 0; i < $num; ++i)); do
             continue
         fi
     fi
-    tmux selectp -t $i
-    tmux send-keys "$*" C-M
+    $ZPWR_ZTMUX selectp -t $i
+    $ZPWR_ZTMUX send-keys "$*" C-M
 
 done
 
-tmux selectp -t $active
+$ZPWR_ZTMUX selectp -t $active

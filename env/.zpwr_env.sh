@@ -184,6 +184,16 @@ export ZPWR_SURROUND=true
 export ZPWR_TABSTOP=__________
 # include tabstop aliases
 export ZPWR_TABSTOP_ALIASES=true
+# the tmux command used by all zpwr aliases/functions/widgets; prefer ztmux (the
+# drop-in Rust multiplexer), fall back to stock tmux. override in tokens file to
+# pin a specific binary
+if [[ -z "$ZPWR_ZTMUX" ]]; then
+    if command -v ztmux >/dev/null 2>&1; then
+        export ZPWR_ZTMUX='ztmux'
+    else
+        export ZPWR_ZTMUX='tmux'
+    fi
+fi
 # the tmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
 # the tmux prefix on linux

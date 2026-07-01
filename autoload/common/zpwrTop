@@ -112,9 +112,9 @@ function zpwrTop(){
         fi
         ts="" tw="" tp=""
         if [[ -n "$TMUX" ]]; then
-            ts="$(tmux list-sessions 2>/dev/null | wc -l)"
-            tw="$(tmux list-windows 2>/dev/null | wc -l)"
-            tp="$(tmux list-panes 2>/dev/null | wc -l)"
+            ts="$($ZPWR_ZTMUX list-sessions 2>/dev/null | wc -l)"
+            tw="$($ZPWR_ZTMUX list-windows 2>/dev/null | wc -l)"
+            tp="$($ZPWR_ZTMUX list-panes 2>/dev/null | wc -l)"
         fi
 
         # ── PROCESS (no forks) ────────────────────────────────

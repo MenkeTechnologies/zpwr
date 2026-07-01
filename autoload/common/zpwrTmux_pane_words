@@ -8,7 +8,7 @@ function zpwrTmux_pane_words() {
   # Capture current pane first.
     w=( ${(u)=$(zpwrTmux_capture_paner)} )
 
-    for i in $(tmux list-panes -F '#D'); do
+    for i in $($ZPWR_ZTMUX list-panes -F '#D'); do
         # Skip current pane (handled before).
         [[ "$TMUX_PANE" = "$i" ]] && continue
         w+=( ${(u)=$(zpwrTmux_capture_paner -t $i)} )

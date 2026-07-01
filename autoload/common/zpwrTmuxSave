@@ -107,7 +107,7 @@ function zpwrTmuxSave(){
         [[ "$wopts_line" == @* ]] && continue  # skip plugin vars
         [[ -z "$wopts_line" ]] && continue
         session_opts+=( "$wopts_line" )
-    done < <(tmux show-options 2>/dev/null)
+    done < <($ZPWR_ZTMUX show-options 2>/dev/null)
 
     while IFS=$'\t' read -r wline; do
         idx="${wline%%	*}"; wline="${wline#*	}"
@@ -118,7 +118,7 @@ function zpwrTmuxSave(){
         win_names+=( "$wname" )
         win_layouts+=( "$wlayout" )
         win_active+=( "$wact" )
-    done < <(tmux list-windows -F "#{window_index}	#{window_name}	#{window_layout}	#{window_active}")
+    done < <($ZPWR_ZTMUX list-windows -F "#{window_index}	#{window_name}	#{window_layout}	#{window_active}")
 
     {
         print "#!/usr/bin/env zsh"
@@ -130,7 +130,7 @@ function zpwrTmuxSave(){
         print "local _sess=\"\${1:-${layout_name}}\""
         print ""
         print "# create session with first window"
-        print "tmux new-session -d -s \"\$_sess\" -n '${win_names[1]}'"
+        print "$ZPWR_ZTMUX new-session -d -s \"\$_sess\" -n '${win_names[1]}'"
         print ""
 
         # session-level options
@@ -139,7 +139,7 @@ function zpwrTmuxSave(){
             for wopts_line in "${session_opts[@]}"; do
                 opt_name="${wopts_line%% *}"
                 opt_val="${wopts_line#* }"
-                print "tmux set-option -t \"\$_sess\" ${opt_name} ${opt_val}"
+                print "$ZPWR_ZTMUX set-option -t \"\$_sess\" ${opt_name} ${opt_val}"
             done
             print ""
         fi
@@ -152,7 +152,7 @@ function zpwrTmuxSave(){
 
             if (( wi > 1 )); then
                 print "# ── window ${widx}: ${wname} ──────────────────────────"
-                print "tmux new-window -t \"\$_sess\" -n '${wname}'"
+                print "$ZPWR_ZTMUX new-window -t \"\$_sess\" -n '${wname}'"
             else
                 print "# ── window ${widx}: ${wname} (initial) ─────────────────"
             fi
@@ -162,12 +162,12 @@ function zpwrTmuxSave(){
             while IFS= read -r wopts_line; do
                 [[ "$wopts_line" == @* || -z "$wopts_line" ]] && continue
                 window_opts+=( "$wopts_line" )
-            done < <(tmux show-window-options -t ":${widx}" 2>/dev/null)
+            done < <($ZPWR_ZTMUX show-window-options -t ":${widx}" 2>/dev/null)
             if (( ${#window_opts} > 0 )); then
                 for wopts_line in "${window_opts[@]}"; do
                     opt_name="${wopts_line%% *}"
                     opt_val="${wopts_line#* }"
-                    print "tmux set-window-option -t \"\$_sess:${widx}\" ${opt_name} ${opt_val}"
+                    print "$ZPWR_ZTMUX set-window-option -t \"\$_sess:${widx}\" ${opt_name} ${opt_val}"
                 done
             fi
 
@@ -182,25 +182,25 @@ function zpwrTmuxSave(){
                 pane_cmds+=( "$pc" )
                 pane_acts+=( "$pa" )
                 pane_pids+=( "$ppid" )
-            done < <(tmux list-panes -t ":${widx}" -F "#{pane_current_path}	#{pane_current_command}	#{pane_active}	#{pane_pid}")
+            done < <($ZPWR_ZTMUX list-panes -t ":${widx}" -F "#{pane_current_path}	#{pane_current_command}	#{pane_active}	#{pane_pid}")
 
             pane_count=${#pane_paths}
 
             # first pane: cd to its directory
             if [[ -n "${pane_paths[1]}" && "${pane_paths[1]}" != "" ]]; then
-                print "tmux send-keys -t \"\$_sess\" 'builtin cd ${(q)pane_paths[1]}; clear' Enter"
+                print "$ZPWR_ZTMUX send-keys -t \"\$_sess\" 'builtin cd ${(q)pane_paths[1]}; clear' Enter"
             fi
 
             # create additional panes via splits
             for (( pi=2; pi<=pane_count; pi++ )); do
-                print "tmux split-window -t \"\$_sess\""
+                print "$ZPWR_ZTMUX split-window -t \"\$_sess\""
                 if [[ -n "${pane_paths[$pi]}" && "${pane_paths[$pi]}" != "" ]]; then
-                    print "tmux send-keys -t \"\$_sess\" 'builtin cd ${(q)pane_paths[$pi]}; clear' Enter"
+                    print "$ZPWR_ZTMUX send-keys -t \"\$_sess\" 'builtin cd ${(q)pane_paths[$pi]}; clear' Enter"
                 fi
             done
 
             # apply the exact layout geometry
-            print "tmux select-layout -t \"\$_sess:${widx}\" '${wlayout}'"
+            print "$ZPWR_ZTMUX select-layout -t \"\$_sess:${widx}\" '${wlayout}'"
 
             # restore running commands in each pane
             for (( pi=1; pi<=pane_count; pi++ )); do
@@ -219,7 +219,7 @@ function zpwrTmuxSave(){
                         child_args="${child_args#reattach-to-user-namespace -l }"
                         # skip if it's just a shell
                         if [[ "$child_args" != */zsh && "$child_args" != */bash ]]; then
-                            print "tmux send-keys -t \"\$_sess:${widx}.$((pi-1))\" ${(q)child_args} Enter"
+                            print "$ZPWR_ZTMUX send-keys -t \"\$_sess:${widx}.$((pi-1))\" ${(q)child_args} Enter"
                         fi
                     fi
                 fi
@@ -228,7 +228,7 @@ function zpwrTmuxSave(){
             # select the active pane
             for (( pi=1; pi<=pane_count; pi++ )); do
                 if [[ "${pane_acts[$pi]}" == "1" ]]; then
-                    print "tmux select-pane -t \"\$_sess:${widx}.$((pi-1))\""
+                    print "$ZPWR_ZTMUX select-pane -t \"\$_sess:${widx}.$((pi-1))\""
                     break
                 fi
             done
@@ -243,19 +243,19 @@ function zpwrTmuxSave(){
 
         # select active window
         print "# restore active window"
-        print "tmux select-window -t \"\$_sess:${active_win}\""
+        print "$ZPWR_ZTMUX select-window -t \"\$_sess:${active_win}\""
         print ""
         print "# attach"
         print "if [[ -z \"\$TMUX\" ]]; then"
-        print "    tmux attach-session -t \"\$_sess\""
+        print "    $ZPWR_ZTMUX attach-session -t \"\$_sess\""
         print "else"
-        print "    tmux switch-client -t \"\$_sess\""
+        print "    $ZPWR_ZTMUX switch-client -t \"\$_sess\""
         print "fi"
     } > "$layout_file"
 
     chmod +x "$layout_file"
 
-    print "  ${G}saved${N} ${B}${layout_name}${N}  ${D}// ${#win_indices} windows, $(tmux list-panes -a -F '#{pane_id}' | wc -l | tr -d ' ') panes${N}"
+    print "  ${G}saved${N} ${B}${layout_name}${N}  ${D}// ${#win_indices} windows, $($ZPWR_ZTMUX list-panes -a -F '#{pane_id}' | wc -l | tr -d ' ') panes${N}"
     print "  ${D}${layout_file}${N}"
     print "  ${D}restore with: ${M}zpwr tmuxload ${layout_name}${N}"
 }

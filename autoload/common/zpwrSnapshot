@@ -169,16 +169,16 @@ function zpwrSnapshot(){
     if [[ -n "$TMUX" ]]; then
         command mkdir -p "$snapdir/tmux"
         # session list
-        tmux list-sessions -F '#{session_name}|#{session_windows}|#{session_width}x#{session_height}' \
+        $ZPWR_ZTMUX list-sessions -F '#{session_name}|#{session_windows}|#{session_width}x#{session_height}' \
             >| "$snapdir/tmux/sessions.txt" 2>/dev/null
         # window + pane layout
-        tmux list-windows -a -F '#{session_name}|#{window_index}|#{window_name}|#{window_layout}|#{window_active}' \
+        $ZPWR_ZTMUX list-windows -a -F '#{session_name}|#{window_index}|#{window_name}|#{window_layout}|#{window_active}' \
             >| "$snapdir/tmux/windows.txt" 2>/dev/null
-        tmux list-panes -a -F '#{session_name}|#{window_index}|#{pane_index}|#{pane_current_path}|#{pane_current_command}|#{pane_active}' \
+        $ZPWR_ZTMUX list-panes -a -F '#{session_name}|#{window_index}|#{pane_index}|#{pane_current_path}|#{pane_current_command}|#{pane_active}' \
             >| "$snapdir/tmux/panes.txt" 2>/dev/null
         # trigger tmux-resurrect save
         if [[ -d "$HOME/.tmux/plugins/tmux-resurrect" ]]; then
-            tmux run-shell "$HOME/.tmux/plugins/tmux-resurrect/scripts/save.sh" 2>/dev/null
+            $ZPWR_ZTMUX run-shell "$HOME/.tmux/plugins/tmux-resurrect/scripts/save.sh" 2>/dev/null
             # copy latest resurrect file
             latest_resurrect=$(command ls -t ~/.tmux/resurrect/tmux_resurrect_*.txt 2>/dev/null | head -1)
             if [[ -n "$latest_resurrect" ]]; then

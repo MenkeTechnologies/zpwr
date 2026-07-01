@@ -349,7 +349,7 @@ function zpwrMatrix(){
             print "" > "$_bdir/command"
 
             # split tmux and launch P2
-            tmux split-window -h "ZPWR='$ZPWR' zsh -c 'source $ZPWR/autoload/common/zpwrMatrix --player2 --gamedir $_bdir'"
+            $ZPWR_ZTMUX split-window -h "ZPWR='$ZPWR' zsh -c 'source $ZPWR/autoload/common/zpwrMatrix --player2 --gamedir $_bdir'"
             sleep 0.3
 
             # ── P1 GAME LOOP ────────────────────────────

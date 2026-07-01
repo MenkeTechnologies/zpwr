@@ -15,7 +15,7 @@ fi
 
 source common.sh
 
-tmux new-session -s zpwr -d
-tmux send-keys -t zpwr q C-h
-tmux send-keys -t zpwr "tmux source-file $ZPWR_TMUX/control-window.conf; tmux select-pane -t zpwr:0.4; tmux send-keys 'cmatrix -C blue -abs' C-m" C-m
-tmux attach -t zpwr
+$ZPWR_ZTMUX new-session -s zpwr -d
+$ZPWR_ZTMUX send-keys -t zpwr q C-h
+$ZPWR_ZTMUX send-keys -t zpwr "$ZPWR_ZTMUX source-file $ZPWR_TMUX/control-window.conf; $ZPWR_ZTMUX select-pane -t zpwr:0.4; $ZPWR_ZTMUX send-keys 'cmatrix -C blue -abs' C-m" C-m
+$ZPWR_ZTMUX attach -t zpwr

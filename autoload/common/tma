@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function tma(){
-    command tmux attach
+    command $ZPWR_ZTMUX attach
 }
 
 tma "$@"

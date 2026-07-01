@@ -74,31 +74,31 @@ function zpwrStudy(){
     local wizard_cmd="zpwr wizard ${wizard_args}"
 
     # if session already exists, attach to it
-    if tmux has-session -t "$session_name" 2>/dev/null; then
+    if $ZPWR_ZTMUX has-session -t "$session_name" 2>/dev/null; then
         if [[ -n "$TMUX" ]]; then
-            tmux switch-client -t "$session_name"
+            $ZPWR_ZTMUX switch-client -t "$session_name"
         else
-            tmux attach-session -t "$session_name"
+            $ZPWR_ZTMUX attach-session -t "$session_name"
         fi
         return 0
     fi
 
     # create new session starting in $ZPWR (pane 0 = left)
-    tmux new-session -d -s "$session_name" -c "$ZPWR"
+    $ZPWR_ZTMUX new-session -d -s "$session_name" -c "$ZPWR"
     # split: pane 1 = right (shell), also in $ZPWR
-    tmux split-window ${split_flag} -t "${session_name}:0" -p $(( 100 - pane_size )) -c "$ZPWR"
+    $ZPWR_ZTMUX split-window ${split_flag} -t "${session_name}:0" -p $(( 100 - pane_size )) -c "$ZPWR"
     # clear the right pane
-    tmux send-keys -t "${session_name}:0.1" "clear" C-m
+    $ZPWR_ZTMUX send-keys -t "${session_name}:0.1" "clear" C-m
     # run wizard in left pane (pane 0)
-    tmux send-keys -t "${session_name}:0.0" "${wizard_cmd}" C-m
+    $ZPWR_ZTMUX send-keys -t "${session_name}:0.0" "${wizard_cmd}" C-m
     # focus right pane (shell)
-    tmux select-pane -t "${session_name}:0.1"
+    $ZPWR_ZTMUX select-pane -t "${session_name}:0.1"
 
     # attach or switch
     if [[ -n "$TMUX" ]]; then
-        tmux switch-client -t "$session_name"
+        $ZPWR_ZTMUX switch-client -t "$session_name"
     else
-        tmux attach-session -t "$session_name"
+        $ZPWR_ZTMUX attach-session -t "$session_name"
     fi
 }
 

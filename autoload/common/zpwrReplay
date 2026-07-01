@@ -172,7 +172,7 @@ function zpwrReplay(){
         } >| "$replay_script"
         chmod +x "$replay_script"
 
-        tmux split-window -h "zsh $replay_script"
+        $ZPWR_ZTMUX split-window -h "zsh $replay_script"
         printf "  ${G}pane opened${N}\n"
     else
         printf "\n  ${R}unknown mode: %s${N}\n" "$mode"

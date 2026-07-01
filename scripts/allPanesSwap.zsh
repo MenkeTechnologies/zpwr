@@ -15,17 +15,17 @@ typeset -A ZPWR_PANE_INFO
 local line out cnt id winw winh pw ph pl pt h w t l o row col win wid type ary socket fdc err=0
 
 if ! zmodload zsh/curses; then
-    tmux display-message "Could NOT load zsh/curses"
+    $ZPWR_ZTMUX display-message "Could NOT load zsh/curses"
     err=1
 fi
 
 if ! zmodload zsh/net/socket; then
-    tmux display-message "Could NOT load zsh/net/socket"
+    $ZPWR_ZTMUX display-message "Could NOT load zsh/net/socket"
     err=1
 fi
 
 if [[ -z "$4" ]]; then
-    tmux display-message "usage: allPanesSwap.zsh SESS_ID WIN_ID <single/multi> SOCKET"
+    $ZPWR_ZTMUX display-message "usage: allPanesSwap.zsh SESS_ID WIN_ID <single/multi> SOCKET"
     exit 1
 fi
 
@@ -54,9 +54,9 @@ while read id winw winh pw ph pl pr pt; do
     ZPWR_PANE_INFO[${id}.t]="$pt"
     ZPWR_PANE_INFO[${id}.l]="$pl"
     ZPWR_PANE_INFO[${id}.r]="$pr"
-    ZPWR_PANE_INFO[${id}.o]="$(tmux capture-pane -p -t "%$id")"
+    ZPWR_PANE_INFO[${id}.o]="$($ZPWR_ZTMUX capture-pane -p -t "%$id")"
 done < \
-<(tmux lsp -t "$wid" -F '#{pane_id} #{window_width} #{window_height} #{pane_width} #{pane_height} #{pane_left} #{pane_right} #{pane_top} ')
+<($ZPWR_ZTMUX lsp -t "$wid" -F '#{pane_id} #{window_width} #{window_height} #{pane_width} #{pane_height} #{pane_left} #{pane_right} #{pane_top} ')
 
 #tmux wait-for -U fingerl1
 
@@ -86,7 +86,7 @@ done
 
 zcurses refresh $win
 
-tmux capture-pane -J -p > "$capture"
+$ZPWR_ZTMUX capture-pane -J -p > "$capture"
 
 if [[ $type == single ]]; then
     type=''
@@ -102,9 +102,9 @@ out="${(j. .)${(f)$(<$ZPWR_TEMPFILE)}}"
 
 # trail space
 if [[ $out[-1] == ' ' ]]; then
-    tmux set-buffer "$out"
+    $ZPWR_ZTMUX set-buffer "$out"
 else
-    tmux set-buffer "$out "
+    $ZPWR_ZTMUX set-buffer "$out "
 fi
 
 print -rn -- "$out" | ${=ZPWR_COPY_CMD}
