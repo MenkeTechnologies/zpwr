@@ -1,12 +1,11 @@
 #!/usr/bin/env stryke
 
-use Env "@PATH"
 
 open(val $less, "|-", "less") or die $!
 val $exe_bat        = "bat"
-val $exe_bat_exists = @PATH |> grep { -x "$_/$exe_bat" }
+val $exe_bat_exists = @p |> grep { -x "$_/$exe_bat" }
 val $exe            = "pygmentize"
-val $exe_exists     = @PATH |> grep { -x "$_/$exe" }
+val $exe_exists     = @p |> grep { -x "$_/$exe" }
 val $colorizer      = $ENV{ZPWR_COLORIZER}
 var $PYGMENTIZE_COLOR = $ENV{ZPWR_PYGMENTIZE_COLOR}
 $PYGMENTIZE_COLOR =~ s/(\$\w+)/$1/eeg
