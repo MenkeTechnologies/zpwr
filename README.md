@@ -30,7 +30,7 @@ ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/
 ZPWR **invented the terminal-OS concept** -- the idea that a shell environment can be a coherent operating system for the command line, not a loose pile of dotfiles. It has no direct competitor because it is not in any existing category; it originated and defines a new one: the **dotfile super-OS**. Every adjacent tool covers exactly one of ZPWR's axes; none integrate all of them in a single installable system:
 
 - **Verb-dispatcher mega-CLI** -- `zpwr <verb>` exposing a discoverable, menucompleted command vocabulary spanning the whole environment.
-- **Full-stack curated cockpit** -- zsh + ztmux + fzf + vim/neovim + spacemacs wired together as one coherent machine, not a pile of configs.
+- **Full-stack curated cockpit** -- zsh + ztmux + fzf + zemacs wired together as one coherent machine, not a pile of configs.
 - **Scale** -- thousands of aliases, tens of thousands of completions, thousands of functions, and a custom env-var control plane, all in one repo.
 - **Single-author, single-install OS** -- one `curl` jacks the entire stack in.
 
@@ -46,7 +46,7 @@ The landscape splits cleanly along these axes, and each rival owns only one:
 
 Closest by spirit -- the famous personal dotfiles repos -- top out at curated configs with a `bin/` of scripts. None expose a namespaced `<tool> <verb>` dispatcher of this breadth, and none ship the full multi-tool cockpit at this scale. ZPWR is the only thing that is simultaneously a verb-CLI, a full-stack terminal environment, and a single-author OS. Category of one.
 
-The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) -- ZPWR's original fork point, and a similar concept in seed form. Dotmatrix is dotfiles for provisioning a dev machine: shell/git/vim/ztmux configs plus `hr`, a subcommand utility for developer tasks. ZPWR took that seed to *terminal-OS breadth* -- a verb-dispatcher spanning the entire environment (not just dev chores), a fully wired zsh + ztmux + vim/neovim + fzf + spacemacs cockpit, an env-var control plane, and completions at corpus scale. The novelty is not "a shell with a helper command" -- that predecessor existed and is credited here -- it is configuring **every aspect of the terminal as one coherent OS**. That is what ZPWR originated.
+The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) -- ZPWR's original fork point, and a similar concept in seed form. Dotmatrix is dotfiles for provisioning a dev machine: shell/git/vim/ztmux configs plus `hr`, a subcommand utility for developer tasks. ZPWR took that seed to *terminal-OS breadth* -- a verb-dispatcher spanning the entire environment (not just dev chores), a fully wired zsh + ztmux + zemacs + fzf + spacemacs cockpit, an env-var control plane, and completions at corpus scale. The novelty is not "a shell with a helper command" -- that predecessor existed and is credited here -- it is configuring **every aspect of the terminal as one coherent OS**. That is what ZPWR originated.
 
 ---
 
@@ -237,10 +237,11 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 
 ## ZPWR Firmware Stack
-- zsh
+- zshrs
 - ztmux
-- neovim with 79 plugins and python3/node support
+- zemacs
 - stryke
+- zterminal
 - bash (4.0+, 3.2 not supported)
 - zinit with 48 plugins of which 33 are custom
 - upstream powerlevel10k zsh prompt with ~dirs via cached hash dirs and prompt_dir override
