@@ -18,7 +18,7 @@
 
 ![tmux final](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
 
-ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface — autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a tmux cockpit that turns your terminal into a multi-pane command center. Began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix); evolved into a sprawling cyberdeck OS for the command line. Will be migrating to [zshrs](https://github.com/MenkeTechnologies/zshrs) — a next-gen, highly parallel login shell designed as a drop-in replacement for zsh. If your terminal isn't glowing, you're not running ZPWR.
+ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface — autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a ztmux cockpit that turns your terminal into a multi-pane command center. Began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix); evolved into a sprawling cyberdeck OS for the command line. Will be migrating to [zshrs](https://github.com/MenkeTechnologies/zshrs) — a next-gen, highly parallel login shell designed as a drop-in replacement for zsh. If your terminal isn't glowing, you're not running ZPWR.
 
 ### [`Read the Docs`](https://menketechnologies.github.io/zpwr/) &middot; [`Engineering Report`](https://menketechnologies.github.io/zpwr/report.html) · [`strykelang`](https://github.com/MenkeTechnologies/strykelang) · [`zshrs`](https://github.com/MenkeTechnologies/zshrs) · [`zsh-more-completions`](https://github.com/MenkeTechnologies/zsh-more-completions)
 
@@ -30,7 +30,7 @@ ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/
 ZPWR **invented the terminal-OS concept** -- the idea that a shell environment can be a coherent operating system for the command line, not a loose pile of dotfiles. It has no direct competitor because it is not in any existing category; it originated and defines a new one: the **dotfile super-OS**. Every adjacent tool covers exactly one of ZPWR's axes; none integrate all of them in a single installable system:
 
 - **Verb-dispatcher mega-CLI** -- `zpwr <verb>` exposing a discoverable, menucompleted command vocabulary spanning the whole environment.
-- **Full-stack curated cockpit** -- zsh + tmux + fzf + vim/neovim + spacemacs wired together as one coherent machine, not a pile of configs.
+- **Full-stack curated cockpit** -- zsh + ztmux + fzf + vim/neovim + spacemacs wired together as one coherent machine, not a pile of configs.
 - **Scale** -- thousands of aliases, tens of thousands of completions, thousands of functions, and a custom env-var control plane, all in one repo.
 - **Single-author, single-install OS** -- one `curl` jacks the entire stack in.
 
@@ -46,7 +46,7 @@ The landscape splits cleanly along these axes, and each rival owns only one:
 
 Closest by spirit -- the famous personal dotfiles repos -- top out at curated configs with a `bin/` of scripts. None expose a namespaced `<tool> <verb>` dispatcher of this breadth, and none ship the full multi-tool cockpit at this scale. ZPWR is the only thing that is simultaneously a verb-CLI, a full-stack terminal environment, and a single-author OS. Category of one.
 
-The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) -- ZPWR's original fork point, and a similar concept in seed form. Dotmatrix is dotfiles for provisioning a dev machine: shell/git/vim/tmux configs plus `hr`, a subcommand utility for developer tasks. ZPWR took that seed to *terminal-OS breadth* -- a verb-dispatcher spanning the entire environment (not just dev chores), a fully wired zsh + tmux + vim/neovim + fzf + spacemacs cockpit, an env-var control plane, and completions at corpus scale. The novelty is not "a shell with a helper command" -- that predecessor existed and is credited here -- it is configuring **every aspect of the terminal as one coherent OS**. That is what ZPWR originated.
+The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) -- ZPWR's original fork point, and a similar concept in seed form. Dotmatrix is dotfiles for provisioning a dev machine: shell/git/vim/ztmux configs plus `hr`, a subcommand utility for developer tasks. ZPWR took that seed to *terminal-OS breadth* -- a verb-dispatcher spanning the entire environment (not just dev chores), a fully wired zsh + ztmux + vim/neovim + fzf + spacemacs cockpit, an env-var control plane, and completions at corpus scale. The novelty is not "a shell with a helper command" -- that predecessor existed and is credited here -- it is configuring **every aspect of the terminal as one coherent OS**. That is what ZPWR originated.
 
 ---
 
@@ -62,7 +62,7 @@ The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/d
 - [Unplug](#unplug) -- Clean Removal
 - [Glyph Firmware](#glyph-firmware-font) -- Font Setup
 - [Patching In](#patching-in) -- Updates
-- [Tmux Prefix](#tmux-prefix----the-activation-key) -- The Activation Key
+- [Ztmux Prefix](#tmux-prefix----the-activation-key) -- The Activation Key
 - [Vim Autosave](#autosaving-vim-plugins----persistent-memory) -- Persistent Memory
 - [Auto Display Completion Choices](#auto-list-completions) -- Predictive Input
 - [Bypass Space Expansion](#bypassing-expansion-on-space) -- Override Expansion
@@ -107,7 +107,7 @@ The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/d
 - [Raspberry Pi Screenshots](#running-on-the-raspberry-pi-3)
 - [Rock64 Screenshots](#running-on-the-rock64)
 - [KeyBindings](#neural-mappings----keybindings-generated-with-source-keybindingstoreadmezsh--readmemd) -- Neural Mappings
-- [Tmux Keybindings](#tmux-keybindings-tmux-lsk)
+- [Ztmux Keybindings](#tmux-keybindings-tmux-lsk)
 - [Zsh Vim Insert Mode](#zsh-vim-insert-mode-keybindings-bindkey--m-viins--l)
 - [Zsh Vim Normal Mode](#zsh-vim-normal-mode-keybindings-bindkey--m-vicmd--l)
 - [Zsh Vim MenuSelect Mode](#zsh-menuselect-mode-keybindings-bindkey--m-menuselect--l)
@@ -143,7 +143,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
     Options:
         -a  Install all dependencies
         -c  Copy just configs
-        -n  Do not start tmux at end of installer
+        -n  Do not start ztmux at end of installer
         -s  Skip main section
         -h  Display this message
         -V  Display script version
@@ -176,11 +176,11 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - heavily colorized man pages [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals) -- manpages that glow
 - insert matching quotes, brackets and parentheses like most IDEs [zsh-autopair](https://github.com/hlissner/zsh-autopair)
 - custom keybinding to open files most recently edited based on viminfo and emacs recentf and placed into fzf for fuzzy searching `zpwr vimrecent` -- time travel through your edit history
-- vim keybindings (insert, normal and visual modes) to run current code file open in vim in tmux pane to right -- write and execute in one fluid motion
-- vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
-- vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
+- vim keybindings (insert, normal and visual modes) to run current code file open in vim in ztmux pane to right -- write and execute in one fluid motion
+- vim keybindings (insert, normal and visual modes) to run current vim selection in ztmux pane to right as standalone script
+- vim keybindings (insert, normal and visual modes) to run current vim selection in ztmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF.*OPTS env vars -- x-ray vision for archives
-- ergonomic, repeating tmux keybindings for next and previous windows
+- ergonomic, repeating ztmux keybindings for next and previous windows
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimfilesearch`
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimwordsearch`
 - zsh keybindings to fzf search of network processes with lsof return PIDs `zpwr lsof` -- scan the local net like a deck jockey
@@ -198,7 +198,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zle keybinding formats newlines and spaces before saving to mysql learning database [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - zsh plugins loading based on OS
 - zsh functions autoloading based on OS
-- tmux keybindings and scripts based on OS
+- ztmux keybindings and scripts based on OS
 - custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `$ZPWR_INSTALL/zpwrInstall.sh` run
 - custom banners when new shell is launched `ZPWR_BANNER_COMMAND`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
@@ -212,7 +212,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh keybindings to git add, commit and push with commit message from current command line [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - git commit blacklisted directories [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zle quote swapper widget
-- zsh, tmux and vim keybindings to copy/paste to system clipboard
+- zsh, ztmux and vim keybindings to copy/paste to system clipboard
 - shell function to pull down latest code changes from this repo with `zpwr update`
 - shell function that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips with `zpwr cat` or `c`
 - shell function uses same shell code to generate output that default FZF preview pane does with `zpwr cat` or `c`
@@ -220,8 +220,8 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - shell function that cds to any of parent directories with zsh completion with `zpwr cdup` or `r`
 - zpwrClearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color-coded, grouped zpwrClearList zsh completion
-- search google from tmux mouse drag selection (tmux's copy-mode-vi) -- highlight text, query the net
-- open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi) -- drag to launch
+- search google from ztmux mouse drag selection (ztmux's copy-mode-vi) -- highlight text, query the net
+- open URLs and files from ztmux mouse drag selection (ztmux's copy-mode-vi) -- drag to launch
 - zpwr subcommands count with `zpwr verbscount`
 - zpwr subcommands into fzf then execed with `zpwr verbs`
 - zpwr subcommands into fzf with `zpwr verbsedit` then onto command line
@@ -238,7 +238,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 ## ZPWR Firmware Stack
 - zsh
-- tmux
+- ztmux
 - neovim with 79 plugins and python3/node support
 - stryke
 - bash (4.0+, 3.2 not supported)
@@ -268,7 +268,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - bottom
 - lolcat
 - python3
-- powerliners for tmux
+- powerliners for ztmux
 - vim-airline status bar
 - grc
 - mycli
@@ -344,7 +344,7 @@ OR
 ```sh
 rm -rf ~/.zpwr
 ```
-This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, tmux plugins and zsh plugins.
+This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, ztmux plugins and zsh plugins.
 You must remove these manually if desired.
 If desired you can also uninstall zinit with ```rm -rf ~/.zinit```.  Make sure `~/.zshrc` and other config files in `$HOME` are original versions.
 
@@ -360,15 +360,15 @@ The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Sym
 `zpwr update` pulls the latest changes from this repository into `~/.zpwr`, relinks all config files and updates all zsh plugins.
 It invokes `zpwr regenconfiglinks` (`zpwrLinkConf`) which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` and other config files into `$HOME`.
 
-## Tmux Prefix -- The Activation Key
-The default tmux prefix key is C-a (control-a) on macOS so one can control inner tmux sessions (nested sessions into remote machines) on Linux/UNIX (prefix is C-b) separately.
+## Ztmux Prefix -- The Activation Key
+The default ztmux prefix key is C-a (control-a) on macOS so one can control inner ztmux sessions (nested sessions into remote machines) on Linux/UNIX (prefix is C-b) separately.
 To invoke C-a in the shell press C-a twice or to invoke C-b press C-b twice.
-The left most segment of the tmux powerline status bar lights up when the prefix is active and goes dark when deactivated.
+The left most segment of the ztmux powerline status bar lights up when the prefix is active and goes dark when deactivated.
 You change the prefixes in `~/.zpwr/local/.tokens.sh` with these environment variables.
 ```sh
-# the tmux prefix on mac
+# the ztmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
-# the tmux prefix on linux
+# the ztmux prefix on linux
 export ZPWR_TMUX_PREFIX_LINUX='C-b'
 ```
 
@@ -432,7 +432,7 @@ export ZPWR_COLORS=false
 export ZPWR_COLORS_SECTIONS=false
 ```
 
-## Supported Runtimes -- Running script from vim in tmux right pane
+## Supported Runtimes -- Running script from vim in ztmux right pane
 > ~/.vimrc
 ```vim
     let supportedTypes=['sh','zsh', 'cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
@@ -440,9 +440,9 @@ export ZPWR_COLORS_SECTIONS=false
 
 File ending of currently edited file in vim determines the interpreter used by the bash script `$ZPWR_SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
-## Tmux Main Window -- The Cockpit
-The main window shown in the screenshots is started by prefix-D in an empty tmux window.  This sources `~/.zpwr/tmux/control-window.conf`.
-Alternatively invoke by prefix-: `source-file ~/.zpwr/tmux/control-window.conf` or from the terminal with `tmux source-file ~/.zpwr/tmux/control-window.conf` in an empty tmux pane.
+## Ztmux Main Window -- The Cockpit
+The main window shown in the screenshots is started by prefix-D in an empty ztmux window.  This sources `~/.zpwr/tmux/control-window.conf`.
+Alternatively invoke by prefix-: `source-file ~/.zpwr/tmux/control-window.conf` or from the terminal with `tmux source-file ~/.zpwr/tmux/control-window.conf` in an empty ztmux pane.
 
 ## Personal Config -- Your Identity File
 Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup -- put your custom code and overrides here.  This file survives `zpwr update`.  You can override installer variables in this file before install.  Because this file is sourced by bash installer and zsh startup you should check if the shell is zsh before any zsh only features like `zpwrIsZsh && myZshConfig`.  `~/.zpwr/local/.tokens-post.sh` is sourced after all zsh config and zinit startup -- the final layer of customization.
@@ -471,13 +471,13 @@ man zpwr        # quick reference
 man zpwrall     # comprehensive meta-page
 ```
 
-`zpwr(1)` is the quick reference: dispatcher overview, `-h`/`-V` flags, a curated verb catalog (diagnostics, profiling, history analytics, snapshot/restore, cache management, navigation, eye-candy, tmux), key environment variables, files, and runnable examples.
+`zpwr(1)` is the quick reference: dispatcher overview, `-h`/`-V` flags, a curated verb catalog (diagnostics, profiling, history analytics, snapshot/restore, cache management, navigation, eye-candy, ztmux), key environment variables, files, and runnable examples.
 
 `zpwrall(1)` is the comprehensive meta-page -- the equivalent of `zshall(1)` for ZPWR.  It contains:
 - the full alphabetic catalog of all 504 dispatcher verbs with their underlying commands,
-- every documented `ZPWR_*` environment variable grouped by purpose (banner, auto-behaviors, colors, expansion, logging, editor, tmux, plugins, paths),
+- every documented `ZPWR_*` environment variable grouped by purpose (banner, auto-behaviors, colors, expansion, logging, editor, ztmux, plugins, paths),
 - the canonical install layout and per-directory purpose,
-- tmux prefix, key bindings, and synced-pane semantics,
+- ztmux prefix, key bindings, and synced-pane semantics,
 - zsh keymap layout and the keybinding search verbs,
 - caching and compilation surfaces (`.zwc`, ctags, gtags, env cache, git repo cache),
 - log levels and destinations,
@@ -508,7 +508,7 @@ These are the environment variables in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/e
 # More Environment Variables in ~/.zpwr/env/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
-# linux OS SSH auto attach to tmux sessions
+# linux OS SSH auto attach to ztmux sessions
 export ZPWR_AUTO_ATTACH=true
 # list completion choices automatically
 export ZPWR_AUTO_COMPLETE=false
@@ -625,7 +625,7 @@ export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 # zpwrLogColor function message color
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
-# when true vim normal mode C-V mapped to exec current file in right tmux pane
+# when true vim normal mode C-V mapped to exec current file in right ztmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # the marker found color in bat output into fzf from ag search ANSI codes
 export ZPWR_MARKER_COLOR='0;1;4;37;44m'
@@ -659,7 +659,7 @@ export ZPWR_SEND_KEYS_FULL=false
 # how long to sleep after display of counts in zpwr display of all
 export ZPWR_LOOK_TIME=5
 # set to comma separated list of pane numbers
-# to activate sending to numbered tmux panes
+# to activate sending to numbered ztmux panes
 export ZPWR_SEND_KEYS_PANE=-1
 # typing leading quote, paren, bracket inserts trailing after caret
 export ZPWR_SURROUND=true
@@ -667,11 +667,11 @@ export ZPWR_SURROUND=true
 export ZPWR_TABSTOP=__________
 # include tabstop aliases
 export ZPWR_TABSTOP_ALIASES=true
-# the tmux prefix on mac
+# the ztmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
-# the tmux prefix on linux
+# the ztmux prefix on linux
 export ZPWR_TMUX_PREFIX_LINUX='C-b'
-# the tmux copy mode history limit
+# the ztmux copy mode history limit
 export ZPWR_TMUX_HISTORY_LIMIT=30000
 # turns on set -x in critical regions
 export ZPWR_TRACE=false
@@ -683,7 +683,7 @@ export ZPWR_BINDKEY_VI=true
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 # username for zdharma
 export ZPWR_ZDHARMA="zdharma-continuum"
-# regex for tmux thumbs
+# regex for ztmux thumbs
 export ZPWR_THUMBS_REGEX='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
 ((?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,})(?::.*)?'
 # store tty for prompt, set from zsh $TTY after p10k finalize
@@ -751,9 +751,9 @@ zpwrEvalIfNeeded ZPWR_TMUXRC "$ZPWR_TMUXRC" "$ZPWR_INSTALL/.tmux.conf" "$ZPWR_IN
 zpwrEvalIfNeeded ZPWR_VIMRC "$ZPWR_VIMRC" "$ZPWR_INSTALL/.vimrc" "$ZPWR_INSTALL"
 # user ideavimrc file
 zpwrEvalIfNeeded ZPWR_IDEAVIMRC "$ZPWR_IDEAVIMRC" "$ZPWR_INSTALL/.ideavimrc" "$ZPWR_INSTALL"
-# zpwr tmux config files
+# zpwr ztmux config files
 zpwrEvalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/tmux" "$ZPWR"
-# zpwr tmux git ignored files
+# zpwr ztmux git ignored files
 zpwrEvalIfNeeded ZPWR_TMUX_LOCAL "$ZPWR_TMUX_LOCAL" "$ZPWR_TMUX/local" "$ZPWR_TMUX"
 # the base path for zsh temp
 zpwrEvalIfNeeded TMPPREFIX "$TMPPREFIX" "$ZPWR_LOCAL/.temp/zsh" "$ZPWR_LOCAL"
@@ -806,7 +806,7 @@ zpwrEvalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_LOCAL_TEMP/.temp$$-4$US
 zpwrEvalIfNeeded ZPWR_TEMPFILE_PROCESSED "$ZPWR_TEMPFILE_PROCESSED" "$ZPWR_LOCAL_TEMP/.temp$$-processed$USER" "$ZPWR_LOCAL_TEMP" "$USER"
 # SQL temp files for use with learning collection
 zpwrEvalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER.sql" "$ZPWR_LOCAL_TEMP" "$USER"
-# last tmux window text capture
+# last ztmux window text capture
 zpwrEvalIfNeeded ZPWR_TMUX_CAPTURE "$ZPWR_TMUX_CAPTURE" "$ZPWR_TMUX_LOCAL/tmux-capture-$$-$USER" "$ZPWR_TMUX_LOCAL" "$USER"
 # socket for IPC
 zpwrEvalIfNeeded ZPWR_SOCKET "$ZPWR_SOCKET" "$ZPWR_LOCAL_TEMP/.temp-$USER-socket" "$ZPWR_LOCAL_TEMP" "$USER"
@@ -872,7 +872,7 @@ zpwr bench 20      # 20 iterations for stable p99
 Baselines and history are stored in `$ZPWR_LOCAL/zpwr-bench-baseline.txt` and `$ZPWR_LOCAL/zpwr-bench-history.txt`.
 
 ## Environment Snapshots -- zpwr snapshot / zpwr restore
-`zpwr snapshot [name]` captures the full terminal environment into a portable snapshot stored in `$ZPWR_LOCAL/snapshots/`.  Each snapshot captures: named directories (`hash -d`), aliases (regular, global, suffix), environment variables, ZPWR_VARS, shell history, directory stack, git repo status, tmux sessions/windows/panes with tmux-resurrect integration, and vim session files.
+`zpwr snapshot [name]` captures the full terminal environment into a portable snapshot stored in `$ZPWR_LOCAL/snapshots/`.  Each snapshot captures: named directories (`hash -d`), aliases (regular, global, suffix), environment variables, ZPWR_VARS, shell history, directory stack, git repo status, ztmux sessions/windows/panes with tmux-resurrect integration, and vim session files.
 
 ```sh
 zpwr snapshot -h                    # cyberpunk help
@@ -887,7 +887,7 @@ zpwr restore myproject aliases env  # restore only specific components
 Available restore components: `hash`, `aliases`, `env`, `tmux`, `vim`, `history`, `dirs`.  Tmux restore stages the resurrect file -- press `prefix+Ctrl-r` to apply.  History is merged rather than overwritten.
 
 ## Live Dashboard -- zpwr top
-`zpwr top [interval]` displays a live-updating dashboard of shell resource usage.  Shows memory (RSS with bar graph, virtual memory), history size, child processes, jobs, zle widgets, hooks, shell objects (functions, completions, aliases, commands, builtins, parameters, modules) with delta tracking between refreshes, loaded zsh modules, paths, git status, tmux session counts, top 5 largest functions with size bars, and top 5 longest PATH entries.  Includes sparkline graphs: startup time history (last 40 shell starts, color-coded green/yellow/red with min/max/avg stats) and commit velocity (commits per day over last 30 days).  Startup times are automatically logged to `$ZPWR_LOCAL/startup_history.log` on each shell init.  Runs in an alternate screen buffer -- press `q` to quit cleanly.
+`zpwr top [interval]` displays a live-updating dashboard of shell resource usage.  Shows memory (RSS with bar graph, virtual memory), history size, child processes, jobs, zle widgets, hooks, shell objects (functions, completions, aliases, commands, builtins, parameters, modules) with delta tracking between refreshes, loaded zsh modules, paths, git status, ztmux session counts, top 5 largest functions with size bars, and top 5 longest PATH entries.  Includes sparkline graphs: startup time history (last 40 shell starts, color-coded green/yellow/red with min/max/avg stats) and commit velocity (commits per day over last 30 days).  Startup times are automatically logged to `$ZPWR_LOCAL/startup_history.log` on each shell init.  Runs in an alternate screen buffer -- press `q` to quit cleanly.
 
 ```sh
 zpwr top -h    # cyberpunk help
@@ -897,7 +897,7 @@ zpwr top 1     # fast refresh
 ```
 
 ## Tmux Layout Save/Load -- zpwr tmuxsave / zpwr tmuxload
-`zpwr tmuxsave [name]` captures the current tmux session layout — windows, pane splits, layout geometry, working directories, and window names — into a self-contained zsh script in `$ZPWR_LOCAL/layouts/`.  The generated script recreates the exact layout via `tmux new-session`, `split-window`, and `select-layout` with the original geometry string, then `cd`s each pane to its saved directory.  `zpwr tmuxload [name]` sources the script to restore the layout, with optional fzf picker when no name is given.  Also available as `zpwr layoutsave` and `zpwr layoutload`.
+`zpwr tmuxsave [name]` captures the current ztmux session layout — windows, pane splits, layout geometry, working directories, and window names — into a self-contained zsh script in `$ZPWR_LOCAL/layouts/`.  The generated script recreates the exact layout via `ztmux new-session`, `split-window`, and `select-layout` with the original geometry string, then `cd`s each pane to its saved directory.  `zpwr tmuxload [name]` sources the script to restore the layout, with optional fzf picker when no name is given.  Also available as `zpwr layoutsave` and `zpwr layoutload`.
 
 ```sh
 zpwr tmuxsave              # save with timestamp name
@@ -1173,7 +1173,7 @@ Moving scripts from `$ZPWR_SCRIPTS` (`~/.zpwr/scripts`) and `$ZPWR_TMUX` (`~/.zp
 
 ## Neural Mappings -- Keybindings generated with `source keybindingsToREADME.zsh >> README.md`
 
-# Tmux keybindings (tmux lsk)
+# Tmux keybindings (ztmux lsk)
 - ``` bind-key    -T copy-mode    C-Space              send-keys -X begin-selection ```
 - ``` bind-key    -T copy-mode    C-a                  send-keys -X start-of-line ```
 - ``` bind-key    -T copy-mode    C-b                  send-keys -X cursor-left ```
