@@ -99,7 +99,7 @@ function zpwrTmuxSave(){
     local -a pane_paths pane_cmds pane_acts pane_pids
     local -a session_opts window_opts
     local -i wi pi pane_count active_win=0
-    session_name=$(tmux display-message -p '#{session_name}')
+    session_name=$($ZPWR_ZTMUX display-message -p '#{session_name}')
 
     # capture session-level options that differ from defaults
     session_opts=()

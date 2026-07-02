@@ -46,8 +46,8 @@ if [[ -z "$ZPWR_TEMPFILE4" ]]; then
     ZPWR_TEMPFILE4="/tmp/.temp$$-4"
 fi
 {
-    echo "# Tmux keybindings (tmux lsk)"
-    tmux lsk
+    echo "# Tmux keybindings ($ZPWR_ZTMUX lsk)"
+    $ZPWR_ZTMUX lsk
 
     echo "# Zsh Vim Insert Mode keybindings (bindkey -M viins -L)"
     bindkey -M viins -L

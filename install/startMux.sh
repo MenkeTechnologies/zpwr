@@ -15,6 +15,12 @@ fi
 
 source common.sh
 
+# ZPWR_ZTMUX was resolved at installer start, before cargo installed ztmux.
+# Now that the install finished, prefer ztmux if it landed on PATH.
+if command -v ztmux >/dev/null 2>&1; then
+    ZPWR_ZTMUX=ztmux
+fi
+
 $ZPWR_ZTMUX new-session -s zpwr -d
 $ZPWR_ZTMUX send-keys -t zpwr q C-h
 $ZPWR_ZTMUX send-keys -t zpwr "$ZPWR_ZTMUX source-file $ZPWR_TMUX/control-window.conf; $ZPWR_ZTMUX select-pane -t zpwr:0.4; $ZPWR_ZTMUX send-keys 'cmatrix -C blue -abs' C-m" C-m
