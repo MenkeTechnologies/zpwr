@@ -62,13 +62,13 @@ The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/d
 - [Unplug](#unplug) -- Clean Removal
 - [Glyph Firmware](#glyph-firmware-font) -- Font Setup
 - [Patching In](#patching-in) -- Updates
-- [Ztmux Prefix](#tmux-prefix----the-activation-key) -- The Activation Key
+- [Ztmux Prefix](#ztmux-prefix----the-activation-key) -- The Activation Key
 - [Vim Autosave](#autosaving-vim-plugins----persistent-memory) -- Persistent Memory
 - [Auto Display Completion Choices](#auto-list-completions) -- Predictive Input
 - [Bypass Space Expansion](#bypassing-expansion-on-space) -- Override Expansion
 - [Turning Off Ponies And Colors](#turning-off-ponies-default-is-off-and-colors-globally----kill-the-neon) -- Kill The Neon
-- [Vim Language Support](#supported-runtimes----running-script-from-vim-in-tmux-right-pane) -- Supported Runtimes
-- [Main Window](#tmux-main-window----the-cockpit) -- The Cockpit
+- [Vim Language Support](#supported-runtimes----running-script-from-vim-in-ztmux-right-pane) -- Supported Runtimes
+- [Main Window](#ztmux-main-window----the-cockpit) -- The Cockpit
 - [Personal Config](#personal-config----your-identity-file) -- Your Identity File
 - [ZPWR Verbs](#zpwr-verbs) -- Command Vocabulary
 - [Man Page](#man-page----man-zpwr-and-man-zpwrall) -- `man zpwr` and `man zpwrall`
@@ -107,7 +107,7 @@ The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/d
 - [Raspberry Pi Screenshots](#running-on-the-raspberry-pi-3)
 - [Rock64 Screenshots](#running-on-the-rock64)
 - [KeyBindings](#neural-mappings----keybindings-generated-with-source-keybindingstoreadmezsh--readmemd) -- Neural Mappings
-- [Ztmux Keybindings](#tmux-keybindings-tmux-lsk)
+- [Ztmux Keybindings](#tmux-keybindings-ztmux-lsk)
 - [Zsh Vim Insert Mode](#zsh-vim-insert-mode-keybindings-bindkey--m-viins--l)
 - [Zsh Vim Normal Mode](#zsh-vim-normal-mode-keybindings-bindkey--m-vicmd--l)
 - [Zsh Vim MenuSelect Mode](#zsh-menuselect-mode-keybindings-bindkey--m-menuselect--l)
