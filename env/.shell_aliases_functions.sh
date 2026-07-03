@@ -155,6 +155,24 @@ if [[ "$PATH" != *"$ZPWR_SCRIPTS"* ]]; then
 fi
 #}}}
 
+#{{{                    MARK:Editor/multiplexer detection
+#**************************************************************
+# must run after the PATH block above so the homebrew bin dir and ~/.cargo/bin
+# (where zemacs/ztmux install) are on PATH. .zpwr_env.sh sets the static vim/tmux
+# defaults; here they are upgraded to zemacs/nvim and ztmux by command-exists.
+# tokens files are sourced afterwards, so a tokens pin still wins.
+# the fzf-driven editor widgets/verbs: prefer zemacs, else nvim, else vim default
+if zpwrCommandExists zemacs; then
+    export ZPWR_ZEMACS='zemacs'
+elif zpwrCommandExists nvim; then
+    export ZPWR_ZEMACS='nvim'
+fi
+# prefer ztmux (the drop-in Rust multiplexer), else the tmux default
+if zpwrCommandExists ztmux; then
+    export ZPWR_ZTMUX='ztmux'
+fi
+#}}}***********************************************************
+
 
 #{{{                    MARK:Shell functions
 #**************************************************************

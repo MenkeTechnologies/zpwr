@@ -83,17 +83,12 @@ export ZPWR_DEFAULT_OMZ_THEME=simonoff
 export ZPWR_DELIMITER_CHAR='%'
 # the default vim command, override in tokens file
 export ZPWR_VIM='nvim'
-# the editor opened by the fzf-driven editor widgets/verbs; prefer zemacs, fall
-# back to neovim then vim. override in tokens file to pin a specific editor
-if [[ -z "$ZPWR_ZEMACS" ]]; then
-    if command -v zemacs >/dev/null 2>&1; then
-        export ZPWR_ZEMACS='zemacs'
-    elif command -v nvim >/dev/null 2>&1; then
-        export ZPWR_ZEMACS='nvim'
-    else
-        export ZPWR_ZEMACS='vim'
-    fi
-fi
+# the editor opened by the fzf-driven editor widgets/verbs; static default is
+# vim, upgraded to zemacs (else nvim) in .shell_aliases_functions.sh once PATH
+# is assembled -- zemacs lives in the homebrew bin dir / ~/.cargo/bin, not on
+# PATH yet while this static init file is sourced. override in tokens file to
+# pin a specific editor
+export ZPWR_ZEMACS='vim'
 # set EDITOR to $ZPWR_VIM command
 export ZPWR_EDITOR_TO_VIM='true'
 # the emacs command
@@ -184,16 +179,12 @@ export ZPWR_SURROUND=true
 export ZPWR_TABSTOP=__________
 # include tabstop aliases
 export ZPWR_TABSTOP_ALIASES=true
-# the tmux command used by all zpwr aliases/functions/widgets; prefer ztmux (the
-# drop-in Rust multiplexer), fall back to stock tmux. override in tokens file to
-# pin a specific binary
-if [[ -z "$ZPWR_ZTMUX" ]]; then
-    if command -v ztmux >/dev/null 2>&1; then
-        export ZPWR_ZTMUX='ztmux'
-    else
-        export ZPWR_ZTMUX='tmux'
-    fi
-fi
+# the tmux command used by all zpwr aliases/functions/widgets; static default
+# is tmux, upgraded to ztmux (the drop-in Rust multiplexer) in
+# .shell_aliases_functions.sh once PATH is assembled -- ztmux lives in the
+# homebrew bin dir / ~/.cargo/bin, not on PATH yet while this static init file
+# is sourced. override in tokens file to pin a specific binary
+export ZPWR_ZTMUX='tmux'
 # the tmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
 # the tmux prefix on linux
