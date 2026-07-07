@@ -7,6 +7,17 @@ function zpwrConvertToRelPath(){
     done
 }
 
+# list files with fd, falling back to find when fd is not installed.
+# callers pass fd flags + regex pattern first and the search path last, so the
+# find fallback keys off the last argument.
+function zpwrFdOrFind(){
+    if zpwrExists fd; then
+        ${=ZPWR_FD} "$@"
+    else
+        command find "${@[-1]}" -type f -follow 2>/dev/null
+    fi
+}
+
 
 function zpwrFzfFileSearch(){
 
@@ -21,19 +32,19 @@ function zpwrFzfFileSearch(){
         top=$(git rev-parse --show-toplevel)
         if [[ $PWD == $top ]]; then
             if git check-ignore -q . &>/dev/null; then
-                ${=ZPWR_FD} --no-ignore . ./ 2>/dev/null
+                zpwrFdOrFind --no-ignore . ./ 2>/dev/null
             else
-                ${=ZPWR_FD} . ./ 2>/dev/null
+                zpwrFdOrFind . ./ 2>/dev/null
             fi
         else
             if git check-ignore -q . &>/dev/null; then
-                ${=ZPWR_FD} --no-ignore . $top 2>/dev/null
+                zpwrFdOrFind --no-ignore . $top 2>/dev/null
             else
-                ${=ZPWR_FD} . $top 2>/dev/null
+                zpwrFdOrFind . $top 2>/dev/null
             fi | zpwrConvertToRelPath
         fi
     else
-        ${=ZPWR_FD} . ./ 2>/dev/null | cut -c3-
+        zpwrFdOrFind . ./ 2>/dev/null | cut -c3-
     fi | ${=filter} |
         eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" |
         stryke -ne 'chomp $_; print "\"$_\" "'
