@@ -86,6 +86,13 @@
       </div>
     </header>
 
+    <div class="hub-scheme-strip">
+      <div class="hub-scheme-strip-inner">
+        <span class="hud-scheme-label">// Color scheme</span>
+        <div class="scheme-grid" id="hudSchemeGrid"></div>
+      </div>
+    </div>
+
     <main class="tutorial-main">
 
       <!-- ═══════════════════════════════════════ -->
@@ -481,25 +488,9 @@
   </div>
 
   <script>
-    const html = document.documentElement;
-    const btnTheme = document.getElementById('btnTheme');
-    const btnCrt = document.getElementById('btnCrt');
-    const btnNeon = document.getElementById('btnNeon');
-    const crtH = document.getElementById('crtH');
-    const crtV = document.getElementById('crtV');
-    btnTheme?.addEventListener('click', () => {
-      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
-    });
-    btnCrt?.addEventListener('click', () => {
-      btnCrt.classList.toggle('active');
-      const on = btnCrt.classList.contains('active');
-      if (crtH) crtH.style.display = on ? '' : 'none';
-      if (crtV) crtV.style.display = on ? '' : 'none';
-    });
-    btnNeon?.addEventListener('click', () => {
-      btnNeon.classList.toggle('active');
-      document.querySelector('.app')?.classList.toggle('neon-off');
-    });
+    // Theme / CRT / neon / color-scheme chrome is wired centrally by
+    // the shared hud-theme.js below. Keep only the report-specific
+    // bar-fill grow animation here.
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.bar-fill').forEach(bar => {
         const w = bar.style.width;
@@ -508,5 +499,6 @@
       });
     });
   </script>
+  <script src="hud-theme.js"></script>
 </body>
 </html>
