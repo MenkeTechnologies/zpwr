@@ -1,7 +1,7 @@
 ```
  _______ _______ _  _  _ ______
 |____   |_____  | |  \| |_____/
-    /  / |_____] |_|\_| |    \_  v48.9.2
+    /  / |_____] |_|\_| |    \_  v48.9.3
 >>> JACK INTO THE GRID <<<
 ```
 
@@ -475,7 +475,7 @@ man zpwrall     # comprehensive meta-page
 `zpwr(1)` is the quick reference: dispatcher overview, `-h`/`-V` flags, a curated verb catalog (diagnostics, profiling, history analytics, snapshot/restore, cache management, navigation, eye-candy, ztmux), key environment variables, files, and runnable examples.
 
 `zpwrall(1)` is the comprehensive meta-page -- the equivalent of `zshall(1)` for ZPWR.  It contains:
-- the full alphabetic catalog of all 504 dispatcher verbs with their underlying commands,
+- the full alphabetic catalog of all 460 dispatcher verbs with their underlying commands,
 - every documented `ZPWR_*` environment variable grouped by purpose (banner, auto-behaviors, colors, expansion, logging, editor, ztmux, plugins, paths),
 - the canonical install layout and per-directory purpose,
 - ztmux prefix, key bindings, and synced-pane semantics,
