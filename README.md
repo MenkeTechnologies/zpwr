@@ -242,34 +242,34 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zemacs
 - stryke
 - zterminal
-- bash (4.0+, 3.2 not supported)
-- zinit with 48 plugins of which 33 are custom
-- upstream powerlevel10k zsh prompt with ~dirs via cached hash dirs and prompt_dir override
-- youcompleteme
-- ultisnips
-- supertab
-- pathogen
-- vundle
 - iftoprs
 - temprs
 - lsofrs
 - storageshower
 - htoprs
-- rust/cargo
-- rustup
 - eza
 - bat
 - fd-find
 - thumbs
 - ripgrep
+- grcrs
 - cargo-update
-- go
+- rust/cargo
+- rustup
+- powerliners for ztmux
 - fzf
+- bash (4.0+, 3.2 not supported)
+- zinit with 48 plugins of which 33 are custom
+- powerlevel10k zsh prompt with ~dirs via cached hash dirs and prompt_dir override
+- youcompleteme
+- ultisnips
+- supertab
+- pathogen
+- vundle
+- go
 - bottom
 - lolcat
 - python3
-- powerliners for ztmux
-- grc
 - mycli
 - pgcli
 - ponysay
