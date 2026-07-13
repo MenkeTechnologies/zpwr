@@ -255,7 +255,6 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - lsofrs
 - storageshower
 - htoprs
-- ccze
 - rust/cargo
 - rustup
 - eza
@@ -270,12 +269,10 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - lolcat
 - python3
 - powerliners for ztmux
-- vim-airline status bar
 - grc
 - mycli
 - pgcli
 - ponysay
-- pygments
 
 # Compatible Chassis:
 - macOS
