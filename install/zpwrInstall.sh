@@ -193,7 +193,7 @@ EOF
 # 17) zsh
 #etc
 
-dependencies_ary=(subversion openssl grc moreutils cmake tig hexedit boxes tal iperf vim tmux wget cowsay cmatrix htop bpython sl mutt \
+dependencies_ary=(subversion openssl moreutils cmake tig hexedit boxes tal iperf vim tmux wget cowsay cmatrix htop bpython sl mutt \
     screenfetch htop btop figlet zsh docker.io docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb jnettop iotop fping ctags texinfo lsof \
@@ -725,29 +725,10 @@ fi
 if [[ $justConfig != true ]]; then
     zpwrPrettyPrintBox "Installing IFTOP-color by MenkeTechnologies"
 
-    if ! zpwrCommandExists grc; then
-        zpwrGoInstallerOutputDir
-        zpwrPrettyPrintBox "Installing grc from source to $(pwd)"
-        git clone https://github.com/garabik/grc.git
-        if builtin cd grc; then
-            sudo bash zpwrInstall.sh
-        else
-            zpwrFail "could not cd to grc"
-        fi
-    fi
-
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
         zpwrPrettyPrintBox "Try again for ponysay on mac"
         zpwrCommandExists ponysay || brew install ponysay
     fi
-
-    zpwrPrettyPrintBox "Installing grc configuration for colorization...asking for passwd with sudo"
-    if [[ "$(uname)" == Darwin ]]; then
-        GRC_DIR=/usr/local/share/grc
-    else
-        GRC_DIR=/usr/share/grc
-    fi
-
 
     zpwrCommandExists ponysay || {
         zpwrGoInstallerOutputDir

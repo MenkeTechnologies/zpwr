@@ -157,7 +157,7 @@ brew install graphene
 brew install graphicsmagick
 brew install graphite2
 brew install graphviz
-brew install grc
+brew install grcrs
 brew install greed
 brew install grep
 brew install groonga

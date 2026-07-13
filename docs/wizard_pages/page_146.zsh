@@ -37,7 +37,7 @@ PAGE_CONTENT() {
     print "  ${B}${Y}GRC IN LOG COLORIZATION${N}"
     print "  ${D}  ${M}\$ZPWR_SCRIPTS/colorLogger.sh${N}${D} uses grc for system logs.${N}"
     print "  ${D}  tmux control windows show colorized live log output.${N}"
-    print "  ${B}${R}TIP:${N} ${D}If eza is missing and ls looks dull, install grc.${N}"
+    print "  ${B}${R}TIP:${N} ${D}If eza is missing and ls looks dull, install grcrs.${N}"
     print "  ${D}  It's the middle tier of zpwr's color fallback chain.${N}"
     print "  ${D}  One package, instant color for dozens of commands.${N}"
 }
