@@ -146,7 +146,7 @@ function zpwrBindAliasesLate(){
     if zpwrCommandExists systemctl; then
         alias sc="$ZPWR_FULL_SUDO systemctl"
         alias jcf="$ZPWR_FULL_SUDO journalctl -f"
-        alias jcfc='"builtin" command sudo -E env PATH="$PATH" journalctl -n 100 -f | ccze'
+        alias jcfc='"builtin" command sudo -E env PATH="$PATH" journalctl -n 100 -f | zcolorizer'
     fi
     #alias df='grc --colour=on -c "$HOME/conf.df" df'
     alias pip="'builtin' 'noglob' 'command' 'python3' -m pip" # allows square brackets for pip command invocation
@@ -205,7 +205,7 @@ function zpwrBindAliasesLate(){
         test -d "$HOME/.local/share/Trash" &&
             alias tra='cd $HOME/.local/share/Trash'
         if [[ "$ZPWR_OS_TYPE" == linux ]]; then
-            alias sjf='"builtin" command sudo -E env PATH="$PATH" journalctl -n 100 -f | ccze'
+            alias sjf='"builtin" command sudo -E env PATH="$PATH" journalctl -n 100 -f | zcolorizer'
             if zpwrExists pacman;then
                 alias api="$ZPWR_FULL_SUDO pacman -Sy --noconfirm"
                 alias apa="$ZPWR_FULL_SUDO pacman -Syyu --noconfirm --overwrite='*'"
@@ -239,8 +239,8 @@ function zpwrBindAliasesLate(){
         fi
     fi
     alias tclsh="rlwrap tclsh"
-    alias logs="$ZPWR_FULL_SUDO tail -f /var/log/**/*.log | ccze"
-    alias beats="$ZPWR_FULL_SUDO tail -f /var/log/*beat/* | ccze"
+    alias logs="$ZPWR_FULL_SUDO tail -f /var/log/**/*.log | zcolorizer"
+    alias beats="$ZPWR_FULL_SUDO tail -f /var/log/*beat/* | zcolorizer"
     alias matr="cmatrix -C blue -abs"
     #}}}***********************************************************
 

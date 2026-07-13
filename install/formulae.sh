@@ -50,7 +50,6 @@ brew install cairo
 brew install cassandra
 brew install catimg
 brew install ccrypt
-brew install ccze
 brew install chapel
 brew install chkrootkit
 brew install cjson
@@ -567,6 +566,7 @@ brew install xz
 brew install yamllint
 brew install yasm
 brew install zbar
+brew install zcolorizer
 brew install zeromq
 brew install zimg
 brew install zlib

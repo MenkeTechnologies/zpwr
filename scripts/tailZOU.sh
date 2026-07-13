@@ -73,7 +73,7 @@ fi
 
 #{{{                    MARK:Tail
 #**************************************************************
-if zpwrCommandExists ccze; then
+if zpwrCommandExists zcolorizer; then
     if [[ $color == no ]]; then
         {
         sudo tail -n $size -F \
@@ -94,7 +94,7 @@ if zpwrCommandExists ccze; then
             /var/log/openvpn/*.log \
             /var/log/zabbix*/*.log
 
-        } | ccze
+        } | zcolorizer
     fi
     {
     sudo tail -n $size -F \
@@ -105,7 +105,7 @@ if zpwrCommandExists ccze; then
         /var/log/openvpn/*.log \
         /var/log/zabbix*/*.log
 
-    } | ccze
+    } | zcolorizer
 else
     {
     sudo tail -n $size -F \

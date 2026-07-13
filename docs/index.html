@@ -614,7 +614,7 @@
 <li class="enc-toc-chapter"><a href="#ch42"><span class="enc-toc-num">CH 42</span> COLORIZATION STACK</a></li>
 <li class="enc-toc-section"><a href="#s146"><span class="enc-toc-num">§146</span> GRC: Generic Colorizer</a></li>
 <li class="enc-toc-section"><a href="#s147"><span class="enc-toc-num">§147</span> Ponysay, Lolcat &amp; ASCII Art</a></li>
-<li class="enc-toc-section"><a href="#s148"><span class="enc-toc-num">§148</span> GRC, ccze &amp; the Color Pipeline</a></li>
+<li class="enc-toc-section"><a href="#s148"><span class="enc-toc-num">§148</span> GRC, zcolorizer &amp; the Color Pipeline</a></li>
 <li class="enc-toc-chapter"><a href="#ch43"><span class="enc-toc-num">CH 43</span> HEALTH &amp; DIAGNOSTICS</a></li>
 <li class="enc-toc-section"><a href="#s149"><span class="enc-toc-num">§149</span> Startup Profile</a></li>
 <li class="enc-toc-section"><a href="#s150"><span class="enc-toc-num">§150</span> Shell Lint</a></li>
@@ -2060,24 +2060,24 @@ zpwr replay 20 preview</pre>
 <h3 class="enc-section-title"><span class="enc-section-num">§46</span>Log Surveillance</h3>
 <div class="enc-section-body">
 <h4 class="enc-h4">LOG SURVEILLANCE</h4>
-<p>// watching logs in glorious technicolor. the ccze way. //</p>
-<p>zpwr logs everything: startup, errors, plugin loads, debug messages. The taillog verb tails these logs with optional ccze colorization for maximum readability.</p>
+<p>// watching logs in glorious technicolor. the zcolorizer way. //</p>
+<p>zpwr logs everything: startup, errors, plugin loads, debug messages. The taillog verb tails these logs with optional zcolorizer colorization for maximum readability.</p>
 <h5 class="enc-h5">BASIC USAGE</h5>
 <pre class="enc-code">zpwr taillog                        # follow log with colors
 zpwr taillog -n 50                  # last 50 lines, then follow
 zpwr taillog -f                     # colorize without following
 zpwr taillog -r                     # raw output with line numbers</pre>
 <h5 class="enc-h5">THE FLAGS</h5>
-<p>-n, –lines N     Show last N lines before following -f, –no-follow   Just colorize, do not tail -f -r, –raw         No ccze, plain output with line numbers</p>
+<p>-n, –lines N     Show last N lines before following -f, –no-follow   Just colorize, do not tail -f -r, –raw         No zcolorizer, plain output with line numbers</p>
 <h5 class="enc-h5">CUSTOM LOGFILE</h5>
 <pre class="enc-code">zpwr taillog /var/log/system.log
 zpwr taillog /var/log/syslog</pre>
 <p>The last argument can be any logfile path. Default: $<strong>ZPWR_LOGFILE</strong> (the zpwr logfile).</p>
-<h5 class="enc-h5">CCZE: THE SECRET WEAPON</h5>
-<p>ccze is a log colorizer that understands dozens of log formats: syslog, Apache, Postfix, PHP, kernel messages, and more. It auto-detects the format and colorizes:</p>
+<h5 class="enc-h5">ZCOLORIZER: THE SECRET WEAPON</h5>
+<p>zcolorizer is a log colorizer that understands dozens of log formats: syslog, Apache, Postfix, PHP, kernel messages, and more. It auto-detects the format and colorizes:</p>
 <p>Timestamps     in one color warnings       in yellow errors         in red info           in cyan.</p>
 <pre class="enc-code">hostnames      in magenta</pre>
-<p>Install: brew install ccze  or  apt install ccze If ccze is not found, taillog falls back to plain output with a helpful install hint.</p>
+<p>Install: brew install zcolorizer If zcolorizer is not found, taillog falls back to plain output with a helpful install hint.</p>
 <h5 class="enc-h5">THE <strong>ZPWR</strong> LOGGING VERBS</h5>
 <p>Taillog consumes logs. These verbs produce them:</p>
 <pre class="enc-code">zpwr logdebug &lt;msg&gt;                 # debug level
@@ -2645,9 +2645,9 @@ wc -l ZPWR_LOGFILE           # how big is it?</pre>
 <h4 class="enc-h4">READING LOGS: THE ART OF LOG DIVING</h4>
 <p>Somewhere in that wall of text is the answer you seek.</p>
 <h5 class="enc-h5">zpwr taillog</h5>
-<p>Live tail of the <strong>ZPWR</strong> log file with ccze colorization. Watch events stream by in glorious technicolor.</p>
+<p>Live tail of the <strong>ZPWR</strong> log file with zcolorizer colorization. Watch events stream by in glorious technicolor.</p>
 <pre class="enc-code">zpwr taillog                # live colorized tail</pre>
-<p>ccze automatically highlights timestamps, levels, paths, and errors. Makes raw logs actually readable.</p>
+<p>zcolorizer automatically highlights timestamps, levels, paths, and errors. Makes raw logs actually readable.</p>
 <h5 class="enc-h5">WHAT TO LOOK FOR:</h5>
 <p>ERROR  lines = something broke, investigate immediately WARN   lines = potential issue, worth noting INFO   lines = normal operations, sanity check DEBUG  lines = details for troubleshooting.</p>
 <pre class="enc-code">TRACE  lines = deep internals, very verbose</pre>
@@ -2657,11 +2657,11 @@ grep -c ERROR ZPWR_LOGFILE  # count errors
 tail -100 ZPWR_LOGFILE      # last 100 lines</pre>
 <h5 class="enc-h5">TMUX LOG MONITORING SETUP:</h5>
 <p>Dedicate a tmux pane to zpwr taillog:</p>
-<p>1. Split pane: Ctrl-b % 2. In new pane: zpwr taillog 3. Work in other pane, watch logs stream 4. Errors glow red thanks to ccze</p>
+<p>1. Split pane: Ctrl-b % 2. In new pane: zpwr taillog 3. Work in other pane, watch logs stream 4. Errors glow red thanks to zcolorizer</p>
 <h5 class="enc-h5">LOG MAINTENANCE:</h5>
 <p>Logs grow forever if you let them. <strong>ZPWR</strong> handles rotation, but you can manually truncate:</p>
 <pre class="enc-code">: &gt; ZPWR_LOGFILE            # truncate to zero</pre>
-<p>// taillog + ccze = the cyberpunk log experience</p>
+<p>// taillog + zcolorizer = the cyberpunk log experience</p>
 <p>// errors in red, info in green, timestamps in cyan</p>
 </div></section>
 <section class="enc-section" id="s68">
@@ -4821,14 +4821,14 @@ done</pre>
 <p>Want to know which font made that gorgeous banner? zpwr taillog  and look for the font name. Found one you love? Set it permanently in your config. REALITY CHECK: A rainbow pony greeting you on every terminal open is either peak engineering or peak insanity. zpwr does not distinguish between the two. Your hostname, rendered in ASCII art, by a cartoon horse. This is what unlimited power looks like.</p>
 </div></section>
 <section class="enc-section" id="s148">
-<h3 class="enc-section-title"><span class="enc-section-num">§148</span>GRC, ccze &amp; the Color Pipeline</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§148</span>GRC, zcolorizer &amp; the Color Pipeline</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">GRC, CCZE &amp; THE COLOR PIPELINE</h4>
+<h4 class="enc-h4">GRC, ZCOLORIZER &amp; THE COLOR PIPELINE</h4>
 <p>Every byte of output deserves to be beautiful.</p>
 <h5 class="enc-h5">THE FULL COLORIZATION STACK</h5>
-<p>zpwr has a color tool for every type of output: FILE LISTING eza (color-scale, git status) -&gt; grc+ls -&gt; plain ls FILE VIEWING bat (syntax highlighting) -&gt; cat <strong>ZPWR_COLORIZER</strong>=bat in <strong>$ZPWR_ENV/.zpwr_env.sh</strong> LOG VIEWING ccze (log colorizer) -&gt; plain tail zpwrTailLog pipes $<strong>ZPWR_LOGFILE</strong> through ccze. GIT DIFFS delta (syntax-aware diff) -&gt; plain diff delta adds line numbers, word-level highlighting, and side-by-side view with Dracula theme.</p>
-<h5 class="enc-h5">CCZE: LOG FILE COLORIZER</h5>
-<p>ccze parses log formats and applies semantic colors: timestamps, severity levels, PIDs, IP addresses. zpwr taillog  uses ccze for colorized log tailing. System logs become readable at a glance.</p>
+<p>zpwr has a color tool for every type of output: FILE LISTING eza (color-scale, git status) -&gt; grc+ls -&gt; plain ls FILE VIEWING bat (syntax highlighting) -&gt; cat <strong>ZPWR_COLORIZER</strong>=bat in <strong>$ZPWR_ENV/.zpwr_env.sh</strong> LOG VIEWING zcolorizer (log colorizer) -&gt; plain tail zpwrTailLog pipes $<strong>ZPWR_LOGFILE</strong> through zcolorizer. GIT DIFFS delta (syntax-aware diff) -&gt; plain diff delta adds line numbers, word-level highlighting, and side-by-side view with Dracula theme.</p>
+<h5 class="enc-h5">ZCOLORIZER: LOG FILE COLORIZER</h5>
+<p>zcolorizer parses log formats and applies semantic colors: timestamps, severity levels, PIDs, IP addresses. zpwr taillog  uses zcolorizer for colorized log tailing. System logs become readable at a glance.</p>
 <h5 class="enc-h5">COLOR TESTING VERBS</h5>
 <p>zpwr colortest       test terminal basic 16 colors zpwr colortest256    test full 256-color palette zpwr pygmentcolors   show all pygment color schemes zpwr colorsdiff      colorized side-by-side diff Use these to verify your terminal supports the full palette.</p>
 <h5 class="enc-h5">THE FALLBACK PHILOSOPHY</h5>

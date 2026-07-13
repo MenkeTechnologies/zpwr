@@ -1067,18 +1067,18 @@ zpwr deps --dot > graph.dot        # graphviz export with cyberpunk colors
 The summary shows outgoing dependency counts (which functions call the most others) and incoming dependency counts (which functions are most depended on), with bar charts and totals.
 
 ## Colorized Log Viewer -- zpwr taillog
-`zpwr taillog [OPTIONS] [LOGFILE]` tails the zpwr logfile with ccze colorization.  Timestamps, log levels, process names, file paths, and keywords are syntax-highlighted in the style of system log viewers.  Falls back to plain `nl` output if ccze is not installed.
+`zpwr taillog [OPTIONS] [LOGFILE]` tails the zpwr logfile with zcolorizer colorization.  Timestamps, log levels, process names, file paths, and keywords are syntax-highlighted in the style of system log viewers.  Falls back to plain `nl` output if zcolorizer is not installed.
 
 ```sh
 zpwr taillog -h            # cyberpunk help
-zpwr taillog               # follow log with ccze colors (last 100 lines)
+zpwr taillog               # follow log with zcolorizer colors (last 100 lines)
 zpwr taillog -n 50         # last 50 lines then follow
 zpwr taillog -f            # colorize without following
 zpwr taillog -r            # plain output with line numbers
 zpwr taillog /var/log/system.log  # custom logfile
 ```
 
-Requires `ccze` (`brew install ccze` or `apt install ccze`).
+Requires `zcolorizer` (`brew install zcolorizer`)
 
 ## Resolve -- zpwr resolve
 `zpwr resolve <command>` traces a command through its full resolution chain: alias → function → builtin → external binary.  Follows alias expansion recursively (stripping `command`/`builtin`/`noglob` prefixes), shows function source file paths and line counts, detects zpwr verb mappings, follows symlink chains for binaries, and shows `file` type info.  Handles multiple commands in one call.  Also invokable as `zpwr which` or `zpwr whatis`.
@@ -1150,7 +1150,7 @@ zpwr study 42              # start study session at page 42
 zpwr study -v              # vertical split (book top, shell bottom)
 ```
 
-Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  76 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Forge oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grc, ccze, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
+Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  76 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Forge oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grcrs, zcolorizer, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
 
 The interactive wizard content lives in `$ZPWR/docs/wizard_pages/` (with screenshots in `$ZPWR/docs/screenshots/`); `zpwr study` and `zpwr wizard` render from those pages.
 
