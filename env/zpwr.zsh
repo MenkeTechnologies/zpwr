@@ -327,7 +327,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[relpath]='zpwrRelPath=get relative path of abs path to $PWD'
     ZPWR_VERBS[rmconfiglinks]='zpwrUnlinkConf=remove sym links from $ZPWR_INSTALL to $HOME'
     ZPWR_VERBS[regenconfiglinks]='zpwrRegenConfigLinks=regen sym links from $ZPWR_INSTALL to $HOME'
-    ZPWR_VERBS[regenpowerline]='zpwrRegenPowerlineLink=regen powerline sym link to $HOME/.tmux/powerline'
+    ZPWR_VERBS[regenpowerline]='zpwrRegenPowerlineLink=link powerline config to $XDG_CONFIG_HOME/powerline'
     ZPWR_VERBS[regengtags]='zpwrRegenGtagsCtags=regen gtags files to $HOME'
     ZPWR_VERBS[regenctags]='zpwrRegenCtags=regen ctags files to $HOME'
     ZPWR_VERBS[regenzsh]='zpwrRegenZshCompCache=regen compsys cache to $ZSH_COMPDUMP'

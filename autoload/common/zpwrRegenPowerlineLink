@@ -1,20 +1,42 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function zpwrRegenPowerlineLink(){
-    # Refresh the powerliners install (Rust port of powerline-status).
-    # Replaces the legacy "regen the ~/.tmux/powerline → site-packages
-    # symlink" workflow now that powerline / powerline-daemon /
-    # powerline-config / powerline-render are first-class cargo binaries
-    # on PATH at $HOME/.cargo/bin/.
-    if ! zpwrCommandExists cargo; then
-        zpwrLogConsoleErr 'cargo not found; install rustup first'
+    # Link the powerliners config tree ($ZPWR_INSTALL/.config/powerline) into
+    # $XDG_CONFIG_HOME so powerline / powerline-render / powerline-daemon find
+    # the zpwr theme + colorscheme. Without this link powerline falls back to
+    # its baked-in 5-segment default theme.
+    #
+    # The powerline binaries themselves ship via the homebrew tap, not cargo.
+
+    local configHome powerlineDir dest
+
+    configHome="${XDG_CONFIG_HOME:-$HOME/.config}"
+    powerlineDir="$ZPWR_INSTALL/.config/powerline"
+    dest="$configHome/powerline"
+
+    if [[ ! -d "$powerlineDir" ]]; then
+        zpwrLogConsoleErr "no powerline config tree at $powerlineDir"
         return 1
     fi
-    zpwrPrettyPrint "Installing powerliners via cargo"
-    command cargo install powerliners || {
-        zpwrLogConsoleErr 'cargo install powerliners failed'
-        return 1
-    }
+
+    test -d "$configHome" || mkdir -p "$configHome"
+
+    # A real directory here would make ln nest the link inside it.
+    if [[ -d "$dest" && ! -L "$dest" ]]; then
+        zpwrPrettyPrint "Backing up $dest to $dest.bak"
+        command rm -rf "$dest.bak"
+        command mv "$dest" "$dest.bak"
+    fi
+
+    zpwrPrettyPrint "Linking $powerlineDir to $dest"
+    echo ln -sfn "$powerlineDir" "$dest"
+    ln -sfn "$powerlineDir" "$dest"
+
+    if zpwrCommandExists powerline-daemon; then
+        zpwrPrettyPrint "Restarting powerline-daemon"
+        command powerline-daemon --kill &>/dev/null
+        command powerline-daemon -q &>/dev/null
+    fi
 }
 
 zpwrRegenPowerlineLink "$@"
