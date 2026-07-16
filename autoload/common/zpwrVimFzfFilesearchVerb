@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrVimFzfFilesearchVerb(){
 
-    zpwrFzfFilesearchVerb "$ZPWR_ZEMACS "
+    zpwrFzfFilesearchVerb "$ZPWR_ZMAX "
 }
 
 zpwrVimFzfFilesearchVerb "$@"

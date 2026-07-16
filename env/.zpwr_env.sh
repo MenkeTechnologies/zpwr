@@ -84,11 +84,11 @@ export ZPWR_DELIMITER_CHAR='%'
 # the default vim command, override in tokens file
 export ZPWR_VIM='nvim'
 # the editor opened by the fzf-driven editor widgets/verbs; static default is
-# vim, upgraded to zemacs (else nvim) in .shell_aliases_functions.sh once PATH
-# is assembled -- zemacs lives in the homebrew bin dir / ~/.cargo/bin, not on
+# vim, upgraded to zmax (else nvim) in .shell_aliases_functions.sh once PATH
+# is assembled -- zmax lives in the homebrew bin dir / ~/.cargo/bin, not on
 # PATH yet while this static init file is sourced. override in tokens file to
 # pin a specific editor
-export ZPWR_ZEMACS='vim'
+export ZPWR_ZMAX='vim'
 # set EDITOR to $ZPWR_VIM command
 export ZPWR_EDITOR_TO_VIM='true'
 # the emacs command

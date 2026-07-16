@@ -855,7 +855,7 @@
     assert $state equals 0
 }
 
-@test 'ZPWR_ZEMACSINFO is set' {
-    run test -n "$ZPWR_ZEMACSINFO"
+@test 'ZPWR_ZMAXINFO is set' {
+    run test -n "$ZPWR_ZMAXINFO"
     assert $state equals 0
 }

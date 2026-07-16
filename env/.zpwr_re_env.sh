@@ -164,8 +164,8 @@ zpwrEvalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_L
 zpwrEvalIfNeeded ZPWR_ALACRITTY_CFG "$ZPWR_ALACRITTY_CFG" "$HOME/.config/alacritty/alacritty.toml" "$HOME"
 # emacs recent files
 zpwrEvalIfNeeded ZPWR_RECENTF "$ZPWR_RECENTF" "$HOME/.emacs.d/.cache/recentf" "$HOME"
-# zemacs recent files (viminfo-format dump written on exit)
-zpwrEvalIfNeeded ZPWR_ZEMACSINFO "$ZPWR_ZEMACSINFO" "$HOME/.zemacs/.zemacsinfo" "$HOME"
+# zmax recent files (viminfo-format dump written on exit)
+zpwrEvalIfNeeded ZPWR_ZMAXINFO "$ZPWR_ZMAXINFO" "$HOME/.zmax/.zmaxinfo" "$HOME"
 # alternate banner to ponysay
 zpwrEvalIfNeeded ZPWR_BANNER_COMMAND "$ZPWR_BANNER_COMMAND" "bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hostname)" "$ZPWR_SCRIPTS_MAC"
 # zpwr banner file location

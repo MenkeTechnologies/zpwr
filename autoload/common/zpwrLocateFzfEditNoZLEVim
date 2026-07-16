@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrLocateFzfEditNoZLEVim(){
 
-    zpwrLocateFzfEditNoZLE "$ZPWR_ZEMACS"
+    zpwrLocateFzfEditNoZLE "$ZPWR_ZMAX"
 }
 
 zpwrLocateFzfEditNoZLEVim "$@"

@@ -12,7 +12,7 @@ function zpwrEditExercism(){
     f="$(zpwrFzfFileSearch sort)"
 
     if [[ -n "$f" ]]; then
-        BUFFER="EDITOR='$ZPWR_ZEMACS' zpwr vimcd $f"
+        BUFFER="EDITOR='$ZPWR_ZMAX' zpwr vimcd $f"
         #print -rs -- "$BUFFER"
         eval "$BUFFER"
     fi

@@ -3,7 +3,7 @@
 
 function zpwrBindAliasesLate(){
 
-    alias v="$ZPWR_ZEMACS"
+    alias v="$ZPWR_ZMAX"
     alias vi="$ZPWR_VIM"
     alias vv="$ZPWR_VIM"
     alias vim="$ZPWR_VIM"

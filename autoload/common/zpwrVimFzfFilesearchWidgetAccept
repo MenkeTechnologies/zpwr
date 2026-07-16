@@ -8,7 +8,7 @@ function zpwrVimFzfFilesearchWidgetAccept(){
 
     if [[ -n "$f" ]]; then
         zle .kill-whole-line
-        BUFFER="$ZPWR_ZEMACS $f"
+        BUFFER="$ZPWR_ZMAX $f"
         zpwrLogDebug "$BUFFER"
         zle .accept-line
     fi

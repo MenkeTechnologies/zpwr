@@ -5,8 +5,8 @@ function zpwrVimFzfSudo(){
     zle .kill-whole-line
     local firstDir editor numWordsPre out
 
-    pre="$ZPWR_FULL_SUDO $ZPWR_ZEMACS"
-    LBUFFER="$pre $(zpwrFzvim "$ZPWR_ZEMACS")"
+    pre="$ZPWR_FULL_SUDO $ZPWR_ZMAX"
+    LBUFFER="$pre $(zpwrFzvim "$ZPWR_ZMAX")"
 
     numWordsPre=( "${(z)pre}" )
     out=( "${(z)BUFFER}" )

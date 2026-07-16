@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrVimRecentCd(){
 
-    zpwrEditorRecentCd "$ZPWR_ZEMACS"
+    zpwrEditorRecentCd "$ZPWR_ZMAX"
 }
 
 zpwrVimRecentCd "$@"
