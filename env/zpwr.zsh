@@ -278,7 +278,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[lsofedit]='zpwrKillLsofVerbEdit=edit kill from lsof output'
     ZPWR_VERBS[ls]='zpwrListNoClear=list the files with no args'
     ZPWR_VERBS[makedir]='jd=make a dir tree'
-    ZPWR_VERBS[makefile]='j=make a dir tree with file at end'
+    ZPWR_VERBS[makefile]='j=make a dir tree with file at end then edit it'
     ZPWR_VERBS[man]='fm=fzf through man pages'
     ZPWR_VERBS[matrix]='zpwrMatrix=fullscreen matrix digital rain screensaver'
     ZPWR_VERBS[rain]='zpwrMatrix=fullscreen matrix digital rain screensaver'

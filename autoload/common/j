@@ -14,6 +14,8 @@ function j(){
         [[ "$dirname" != . ]] && command mkdir -p "$dirname"
         touch "$file"
     done
+
+    "${ZPWR_ZMAX:-vim}" "$@"
 }
 
 j "$@"
