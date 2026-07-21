@@ -89,7 +89,7 @@ export ZPWR_VIM='nvim'
 # PATH yet while this static init file is sourced. override in tokens file to
 # pin a specific editor
 export ZPWR_ZMAX='vim'
-# set EDITOR to $ZPWR_VIM command
+# set EDITOR to $ZPWR_ZMAX (zmax, else nvim, else vim) command
 export ZPWR_EDITOR_TO_VIM='true'
 # the emacs command
 export ZPWR_EMACS='command emacs -nw'

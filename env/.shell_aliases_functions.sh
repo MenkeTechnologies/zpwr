@@ -99,14 +99,12 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
     if [[ "$ZPWR_EDITOR_TO_VIM" == true ]]; then
         if zpwrCommandExists nvim; then
-            export EDITOR="$ZPWR_VIM"
             export PSQL_EDITOR="$ZPWR_VIM -c \"setf sql\""
         fi
     fi
 else
     if [[ "$ZPWR_EDITOR_TO_VIM" == true ]]; then
         if zpwrCommandExists nvim; then
-            export EDITOR="$ZPWR_VIM"
             export PSQL_EDITOR="$ZPWR_VIM -c \"setf sql\""
         fi
     fi
@@ -166,6 +164,13 @@ if zpwrCommandExists zmax; then
     export ZPWR_ZMAX='zmax'
 elif zpwrCommandExists nvim; then
     export ZPWR_ZMAX='nvim'
+fi
+# EDITOR points at zmax (the finalized $ZPWR_ZMAX), not nvim. Set here rather
+# than in the EDITOR block above because that block runs before $ZPWR_ZMAX is
+# upgraded off its static 'vim' default. tokens files source afterwards, so a
+# tokens pin still wins.
+if [[ "$ZPWR_EDITOR_TO_VIM" == true ]]; then
+    export EDITOR="$ZPWR_ZMAX"
 fi
 # prefer ztmux (the drop-in Rust multiplexer), else the tmux default
 if zpwrCommandExists ztmux; then
