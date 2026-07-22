@@ -248,6 +248,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - storageshower
 - htoprs
 - eza
+- arb
 - bat
 - fd-find
 - thumbs

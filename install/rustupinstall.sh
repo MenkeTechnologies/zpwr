@@ -48,6 +48,7 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 fi
 
 ins powerliners powerliners
+ins arb arb
 ins grcrs grcrs
 ins htoprs htoprs
 ins ztmux ztmux
