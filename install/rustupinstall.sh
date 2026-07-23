@@ -47,6 +47,7 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         exit 1'
 fi
 
+ins pythonrs pythonrs
 ins powerliners powerliners
 ins arb arb
 ins grcrs grcrs

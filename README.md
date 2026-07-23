@@ -157,7 +157,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 177 centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 48k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
-- 183 bash, stryke, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
+- 183 bash, stryke, zsh and pythonrs scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored -- your private data vault
@@ -203,9 +203,9 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - custom banners when new shell is launched `ZPWR_BANNER_COMMAND`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - expanded vim text objects on command line
-- vim extract method from visual selection for shell, stryke and python scripts (`gv` to select extracted)
-- vim extract variable under cursor for shell, stryke and python scripts (`gv` to select extracted)
-- vim extract variable from visual selection for shell, stryke and python scripts (`gv` to select extracted)
+- vim extract method from visual selection for shell, stryke and pythonrs scripts (`gv` to select extracted)
+- vim extract variable under cursor for shell, stryke and pythonrs scripts (`gv` to select extracted)
+- vim extract variable from visual selection for shell, stryke and pythonrs scripts (`gv` to select extracted)
 - vim autohighlight word under cursor after delay like JetBrains IDEs
 - software updater script, `source ~/.zpwr/scripts/autoUpdater.sh`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
