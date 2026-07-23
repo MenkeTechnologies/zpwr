@@ -15,7 +15,12 @@ function j(){
         touch "$file"
     done
 
-    "${ZPWR_ZMAX:-vim}" "$@"
+    # Only drop into the editor interactively; in scripts/CI/pipes stdin is not
+    # a tty, and launching vim/zmax there blocks forever with no controlling
+    # terminal. An if-block (not `&&`) keeps the exit status 0 when skipped.
+    if [[ -t 0 ]]; then
+        "${ZPWR_ZMAX:-vim}" "$@"
+    fi
 }
 
 j "$@"
