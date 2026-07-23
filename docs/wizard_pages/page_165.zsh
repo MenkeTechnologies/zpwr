@@ -28,7 +28,7 @@ PAGE_CONTENT() {
     print "  ${M}  zpwr brc${N}${D}                   # shell aliases file vim session${N}"
     print "  ${M}  zpwr trc${N}${D}                   # tmux.conf vim session${N}"
     print "  ${M}  zpwr zrc${N}${D}                   # zshrc vim session${N}"
-    print "  ${M}  zpwr tokens${N}${D}                # vim the .tokens.sh file${N}"
+    print "  ${M}  zpwr tokens${N}${D}                # zmax the .tokens.sh file${N}"
     print ""
     print "  ${B}${Y}NAVIGATION${N}"
     print "  ${D}──────────────────────────────────────────────────────────${N}"

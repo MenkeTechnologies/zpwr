@@ -36,7 +36,7 @@ PAGE_CONTENT() {
     print "  ${D}  Use :bn and :bp to navigate between buffers.${N}"
     print ""
     print "  ${M}  zpwr vimtokens${N}${D}   # vim the .tokens.sh file${N}"
-    print "  ${M}  zpwr tokens${N}${D}      # same thing${N}"
+    print "  ${M}  zpwr tokens${N}${D}      # same file, opens in zmax${N}"
     print "  ${D}  Quick jump to your personal aliases and secrets file.${N}"
     print "  ${D}  This is the file that is gitignored. Your sanctuary.${N}"
     print ""

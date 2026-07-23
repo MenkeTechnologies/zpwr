@@ -805,9 +805,9 @@ zpwr verbscount          # how many verbs exist</pre>
 <pre class="enc-code">zpwr trc    # tmux.conf vim session</pre>
 <p>Opens tmux configuration pane and window management settings.</p>
 <h5 class="enc-h5">THE TOKENS FILE</h5>
-<pre class="enc-code">zpwr tokens       # vim the .tokens.sh file
-zpwr vimtokens    # same thing, explicit vim
-zpwr emacstokens  # same thing, emacs edition</pre>
+<pre class="enc-code">zpwr tokens       # zmax the .tokens.sh file
+zpwr vimtokens    # same file, explicit vim
+zpwr emacstokens  # same file, emacs edition</pre>
 <p>Located at <strong>$ZPWR_LOCAL/.tokens.sh</strong> This file is gitignored. Put secrets and custom aliases here. Never commit this file. It is YOUR local override.</p>
 <h5 class="enc-h5"><strong>EDITOR</strong> COMMANDS</h5>
 <pre class="enc-code">zpwr edit      # launch EDITOR
@@ -1346,7 +1346,7 @@ zpwr vimgtagsedit           # edit zpwr GNU global tags</pre>
 <pre class="enc-code">zpwr vimconfig    # edit all zpwr configs in vim</pre>
 <p>Opens every zpwr configuration file. The master session. Use :bn and :bp to navigate between buffers.</p>
 <pre class="enc-code">zpwr vimtokens   # vim the .tokens.sh file
-zpwr tokens      # same thing</pre>
+zpwr tokens      # same file, opens in zmax</pre>
 <p>Quick jump to your personal aliases and secrets file. This is the file that is gitignored. Your sanctuary.</p>
 <h5 class="enc-h5">PLUGIN INVENTORY</h5>
 <pre class="enc-code">zpwr vimplugincount  # how many vim plugins installed
@@ -5266,7 +5266,7 @@ zpwr vrc                   # vimrc vim session
 zpwr brc                   # shell aliases file vim session
 zpwr trc                   # tmux.conf vim session
 zpwr zrc                   # zshrc vim session
-zpwr tokens                # vim the .tokens.sh file</pre>
+zpwr tokens                # zmax the .tokens.sh file</pre>
 <h5 class="enc-h5">NAVIGATION</h5>
 <pre class="enc-code">zpwr vimcd                 # vim edit and cd to first dir
 zpwr vimrecent             # vim edit most recent editor files

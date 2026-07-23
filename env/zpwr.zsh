@@ -371,7 +371,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[activity]='zpwrTimeline=visual timeline of shell history grouped by hour and directory'
     ZPWR_VERBS[timer]='zpwrTimer=timer one or more commands'
     ZPWR_VERBS[to]='to=toggle external ip'
-    ZPWR_VERBS[tokens]='tok=vim the .tokens.sh file'
+    ZPWR_VERBS[tokens]='vtok=zmax the .tokens.sh file'
     ZPWR_VERBS[tmuxsave]='zpwrTmuxSave=save current tmux layout to repeatable script'
     ZPWR_VERBS[tmuxload]='zpwrTmuxLoad=restore a saved tmux layout'
     ZPWR_VERBS[layoutsave]='zpwrTmuxSave=save current tmux layout to repeatable script'
