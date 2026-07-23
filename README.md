@@ -239,6 +239,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Firmware Stack
 - zshrs
 - ztmux
+- zvcs
 - zmax
 - stryke
 - zterminal
