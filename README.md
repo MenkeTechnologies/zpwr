@@ -18,7 +18,7 @@
 
 ![tmux final](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
 
-ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface — autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a ztmux cockpit that turns your terminal into a multi-pane command center. Began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix); evolved into a sprawling cyberdeck OS for the command line. Will be migrating to [zshrs](https://github.com/MenkeTechnologies/zshrs) — a next-gen, highly parallel login shell designed as a drop-in replacement for zsh. If your terminal isn't glowing, you're not running ZPWR.
+ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zshrs, vimlrs and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface — autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a ztmux cockpit that turns your terminal into a multi-pane command center. Began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix); evolved into a sprawling cyberdeck OS for the command line. Will be migrating to [zshrs](https://github.com/MenkeTechnologies/zshrs) — a next-gen, highly parallel login shell designed as a drop-in replacement for zsh. If your terminal isn't glowing, you're not running ZPWR.
 
 ### [`Read the Docs`](https://menketechnologies.github.io/zpwr/) &middot; [`Engineering Report`](https://menketechnologies.github.io/zpwr/report.html) · [`strykelang`](https://github.com/MenkeTechnologies/strykelang) · [`zshrs`](https://github.com/MenkeTechnologies/zshrs) · [`zsh-more-completions`](https://github.com/MenkeTechnologies/zsh-more-completions)
 
@@ -157,7 +157,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 177 centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 48k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
-- 183 bash, stryke, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
+- 183 bash, stryke, zsh and pythonrs scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored -- your private data vault
@@ -203,9 +203,9 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - custom banners when new shell is launched `ZPWR_BANNER_COMMAND`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - expanded vim text objects on command line
-- vim extract method from visual selection for shell, stryke and python scripts (`gv` to select extracted)
-- vim extract variable under cursor for shell, stryke and python scripts (`gv` to select extracted)
-- vim extract variable from visual selection for shell, stryke and python scripts (`gv` to select extracted)
+- vim extract method from visual selection for shell, stryke and pythonrs scripts (`gv` to select extracted)
+- vim extract variable under cursor for shell, stryke and pythonrs scripts (`gv` to select extracted)
+- vim extract variable from visual selection for shell, stryke and pythonrs scripts (`gv` to select extracted)
 - vim autohighlight word under cursor after delay like JetBrains IDEs
 - software updater script, `source ~/.zpwr/scripts/autoUpdater.sh`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
@@ -239,6 +239,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Firmware Stack
 - zshrs
 - ztmux
+- zvcs
 - zmax
 - stryke
 - zterminal
