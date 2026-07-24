@@ -157,14 +157,14 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 177 centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 48k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
-- 183 bash, stryke, zsh and pythonrs scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
+- 183 bash, stryke, zshrs and pythonrs scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored -- your private data vault
 - installer specific ZPWR files in `~/.zpwr/install` git tracked
 - ZPWR installer output in `~/.zpwr/local/installer` git ignored
 - central kill switch for zpwr colorful output with `ZPWR_COLORS`
-- zsh completion with descriptions for parameters, regular, suffix and global aliases
+- zshrs completion with descriptions for parameters, regular, suffix and global aliases
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) -- the shell corrects you before you finish typing
 - snippets with tabstops that expand with spacebar and advance to next stop with C-o [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
