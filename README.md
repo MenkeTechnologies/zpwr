@@ -12,7 +12,7 @@
  [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://menketechnologies.github.io/zpwr/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### `[NEON-LIT UNIX TERMINAL OS // 460 VERBS // 168k LOC // STRYKE-POWERED]`
+### `[NEON-LIT UNIX TERMINAL OS // 504 VERBS // 168k LOC // STRYKE-POWERED]`
 
 > *"The street finds its own uses for things."* — William Gibson
 
@@ -153,7 +153,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 460 zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 504 zpwr subcommands (460 from the in-repo dispatcher table, the rest registered by the zinit-installed MenkeTechnologies plugins) -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 177 centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 47k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
