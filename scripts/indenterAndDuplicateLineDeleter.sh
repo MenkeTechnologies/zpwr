@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Sun Jul 16 02:44:18 EDT 2017
 ##### Purpose: bash script to reindent and delete duplicate lines
 ##### Notes:

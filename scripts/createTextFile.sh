@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 12:14:31 EDT 2017
 ##### Purpose: bash script to create new script and edit it with SublimeText
 ##### Notes:

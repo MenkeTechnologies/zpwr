@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Sat Apr 21 17:07:54 EDT 2018
 ##### Purpose: bash script to
 ##### Notes:

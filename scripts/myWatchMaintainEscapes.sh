@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 19:19:24 EDT 2017
 ##### Purpose: bash script to watch output of command using clear
 ##### Notes:

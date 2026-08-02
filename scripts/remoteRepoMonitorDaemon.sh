@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Thu Apr 12 00:02:45 EDT 2018
 ##### Purpose: bash script to keep remote hosts in sync with main
 ##### Notes: watches 2 repos

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
+#####   Author: MENKETECHNOLOGIES
 #####   Date: Wed May 31 22:54:32 EDT 2017
 #####   Purpose: bash script for custom terminal setup
 #####   Notes: goal - work on mac and linux

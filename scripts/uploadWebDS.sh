@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 19:31:35 EDT 2017
 ##### Purpose: bash script to upload to web direcctory of NAS
 ##### Notes:
@@ -11,7 +11,7 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-address="jacobmenke@$MY_IP:/var/services/web"
+address="menketechnologies@$MY_IP:/var/services/web"
 
 printf "${ZPWR_COLOR_BLUE}Uploading $* to $address\n" | ponysay -W 120
 

@@ -94,7 +94,7 @@ colours=green
 regexp=\s(admin)\s
 colours=unchanged,on_cyan, bold green
 -
-regexp=\s(jacobmenke|pi)\s
+regexp=\s(menketechnologies|pi)\s
 colours=red
 -
 regexp=^total\s(\S+)$

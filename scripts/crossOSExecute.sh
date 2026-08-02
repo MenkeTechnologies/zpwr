@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Wed Dec 15 22:51:36 EST 2021
 ##### Purpose: bash script to execute code base on os
 ##### Notes:

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Thu Oct 12 07:28:22 EDT 2017
 ##### Purpose: bash script to facilitate running fat jars from gradle
 ##### Notes: run from shell script from intellij with bash support plugin

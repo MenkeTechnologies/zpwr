@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 12:17:09 EDT 2017
 ##### Purpose: bash script to display output with invisible cursor refreshing every 60 secs
 ##### Notes:

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
+#####   Author: MENKETECHNOLOGIES
 #####   Date: Sat Jul  7 11:20:08 EDT 2018
 #####   Purpose: perl script to
 #####   Notes:

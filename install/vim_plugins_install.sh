@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
+#####   Author: MENKETECHNOLOGIES
 #####   Date: Fri Jul  7 20:42:55 EDT 2017
 #####   Purpose: bash script to install vim plugins
 #####   Notes: 

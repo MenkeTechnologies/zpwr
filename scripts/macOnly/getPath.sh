@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 12:18:45 EDT 2017
 ##### Purpose: bash script to add abs path to system clipboard on Mac
 ##### Notes:

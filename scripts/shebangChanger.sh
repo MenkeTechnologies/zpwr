@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Thu Jul 6 23:16:50 EDT 2017
 ##### Purpose: bash script to change the shebang line
 ##### Notes:

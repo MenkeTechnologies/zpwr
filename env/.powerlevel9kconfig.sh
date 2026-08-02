@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Fri Jul  7 23:52:18 EDT 2017
 ##### Purpose: bash script to update zsh prompt
 ##### Notes:

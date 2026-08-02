@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 12:10:58 EDT 2017
 ##### Purpose: bash script for making text blue
 ##### Notes: usage: > >(blueText.sh)

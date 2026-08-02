@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 19:24:04 EDT 2017
 ##### Purpose: bash script to rsync to RPi and upload to Tomcat
 ##### Notes:

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Sun Jul 29 16:31:51 EDT 2018
 ##### Purpose: perl script to remove trailing spaces
 ##### Notes:

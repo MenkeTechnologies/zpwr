@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 19:23:26 EDT 2017
 ##### Purpose: bash script to download from RPi to local host
 ##### Notes:
 #}}}***********************************************************
 
 outputDir="Desktop"
-main="jacobmenke"
+main="menketechnologies"
 
 printf "${ZPWR_COLOR_BLUE}Downloading $*\n"
 for i in "$@"; do

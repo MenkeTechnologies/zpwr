@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
+#####   Author: MENKETECHNOLOGIES
 #####   Date: Mon Jul 10 19:11:11 EDT 2017
 #####   Purpose: perl script to remove escape sequences
 #####   Notes:

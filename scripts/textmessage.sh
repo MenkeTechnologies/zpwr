@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 12:03:02 EDT 2017
 ##### Purpose: bash script to facilitate text messaging from command line
 ##### Notes: high complexity

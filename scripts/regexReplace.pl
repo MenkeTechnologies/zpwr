@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
+#####   Author: MENKETECHNOLOGIES
 #####   Date: Wed Jun 20 11:37:12 EDT 2018
 #####   Purpose: perl script to remove carriage returns
 #####   Notes: works recursively

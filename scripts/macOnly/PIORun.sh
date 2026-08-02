@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Wed Oct 11 17:52:47 EDT 2017
 ##### Purpose: bash script to upload to Arduino
 ##### Notes:

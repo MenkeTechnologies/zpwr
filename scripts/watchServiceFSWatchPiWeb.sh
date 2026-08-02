@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 19:35:11 EDT 2017
 ##### Purpose: bash script to upload to RPi web dir on file change
 ##### Notes:

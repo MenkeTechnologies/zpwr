@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Fri Oct  4 17:27:00 EDT 2019
 ##### Purpose: zsh script to get env
 ##### Notes: builds Key.txt (fzf input), Value.txt (per-entry

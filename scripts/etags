@@ -1164,7 +1164,7 @@ optstring=shtaoptstring57,1370
 
 /Users/wizard/.zpwr/scripts/dsDownloader.sh,71
 outputDir="Desktop"outputDir10,307
-main="jacobmenke"main11,327
+main="menketechnologies"main11,327
 
 /Users/wizard/.zpwr/scripts/duplicateLineDeleter.sh,198
 home_dir=$HOMEhome_dir10,315
@@ -1778,7 +1778,7 @@ refreshers() {refreshers60,1665
 
 /Users/wizard/.zpwr/scripts/rpiDownloader.sh,71
 outputDir="Desktop"outputDir10,307
-main="jacobmenke"main11,327
+main="menketechnologies"main11,327
 
 /Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh,400
 zpwrPrettyPrint() {zpwrPrettyPrint13,380
@@ -2012,7 +2012,7 @@ zpwrPrettyPrint() {zpwrPrettyPrint10,285
         installDir=$(python2 -m pip show "pip" | \forge -ne 'print $1 if /^Location: (.*)/')installDir70,2490
 
 /Users/wizard/.zpwr/scripts/uploadWebDS.sh,61
-address="jacobmenke@$MY_IP:/var/services/web"address11,363
+address="menketechnologies@$MY_IP:/var/services/web"address11,363
 
 /Users/wizard/.zpwr/scripts/uploadWebPi.sh,165
 address="pi@$MY_IP:/var/www/html"address11,356

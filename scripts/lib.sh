@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
+#####   Author: MENKETECHNOLOGIES
 #####   Date: Sat Apr  7 02:19:29 EDT 2018
 #####   Purpose: bash script to hold installer lib fns
 #####   Notes: 

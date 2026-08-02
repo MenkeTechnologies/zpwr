@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 12:11:46 EDT 2017
 ##### Purpose: bash script to make text white on blue background and some underscores
 ##### Notes:

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Fri Jun 30 15:18:40 EDT 2017
 ##### Purpose: file templates for bash, stryke, python
 ##### Notes:

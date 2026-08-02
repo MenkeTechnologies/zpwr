@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Mon Jul 10 12:19:26 EDT 2017
 ##### Purpose: bash script to facilitate github repo creation and committing
 ##### Notes:

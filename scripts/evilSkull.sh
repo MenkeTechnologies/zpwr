@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: JACOBMENKE
+##### Author: MENKETECHNOLOGIES
 ##### Date: Fri Oct 20 02:58:59 EDT 2017
 ##### Purpose: bash script to print evil skull
 ##### Notes:
