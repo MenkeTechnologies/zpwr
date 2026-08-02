@@ -12,7 +12,7 @@
  [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://menketechnologies.github.io/zpwr/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### `[NEON-LIT UNIX TERMINAL OS // 504 VERBS // 190k LOC // STRYKE-POWERED]`
+### `[NEON-LIT UNIX TERMINAL OS // 460 VERBS // 168k LOC // STRYKE-POWERED]`
 
 > *"The street finds its own uses for things."* — William Gibson
 
@@ -153,10 +153,10 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 504 zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 460 zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 177 centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
-- 48k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
+- 47k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
 - 183 bash, stryke, zshrs and pythonrs scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
@@ -185,16 +185,16 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimwordsearch`
 - zsh keybindings to fzf search of network processes with lsof return PIDs `zpwr lsof` -- scan the local net like a deck jockey
 - zsh function to cache all git directories `zpwr regengitrepocache`
-- zsh function for fzf searching of all git directories `zpwr gitrepos`
-- zsh function for fzf searching of all dirty git directories `zpwr gitreposdirty` -- find every repo with uncommitted cargo
+- zsh function to edit the cached git-directory list `zpwr gitreposfile`
+- zsh function to refresh the dirty-repo cache and run a command in every dirty repo `zpwr gitreposdirtyexec` -- find every repo with uncommitted cargo
 - zsh function to exec cmd in all git directories `zpwr gitreposexec` -- broadcast commands across all repos simultaneously
 - integration of [z](https://github.com/MenkeTechnologies/zsh-z) frecency database into _files completion
 - integration of [fasd](https://github.com/MenkeTechnologies/fasd-simple) frecency database into _files completion
 - zsh menucompletion for [z](https://github.com/MenkeTechnologies/zsh-z) command based on frecency [z](https://github.com/MenkeTechnologies/zsh-z) and [fasd](https://github.com/MenkeTechnologies/fasd-simple) databases
 - keybindings to save to mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- functions `zpwr searchl` to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- `zpwr redo <number/regex...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- `zpwr redosql <number/regex...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- `searchl` searches the mysql learning table -- a [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn) command, not a `zpwr` verb
+- `redo <number/regex...>` prints to prompt SQL update statements for learning items -- a [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn) command, not a `zpwr` verb
+- `redosql <number/regex...>` prints to vim SQL update statements for learning items that run once vim is quit -- a [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn) command, not a `zpwr` verb
 - zle keybinding formats newlines and spaces before saving to mysql learning database [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - zsh plugins loading based on OS
 - zsh functions autoloading based on OS
@@ -233,7 +233,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
 - 3k+ line README -- you are here, deep in the docs
-- 190k+ LOC -- hand-forged in the neon glow of late-night terminals
+- 168k LOC -- hand-forged in the neon glow of late-night terminals
 
 
 ## ZPWR Firmware Stack
@@ -1152,7 +1152,7 @@ zpwr study 42              # start study session at page 42
 zpwr study -v              # vertical split (book top, shell bottom)
 ```
 
-Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  76 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Forge oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grcrs, zcolorizer, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
+Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  45 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Forge oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grcrs, zcolorizer, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
 
 The interactive wizard content lives in `$ZPWR/docs/wizard_pages/` (with screenshots in `$ZPWR/docs/screenshots/`); `zpwr study` and `zpwr wizard` render from those pages.
 
