@@ -13,8 +13,9 @@
 # scripts/*.stk — syntax (batch4 covers boxPrint.pl)
 #--------------------------------------------------------------
 # All 8 *.stk tests below require the `stryke` binary on PATH. Skip when
-# it isn't installed (CI without strykelang because of the downstream
-# zshrs __error() Linux blocker).
+# it isn't installed — a strykelang release whose dependency graph holds
+# two fusevm majors cannot link under `lto = "fat"`, so `cargo install`
+# can fail outright.
 @test 'banner.stk runs with stryke' {
     command -v stryke >/dev/null 2>&1 || skip "stryke not installed"
     run stryke "$ZPWR_SCRIPTS/banner.stk" --help 2>&1

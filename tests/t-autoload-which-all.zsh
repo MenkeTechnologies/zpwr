@@ -269,9 +269,10 @@
 
 @test 'which s found' {
     # `s` is the strykelang launcher (cargo install strykelang installs both
-    # `stryke` and `s`). Skip on CI where the install may be unavailable
-    # due to the downstream zshrs __error() Linux blocker. Mirrors the same
-    # skip in t-autoload-whence-all.zsh for `whence s resolves`.
+    # `stryke` and `s`). Skip wherever the install is unavailable — a
+    # strykelang release whose dependency graph holds two fusevm majors
+    # cannot link under `lto = "fat"`. Mirrors the same skip in
+    # t-autoload-whence-all.zsh for `whence s resolves`.
     command -v stryke >/dev/null 2>&1 || skip "stryke not installed; \`s\` launcher requires strykelang"
     run which s
     assert $state equals 0

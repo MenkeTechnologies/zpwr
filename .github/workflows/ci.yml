@@ -42,14 +42,34 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install stryke
-        # IMPORTANT: --locked honors the Cargo.lock published with the
-        # strykelang crate, which pins `zshrs = 0.11.4`. Without --locked
-        # Cargo resolves to the latest 0.11.x → 0.11.6 → which has an
-        # unguarded `libc::__error()` call that only compiles on macOS
-        # (Linux libc exposes `__errno_location()` instead). 0.11.4 has
-        # the proper #[cfg(target_os = "macos")] guards.
+        # INTERIM PIN — remove once strykelang publishes a release that builds.
+        # strykelang 0.17.46 (published 2026-07-29, currently the crates.io
+        # latest) cannot be installed on this runner by either resolution path:
+        #   * with --locked: 0.17.46 bumped its direct dep to `fusevm = "0.15.0"`
+        #     but kept `zshrs = "0.12.3"`, and zshrs 0.12.3 requires
+        #     `fusevm ^0.14.0`. Those are separate 0.x majors, so Cargo cannot
+        #     unify them and the published Cargo.lock carries TWO fusevm
+        #     packages (0.14.17 and 0.15.0). Both export the same 51
+        #     `extern "C"` `fusevm_jit_*`/`fusevm_aot_*` symbols, which collide
+        #     under strykelang's `[profile.release] lto = "fat"`. Observed in
+        #     run 30736164453: `failed to load bitcode of module
+        #     "fusevm-d5d7584c955bb84e.…rcgu.o"` → `failed to compile
+        #     `strykelang v0.17.46``, exit 101 after ~18 min.
+        #   * without --locked: resolution floats zshrs to 0.12.28, whose
+        #     `ZshCond` gained a `ModCond` variant (zshrs-0.12.28
+        #     src/extensions/zsh_ast.rs:316). strykelang 0.17.46's `map_zcond`
+        #     (strykelang/zsh_convert.rs:496) matches only Not/And/Or/Unary/
+        #     Binary/Regex with no wildcard arm → error[E0004].
+        # 0.17.45 keeps a single fusevm (0.14.7) and is the newest release that
+        # builds. It installed cleanly with --locked on this same ubuntu-latest
+        # image in run 30161742924 ("Installed package `strykelang v0.17.45`"),
+        # where the full suite then passed — so this pin restores a known-good
+        # graph rather than papering over a zpwr defect.
+        # --locked stays so the pin resolves that exact verified graph.
+        # Unpin as soon as a strykelang release lands whose graph holds one
+        # fusevm major (needs strykelang to bump zshrs alongside fusevm).
         run: |
-          cargo install --locked strykelang
+          cargo install --locked strykelang --version 0.17.45
           command -v stryke
 
       - name: Checkout repository

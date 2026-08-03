@@ -334,9 +334,9 @@
 
 @test 'zpwrAbout output contains fetch' {
     # about.sh derives the FETCH line from `git remote -v | grep fetch | stryke -pe ...`.
-    # Skip when stryke isn't on PATH (CI without strykelang installed, e.g.
-    # while the downstream zshrs __error() blocker prevents cargo install
-    # strykelang from building on Linux).
+    # Skip when stryke isn't on PATH — a strykelang release whose dependency
+    # graph holds two fusevm majors cannot link under `lto = "fat"`, so
+    # `cargo install strykelang` can fail outright.
     [[ -n "$CI" ]] && skip "CI sandbox lacks the local zpwr git remote needed for about.sh FETCH line"
     run zpwrAbout &>/dev/null
     assert "$output" contains fetch
