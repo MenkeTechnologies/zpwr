@@ -6,7 +6,9 @@ function zpwrBindFZFLate(){
     local base03 base02 base01 base00 base0 base1 base2 base3
     local yellow orange red magenta violet blue cyan green
 
-    if zpwrCommandExists fzf; then
+    # The picker is whatever ZPWR_FZF points at (arb --fzf by default, fzf if
+    # you set it back), so gate the bindings on either binary being present.
+    if zpwrCommandExists arb || zpwrCommandExists fzf; then
 
         function zpwrBatSetup() {
             export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'

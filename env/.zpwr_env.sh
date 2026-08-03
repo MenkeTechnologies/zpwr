@@ -114,7 +114,7 @@ export ZPWR_EXPAND_QUOTE_DOUBLE=true
 # expand inside '
 export ZPWR_EXPAND_QUOTE_SINGLE=false
 # command for all fzf
-export ZPWR_FZF='fzf --ansi'
+export ZPWR_FZF='arb --fzf --ansi'
 # command for fd
 export ZPWR_FD='command fd --follow --type file --threads 8'
 # prompt for all fzf

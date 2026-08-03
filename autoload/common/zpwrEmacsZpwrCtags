@@ -7,7 +7,7 @@ function zpwrEmacsZpwrCtags(){
         return 1
     fi
 
-    cat "$ZPWR_SCRIPTS/tags" | fzf
+    cat "$ZPWR_SCRIPTS/tags" | arb --fzf
 }
 
 zpwrEmacsZpwrCtags "$@"

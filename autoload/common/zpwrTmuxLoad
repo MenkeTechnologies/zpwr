@@ -46,8 +46,8 @@ function zpwrTmuxLoad(){
             zpwrLogConsoleErr "no saved layouts\nsave one with: zpwr tmuxsave <name>"
             return 1
         fi
-        if (( $+commands[fzf] )); then
-            layout_name=$(printf '%s\n' "${layouts[@]}" | fzf --prompt="layout> " --height=10)
+        if (( $+commands[arb] || $+commands[fzf] )); then
+            layout_name=$(printf '%s\n' "${layouts[@]}" | arb --fzf --prompt="layout> " --height=10)
             [[ -z "$layout_name" ]] && return 0
         else
             zpwrLogConsoleErr "usage: zpwr tmuxload <name>\navailable: ${layouts[*]}"

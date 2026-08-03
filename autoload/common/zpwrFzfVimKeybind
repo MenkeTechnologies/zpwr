@@ -6,7 +6,7 @@ function zpwrFzfVimKeybind(){
         zpwrLogDebug "regenerating $ZPWR_VIM_KEYBINDINGS"
         zpwrRegenAllKeybindingsCache
     fi
-    cat "$ZPWR_VIM_KEYBINDINGS" | fzf
+    cat "$ZPWR_VIM_KEYBINDINGS" | arb --fzf
 }
 
 zpwrFzfVimKeybind "$@"
