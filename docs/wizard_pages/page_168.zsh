@@ -54,10 +54,10 @@ PAGE_CONTENT() {
     print "  ${M}  zpwr zpwr${N}${D}                  # cd to \$ZPWR_REPO_NAME${N}"
     print "  ${M}  zpwr zpz${N}${D}                   # cd to repo, checkout, rebase, push${N}"
     print ""
-    print "  ${B}${Y}FRECENCY & FZF${N}"
+    print "  ${B}${Y}FRECENCY & ARB${N}"
     print "  ${D}──────────────────────────────────────────────────────────${N}"
     print "  ${M}  zpwr z${N}${D}                     # cd to z frecency ranked dir${N}"
     print "  ${M}  zpwr zcd${N}${D}                   # list then cd to z ranked dir${N}"
-    print "  ${M}  zpwr dirsearch${N}${D}             # cd to a sub dir via fzf${N}"
+    print "  ${M}  zpwr dirsearch${N}${D}             # cd to a sub dir via arb --fzf${N}"
     print ""
 }

@@ -83,8 +83,8 @@ export ZPWR_DEFAULT_OMZ_THEME=simonoff
 export ZPWR_DELIMITER_CHAR='%'
 # the default vim command, override in tokens file
 export ZPWR_VIM='nvim'
-# the editor opened by the fzf-driven editor widgets/verbs; static default is
-# vim, upgraded to zmax (else nvim) in .shell_aliases_functions.sh once PATH
+# the editor opened by the picker-driven (arb --fzf) editor widgets/verbs;
+# static default is vim, upgraded to zmax (else nvim) in .shell_aliases_functions.sh once PATH
 # is assembled -- zmax lives in the homebrew bin dir / ~/.cargo/bin, not on
 # PATH yet while this static init file is sourced. override in tokens file to
 # pin a specific editor
@@ -113,11 +113,11 @@ export ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION=true
 export ZPWR_EXPAND_QUOTE_DOUBLE=true
 # expand inside '
 export ZPWR_EXPAND_QUOTE_SINGLE=false
-# command for all fzf
+# command for all fuzzy picking; arb --fzf is the picker
 export ZPWR_FZF='arb --fzf --ansi'
 # command for fd
 export ZPWR_FD='command fd --follow --type file --threads 8'
-# prompt for all fzf
+# prompt for all fuzzy picking
 export ZPWR_FZF_LOGO='<<)ZPWR(>>'
 # GH username
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -139,7 +139,7 @@ export ZPWR_LOG_DATE_COLOR='\x1b[1;32;40m'
 export ZPWR_LOG_MSG_COLOR='\x1b[1;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
-# the marker found color in bat output into fzf from ag search ANSI codes
+# the marker found color in bat output into arb --fzf from ag search ANSI codes
 export ZPWR_MARKER_COLOR='0;1;4;37;44m'
 # default value for pygmentize theme
 export ZPWR_PYGMENTIZE_COLOR="emacs"

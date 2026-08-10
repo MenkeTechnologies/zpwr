@@ -11,7 +11,7 @@ PAGE_CONTENT() {
     print "  ${D}     auto_name_dirs leaking gitstatus vars.${N}"
     print ""
     print "  ${G}7. DEPENDENCIES${N}"
-    print "  ${D}     Checks: git, eza, fzf, tmux, perl, python3, zinit.${N}"
+    print "  ${D}     Checks: git, eza, arb --fzf, tmux, perl, python3, zinit.${N}"
     print ""
     print "  ${G}8. HISTORY & BACKUPS${N}"
     print "  ${D}     Is HISTFILE present? How many backups exist?${N}"

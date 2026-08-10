@@ -14,7 +14,7 @@ PAGE_CONTENT() {
     print "  ${B}${Y}FORGITRESET — UNSTAGE WITH PREVIEW${N}"
     print "  ${D}──────────────────────────────────────────────────────────${N}"
     print "  ${M}  zpwr forgitreset${N}"
-    print "  ${G}Shows staged files in fzf with diff previews.${N}"
+    print "  ${G}Shows staged files in arb --fzf with diff previews.${N}"
     print "  ${G}Select files to unstage. Like git reset HEAD but${N}"
     print "  ${G}you can see exactly what you are unstaging first.${N}"
     print ""

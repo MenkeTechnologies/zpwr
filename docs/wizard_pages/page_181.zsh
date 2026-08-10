@@ -30,7 +30,7 @@ PAGE_CONTENT() {
     print "  ${M}  zpwr tmuxsave${N}${D}                 # save with timestamp name${N}"
     print "  ${M}  zpwr tmuxsave --list${N}${D}          # list saved layouts${N}"
     print "  ${M}  zpwr tmuxsave --delete dev${N}${D}    # remove a layout${N}"
-    print "  ${M}  zpwr tmuxload${N}${D}                 # fzf picker (no args)${N}"
+    print "  ${M}  zpwr tmuxload${N}${D}                 # arb --fzf picker (no args)${N}"
     print "  ${M}  zpwr tmuxload dev mywork${N}${D}      # restore as session 'mywork'${N}"
     print ""
     print "  ${B}${Y}KEYBINDING${N}"

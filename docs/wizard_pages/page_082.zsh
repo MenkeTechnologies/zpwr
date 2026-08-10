@@ -33,7 +33,7 @@ PAGE_CONTENT() {
     print "  ${B}${Y}FORGITCLEAN — THE UNTRACKED FILE PURGE${N}"
     print "  ${D}──────────────────────────────────────────────────────────${N}"
     print "  ${M}  zpwr forgitclean${N}"
-    print "  ${G}Shows untracked files in an fzf interface with previews.${N}"
+    print "  ${G}Shows untracked files in an arb --fzf interface with previews.${N}"
     print "  ${G}Select which ones to delete. Surgical, not scorched earth.${N}"
     print "  ${G}Unlike ${Y}git clean -fd${G}, you see before you destroy.${N}"
     print ""

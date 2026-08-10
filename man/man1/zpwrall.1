@@ -523,7 +523,7 @@ edit emacs a file in a sub dir by word \(em \fIzpwrEmacsFzfWordsearchVerbEdit\fP
 emacs zpwr dir \(em \fIzpwrEmacsZpwr\fP
 .TP
 .B envaccept
-accept from fzf env \(em \fIzpwrFzfEnvVerbAccept\fP
+accept from arb \-\-fzf env \(em \fIzpwrFzfEnvVerbAccept\fP
 .TP
 .B envcachesearch
 search all cached aliases, parameters, builtins, keywords and functions \(em \fIzpwrFzfEnv\fP
@@ -532,7 +532,7 @@ search all cached aliases, parameters, builtins, keywords and functions \(em \fI
 count all zpwr env \(em \fIzpwrEnvCounts\fP
 .TP
 .B envedit
-edit from fzf env \(em \fIzpwrFzfEnvVerbEdit\fP
+edit from arb \-\-fzf env \(em \fIzpwrFzfEnvVerbEdit\fP
 .TP
 .B environmentcachesearch
 search all cached aliases, parameters, builtins, keywords and functions \(em \fIzpwrFzfEnv\fP
@@ -630,46 +630,46 @@ run first arg in following dirs \(em \fIzpwrFordir\fP
 run git updaters in following dirs \(em \fIzpwrFordirUpdate\fP
 .TP
 .B forgitadd
-forgit fzf add \(em \fIforgit::add\fP
+forgit interactive add \(em \fIforgit::add\fP
 .TP
 .B forgitclean
-forgit fzf clean \(em \fIforgit::clean\fP
+forgit interactive clean \(em \fIforgit::clean\fP
 .TP
 .B forgitdiff
-forgit fzf diff \(em \fIforgit::diff\fP
+forgit interactive diff \(em \fIforgit::diff\fP
 .TP
 .B forgitignore
-forgit fzf ignore \(em \fIforgit::ignore\fP
+forgit interactive ignore \(em \fIforgit::ignore\fP
 .TP
 .B forgitignoreclean
-forgit fzf ignore clean \(em \fIforgit::ignore::clean\fP
+forgit interactive ignore clean \(em \fIforgit::ignore::clean\fP
 .TP
 .B forgitignoreget
-forgit fzf ignore get \(em \fIforgit::ignore::get\fP
+forgit interactive ignore get \(em \fIforgit::ignore::get\fP
 .TP
 .B forgitignorelist
-forgit fzf ignore list \(em \fIforgit::ignore::list\fP
+forgit interactive ignore list \(em \fIforgit::ignore::list\fP
 .TP
 .B forgitignoreupdate
-forgit fzf ignoreupdate \(em \fIforgit::ignore::update\fP
+forgit interactive ignoreupdate \(em \fIforgit::ignore::update\fP
 .TP
 .B forgitinfo
-forgit fzf info \(em \fIforgit::info\fP
+forgit interactive info \(em \fIforgit::info\fP
 .TP
 .B forgitlog
-forgit fzf log \(em \fIforgit::log\fP
+forgit interactive log \(em \fIforgit::log\fP
 .TP
 .B forgitreset
-forgit fzf reset \(em \fIforgit::reset::head\fP
+forgit interactive reset \(em \fIforgit::reset::head\fP
 .TP
 .B forgitrestore
-forgit fzf restore \(em \fIforgit::restore\fP
+forgit interactive restore \(em \fIforgit::restore\fP
 .TP
 .B forgitstash
-forgit fzf stash \(em \fIforgit::stash::show\fP
+forgit interactive stash \(em \fIforgit::stash::show\fP
 .TP
 .B forgitwarn
-forgit fzf warn \(em \fIforgit::warn\fP
+forgit interactive warn \(em \fIforgit::warn\fP
 .TP
 .B forked
 cd to $ZPWR_FORKED_DIR \(em \fIfp\fP
@@ -722,7 +722,7 @@ commit and push with arg message \(em \fIzsh\-gacp\-CommitAndPush\fP
 count commits \(em \fIzsh\-gacp\-CommitCount\fP
 .TP
 .B gitcommits
-search git commits with fzf \(em \fIzpwrCommits\fP
+search git commits via vim :Commits \(em \fIzpwrCommits\fP
 .TP
 .B gitconfig
 edit git config file \(em \fIzpwrGitConfig\fP
@@ -839,7 +839,7 @@ clean Go package artifacts \(em \fIzpwrGoclean\fP
 google clipboard contents in tmux \(em \fIzpwrGoogle\fP
 .TP
 .B grep
-grep through pwd with ag into fzf \(em \fIzpwrAgIntoFzf\fP
+grep through pwd with ag into arb \-\-fzf \(em \fIzpwrAgIntoFzf\fP
 
 .SS H
 .TP
@@ -1011,7 +1011,7 @@ make a dir tree \(em \fIjd\fP
 make a dir tree with file at end \(em \fIj\fP
 .TP
 .B man
-fzf through man pages \(em \fIfm\fP
+arb \-\-fzf through man pages \(em \fIfm\fP
 .TP
 .B manual
 interactive guided tour of zpwr \(em \fIzpwrWizard\fP
@@ -1308,7 +1308,7 @@ number of choice for zpwr <tab> \(em \fIzpwrNumVerbs\fP
 edit the subcommands for zpwr <tab> \(em \fIzpwrVerbsEditNoZLE\fP
 .TP
 .B subcommandsfzf
-fzf the subcommands for zpwr <tab> \(em \fIzpwrVerbsFZF\fP
+arb \-\-fzf the subcommands for zpwr <tab> \(em \fIzpwrVerbsFZF\fP
 .TP
 .B subcommandslist
 the subcommands for zpwr <tab> \(em \fIzpwrListVerbs\fP
@@ -1431,7 +1431,7 @@ number of choice for zpwr <tab> \(em \fIzpwrNumVerbs\fP
 edit the subcommands for zpwr <tab> \(em \fIzpwrVerbsEditNoZLE\fP
 .TP
 .B verbsfzf
-fzf the subcommands for zpwr <tab> \(em \fIzpwrVerbsFZF\fP
+arb \-\-fzf the subcommands for zpwr <tab> \(em \fIzpwrVerbsFZF\fP
 .TP
 .B verbslist
 list the subcommands for zpwr <tab> \(em \fIzpwrListVerbs\fP
@@ -1688,7 +1688,7 @@ to Desktop after banner on Linux.
 Single-character logo glyph for prompts/banners.
 .TP
 .B ZPWR_FZF_LOGO
-Prompt string for all fzf invocations.
+Prompt string for all picker invocations.
 .TP
 .B ZPWR_LOOK_TIME
 Sleep duration after counts in
@@ -1764,7 +1764,7 @@ ANSI styling for git commits.
 .B ZPWR_MARKER_COLOR
 Marker color in
 .B bat
-output piped through fzf from ag search.
+output piped through arb \-\-fzf from ag search.
 .TP
 .B ZPWR_DELIMITER_CHAR
 Delimiter for the alternating pretty-printer.
@@ -1891,7 +1891,7 @@ Include tabstop aliases.
 .SS Tools
 .TP
 .B ZPWR_FZF
-Command for all fzf invocations.
+Command for all picker invocations. Defaults to 'arb \-\-fzf \-\-ansi'.
 .TP
 .B ZPWR_FD
 Command for fd.
@@ -2159,7 +2159,7 @@ purge subsets.
 writes
 .IR $ZPWR/zpwrEnvKey.txt " and " $ZPWR/zpwrEnvValue.txt ;
 .B envcachesearch
-queries it via fzf.
+queries it via arb \-\-fzf.
 .TP
 .B ctags / gtags
 .B "zpwr regenctags"
@@ -2396,7 +2396,7 @@ Forwarded from the dispatched verb.
 .BR zshall (1),
 .BR zinit (1),
 .BR tmux (1),
-.BR fzf (1),
+.BR arb (1),
 .BR shellcheck (1),
 .BR zprof (1),
 .BR ag (1),

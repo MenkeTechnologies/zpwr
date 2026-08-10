@@ -30,8 +30,8 @@ PAGE_CONTENT() {
     print "  ${D}  Use when a dev server refuses to die.${N}"
     print ""
     print "  ${B}${Y}COMPANION VERBS${N}"
-    print "  ${M}  zpwr lsof${N}${D}                 # interactive fzf over all lsof output${N}"
+    print "  ${M}  zpwr lsof${N}${D}                 # interactive arb --fzf over all lsof output${N}"
     print "  ${M}  zpwr ps${N}${D}                   # grep through ps output${N}"
-    print "  ${M}  zpwr kill${N}${D}                 # fzf kill from ps${N}"
+    print "  ${M}  zpwr kill${N}${D}                 # arb --fzf kill from ps${N}"
     print ""
 }

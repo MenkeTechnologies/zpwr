@@ -10,7 +10,7 @@ PAGE_CONTENT() {
     print "  ${D}Set this in your env to change the default theme globally.${N}"
     print "  ${D}Popular themes: Dracula, Monokai Extended, Nord, OneHalfDark,${N}"
     print "  ${D}Solarized (Dark), TwoDark, ansi. Preview them all:${N}"
-    print "  ${M}  bat --list-themes | fzf --preview='bat --theme={} src/main.rs'${N}"
+    print "  ${M}  bat --list-themes | arb --fzf --preview='bat --theme={} src/main.rs'${N}"
     print "  ${B}${Y}STYLE COMPONENTS${N}"
     print "  ${M}  bat --style=numbers,changes,header${N}"
     print "  ${D}Components: full, auto, plain, numbers, changes, header,${N}"

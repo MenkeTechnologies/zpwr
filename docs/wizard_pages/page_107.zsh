@@ -25,7 +25,7 @@ PAGE_CONTENT() {
     print "  ${G}  wait'0a':${N}${D}      zsh-expand + late aliases + alias cache${N}"
     print "  ${G}  wait'0b':${N}${D}      zsh-autocomplete (if ZPWR_AUTO_COMPLETE=true)${N}"
     print "  ${G}  wait'0c':${N}${D}      zsh-history-substring-search${N}"
-    print "  ${G}  wait'0d':${N}${D}      zsh-autosuggestions + FZF late bindings + verbs${N}"
+    print "  ${G}  wait'0d':${N}${D}      zsh-autosuggestions + ARB late bindings + verbs${N}"
     print "  ${G}  wait'0e':${N}${D}      zsh-zinit-final (penultimate, final keybindings)${N}"
     print "  ${G}  wait'0f':${N}${D}      zsh-more-completions (low priority, last resort)${N}"
     print "  ${G}  wait'\${ZPWR_ZINIT_COMPINIT_DELAY}g':${N}${D}  compinit + cdreplay${N}"

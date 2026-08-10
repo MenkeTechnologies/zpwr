@@ -15,7 +15,7 @@ PAGE_CONTENT() {
     print "  ${D}  Hundreds of files. Ready for :argdo mass operations.${N}"
     print "  ${D}  This is the tactical nuke of text editing.${N}"
     print ""
-    print "  ${M}  zpwr vimalledit${N}${D}         # fzf pick 1+ configs to edit${N}"
+    print "  ${M}  zpwr vimalledit${N}${D}         # arb --fzf pick 1+ configs to edit${N}"
     print "  ${D}  Like vimall but you choose which files to open.${N}"
     print "  ${D}  Surgical precision instead of carpet bombing.${N}"
     print ""

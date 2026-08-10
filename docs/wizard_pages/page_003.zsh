@@ -36,7 +36,7 @@ PAGE_CONTENT() {
     print ""
     print "  ${B}${Y}INSPECT THE TABLE YOURSELF${N}"
     print "  ${M}  zpwr subcommands${N}${D}        # dump all verbs to stdout${N}"
-    print "  ${M}  zpwr verbs${N}${D}     # fuzzy search verbs with fzf${N}"
+    print "  ${M}  zpwr verbs${N}${D}     # fuzzy search verbs with arb --fzf${N}"
     print "  ${M}  zpwr verbscount${N}${D}          # how many verbs exist${N}"
     print ""
     print "  ${B}${Y}THE EDIT SUFFIX PATTERN${N}"

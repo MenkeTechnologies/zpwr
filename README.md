@@ -30,7 +30,7 @@ ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/
 ZPWR **invented the terminal-OS concept** -- the idea that a shell environment can be a coherent operating system for the command line, not a loose pile of dotfiles. It has no direct competitor because it is not in any existing category; it originated and defines a new one: the **dotfile super-OS**. Every adjacent tool covers exactly one of ZPWR's axes; none integrate all of them in a single installable system:
 
 - **Verb-dispatcher mega-CLI** -- `zpwr <verb>` exposing a discoverable, menucompleted command vocabulary spanning the whole environment.
-- **Full-stack curated cockpit** -- zsh + ztmux + fzf + zmax wired together as one coherent machine, not a pile of configs.
+- **Full-stack curated cockpit** -- zsh + ztmux + arb --fzf + zmax wired together as one coherent machine, not a pile of configs.
 - **Scale** -- thousands of aliases, tens of thousands of completions, thousands of functions, and a custom env-var control plane, all in one repo.
 - **Single-author, single-install OS** -- one `curl` jacks the entire stack in.
 
@@ -46,7 +46,7 @@ The landscape splits cleanly along these axes, and each rival owns only one:
 
 Closest by spirit -- the famous personal dotfiles repos -- top out at curated configs with a `bin/` of scripts. None expose a namespaced `<tool> <verb>` dispatcher of this breadth, and none ship the full multi-tool cockpit at this scale. ZPWR is the only thing that is simultaneously a verb-CLI, a full-stack terminal environment, and a single-author OS. Category of one.
 
-The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) -- ZPWR's original fork point, and a similar concept in seed form. Dotmatrix is dotfiles for provisioning a dev machine: shell/git/vim/ztmux configs plus `hr`, a subcommand utility for developer tasks. ZPWR took that seed to *terminal-OS breadth* -- a verb-dispatcher spanning the entire environment (not just dev chores), a fully wired zsh + ztmux + zmax + fzf + spacemacs cockpit, an env-var control plane, and completions at corpus scale. The novelty is not "a shell with a helper command" -- that predecessor existed and is credited here -- it is configuring **every aspect of the terminal as one coherent OS**. That is what ZPWR originated.
+The nearest ancestor is Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) -- ZPWR's original fork point, and a similar concept in seed form. Dotmatrix is dotfiles for provisioning a dev machine: shell/git/vim/ztmux configs plus `hr`, a subcommand utility for developer tasks. ZPWR took that seed to *terminal-OS breadth* -- a verb-dispatcher spanning the entire environment (not just dev chores), a fully wired zsh + ztmux + zmax + arb --fzf + spacemacs cockpit, an env-var control plane, and completions at corpus scale. The novelty is not "a shell with a helper command" -- that predecessor existed and is credited here -- it is configuring **every aspect of the terminal as one coherent OS**. That is what ZPWR originated.
 
 ---
 
@@ -175,15 +175,15 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - neon-coded groups of zsh menu completion for git objects
 - heavily colorized man pages [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals) -- manpages that glow
 - insert matching quotes, brackets and parentheses like most IDEs [zsh-autopair](https://github.com/hlissner/zsh-autopair)
-- custom keybinding to open files most recently edited based on viminfo and emacs recentf and placed into fzf for fuzzy searching `zpwr vimrecent` -- time travel through your edit history
+- custom keybinding to open files most recently edited based on viminfo and emacs recentf and placed into arb --fzf for fuzzy searching `zpwr vimrecent` -- time travel through your edit history
 - vim keybindings (insert, normal and visual modes) to run current code file open in vim in ztmux pane to right -- write and execute in one fluid motion
 - vim keybindings (insert, normal and visual modes) to run current vim selection in ztmux pane to right as standalone script
 - vim keybindings (insert, normal and visual modes) to run current vim selection in ztmux pane to right in REPL
-- fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF.*OPTS env vars -- x-ray vision for archives
+- arb --fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF.*OPTS env vars -- x-ray vision for archives
 - ergonomic, repeating ztmux keybindings for next and previous windows
-- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimfilesearch`
-- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimwordsearch`
-- zsh keybindings to fzf search of network processes with lsof return PIDs `zpwr lsof` -- scan the local net like a deck jockey
+- zsh keybindings to arb --fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimfilesearch`
+- zsh keybindings to arb --fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimwordsearch`
+- zsh keybindings to arb --fzf search of network processes with lsof return PIDs `zpwr lsof` -- scan the local net like a deck jockey
 - zsh function to cache all git directories `zpwr regengitrepocache`
 - zsh function to edit the cached git-directory list `zpwr gitreposfile`
 - zsh function to refresh the dirty-repo cache and run a command in every dirty repo `zpwr gitreposdirtyexec` -- find every repo with uncommitted cargo
@@ -215,7 +215,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh, ztmux and vim keybindings to copy/paste to system clipboard
 - shell function to pull down latest code changes from this repo with `zpwr update`
 - shell function that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips with `zpwr cat` or `c`
-- shell function uses same shell code to generate output that default FZF preview pane does with `zpwr cat` or `c`
+- shell function uses same shell code to generate output that the default arb --fzf preview pane does with `zpwr cat` or `c`
 - shell function automatically runs sudo when file is not readable with `zpwr cat` or `c`
 - shell function that cds to any of parent directories with zsh completion with `zpwr cdup` or `r`
 - zpwrClearList function that run clear and ls and show stats for commands, files, aliases, functions etc
@@ -223,10 +223,10 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - search google from ztmux mouse drag selection (ztmux's copy-mode-vi) -- highlight text, query the net
 - open URLs and files from ztmux mouse drag selection (ztmux's copy-mode-vi) -- drag to launch
 - zpwr subcommands count with `zpwr verbscount`
-- zpwr subcommands into fzf then execed with `zpwr verbs`
-- zpwr subcommands into fzf with `zpwr verbsedit` then onto command line
+- zpwr subcommands into arb --fzf then execed with `zpwr verbs`
+- zpwr subcommands into arb --fzf with `zpwr verbsedit` then onto command line
 - zpwr environment counts with `zpwr envcounts`
-- centralized FZF preview pane customization with environment variables
+- centralized arb --fzf preview pane customization with FZF_* environment variables
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - systemd service, poll.service, that polls github and download latest zpwr code
@@ -259,7 +259,6 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - rust/cargo
 - rustup
 - powerliners for ztmux
-- fzf
 - bash (4.0+, 3.2 not supported)
 - zinit with 48 plugins of which 33 are custom
 - powerlevel10k zsh prompt with ~dirs via cached hash dirs and prompt_dir override
@@ -461,7 +460,7 @@ Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and crea
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
 
 ## zpwr verbs
-Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verbs (fzf multiselection is enabled).  `zpwr verbsedit` puts selected verbs onto command line for editing.
+Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in arb and then execute selected verbs (arb multiselection is enabled).  `zpwr verbsedit` puts selected verbs onto command line for editing.
 
 ## Man Page -- `man zpwr` and `man zpwrall`
 ZPWR ships two UNIX man pages at `~/.zpwr/man/man1/`.  Add the directory to your `MANPATH` to view them with the system `man`:
@@ -603,9 +602,9 @@ export ZPWR_EXPAND_QUOTE_DOUBLE=true
 export ZPWR_EXPAND_QUOTE_SINGLE=false
 # command for fd
 export ZPWR_FD='command fd --follow --type file --threads 8'
-# command for all fzf
-export ZPWR_FZF='fzf --ansi'
-# prompt for all fzf
+# command for all arb
+export ZPWR_FZF='arb --fzf --ansi'
+# prompt for all arb
 export ZPWR_FZF_LOGO='<<)ZPWR(>>'
 # GH username
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -627,7 +626,7 @@ export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right ztmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
-# the marker found color in bat output into fzf from ag search ANSI codes
+# the marker found color in bat output into arb --fzf from ag search ANSI codes
 export ZPWR_MARKER_COLOR='0;1;4;37;44m'
 # default value for pygmentize theme
 export ZPWR_PYGMENTIZE_COLOR="emacs"
@@ -701,7 +700,7 @@ elif [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
     zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
 fi
 
-# fzf dir
+# fzf zsh-plugin dir (shell glue: widgets, completion shims)
 zpwrEvalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
 # local file ignored by git
 zpwrEvalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
@@ -719,7 +718,7 @@ zpwrEvalIfNeeded ZPWR_AUTOLOAD_COMPS "$ZPWR_AUTOLOAD_COMPS" "$ZPWR_AUTOLOAD/comp
 zpwrEvalIfNeeded ZPWR_AUTOLOAD_COMP_UTILS "$ZPWR_AUTOLOAD_COMP_UTILS" "$ZPWR_AUTOLOAD/comp_utils" "$ZPWR_AUTOLOAD"
 # autoloaded darwin non completion functions
 zpwrEvalIfNeeded ZPWR_AUTOLOAD_DARWIN "$ZPWR_AUTOLOAD_DARWIN" "$ZPWR_AUTOLOAD/darwin" "$ZPWR_AUTOLOAD"
-# autoloaded fzf helper functions
+# autoloaded fzf completion helper functions
 zpwrEvalIfNeeded ZPWR_AUTOLOAD_FZF "$ZPWR_AUTOLOAD_FZF" "$ZPWR_AUTOLOAD/fzf" "$ZPWR_AUTOLOAD"
 # autoloaded linux non completion functions
 zpwrEvalIfNeeded ZPWR_AUTOLOAD_LINUX "$ZPWR_AUTOLOAD_LINUX" "$ZPWR_AUTOLOAD/linux" "$ZPWR_AUTOLOAD"
@@ -734,7 +733,7 @@ zpwrEvalIfNeeded ZPWR_CROSS_OS_EXE "$ZPWR_CROSS_OS_EXE" "$ZPWR_SCRIPTS/crossOSEx
 # the location of macOS only associated interpreted scripts
 # custom plugin dir
 zpwrEvalIfNeeded ZPWR_PLUGIN_DIR "$ZPWR_PLUGIN_DIR" "$ZSH_CUSTOM/plugins" "$ZSH_CUSTOM"
-# fzf custom plugin dir
+# fzf custom zsh-plugin dir
 zpwrEvalIfNeeded ZPWR_ZINIT_FZF "$ZPWR_ZINIT_FZF" "$ZPWR_PLUGIN_DIR/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_DIR"
 # same as zpwr local
 zpwrEvalIfNeeded ZPWR_HIDDEN_DIR "$ZPWR_HIDDEN_DIR" "$ZPWR/local" "$ZPWR"
@@ -775,7 +774,7 @@ zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_ENV/zpwr.zsh" "$ZPWR_
 zpwrEvalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file
 zpwrEvalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
-# command for all fzf clearlist in preview pane
+# command for all arb --fzf clearlist in preview pane
 zpwrEvalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpwrClearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
 # the file used to find most recent files opened in neovim
 zpwrEvalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
@@ -897,7 +896,7 @@ zpwr top 1     # fast refresh
 ```
 
 ## Tmux Layout Save/Load -- zpwr tmuxsave / zpwr tmuxload
-`zpwr tmuxsave [name]` captures the current ztmux session layout — windows, pane splits, layout geometry, working directories, and window names — into a self-contained zsh script in `$ZPWR_LOCAL/layouts/`.  The generated script recreates the exact layout via `ztmux new-session`, `split-window`, and `select-layout` with the original geometry string, then `cd`s each pane to its saved directory.  `zpwr tmuxload [name]` sources the script to restore the layout, with optional fzf picker when no name is given.  Also available as `zpwr layoutsave` and `zpwr layoutload`.
+`zpwr tmuxsave [name]` captures the current ztmux session layout — windows, pane splits, layout geometry, working directories, and window names — into a self-contained zsh script in `$ZPWR_LOCAL/layouts/`.  The generated script recreates the exact layout via `ztmux new-session`, `split-window`, and `select-layout` with the original geometry string, then `cd`s each pane to its saved directory.  `zpwr tmuxload [name]` sources the script to restore the layout, with optional arb --fzf picker when no name is given.  Also available as `zpwr layoutsave` and `zpwr layoutload`.
 
 ```sh
 zpwr tmuxsave              # save with timestamp name
@@ -906,7 +905,7 @@ zpwr tmuxsave --list       # list saved layouts
 zpwr tmuxsave --delete dev # delete "dev" layout
 zpwr tmuxload dev          # restore "dev" layout
 zpwr tmuxload dev mywork   # restore as session "mywork"
-zpwr tmuxload              # fzf picker (if fzf available)
+zpwr tmuxload              # arb --fzf picker (if arb available)
 ```
 
 ## Health Check -- zpwr doctor
@@ -1152,7 +1151,7 @@ zpwr study 42              # start study session at page 42
 zpwr study -v              # vertical split (book top, shell bottom)
 ```
 
-Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  45 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Forge oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grcrs, zcolorizer, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
+Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  45 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), arb --fzf architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Forge oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grcrs, zcolorizer, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
 
 The interactive wizard content lives in `$ZPWR/docs/wizard_pages/` (with screenshots in `$ZPWR/docs/screenshots/`); `zpwr study` and `zpwr wizard` render from those pages.
 

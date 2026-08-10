@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="ZPWR — Neon-lit UNIX terminal operating system. The complete encyclopedia. 504 verbs, 2000+ aliases, 47k zsh completions, 533 autoload functions, 45-chapter / 217-section wizard. Built on zsh + tmux + vim/nvim + fzf + git + zinit + stryke.">
+  <meta name="description" content="ZPWR — Neon-lit UNIX terminal operating system. The complete encyclopedia. 504 verbs, 2000+ aliases, 47k zsh completions, 533 autoload functions, 45-chapter / 217-section wizard. Built on zsh + tmux + vim/nvim + arb --fzf + git + zinit + stryke.">
   <title>ZPWR — Wizard Encyclopedia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -404,7 +404,7 @@
 
     <main class="tutorial-main">
       <h2 class="tutorial-title"><span class="step-hash">&gt;_</span>ZPWR — WIZARD ENCYCLOPEDIA</h2>
-      <p class="tutorial-subtitle"><strong>Not a dotfiles repo. Not a "framework."</strong> A fully integrated shell operating system that happens to run inside your terminal — built on zsh, tmux, vim/nvim, fzf, git, zinit, and <a href="https://github.com/MenkeTechnologies/strykelang">stryke</a>. This is the complete encyclopedia: 45 chapters, 217 sections, rendered from the <code>zpwr wizard</code> page sources in <code>docs/wizard_pages/</code>. Read it linearly, jump via the table of contents, or invoke it live with <code>zpwr wizard</code>.</p>
+      <p class="tutorial-subtitle"><strong>Not a dotfiles repo. Not a "framework."</strong> A fully integrated shell operating system that happens to run inside your terminal — built on zsh, tmux, vim/nvim, arb --fzf, git, zinit, and <a href="https://github.com/MenkeTechnologies/strykelang">stryke</a>. This is the complete encyclopedia: 45 chapters, 217 sections, rendered from the <code>zpwr wizard</code> page sources in <code>docs/wizard_pages/</code>. Read it linearly, jump via the table of contents, or invoke it live with <code>zpwr wizard</code>.</p>
 
       <div class="stat-grid">
         <div class="stat-card"><div class="num">504</div><div class="lbl">zpwr verbs</div></div>
@@ -445,7 +445,7 @@
 <li class="enc-toc-chapter"><a href="#ch4"><span class="enc-toc-num">CH 04</span> THE SEARCH ENGINE</a></li>
 <li class="enc-toc-section"><a href="#s15"><span class="enc-toc-num">§15</span> Finding Files</a></li>
 <li class="enc-toc-section"><a href="#s16"><span class="enc-toc-num">§16</span> Searching Content</a></li>
-<li class="enc-toc-section"><a href="#s17"><span class="enc-toc-num">§17</span> The FZF Dimension</a></li>
+<li class="enc-toc-section"><a href="#s17"><span class="enc-toc-num">§17</span> The ARB Dimension</a></li>
 <li class="enc-toc-chapter"><a href="#ch5"><span class="enc-toc-num">CH 05</span> EDITOR MASTERY</a></li>
 <li class="enc-toc-section"><a href="#s18"><span class="enc-toc-num">§18</span> Vim Integration Overview</a></li>
 <li class="enc-toc-section"><a href="#s19"><span class="enc-toc-num">§19</span> Vim File Operations</a></li>
@@ -546,7 +546,7 @@
 <li class="enc-toc-section"><a href="#s95"><span class="enc-toc-num">§95</span> The One-Letter Verbs</a></li>
 <li class="enc-toc-section"><a href="#s96"><span class="enc-toc-num">§96</span> Alias Chains</a></li>
 <li class="enc-toc-section"><a href="#s97"><span class="enc-toc-num">§97</span> The Token System</a></li>
-<li class="enc-toc-section"><a href="#s98"><span class="enc-toc-num">§98</span> FZF Everywhere</a></li>
+<li class="enc-toc-section"><a href="#s98"><span class="enc-toc-num">§98</span> ARB Everywhere</a></li>
 <li class="enc-toc-chapter"><a href="#ch25"><span class="enc-toc-num">CH 25</span> THE COMPLETE REFERENCE</a></li>
 <li class="enc-toc-section"><a href="#s99"><span class="enc-toc-num">§99</span> All Verbs A-G</a></li>
 <li class="enc-toc-section"><a href="#s100"><span class="enc-toc-num">§100</span> All Verbs H-S</a></li>
@@ -569,10 +569,10 @@
 <li class="enc-toc-section"><a href="#s114"><span class="enc-toc-num">§114</span> Emulate &amp; Options</a></li>
 <li class="enc-toc-section"><a href="#s115"><span class="enc-toc-num">§115</span> Parameter Expansion Magic</a></li>
 <li class="enc-toc-section"><a href="#s116"><span class="enc-toc-num">§116</span> The .zwc Compilation System</a></li>
-<li class="enc-toc-chapter"><a href="#ch29"><span class="enc-toc-num">CH 29</span> FZF ARCHITECTURE</a></li>
-<li class="enc-toc-section"><a href="#s117"><span class="enc-toc-num">§117</span> FZF: The Neural Interface</a></li>
-<li class="enc-toc-section"><a href="#s118"><span class="enc-toc-num">§118</span> FZF in Practice</a></li>
-<li class="enc-toc-section"><a href="#s119"><span class="enc-toc-num">§119</span> Building Your Own FZF Verbs</a></li>
+<li class="enc-toc-chapter"><a href="#ch29"><span class="enc-toc-num">CH 29</span> ARB ARCHITECTURE</a></li>
+<li class="enc-toc-section"><a href="#s117"><span class="enc-toc-num">§117</span> arb --fzf: The Neural Interface</a></li>
+<li class="enc-toc-section"><a href="#s118"><span class="enc-toc-num">§118</span> ARB in Practice</a></li>
+<li class="enc-toc-section"><a href="#s119"><span class="enc-toc-num">§119</span> Building Your Own ARB Verbs</a></li>
 <li class="enc-toc-chapter"><a href="#ch30"><span class="enc-toc-num">CH 30</span> TMUX DEEP DIVE</a></li>
 <li class="enc-toc-section"><a href="#s120"><span class="enc-toc-num">§120</span> Tmux Architecture in ZPWR</a></li>
 <li class="enc-toc-section"><a href="#s121"><span class="enc-toc-num">§121</span> Vim-Tmux Code Execution</a></li>
@@ -594,7 +594,7 @@
 <li class="enc-toc-section"><a href="#s132"><span class="enc-toc-num">§132</span> bat: Configuration &amp; Tricks</a></li>
 <li class="enc-toc-chapter"><a href="#ch36"><span class="enc-toc-num">CH 36</span> FD-FIND — FIND REPLACEMENT</a></li>
 <li class="enc-toc-section"><a href="#s133"><span class="enc-toc-num">§133</span> fd: find for Humans</a></li>
-<li class="enc-toc-section"><a href="#s134"><span class="enc-toc-num">§134</span> fd: Integration with zpwr &amp; fzf</a></li>
+<li class="enc-toc-section"><a href="#s134"><span class="enc-toc-num">§134</span> fd: Integration with zpwr &amp; arb --fzf</a></li>
 <li class="enc-toc-chapter"><a href="#ch37"><span class="enc-toc-num">CH 37</span> RIPGREP — GREP AT LIGHT SPEED</a></li>
 <li class="enc-toc-section"><a href="#s135"><span class="enc-toc-num">§135</span> ripgrep: grep Reimagined</a></li>
 <li class="enc-toc-section"><a href="#s136"><span class="enc-toc-num">§136</span> ripgrep: Advanced &amp; zpwr Integration</a></li>
@@ -631,8 +631,8 @@
 <li class="enc-toc-section"><a href="#s157"><span class="enc-toc-num">§157</span> The Learning System</a></li>
 <li class="enc-toc-chapter"><a href="#ch48"><span class="enc-toc-num">CH 48</span> BATCH OPERATIONS</a></li>
 <li class="enc-toc-section"><a href="#s158"><span class="enc-toc-num">§158</span> Git Repo Cache System</a></li>
-<li class="enc-toc-chapter"><a href="#ch49"><span class="enc-toc-num">CH 49</span> FZF ARCHITECTURE</a></li>
-<li class="enc-toc-section"><a href="#s159"><span class="enc-toc-num">§159</span> FZF Brew &amp; Chrome</a></li>
+<li class="enc-toc-chapter"><a href="#ch49"><span class="enc-toc-num">CH 49</span> ARB ARCHITECTURE</a></li>
+<li class="enc-toc-section"><a href="#s159"><span class="enc-toc-num">§159</span> fzf-zsh-plugin: Brew &amp; Chrome</a></li>
 <li class="enc-toc-chapter"><a href="#ch50"><span class="enc-toc-num">CH 50</span> THE GIT DIMENSION</a></li>
 <li class="enc-toc-section"><a href="#s160"><span class="enc-toc-num">§160</span> Git Add-Commit-Push</a></li>
 <li class="enc-toc-chapter"><a href="#ch51"><span class="enc-toc-num">CH 51</span> NETWORK &amp; CONTAINERS</a></li>
@@ -728,7 +728,7 @@
 <h4 class="enc-h4">WELCOME TO THE MACHINE</h4>
 <p>You found it. The rabbit hole. <strong>ZPWR</strong> is not a dotfiles repo. It is not a &quot;framework.&quot; It is a fully integrated shell operating system that happens to run inside your terminal.</p>
 <h5 class="enc-h5">WHAT IS <strong>ZPWR</strong>?</h5>
-<p>A $#<strong>ZPWR_VERBS</strong>-verb command dispatcher built on top of zsh, tmux, vim/nvim, fzf, and git. Every verb is a surgical tool. Every keybinding is a weapon. Every alias is a shortcut through the matrix.</p>
+<p>A $#<strong>ZPWR_VERBS</strong>-verb command dispatcher built on top of zsh, tmux, vim/nvim, arb --fzf, and git. Every verb is a surgical tool. Every keybinding is a weapon. Every alias is a shortcut through the matrix.</p>
 <h5 class="enc-h5">THE PHILOSOPHY</h5>
 <p>1. Verbs, not scripts. Everything is zpwr &lt;verb&gt;. 2. Discoverability.   Tab completion on everything. 3. Symmetry.          vim* and emacs* verbs mirror each other. 4. Speed.             Compiled zwc files. Benchmarked startup. 5. No magic.          Read the source. It is all zsh.</p>
 <h5 class="enc-h5">THE DIRECTORY TREE</h5>
@@ -753,8 +753,8 @@ zpwr bannercounts       # banner + environment statistics</pre>
 <p>This prints a breakdown of your loaded shell environment: aliases, functions, builtins, parameters, completions. If the numbers are big, congratulations. You are armed.</p>
 <h5 class="enc-h5">STEP 3: DISCOVER THE VERBS</h5>
 <pre class="enc-code">zpwr help               # colorized list of ALL verbs
-zpwr verbs     # fzf fuzzy search through verbs</pre>
-<p>The verbs verb is your panic button (alias: subcommandsfzf). Forgot what a command is called? Fuzzy search it. This pipes every verb and its description into fzf. Type a few characters. Watch the list collapse. Hit enter. Execute.</p>
+zpwr verbs     # arb --fzf fuzzy search through verbs</pre>
+<p>The verbs verb is your panic button (alias: subcommandsfzf). Forgot what a command is called? Fuzzy search it. This pipes every verb and its description into arb --fzf. Type a few characters. Watch the list collapse. Hit enter. Execute.</p>
 <h5 class="enc-h5">STEP 4: VERIFY YOUR ENVIRONMENT</h5>
 <pre class="enc-code">zpwr doctor             # run environment health check
 zpwr envvars            # list all zpwr env vars
@@ -784,7 +784,7 @@ zpwr repo     = zpwr zp  = zpwr zpwr</pre>
 <p>zpwr git&lt;tab&gt;     # shows: gitcommit, gitconfig, gitsearch... zpwr vim&lt;tab&gt;     # shows: vimall, vimrecent, vimctags... zpwr home&lt;tab&gt;    # shows: home, homeenv, homelocal... zpwr forgit&lt;tab&gt;  # shows: forgitadd, forgitlog, forgitdiff...</p>
 <h5 class="enc-h5">INSPECT THE TABLE YOURSELF</h5>
 <pre class="enc-code">zpwr subcommands        # dump all verbs to stdout
-zpwr verbs     # fuzzy search verbs with fzf
+zpwr verbs     # fuzzy search verbs with arb --fzf
 zpwr verbscount          # how many verbs exist</pre>
 <h5 class="enc-h5">THE EDIT SUFFIX PATTERN</h5>
 <p>Many verbs come in pairs: filesearch      -&gt; open file after selection filesearchedit  -&gt; type into command line for editing The &quot;edit&quot; variant puts the result on your command line instead of executing immediately. Power and precision.</p>
@@ -842,8 +842,8 @@ zpwr cdup &lt;dir&gt;     # same thing, cd-up style</pre>
 <h5 class="enc-h5">Z: FRECENCY JUMPING</h5>
 <pre class="enc-code">zpwr z &lt;query&gt;      # jump to frecency-ranked directory</pre>
 <p>Z tracks where you go. The more you visit a directory, the higher it ranks. Type a fragment, land at the top match.</p>
-<pre class="enc-code">zpwr zcd            # fzf list of z-ranked dirs, pick one</pre>
-<p>When you cannot remember the exact fragment, zcd shows you the full ranked list in fzf.</p>
+<pre class="enc-code">zpwr zcd            # arb --fzf list of z-ranked dirs, pick one</pre>
+<p>When you cannot remember the exact fragment, zcd shows you the full ranked list in arb --fzf.</p>
 <h5 class="enc-h5">PRACTICAL COMBOS</h5>
 <p>zpwr z proj         # land in your most-visited &quot;proj&quot; dir zpwr r src          # climb back up to the &quot;src&quot; parent zpwr f tests        # dive into the &quot;tests&quot; child.</p>
 <p>The pattern is: z for teleportation, f for descent, r for ascent. Three directions. Total coverage.</p>
@@ -952,8 +952,8 @@ zpwr gitignores        # edit global git ignores file
 zpwr gitglobalignores  # same as gitignores</pre>
 <h5 class="enc-h5">STASH AND DIFF (VIA FORGIT)</h5>
 <p><strong>ZPWR</strong> delegates interactive stash and diff to forgit:</p>
-<pre class="enc-code">zpwr forgitdiff        # fzf-powered git diff viewer
-zpwr forgitstash       # fzf-powered stash browser</pre>
+<pre class="enc-code">zpwr forgitdiff        # interactive git diff viewer
+zpwr forgitstash       # interactive stash browser</pre>
 <p>See page 13 for the full forgit arsenal.</p>
 <h5 class="enc-h5">REMOTE OPERATIONS</h5>
 <pre class="enc-code">zpwr gitremotes        # list all git remotes
@@ -1012,8 +1012,8 @@ zpwr reveal            # admire it in the browser</pre>
 <p>The past is not dead. It is not even past. It is stored in .git/objects and zpwr can dig it up.</p>
 <h5 class="enc-h5">SEARCHING THE LOG</h5>
 <pre class="enc-code">zpwr gitsearch             # search for regex in git log</pre>
-<p>Uses fzf to grep through your entire commit history. That one commit where you &quot;fixed the thing&quot;? Found.</p>
-<pre class="enc-code">zpwr gitcommits            # search git commits with fzf</pre>
+<p>Uses arb --fzf to grep through your entire commit history. That one commit where you &quot;fixed the thing&quot;? Found.</p>
+<pre class="enc-code">zpwr gitcommits            # search git commits via vim :Commits</pre>
 <p>Interactive commit browser. Preview diffs inline. Like git log but you can actually find things.</p>
 <h5 class="enc-h5">COUNTING COMMITS</h5>
 <pre class="enc-code">zpwr gitcommitcount        # total number of commits</pre>
@@ -1037,7 +1037,7 @@ zpwr reveal            # admire it in the browser</pre>
 <pre class="enc-code">zpwr gitlargest</pre>
 <p># Find that commit about the database migration:</p>
 <pre class="enc-code">zpwr gitsearch</pre>
-<p># Type &quot;migration&quot; in fzf. There it is.</p>
+<p># Type &quot;migration&quot; in arb --fzf. There it is.</p>
 </div></section>
 <section class="enc-section" id="s12">
 <h3 class="enc-section-title"><span class="enc-section-num">§12</span>Git Surgery</h3>
@@ -1073,24 +1073,24 @@ zpwr reveal            # admire it in the browser</pre>
 <h3 class="enc-section-title"><span class="enc-section-num">§13</span>Forgit: Git on Steroids</h3>
 <div class="enc-section-body">
 <h4 class="enc-h4">FORGIT: GIT ON STEROIDS</h4>
-<p>Forgit wraps common git operations with fzf previews. Every action gets a live preview pane. Every choice is informed. No more blind git commands.</p>
+<p>Forgit wraps common git operations with interactive previews. Every action gets a live preview pane. Every choice is informed. No more blind git commands.</p>
 <h5 class="enc-h5">STAGING AND UNSTAGING</h5>
-<pre class="enc-code">zpwr forgitadd            # fzf-powered git add</pre>
+<pre class="enc-code">zpwr forgitadd            # interactive git add</pre>
 <p>Shows unstaged files with inline diffs in the preview. Select files with tab. Enter to stage. Visual staging.</p>
-<pre class="enc-code">zpwr forgitreset          # fzf-powered git reset HEAD</pre>
+<pre class="enc-code">zpwr forgitreset          # interactive git reset HEAD</pre>
 <p>The reverse of forgitadd. Unstage files visually.</p>
 <h5 class="enc-h5">VIEWING CHANGES</h5>
-<pre class="enc-code">zpwr forgitdiff           # fzf-powered git diff viewer</pre>
+<pre class="enc-code">zpwr forgitdiff           # interactive git diff viewer</pre>
 <p>Browse changed files. Preview shows colorized diffs. Side-by-side comparison in your terminal.</p>
-<pre class="enc-code">zpwr forgitlog            # fzf-powered git log</pre>
+<pre class="enc-code">zpwr forgitlog            # interactive git log</pre>
 <p>Commit history with preview. See the diff for each commit without leaving the log view. Beautiful.</p>
 <h5 class="enc-h5">STASH OPERATIONS</h5>
-<pre class="enc-code">zpwr forgitstash          # fzf-powered stash browser</pre>
+<pre class="enc-code">zpwr forgitstash          # interactive stash browser</pre>
 <p>Lists stashes. Preview shows what each stash contains. Pick one, apply it. No more &quot;was it stash@3?&quot;</p>
 <h5 class="enc-h5">CLEANUP</h5>
-<pre class="enc-code">zpwr forgitclean          # fzf-powered git clean</pre>
+<pre class="enc-code">zpwr forgitclean          # interactive git clean</pre>
 <p>Shows untracked files. Select which to delete. Preview before you destroy. Civilized cleanup.</p>
-<pre class="enc-code">zpwr forgitrestore        # fzf-powered git restore</pre>
+<pre class="enc-code">zpwr forgitrestore        # interactive git restore</pre>
 <p>Discard changes to selected files. With preview.</p>
 <h5 class="enc-h5">GITIGNORE MANAGEMENT</h5>
 <pre class="enc-code">zpwr forgitignore         # browse gitignore templates
@@ -1144,18 +1144,18 @@ zpwr gitzfordirdevelop [z]         # z jump + wipe to develop</pre>
 <h3 class="enc-section-title"><span class="enc-section-num">§15</span>Finding Files</h3>
 <div class="enc-section-body">
 <h4 class="enc-h4">FINDING FILES</h4>
-<p>The filesystem is vast. You are small. But you have fzf and a verb for every search strategy.</p>
+<p>The filesystem is vast. You are small. But you have arb --fzf and a verb for every search strategy.</p>
 <h5 class="enc-h5">FILESEARCH: LOCAL TREE</h5>
 <pre class="enc-code">zpwr filesearch          # find and open a file in a sub dir</pre>
-<p>Recursively lists files under $<strong>PWD</strong> into fzf. Type fragments of the filename. Fuzzy match. Enter. Opens the file in your pager.</p>
+<p>Recursively lists files under $<strong>PWD</strong> into arb --fzf. Type fragments of the filename. Fuzzy match. Enter. Opens the file in your pager.</p>
 <pre class="enc-code">zpwr filesearchedit      # same but puts path on command line</pre>
 <p>Instead of opening immediately, the selected path lands on your $BUFFER for further editing. Append commands, pipe it, whatever you want.</p>
 <h5 class="enc-h5">DIRSEARCH: DIRECTORIES ONLY</h5>
-<pre class="enc-code">zpwr dirsearch           # cd to a sub directory via fzf</pre>
+<pre class="enc-code">zpwr dirsearch           # cd to a sub directory via arb --fzf</pre>
 <p>Same idea but only directories. Pick one, land in it. Faster than cd-tab-tab-tab-tab.</p>
 <h5 class="enc-h5">FINDSEARCH: FULL DISK</h5>
 <pre class="enc-code">zpwr findsearch          # find across the entire drive</pre>
-<p>Uses find(1) to search the whole filesystem. Results feed into fzf. Pick one, open it. Slow on first run. Worth the wait.</p>
+<p>Uses find(1) to search the whole filesystem. Results feed into arb --fzf. Pick one, open it. Slow on first run. Worth the wait.</p>
 <pre class="enc-code">zpwr findsearchedit      # same but result goes to BUFFER</pre>
 <h5 class="enc-h5">LOCATESEARCH: INDEX-BASED</h5>
 <pre class="enc-code">zpwr locatesearch        # search the locate database</pre>
@@ -1175,9 +1175,9 @@ zpwr gitzfordirdevelop [z]         # z jump + wipe to develop</pre>
 <p>Greps through files in the current tree. Results show matching lines with filenames. Fzf preview shows the file with match highlighted. Select one, jump straight to it.</p>
 <pre class="enc-code">zpwr wordsearchedit      # same but result goes to BUFFER</pre>
 <p>Puts the selected file path on your command line. Useful when you want to pipe or chain commands.</p>
-<h5 class="enc-h5">GREP: AG INTO FZF</h5>
-<pre class="enc-code">zpwr grep               # grep through pwd with ag into fzf</pre>
-<p>This is the heavy artillery. Uses the silver searcher (ag) piped into fzf for interactive filtering. Respects .gitignore. Skips binaries. Fast.</p>
+<h5 class="enc-h5">GREP: AG INTO ARB</h5>
+<pre class="enc-code">zpwr grep               # grep through pwd with ag into arb --fzf</pre>
+<p>This is the heavy artillery. Uses the silver searcher (ag) piped into arb --fzf for interactive filtering. Respects .gitignore. Skips binaries. Fast.</p>
 <h5 class="enc-h5">FILESEARCH VS WORDSEARCH</h5>
 <p>Know the filename?     Use filesearch Know the content?      Use wordsearch Know nothing?          Use grep and improvise.</p>
 <h5 class="enc-h5">THE EDIT SUFFIX PATTERN</h5>
@@ -1186,35 +1186,35 @@ zpwr gitzfordirdevelop [z]         # z jump + wipe to develop</pre>
 <h5 class="enc-h5">REAL-WORLD EXAMPLES</h5>
 <p># Find where &quot;<strong>ZPWR_VERBS</strong>&quot; is defined:</p>
 <pre class="enc-code">zpwr wordsearch</pre>
-<p># Type <strong>ZPWR_VERBS</strong> in fzf, browse the matches.</p>
+<p># Type <strong>ZPWR_VERBS</strong> in arb --fzf, browse the matches.</p>
 <p># Quick grep for TODO comments:</p>
 <pre class="enc-code">zpwr grep</pre>
 <p># Type TODO, see every file that has one.</p>
 <p>The search verbs are your eyes inside the codebase. Use them before you reach for a GUI.</p>
 </div></section>
 <section class="enc-section" id="s17">
-<h3 class="enc-section-title"><span class="enc-section-num">§17</span>The FZF Dimension</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§17</span>The ARB Dimension</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">THE FZF DIMENSION</h4>
-<p>FZF is the nervous system of zpwr. It is wired into search, selection, navigation, git, vim, environment browsing, and verb dispatch. If zpwr has a UI, fzf IS that UI.</p>
+<h4 class="enc-h4">THE ARB DIMENSION</h4>
+<p>ARB is the nervous system of zpwr. It is wired into search, selection, navigation, git, vim, environment browsing, and verb dispatch. If zpwr has a UI, arb --fzf IS that UI.</p>
 <h5 class="enc-h5">VERB DISCOVERY</h5>
 <pre class="enc-code">zpwr verbs     # fuzzy search all zpwr verbs</pre>
-<p>Every verb, every description, in one fzf window. This is the god-mode cheat sheet. Learn it first.</p>
+<p>Every verb, every description, in one arb --fzf window. This is the god-mode cheat sheet. Learn it first.</p>
 <h5 class="enc-h5">ENVIRONMENT BROWSING</h5>
-<pre class="enc-code">zpwr envaccept          # accept from fzf env</pre>
-<p>Browse all shell environment entries (aliases, functions, parameters, builtins) in fzf. Select one, accept it onto the command line.</p>
-<pre class="enc-code">zpwr envedit            # edit from fzf env</pre>
+<pre class="enc-code">zpwr envaccept          # accept from arb --fzf env</pre>
+<p>Browse all shell environment entries (aliases, functions, parameters, builtins) in arb --fzf. Select one, accept it onto the command line.</p>
+<pre class="enc-code">zpwr envedit            # edit from arb --fzf env</pre>
 <p>Same browsing but puts the result on $BUFFER for editing.</p>
 <pre class="enc-code">zpwr envcachesearch     # search cached aliases, functions, etc.</pre>
 <p>Searches the pre-built cache of your entire environment. Faster than envedit because it uses the cache file.</p>
-<h5 class="enc-h5">FZF PATTERNS ACROSS <strong>ZPWR</strong></h5>
-<p>FZF appears in dozens of verbs. The pattern is always: 1. A data source generates lines (files, commits, dirs) 2. Lines pipe into fzf with a preview command 3. You fuzzy-filter, select, and take an action.</p>
-<p>Verbs with fzf built in: filesearch     file list -&gt; fzf -&gt; open wordsearch     grep results -&gt; fzf -&gt; open dirsearch      dir list -&gt; fzf -&gt; cd gitcommits     git log -&gt; fzf -&gt; show diff forgitadd      unstaged files -&gt; fzf -&gt; stage forgitlog      commit log -&gt; fzf -&gt; preview zcd            z database -&gt; fzf -&gt; cd subcommandsfzf all verbs -&gt; fzf -&gt; execute.</p>
-<h5 class="enc-h5">THE FZF KEYBINDINGS</h5>
-<pre class="enc-code">zpwr vimsearch          # search vim keybindings in fzf
-zpwr allsearch          # search ALL keybindings in fzf</pre>
+<h5 class="enc-h5">ARB PATTERNS ACROSS <strong>ZPWR</strong></h5>
+<p>ARB appears in dozens of verbs. The pattern is always: 1. A data source generates lines (files, commits, dirs) 2. Lines pipe into arb --fzf with a preview command 3. You fuzzy-filter, select, and take an action.</p>
+<p>Verbs with arb --fzf built in: filesearch     file list -&gt; arb --fzf -&gt; open wordsearch     grep results -&gt; arb --fzf -&gt; open dirsearch      dir list -&gt; arb --fzf -&gt; cd gitcommits     git log -&gt; arb --fzf -&gt; show diff forgitadd      unstaged files -&gt; arb --fzf -&gt; stage forgitlog      commit log -&gt; arb --fzf -&gt; preview zcd            z database -&gt; arb --fzf -&gt; cd subcommandsfzf all verbs -&gt; arb --fzf -&gt; execute.</p>
+<h5 class="enc-h5">THE ARB KEYBINDINGS</h5>
+<pre class="enc-code">zpwr vimsearch          # search vim keybindings in arb --fzf
+zpwr allsearch          # search ALL keybindings in arb --fzf</pre>
 <p>When you want to find a keybinding but do not remember where it is defined. Search them all.</p>
-<p>FZF is not optional in zpwr. It is the interface. Master fzf and you master zpwr.</p>
+<p>ARB is not optional in zpwr. It is the interface. Master arb --fzf and you master zpwr.</p>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch5">
@@ -1234,13 +1234,13 @@ vimcd ............... vim edit, then cd to first dir
 vimconfig ........... edit all zpwr config files
 vimctags ............ vim zpwr ctags
 vimemacsconfig ...... vim edit emacs zpwr configs
-vimfilesearch ....... vim a file found via fzf
-vimfilesearchedit ... vim edit a file found via fzf
-vimfindsearch ....... vim a file from find(1) via fzf
+vimfilesearch ....... vim a file found via arb --fzf
+vimfilesearchedit ... vim edit a file found via arb --fzf
+vimfindsearch ....... vim a file from find(1) via arb --fzf
 vimfindsearchedit ... vim edit find result
 vimgtags ............ vim zpwr GNU global tags
 vimgtagsedit ........ vim edit zpwr GNU global tags
-vimlocatesearch ..... vim a file from locate via fzf
+vimlocatesearch ..... vim a file from locate via arb --fzf
 vimlocatesearchedit . vim edit locate result
 vimplugincount ...... count vim plugins
 vimpluginlist ....... list all vim plugins
@@ -1250,7 +1250,7 @@ vimrecentsudo ....... sudo edit most recent files
 vimrecentsudocd ..... cd + sudo edit recent files
 vimscripts .......... open all zpwr scripts (for :argdo)
 vimscriptedit ....... pick and edit 1+ scripts
-vimsearch ........... search vim keybindings via fzf
+vimsearch ........... search vim keybindings via arb --fzf
 vimtests ............ edit all zpwr tests
 vimtokens ........... vim the .tokens.sh file
 vimwordsearch ....... vim a file found by content
@@ -1269,7 +1269,7 @@ vimwordsearchedit ... vim edit file found by content</pre>
 <h5 class="enc-h5">THE BIG OPENS</h5>
 <pre class="enc-code">zpwr vimall             # load ALL zpwr files into arglist</pre>
 <p>Every .zsh, .sh, .py, .pl file in the zpwr tree. Hundreds of files. Ready for :argdo mass operations. This is the tactical nuke of text editing.</p>
-<pre class="enc-code">zpwr vimalledit         # fzf pick 1+ configs to edit</pre>
+<pre class="enc-code">zpwr vimalledit         # arb --fzf pick 1+ configs to edit</pre>
 <p>Like vimall but you choose which files to open. Surgical precision instead of carpet bombing.</p>
 <h5 class="enc-h5">RECENT FILES</h5>
 <pre class="enc-code">zpwr vimrecent          # edit most recently opened files</pre>
@@ -1303,19 +1303,19 @@ zpwr vimtests           # edit all zpwr test files</pre>
 <h4 class="enc-h4">VIM SEARCH AND TAGS</h4>
 <p>Finding files is step one. Finding definitions inside those files is step two. Tags are step three: jump to any symbol by name.</p>
 <h5 class="enc-h5">VIM FILE SEARCH</h5>
-<pre class="enc-code">zpwr vimfilesearch          # fzf find file -&gt; open in vim</pre>
-<p>Lists files in the current tree via fzf. Select one, it opens in vim. No path typing.</p>
-<pre class="enc-code">zpwr vimfilesearchedit      # fzf find file -&gt; path to BUFFER</pre>
+<pre class="enc-code">zpwr vimfilesearch          # arb --fzf find file -&gt; open in vim</pre>
+<p>Lists files in the current tree via arb --fzf. Select one, it opens in vim. No path typing.</p>
+<pre class="enc-code">zpwr vimfilesearchedit      # arb --fzf find file -&gt; path to BUFFER</pre>
 <p>Same search but puts the path on your command line.</p>
 <h5 class="enc-h5">VIM WORD SEARCH</h5>
-<pre class="enc-code">zpwr vimwordsearch          # fzf grep content -&gt; open in vim</pre>
-<p>Searches file contents, shows matches in fzf. Select a match, vim opens at that location.</p>
+<pre class="enc-code">zpwr vimwordsearch          # arb --fzf grep content -&gt; open in vim</pre>
+<p>Searches file contents, shows matches in arb --fzf. Select a match, vim opens at that location.</p>
 <pre class="enc-code">zpwr vimwordsearchedit      # same but path to BUFFER</pre>
 <h5 class="enc-h5">FULL DISK SEARCH INTO VIM</h5>
-<pre class="enc-code">zpwr vimfindsearch          # find(1) -&gt; fzf -&gt; vim
-zpwr vimfindsearchedit      # find(1) -&gt; fzf -&gt; BUFFER
-zpwr vimlocatesearch        # locate -&gt; fzf -&gt; vim
-zpwr vimlocatesearchedit    # locate -&gt; fzf -&gt; BUFFER</pre>
+<pre class="enc-code">zpwr vimfindsearch          # find(1) -&gt; arb --fzf -&gt; vim
+zpwr vimfindsearchedit      # find(1) -&gt; arb --fzf -&gt; BUFFER
+zpwr vimlocatesearch        # locate -&gt; arb --fzf -&gt; vim
+zpwr vimlocatesearchedit    # locate -&gt; arb --fzf -&gt; BUFFER</pre>
 <p>The search escalation ladder from page 15 but with vim as the final destination instead of a pager.</p>
 <h5 class="enc-h5">CTAGS: JUMP TO DEFINITION</h5>
 <pre class="enc-code">zpwr vimctags               # open zpwr ctags in vim</pre>
@@ -1501,7 +1501,7 @@ zpwr doctor -h           # help with detailed check list</pre>
 <div class="enc-section-body">
 <h4 class="enc-h4">THE DOCTOR (continued)</h4>
 <p>6. NAMED DIRECTORIES Invalid named dirs and p10k pollution from auto_name_dirs leaking gitstatus vars.</p>
-<p>7. DEPENDENCIES Checks: git, eza, fzf, tmux, perl, python3, zinit.</p>
+<p>7. DEPENDENCIES Checks: git, eza, arb --fzf, tmux, perl, python3, zinit.</p>
 <p>8. HISTORY &amp; BACKUPS Is <strong>HISTFILE</strong> present? How many backups exist?</p>
 <p>9. CONFIG SYMLINKS Checks .zshrc, .vimrc, .tmux.conf are symlinks.</p>
 <h5 class="enc-h5">READING THE RESULTS</h5>
@@ -1614,8 +1614,8 @@ zpwr ev                              # same thing, shorter</pre>
 <h5 class="enc-h5">ENVVARSALL: THE FULL PICTURE</h5>
 <pre class="enc-code">zpwr envvarsall                     # every env var, all of them
 zpwr eva                             # same thing, shorter</pre>
-<p>Dumps every exported variable. This includes <strong>ZPWR</strong>_*, <strong>PATH</strong>, <strong>HOME</strong>, <strong>EDITOR</strong>, <strong>LANG</strong>, and everything else. Pipe it to fzf when you are hunting for a specific var:</p>
-<pre class="enc-code">zpwr eva | fzf</pre>
+<p>Dumps every exported variable. This includes <strong>ZPWR</strong>_*, <strong>PATH</strong>, <strong>HOME</strong>, <strong>EDITOR</strong>, <strong>LANG</strong>, and everything else. Pipe it to arb --fzf when you are hunting for a specific var:</p>
+<pre class="enc-code">zpwr eva | arb --fzf</pre>
 <h5 class="enc-h5">ENVIRONMENTCOUNTS: THE NUMBERS GAME</h5>
 <pre class="enc-code">zpwr environmentcounts              # full environment statistics
 zpwr envcounts                      # alias
@@ -1660,9 +1660,9 @@ zpwr zstyle     # what completion styles are set?</pre>
 <h4 class="enc-h4">CACHE SEARCH</h4>
 <p>// the environment is a haystack. these are your magnets. //</p>
 <p>zpwr maintains an environment cache for fast lookup. These verbs let you search, inspect, and edit that cache without grepping through raw variable dumps.</p>
-<h5 class="enc-h5">ENVIRONMENTCACHESEARCH: FZF ENV NAVIGATION</h5>
-<pre class="enc-code">zpwr environmentcachesearch         # fzf through cached env</pre>
-<p>Opens an fzf interface over the environment cache. Type a few characters to filter. The cache includes: - All exported environment variables - <strong>ZPWR</strong>_* configuration variables - <strong>PATH</strong> and <strong>FPATH</strong> entries - Named directory mappings.</p>
+<h5 class="enc-h5">ENVIRONMENTCACHESEARCH: ARB ENV NAVIGATION</h5>
+<pre class="enc-code">zpwr environmentcachesearch         # arb --fzf through cached env</pre>
+<p>Opens an arb --fzf interface over the environment cache. Type a few characters to filter. The cache includes: - All exported environment variables - <strong>ZPWR</strong>_* configuration variables - <strong>PATH</strong> and <strong>FPATH</strong> entries - Named directory mappings.</p>
 <p>This is faster than env | grep because it uses the pre-built cache file rather than querying the live env.</p>
 <h5 class="enc-h5">ENVACCEPT: ACCEPT A CACHE ENTRY</h5>
 <pre class="enc-code">zpwr envaccept                      # accept/apply cached env entry</pre>
@@ -1675,7 +1675,7 @@ zpwr zstyle     # what completion styles are set?</pre>
 <p>The cache lives at $<strong>ZPWR_LOCAL</strong>. It is regenerated during shell startup and when you run zpwr regenenvcache.</p>
 <h5 class="enc-h5">WORKFLOW EXAMPLE</h5>
 <p>&quot;What is <strong>ZPWR_EDITOR</strong> set to?&quot;</p>
-<pre class="enc-code">zpwr environmentcachesearch    # type &#x27;EDITOR&#x27; in fzf</pre>
+<pre class="enc-code">zpwr environmentcachesearch    # type &#x27;EDITOR&#x27; in arb --fzf</pre>
 <p>Found it: <strong>ZPWR_EDITOR</strong>=nvim.</p>
 <p>&quot;I want to change a bunch of <strong>ZPWR</strong>_ vars.&quot;</p>
 <pre class="enc-code">zpwr envedit                       # opens in EDITOR</pre>
@@ -2136,7 +2136,7 @@ zpwr backup</pre>
 <div class="enc-section-body">
 <h4 class="enc-h4">FILE &amp; PROCESS OPERATIONS</h4>
 <p>// the everyday tools. sharpened and color-coded. //</p>
-<p>zpwr wraps common file and process operations with enhanced output, color, and fzf integration. These are the verbs you reach for twenty times a day.</p>
+<p>zpwr wraps common file and process operations with enhanced output, color, and arb --fzf integration. These are the verbs you reach for twenty times a day.</p>
 <h5 class="enc-h5">FILE LISTING</h5>
 <pre class="enc-code">zpwr clearlist                      # clear screen + list files
 zpwr clearls                        # alias for clearlist
@@ -2151,13 +2151,13 @@ zpwr catcd &lt;dir&gt;                    # cat files in a directory</pre>
 <p>Cat/c uses bat or pygmentize for syntax highlighting when available. Plain cat as fallback. Catcd lists the contents of each file in a directory.</p>
 <h5 class="enc-h5">PROCESS MANAGEMENT</h5>
 <pre class="enc-code">zpwr ps                             # enhanced process listing
-zpwr kill                           # fzf-powered process kill
+zpwr kill                           # arb-powered process kill
 zpwr killedit                       # kill then edit related file</pre>
-<p>zpwr kill is the crown jewel here. It pipes process listings through fzf, letting you fuzzy-search for the process you want to terminate. Select it, confirm, dead. No more guessing PIDs.</p>
+<p>zpwr kill is the crown jewel here. It pipes process listings through arb --fzf, letting you fuzzy-search for the process you want to terminate. Select it, confirm, dead. No more guessing PIDs.</p>
 <h5 class="enc-h5">FILE DESCRIPTORS</h5>
 <pre class="enc-code">zpwr lsof                           # list open files (enhanced)
 zpwr lsofedit                       # lsof then edit result</pre>
-<p>zpwr lsof wraps lsof with fzf filtering. Useful when tracking down which process holds a file or which files a process has open.</p>
+<p>zpwr lsof wraps lsof with arb --fzf filtering. Useful when tracking down which process holds a file or which files a process has open.</p>
 <h5 class="enc-h5">FILE OPENING</h5>
 <pre class="enc-code">zpwr open                           # open file/dir with system</pre>
 <p>Opens the target with the system handler: Finder on macOS, xdg-open on Linux. Works with files, directories, URLs.</p>
@@ -2165,9 +2165,9 @@ zpwr lsofedit                       # lsof then edit result</pre>
 <p>Clear terminal, list files, check what is running:</p>
 <pre class="enc-code">zpwr clearlist &amp;&amp; zpwr ps</pre>
 <p>Find and kill a zombie process:</p>
-<pre class="enc-code">zpwr kill     # fzf search -&gt; select -&gt; terminate</pre>
+<pre class="enc-code">zpwr kill     # arb --fzf search -&gt; select -&gt; terminate</pre>
 <p>Find what is holding a port:</p>
-<pre class="enc-code">zpwr lsof     # fzf through open files and ports</pre>
+<pre class="enc-code">zpwr lsof     # arb --fzf through open files and ports</pre>
 </div></section>
 <section class="enc-section" id="s49">
 <h3 class="enc-section-title"><span class="enc-section-num">§49</span>Batch Execution</h3>
@@ -2305,12 +2305,12 @@ zpwr colortest256                   # full 256-color palette</pre>
 <h4 class="enc-h4">EMACS FILE OPS: OPENING THINGS SINCE 1976</h4>
 <p>emacs: an operating system lacking only a decent editor.</p>
 <h5 class="enc-h5">zpwr emacsall</h5>
-<p>Opens all <strong>ZPWR</strong> framework files in emacs via fzf. Every autoload, script, config – the whole kingdom.</p>
+<p>Opens all <strong>ZPWR</strong> framework files in emacs via arb --fzf. Every autoload, script, config – the whole kingdom.</p>
 <pre class="enc-code">zpwr emacsall              # browse all files
 zpwr emacsalledit          # same but editable</pre>
 <h5 class="enc-h5">zpwr emacsrecent</h5>
 <p>Opens recently edited files. Emacs remembers where you have been, like a browser history for code.</p>
-<pre class="enc-code">zpwr emacsrecent            # fzf recent files
+<pre class="enc-code">zpwr emacsrecent            # arb --fzf recent files
 zpwr emacsrecentcd          # cd to recent dir
 zpwr emacsrecentsudo        # recent with sudo
 zpwr emacsrecentsudocd      # sudo + cd combo</pre>
@@ -2329,15 +2329,15 @@ zpwr emacsscriptedit        # edit a script</pre>
 <h3 class="enc-section-title"><span class="enc-section-num">§54</span>Emacs Search &amp; Tags</h3>
 <div class="enc-section-body">
 <h4 class="enc-h4">SEARCH &amp; TAGS: FIND ANYTHING, ANYWHERE</h4>
-<p>grep is for amateurs, we have fzf-powered search beams.</p>
+<p>grep is for amateurs, we have arb-powered search beams.</p>
 <h5 class="enc-h5">FILE SEARCH (by filename):</h5>
-<pre class="enc-code">zpwr emacsfilesearch        # fzf filename search
+<pre class="enc-code">zpwr emacsfilesearch        # arb --fzf filename search
 zpwr emacsfilesearchedit    # search + edit</pre>
 <p>Searches file NAMES across the <strong>ZPWR</strong> tree. Fast, fuzzy, and feeds results into emacs.</p>
 <h5 class="enc-h5">WORD SEARCH (by content):</h5>
 <pre class="enc-code">zpwr emacswordsearch        # search file content
 zpwr emacswordsearchedit    # content search + edit</pre>
-<p>Searches INSIDE files for patterns. Like ag/rg but with fzf preview and direct-to-emacs piping.</p>
+<p>Searches INSIDE files for patterns. Like ag/rg but with arb --fzf preview and direct-to-emacs piping.</p>
 <h5 class="enc-h5">FIND &amp; LOCATE SEARCH:</h5>
 <pre class="enc-code">zpwr emacsfindsearch        # find-based search
 zpwr emacsfindsearchedit    # find + edit
@@ -2492,8 +2492,8 @@ zpwr startauto              # when you miss it</pre>
 <p>The power move: dedicate a tmux pane to monitoring.</p>
 <p>LAYOUT EXAMPLE: +——————-+——————–+ |                   |                    | |   your work       |  pstreemonitor     | |                   |                    | +——————-+——————–+ |         zpwr taillog                   | +—————————————–+</p>
 <h5 class="enc-h5">PROCESS HUNTING:</h5>
-<p><strong>ZPWR</strong> integrates fzf with ps and lsof for killing.</p>
-<p>Ctrl-Y Ctrl-K                  # fzf kill by ps Ctrl-Y Ctrl-L                  # fzf kill by lsof.</p>
+<p><strong>ZPWR</strong> integrates arb --fzf with ps and lsof for killing.</p>
+<p>Ctrl-Y Ctrl-K                  # arb --fzf kill by ps Ctrl-Y Ctrl-L                  # arb --fzf kill by lsof.</p>
 <p>// pstreemonitor in a side pane = instant situational awareness</p>
 <p>// you will see zombie processes before they see you</p>
 </div></section>
@@ -2730,7 +2730,7 @@ zpwr reload                  # reload clean</pre>
 <h5 class="enc-h5">zpwr autoloadlist</h5>
 <p>List every autoloaded function by name.</p>
 <pre class="enc-code">zpwr autoloadlist            # all function names
-zpwr autoloadlist | grep fzf # find fzf funcs</pre>
+zpwr autoloadlist | grep arb --fzf # find arb --fzf funcs</pre>
 <h5 class="enc-h5">zpwr scriptlist</h5>
 <p>List every script in the scripts directory.</p>
 <pre class="enc-code">zpwr scriptlist              # all scripts</pre>
@@ -2745,11 +2745,11 @@ zpwr autoloadlist | grep fzf # find fzf funcs</pre>
 <pre class="enc-code">zpwr emacspluginlist         # all emacs packages</pre>
 <h5 class="enc-h5">POWER COMBOS:</h5>
 <pre class="enc-code">zpwr autoloadlist | wc -l    # quick count
-zpwr autoloadlist | fzf      # fuzzy browse
+zpwr autoloadlist | arb --fzf      # fuzzy browse
 zpwr scriptlist | sort       # alphabetical</pre>
-<p>// lists are grep-able, fzf-able, pipe-able</p>
+<p>// lists are grep-able, arb-able, pipe-able</p>
 <p>// the raw material for your own exploration</p>
-<p>// pipe into fzf for interactive discovery</p>
+<p>// pipe into arb --fzf for interactive discovery</p>
 </div></section>
 <section class="enc-section" id="s71">
 <h3 class="enc-section-title"><span class="enc-section-num">§71</span>History Archaeology</h3>
@@ -2757,8 +2757,8 @@ zpwr scriptlist | sort       # alphabetical</pre>
 <h4 class="enc-h4">HISTORY ARCHAEOLOGY: DIGGING UP THE PAST</h4>
 <p>Your terminal remembers everything, even the mistakes.</p>
 <h5 class="enc-h5">zpwr hist</h5>
-<p>Browse command history with fzf. Search, preview, and re-execute past commands interactively.</p>
-<pre class="enc-code">zpwr hist                   # fzf history browser</pre>
+<p>Browse command history with arb --fzf. Search, preview, and re-execute past commands interactively.</p>
+<pre class="enc-code">zpwr hist                   # arb --fzf history browser</pre>
 <h5 class="enc-h5">zpwr histedit</h5>
 <p>Edit the history file directly. Surgically remove embarrassing commands or fix typos in saved history.</p>
 <pre class="enc-code">zpwr histedit               # edit history file</pre>
@@ -2774,7 +2774,7 @@ zpwr scriptlist | sort       # alphabetical</pre>
 <pre class="enc-code">zpwr catrecentfviminfo      # vim+recentf cross
 zpwr catnviminforecentf     # nvim+recentf cross</pre>
 <p>// your history is a goldmine of workflow patterns</p>
-<p>// hist + fzf = instant command recall</p>
+<p>// hist + arb --fzf = instant command recall</p>
 <p>// histedit = revisionist history (use responsibly)</p>
 </div></section>
 <section class="enc-section" id="s72">
@@ -2789,12 +2789,12 @@ zpwr catnviminforecentf     # nvim+recentf cross</pre>
 <p>How many subcommands exist? The number keeps growing.</p>
 <pre class="enc-code">zpwr subcommandscount        # total count</pre>
 <h5 class="enc-h5">zpwr verbs (alias: subcommandsfzf)</h5>
-<p>Browse subcommands interactively with fzf. The best way to explore when you&#x27;re not sure what to try.</p>
-<pre class="enc-code">zpwr verbs         # fzf subcommands</pre>
+<p>Browse subcommands interactively with arb --fzf. The best way to explore when you&#x27;re not sure what to try.</p>
+<pre class="enc-code">zpwr verbs         # arb --fzf subcommands</pre>
 <h5 class="enc-h5">zpwr verbslist / verbsfzf / verbscount</h5>
 <p>Alternative verb-centric views of available commands.</p>
 <pre class="enc-code">zpwr verbslist              # list all verbs
-zpwr verbs               # fzf browse verbs
+zpwr verbs               # arb --fzf browse verbs
 zpwr verbscount             # count verbs</pre>
 <h5 class="enc-h5">zpwr wizard / manual / tutorial / docs</h5>
 <p>You&#x27;re reading it right now. The interactive encyclopedia with vim-style navigation. Very meta. All four names work.</p>
@@ -2803,8 +2803,8 @@ zpwr wizard --toc           # table of contents
 zpwr wizard --search docker  # search pages
 zpwr wizard 42              # jump to page 42</pre>
 <p>// verbsfzf is the fastest way to discover (alias: subcommandsfzf)</p>
-<p>// type a few letters, fzf narrows it down</p>
-<p>// when in doubt, fzf it out</p>
+<p>// type a few letters, arb --fzf narrows it down</p>
+<p>// when in doubt, arb --fzf it out</p>
 </div></section>
 <section class="enc-section" id="s73">
 <h3 class="enc-section-title"><span class="enc-section-num">§73</span>Shell State Inspection</h3>
@@ -3016,15 +3016,15 @@ zpwr emacstokens            # same, force emacs</pre>
 <div class="enc-section-body">
 <h4 class="enc-h4">FORGIT ADD &amp; DIFF — INTERACTIVE STAGING</h4>
 <p>git add, but make it beautiful.</p>
-<p>Forgit is the fusion of fzf and git. It wraps the most common git operations in fuzzy, interactive, preview-enabled interfaces. You will never go back to raw git add.</p>
+<p>Forgit is the fusion of arb --fzf and git. It wraps the most common git operations in fuzzy, interactive, preview-enabled interfaces. You will never go back to raw git add.</p>
 <h5 class="enc-h5">FORGITADD — INTERACTIVE STAGING</h5>
 <pre class="enc-code">zpwr forgitadd</pre>
-<p>Opens an fzf interface showing all unstaged changes. Each file gets a diff preview in the right pane. Tab to select multiple files. Enter to stage them.</p>
+<p>Opens an arb --fzf interface showing all unstaged changes. Each file gets a diff preview in the right pane. Tab to select multiple files. Enter to stage them.</p>
 <p>The workflow: 1. Run zpwr forgitadd 2. Browse files with arrow keys 3. See the diff preview for each file 4. Tab to multi-select 5. Enter to stage selected files.</p>
 <p>No more git add -p scrolling through 500-line diffs. No more accidentally staging that debug print.</p>
 <h5 class="enc-h5">FORGITDIFF — <strong>VISUAL</strong> DIFF BROWSER</h5>
 <pre class="enc-code">zpwr forgitdiff</pre>
-<p>Opens an fzf browser of all changed files with a live diff preview. Read diffs without committing to anything. Pure reconnaissance.</p>
+<p>Opens an arb --fzf browser of all changed files with a live diff preview. Read diffs without committing to anything. Pure reconnaissance.</p>
 <p>Example workflow:</p>
 <pre class="enc-code">zpwr forgitdiff           # browse all diffs visually
 zpwr forgitadd            # stage what you want
@@ -3042,7 +3042,7 @@ zpwr gitcommit &#x27;msg&#x27;      # commit with message</pre>
 <p>Git log is a river of hashes. Git stash is a pile of forgotten context. Forgit turns both into something you can actually navigate without losing your mind.</p>
 <h5 class="enc-h5">FORGITLOG — THE COMMIT BROWSER</h5>
 <pre class="enc-code">zpwr forgitlog</pre>
-<p>Opens your git history in fzf with commit previews. Each commit shows its full diff in the preview pane. Search commits by message, author, or hash.</p>
+<p>Opens your git history in arb --fzf with commit previews. Each commit shows its full diff in the preview pane. Search commits by message, author, or hash.</p>
 <p>What you see: Left pane:  commit graph with short messages Right pane: full diff of highlighted commit Search:     fuzzy match on any commit field.</p>
 <p>&quot;Who wrote this garbage?&quot; — you, using forgitlog, discovering it was also you, three months ago.</p>
 <h5 class="enc-h5">FORGITSTASH — THE STASH MANAGER</h5>
@@ -3073,7 +3073,7 @@ zpwr gitcommit &#x27;msg&#x27;      # commit with message</pre>
 <pre class="enc-code">zpwr forgitignorelist</pre>
 <h5 class="enc-h5">FORGITCLEAN — THE UNTRACKED FILE PURGE</h5>
 <pre class="enc-code">zpwr forgitclean</pre>
-<p>Shows untracked files in an fzf interface with previews. Select which ones to delete. Surgical, not scorched earth. Unlike git clean -fd, you see before you destroy.</p>
+<p>Shows untracked files in an arb --fzf interface with previews. Select which ones to delete. Surgical, not scorched earth. Unlike git clean -fd, you see before you destroy.</p>
 <p>The old way: git clean -fd    # delete everything. Hope for the best.</p>
 <p>The forgit way:</p>
 <pre class="enc-code">zpwr forgitclean  # browse, select, confirm, then delete.</pre>
@@ -3090,7 +3090,7 @@ zpwr gitcommit &#x27;msg&#x27;      # commit with message</pre>
 <p>Git reset and restore are the most terrifying commands in version control. Forgit wraps them in bubble wrap and gives you a preview before you pull the trigger.</p>
 <h5 class="enc-h5">FORGITRESET — UNSTAGE WITH PREVIEW</h5>
 <pre class="enc-code">zpwr forgitreset</pre>
-<p>Shows staged files in fzf with diff previews. Select files to unstage. Like git reset HEAD but you can see exactly what you are unstaging first.</p>
+<p>Shows staged files in arb --fzf with diff previews. Select files to unstage. Like git reset HEAD but you can see exactly what you are unstaging first.</p>
 <p>Use case: you ran git add -A like a maniac and now you need to surgically remove files.</p>
 <pre class="enc-code">zpwr forgitreset    # browse and unstage selectively</pre>
 <h5 class="enc-h5">FORGITRESTORE — DISCARD CHANGES SAFELY</h5>
@@ -3514,29 +3514,29 @@ zpwr emacstokens      edit tokens in emacs</pre>
 <p>// your overrides survive every git pull</p>
 </div></section>
 <section class="enc-section" id="s98">
-<h3 class="enc-section-title"><span class="enc-section-num">§98</span>FZF Everywhere</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§98</span>ARB Everywhere</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">FZF EVERYWHERE — THE FUZZY FINDER CONSPIRACY</h4>
-<p>fzf is not a tool. It is a religion. <strong>ZPWR</strong> is its cathedral.</p>
-<p>fzf (fuzzy finder) is woven into the fabric of <strong>ZPWR</strong>. Dozens of verbs pipe their output through fzf for interactive selection. If a verb ends in &#x27;fzf&#x27;, it is the fuzzy-interactive variant. But many others use it too.</p>
-<h5 class="enc-h5">DEDICATED FZF VERBS:</h5>
-<pre class="enc-code">zpwr verbs     browse subcommands in fzf
-zpwr verbs           browse all verbs in fzf</pre>
-<h5 class="enc-h5">VERBS THAT USE FZF INTERNALLY:</h5>
-<p>Forgit* verbs: forgitadd, forgitdiff, forgitlog, forgitstash, forgitreset, forgitrestore, forgitclean All use fzf for interactive selection with previews.</p>
-<p>Search + edit verbs: filesearchedit, findsearchedit, locatesearchedit, wordsearchedit — search with fzf, open selection.</p>
-<p>Recent file verbs: vimrecent, vimrecentcd, emacsrecent, emacsrecentcd Browse recent files with fzf preview.</p>
+<h4 class="enc-h4">ARB EVERYWHERE — THE FUZZY FINDER CONSPIRACY</h4>
+<p>arb --fzf is not a tool. It is a religion. <strong>ZPWR</strong> is its cathedral.</p>
+<p>arb --fzf (fuzzy finder) is woven into the fabric of <strong>ZPWR</strong>. Dozens of verbs pipe their output through arb --fzf for interactive selection. If a verb ends in &#x27;arb --fzf&#x27;, it is the fuzzy-interactive variant. But many others use it too.</p>
+<h5 class="enc-h5">DEDICATED ARB VERBS:</h5>
+<pre class="enc-code">zpwr verbs     browse subcommands in arb --fzf
+zpwr verbs           browse all verbs in arb --fzf</pre>
+<h5 class="enc-h5">VERBS THAT USE ARB INTERNALLY:</h5>
+<p>Forgit* verbs: forgitadd, forgitdiff, forgitlog, forgitstash, forgitreset, forgitrestore, forgitclean All use arb --fzf for interactive selection with previews.</p>
+<p>Search + edit verbs: filesearchedit, findsearchedit, locatesearchedit, wordsearchedit — search with arb --fzf, open selection.</p>
+<p>Recent file verbs: vimrecent, vimrecentcd, emacsrecent, emacsrecentcd Browse recent files with arb --fzf preview.</p>
 <p>Editor verbs: vimalledit, emacsalledit — select files to edit.</p>
-<p>Git tag verbs: vimgtagsedit, emacsgtagsedit — browse tags in fzf.</p>
-<h5 class="enc-h5">THE FZF PATTERN:</h5>
-<p>The pattern is always the same: 1. Generate a list of candidates 2. Pipe through fzf with a preview command 3. Take the selection and act on it.</p>
+<p>Git tag verbs: vimgtagsedit, emacsgtagsedit — browse tags in arb --fzf.</p>
+<h5 class="enc-h5">THE ARB PATTERN:</h5>
+<p>The pattern is always the same: 1. Generate a list of candidates 2. Pipe through arb --fzf with a preview command 3. Take the selection and act on it.</p>
 <p>This pattern turns every list into a menu. Every menu into a decision. Every decision into action.</p>
-<h5 class="enc-h5">FZF CUSTOMIZATION:</h5>
+<h5 class="enc-h5">ARB CUSTOMIZATION:</h5>
 <p>Set FZF_DEFAULT_OPTS in your tokens file:</p>
 <pre class="enc-code">export FZF_DEFAULT_OPTS=&#x27;--height 80% --reverse --border&#x27;</pre>
-<p>// if you can list it, you can fzf it</p>
-<p>// if you can fzf it, you can act on it</p>
-<p>// fzf is the universal adapter between data and decisions</p>
+<p>// if you can list it, you can arb --fzf it</p>
+<p>// if you can arb --fzf it, you can act on it</p>
+<p>// arb --fzf is the universal adapter between data and decisions</p>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch25">
@@ -3554,7 +3554,7 @@ zpwr verbs           browse all verbs in fzf</pre>
 <div class="enc-section-body">
 <h4 class="enc-h4">ALL $#ZPWR_VERBS VERBS: forgitdiff through recompilefpath (2/3)</h4>
 <p>The middle of the alphabet is where the real work lives.</p>
-<p>Forgitdiff                 interactive diff via fzf forgitignore               browse gitignore templates forgitignoreclean          clean gitignore cache forgitignoreget            fetch gitignore template forgitignorelist           list gitignore templates forgitignoreupdate         update gitignore cache forgitinfo                 repo info dashboard forgitlog                  interactive git log via fzf forgitreset                interactive unstage via fzf forgitrestore              interactive restore via fzf forgitstash                interactive stash via fzf forgitwarn                 warn about repo hazards forked                     manage forked repos forward                    port forwarding fp                         fpath info funcrank                   rank functions by usage fwd                        forward shortcut gh                         GitHub CLI integration ghcontribcount             GitHub contribution count ghz                        GitHub + z integration gitaemail                  set git author email gitcemail                  set git committer email gitclearcache              clear git cache gitclearcommit             clear a git commit gitclearfile               clear file from git gitcommit                  enhanced git commit gitcommitcount             count commits gitcommits                 browse commits gitconfig                  show git config gitcontribcount            count contributions gitcontribcountdirs        count contribs per dir gitcontribcountlines       count contributed lines gitdir                     show git directory gitedittag                 edit a git tag gitemail                   show git email gitforalldir               git cmd in all dirs hometests                  cd to test directory (alias: hometest) loadjenv                   lazy load jenv logincount                 count logins by user regenpdf                   regenerate encyclopedia PDF subcommandsedit            edit subcommand selection subcommandslist             list all subcommands.</p>
+<p>Forgitdiff                 interactive diff via forgit forgitignore               browse gitignore templates forgitignoreclean          clean gitignore cache forgitignoreget            fetch gitignore template forgitignorelist           list gitignore templates forgitignoreupdate         update gitignore cache forgitinfo                 repo info dashboard forgitlog                  interactive git log via forgit forgitreset                interactive unstage via forgit forgitrestore              interactive restore via forgit forgitstash                interactive stash via forgit forgitwarn                 warn about repo hazards forked                     manage forked repos forward                    port forwarding fp                         fpath info funcrank                   rank functions by usage fwd                        forward shortcut gh                         GitHub CLI integration ghcontribcount             GitHub contribution count ghz                        GitHub + z integration gitaemail                  set git author email gitcemail                  set git committer email gitclearcache              clear git cache gitclearcommit             clear a git commit gitclearfile               clear file from git gitcommit                  enhanced git commit gitcommitcount             count commits gitcommits                 browse commits gitconfig                  show git config gitcontribcount            count contributions gitcontribcountdirs        count contribs per dir gitcontribcountlines       count contributed lines gitdir                     show git directory gitedittag                 edit a git tag gitemail                   show git email gitforalldir               git cmd in all dirs hometests                  cd to test directory (alias: hometest) loadjenv                   lazy load jenv logincount                 count logins by user regenpdf                   regenerate encyclopedia PDF subcommandsedit            edit subcommand selection subcommandslist             list all subcommands.</p>
 <p>... continued. Run zpwr verbs for the complete list.</p>
 </div></section>
 <section class="enc-section" id="s101">
@@ -3731,7 +3731,7 @@ zinit ice wait&#x27;0b&#x27;        Priority 0, sub-order b (loads second)
 zinit ice wait&#x27;0e&#x27;        Priority 0, sub-order e (loads later)</pre>
 <p>The letter suffix controls load order WITHIN the same priority. A loads before b loads before c, etc. This is how <strong>ZPWR</strong> orchestrates 48 plugins into a precise loading sequence.</p>
 <h5 class="enc-h5">THE GRADUATED LOADING SEQUENCE</h5>
-<p>Synchronous:  powerlevel10k (must load before prompt) wait:          OMZ completions, libs, plugins, GH plugins wait&#x27;0&#x27;:       zsh-autopair (needs ZLE ready) wait&#x27;0a&#x27;:      zsh-expand + late aliases + alias cache wait&#x27;0b&#x27;:      zsh-autocomplete (if <strong>ZPWR_AUTO</strong>_COMPLETE=true) wait&#x27;0c&#x27;:      zsh-history-substring-search wait&#x27;0d&#x27;:      zsh-autosuggestions + FZF late bindings + verbs wait&#x27;0e&#x27;:      zsh-zinit-final (penultimate, final keybindings) wait&#x27;0f&#x27;:      zsh-more-completions (low priority, last resort) wait&#x27;$<strong>ZPWR_ZINIT</strong>_COMPINIT_DELAYg&#x27;:  compinit + cdreplay wait&#x27;$<strong>ZPWR_ZINIT</strong>_COMPINIT_DELAYh&#x27;:  fast-syntax-highlighting.</p>
+<p>Synchronous:  powerlevel10k (must load before prompt) wait:          OMZ completions, libs, plugins, GH plugins wait&#x27;0&#x27;:       zsh-autopair (needs ZLE ready) wait&#x27;0a&#x27;:      zsh-expand + late aliases + alias cache wait&#x27;0b&#x27;:      zsh-autocomplete (if <strong>ZPWR_AUTO</strong>_COMPLETE=true) wait&#x27;0c&#x27;:      zsh-history-substring-search wait&#x27;0d&#x27;:      zsh-autosuggestions + ARB late bindings + verbs wait&#x27;0e&#x27;:      zsh-zinit-final (penultimate, final keybindings) wait&#x27;0f&#x27;:      zsh-more-completions (low priority, last resort) wait&#x27;$<strong>ZPWR_ZINIT</strong>_COMPINIT_DELAYg&#x27;:  compinit + cdreplay wait&#x27;$<strong>ZPWR_ZINIT</strong>_COMPINIT_DELAYh&#x27;:  fast-syntax-highlighting.</p>
 <h5 class="enc-h5">WHY STARTUP IS FAST</h5>
 <p>Only ONE plugin loads synchronously: powerlevel10k. Everything else is turbo-deferred. Combined with instant prompt, you see the prompt in  15ms. The other 47 plugins load in the next  200ms while you&#x27;re still thinking.</p>
 <h5 class="enc-h5">atinit AND atload HOOKS</h5>
@@ -3876,9 +3876,9 @@ bindkey -e                     Switch to emacs mode</pre>
 <p>The accept-line replacement does serious work: 1. Updates zconvey name with current command + TTY + PID 2. Detects commands that modify files (rm, mv, cp, mkdir...) and sets <strong>ZPWR_WILL</strong>_CLEAR=true for post-exec ls refresh 3. Handles sudo + grc colorization for aliased commands 4. Prevents global alias expansion in first position 5. Optionally expands aliases before execution 6. Calls .accept-line (the real built-in)</p>
 <h5 class="enc-h5">THE Ctrl-F CHORD PREFIX SYSTEM</h5>
 <p><strong>ZPWR</strong> binds Ctrl-F as a prefix key for multi-key chords:</p>
-<pre class="enc-code">Ctrl-F Ctrl-D   FZF file search
-Ctrl-F Ctrl-I   FZF word search (ag/grep)
-Ctrl-F Ctrl-G   FZF git operations</pre>
+<pre class="enc-code">Ctrl-F Ctrl-D   ARB file search
+Ctrl-F Ctrl-I   ARB word search (ag/grep)
+Ctrl-F Ctrl-G   ARB git operations</pre>
 <p>This gives you an entire second keymap layer without conflicting with normal editing keys. Like tmux prefix but for your command line.</p>
 </div></section>
 <section class="enc-section" id="s113">
@@ -3989,102 +3989,106 @@ zsh/zprof       Profiler (ZPWR_PROFILING=true enables it)</pre>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch29">
-<h2 class="enc-chapter-title"><span class="enc-chapter-num">CH 29</span>FZF ARCHITECTURE</h2>
+<h2 class="enc-chapter-title"><span class="enc-chapter-num">CH 29</span>ARB ARCHITECTURE</h2>
 <section class="enc-section" id="s117">
-<h3 class="enc-section-title"><span class="enc-section-num">§117</span>FZF: The Neural Interface</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§117</span>arb --fzf: The Neural Interface</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">FZF: THE NEURAL INTERFACE</h4>
+<h4 class="enc-h4">ARB --FZF: THE NEURAL INTERFACE</h4>
 <p>// the universal adapter between data and decisions. //</p>
-<p>fzf (fuzzy finder) is a general-purpose command-line filter. Pipe anything into it, fuzzy-search interactively, get results. <strong>ZPWR</strong> wraps fzf into dozens of workflows: files, words, git, verbs.</p>
-<h5 class="enc-h5">THE PATTERN: PIPE | FZF | ACTION</h5>
-<p>Every fzf integration follows the same architecture:</p>
-<pre class="enc-code">&lt;data source&gt; | fzf [options] | &lt;action on selection&gt;</pre>
-<p>The data source generates lines. fzf presents them. The action consumes the selected line(s). Simple. Composable. Powerful.</p>
+<p>arb is a TUI for every pipeline. Its <code>--fzf</code> mode is a general-purpose command-line filter: pipe anything in, fuzzy-search interactively, get the selection back on stdout. <strong>ZPWR</strong> wires it into dozens of workflows: files, words, git, verbs.</p>
+<h5 class="enc-h5">THE PICKER IS ONE VARIABLE</h5>
+<p>Every <strong>ZPWR</strong> picker runs whatever <code>$ZPWR_FZF</code> points at:</p>
+<pre class="enc-code">export ZPWR_FZF=&#x27;arb --fzf --ansi&#x27;</pre>
+<p>That is the single switch. Change it and every verb, widget, global alias and fzf-tab menu follows without further edits.</p>
+<h5 class="enc-h5">THE PATTERN: PIPE | ARB | ACTION</h5>
+<p>Every picker integration follows the same architecture:</p>
+<pre class="enc-code">&lt;data source&gt; | arb --fzf [options] | &lt;action on selection&gt;</pre>
+<p>The data source generates lines. arb presents them. The action consumes the selected line(s). Simple. Composable. Powerful.</p>
 <h5 class="enc-h5">FZF_DEFAULT_OPTS</h5>
-<p><strong>ZPWR</strong> sets global fzf defaults in zpwrBindFZFLate:</p>
+<p><strong>ZPWR</strong> sets global picker defaults in zpwrBindFZFLate:</p>
 <pre class="enc-code">FZF_DEFAULT_OPTS=&quot;ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%&quot;</pre>
 <p>Plus a Solarized Dark color scheme layered on top:</p>
 <pre class="enc-code">--color fg:-1,bg:-1,hl:blue,fg+:base2,bg+:base02,hl+:blue</pre>
 <p><strong>ZPWR_COMMON</strong>_FZF_ELEM adds the logo prompt and navigation binds:</p>
 <pre class="enc-code">--prompt=&#x27;ZPWR_FZF_LOGO &#x27; --bind=ctrl-n:page-down,...</pre>
 <h5 class="enc-h5">THE PREVIEW WINDOW</h5>
-<p>fzf&#x27;s –preview flag runs a command for each highlighted item:</p>
-<pre class="enc-code">fzf --preview &#x27;bat --color=always &#x27;</pre>
+<p>The <code>--preview</code> flag runs a command for each highlighted item:</p>
+<pre class="enc-code">arb --fzf --preview &#x27;bat --color=always &#x27;</pre>
 <p><strong>ZPWR</strong> configures rich previews per context: Files:   bat with syntax highlighting, line numbers, grid Dirs:    stat output Packages: dpkg -I or rpm -qi Git:     diff preview, commit log If bat is installed, it&#x27;s the default colorizer. Falls back to pygmentize with terminal256 output.</p>
 <h5 class="enc-h5">fzf-completion (Tab)</h5>
-<p>fzf replaces the default Tab completion with a fuzzy finder. Type a command, press Tab, and fzf opens with completions:</p>
-<pre class="enc-code">cd **&lt;Tab&gt;     fzf through subdirectories
-kill &lt;Tab&gt;      fzf through running processes
-ssh **&lt;Tab&gt;     fzf through known hosts</pre>
+<p>The picker replaces default Tab completion with fuzzy search. Type a command, press Tab, and the picker opens:</p>
+<pre class="enc-code">cd **&lt;Tab&gt;     fuzzy-select a subdirectory
+kill &lt;Tab&gt;      fuzzy-select a running process
+ssh **&lt;Tab&gt;     fuzzy-select a known host</pre>
 <p>FZF_COMPLETION_OPTS controls the preview for these.</p>
 <h5 class="enc-h5">fzf-tab PLUGIN</h5>
-<p>MenkeTechnologies/fzf-tab replaces zsh&#x27;s menu completion with fzf. Any time the completion system would show a menu, fzf-tab intercepts it and shows fzf instead. This means: - Fuzzy matching for every completion, not just ** triggers - Previews for file completions, git branches, everything - FZF_TAB_OPTS configures the behavior (ansi, nth, delimiter) - FZF_TAB_COMMAND sets which fzf binary to use.</p>
-<h5 class="enc-h5">GLOBAL ALIASES FOR FZF</h5>
-<pre class="enc-code">ZPWR_GLOBAL_ALIAS_PREFIXz   Pipe into fzf: ls | ,,z
-ZPWR_GLOBAL_ALIAS_PREFIXzb  Inline fzf selection: vim ,,zb</pre>
+<p>MenkeTechnologies/fzf-tab replaces zsh&#x27;s menu completion. Any time the completion system would show a menu, fzf-tab intercepts it and shows the picker instead. This means: - Fuzzy matching for every completion, not just ** triggers - Previews for file completions, git branches, everything - FZF_TAB_OPTS configures behavior (ansi, nth, delimiter) - FZF_TAB_COMMAND is set from <code>$ZPWR_FZF</code>, so it is arb too.</p>
+<h5 class="enc-h5">GLOBAL ALIASES FOR ARB</h5>
+<pre class="enc-code">ZPWR_GLOBAL_ALIAS_PREFIXz   Pipe into arb: ls | ,,z
+ZPWR_GLOBAL_ALIAS_PREFIXzb  Inline selection: vim ,,zb</pre>
 </div></section>
 <section class="enc-section" id="s118">
-<h3 class="enc-section-title"><span class="enc-section-num">§118</span>FZF in Practice</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§118</span>ARB in Practice</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">FZF IN PRACTICE</h4>
+<h4 class="enc-h4">ARB IN PRACTICE</h4>
 <p>// the theory is simple. the practice is where it gets good. //</p>
-<p><strong>ZPWR</strong> ships dozens of fzf-powered workflows. Each follows the generate | fzf | action pattern. Here are the heaviest hitters.</p>
+<p><strong>ZPWR</strong> ships dozens of arb-powered workflows. Each follows the generate | arb --fzf | action pattern. Here are the heaviest hitters.</p>
 <h5 class="enc-h5">FILE SEARCH (zpwr filesearch / Ctrl-F Ctrl-D)</h5>
-<p>Pattern: find files | fzf –preview &#x27;bat&#x27; | open in editor 1. Find/fd generates a file list (respecting .gitignore) 2. fzf shows files with bat-powered syntax-highlighted preview 3. Selected file opens in $<strong>EDITOR</strong> at the matched location FZF_CTRL_T_OPTS configures the preview command.</p>
+<p>Pattern: find files | arb --fzf –preview &#x27;bat&#x27; | open in editor 1. Find/fd generates a file list (respecting .gitignore) 2. arb --fzf shows files with bat-powered syntax-highlighted preview 3. Selected file opens in $<strong>EDITOR</strong> at the matched location FZF_CTRL_T_OPTS configures the preview command.</p>
 <h5 class="enc-h5">WORD SEARCH (zpwr wordsearch / Ctrl-F Ctrl-I)</h5>
-<p>Pattern: ag/rg search | fzf –preview &#x27;context&#x27; | open at line 1. Ag (silver searcher) or rg searches file contents 2. fzf shows matches with file:line:content format 3. Selection opens the file at the exact line number FZF_AG_OPTS: delimiter &#x27;:&#x27;, match on 3rd+ field (skip file:line).</p>
+<p>Pattern: ag/rg search | arb --fzf –preview &#x27;context&#x27; | open at line 1. Ag (silver searcher) or rg searches file contents 2. arb --fzf shows matches with file:line:content format 3. Selection opens the file at the exact line number FZF_AG_OPTS: delimiter &#x27;:&#x27;, match on 3rd+ field (skip file:line).</p>
 <h5 class="enc-h5">GIT ADD (forgitadd)</h5>
-<p>Pattern: git diff –stat | fzf –preview &#x27;git diff&#x27; | git add 1. Lists modified files with diff stats 2. Preview pane shows the actual diff for each file 3. Toggle files with Tab, confirm to stage them Part of forgit: the git + fzf integration plugin.</p>
+<p>Pattern: git diff –stat | arb --fzf –preview &#x27;git diff&#x27; | git add 1. Lists modified files with diff stats 2. Preview pane shows the actual diff for each file 3. Toggle files with Tab, confirm to stage them Part of forgit: the git + picker integration plugin.</p>
 <h5 class="enc-h5">VERB SEARCH (zpwr verbsfzf)</h5>
-<p>Pattern: <strong>ZPWR_VERBS</strong> keys | fzf –preview &#x27;help&#x27; | eval 1. All $#<strong>ZPWR_VERBS</strong>+ zpwr verbs piped into fzf 2. Preview shows the verb description and command 3. Select a verb to execute it immediately FZF_ENV_OPTS_VERBS configures the preview for verbs.</p>
-<h5 class="enc-h5">CUSTOM FZF KEY BINDINGS</h5>
-<p>The Ctrl-F prefix opens <strong>ZPWR</strong>&#x27;s fzf keymap layer:</p>
-<pre class="enc-code">Ctrl-F Ctrl-D   File search (find + fzf + editor)
-Ctrl-F Ctrl-I   Word search (ag + fzf + editor)
-Ctrl-F Ctrl-G   Git search (git log + fzf)
-Ctrl-F Ctrl-R   History search with fzf</pre>
+<p>Pattern: <strong>ZPWR_VERBS</strong> keys | arb --fzf –preview &#x27;help&#x27; | eval 1. All $#<strong>ZPWR_VERBS</strong>+ zpwr verbs piped into arb --fzf 2. Preview shows the verb description and command 3. Select a verb to execute it immediately FZF_ENV_OPTS_VERBS configures the preview for verbs.</p>
+<h5 class="enc-h5">CUSTOM ARB KEY BINDINGS</h5>
+<p>The Ctrl-F prefix opens <strong>ZPWR</strong>&#x27;s arb --fzf keymap layer:</p>
+<pre class="enc-code">Ctrl-F Ctrl-D   File search (find + arb --fzf + editor)
+Ctrl-F Ctrl-I   Word search (ag + arb --fzf + editor)
+Ctrl-F Ctrl-G   Git search (git log + arb --fzf)
+Ctrl-F Ctrl-R   History search with arb --fzf</pre>
 <p>These are ZLE widgets bound via zpwrBindOverrideZLE.</p>
 <h5 class="enc-h5">zpwrIntoFzf AND zpwrIntoFzfAg</h5>
-<p>Two core ZLE widgets that bridge the command line with fzf: zpwrIntoFzf     File-oriented fzf (Ctrl-T style) zpwrIntoFzfAg   Content-oriented fzf (ag/grep style) Both capture fzf output and insert it into the command line buffer ($BUFFER). You select files/matches, they appear at your cursor. Seamless integration between search and input.</p>
+<p>Two core ZLE widgets that bridge the command line with arb --fzf: zpwrIntoFzf     File-oriented arb --fzf (Ctrl-T style) zpwrIntoFzfAg   Content-oriented arb --fzf (ag/grep style) Both capture arb --fzf output and insert it into the command line buffer ($BUFFER). You select files/matches, they appear at your cursor. Seamless integration between search and input.</p>
 <h5 class="enc-h5">THE COLORIZER CHAIN</h5>
 <p><strong>ZPWR_COLORIZER</strong> preference: bat &gt; pygmentize. bat uses themes (BAT_THEME=$<strong>ZPWR_BAT</strong>_THEME). Pygmentize uses PYGMENTIZE_COLOR style. Language-specific colorizers: FZF_COLORIZER_C, _SH, _YAML, _JAVA.</p>
 </div></section>
 <section class="enc-section" id="s119">
-<h3 class="enc-section-title"><span class="enc-section-num">§119</span>Building Your Own FZF Verbs</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§119</span>Building Your Own ARB Verbs</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">BUILDING YOUR OWN FZF VERBS</h4>
-<p>// once you grok the pattern, everything becomes fzf-able. //</p>
-<p>The generate | fzf | action pattern is infinitely extensible. Here&#x27;s how to build your own fzf-powered verbs.</p>
+<h4 class="enc-h4">BUILDING YOUR OWN ARB VERBS</h4>
+<p>// once you grok the pattern, everything becomes arb-able. //</p>
+<p>The generate | arb --fzf | action pattern is infinitely extensible. Here&#x27;s how to build your own arb-powered verbs.</p>
 <h5 class="enc-h5">THE PATTERN</h5>
-<pre class="enc-code">&lt;generator&gt; | fzf [--preview &#x27;&lt;preview-cmd&gt;&#x27;] | &lt;consumer&gt;</pre>
+<pre class="enc-code">&lt;generator&gt; | arb --fzf [--preview &#x27;&lt;preview-cmd&gt;&#x27;] | &lt;consumer&gt;</pre>
 <p>Generator: anything that outputs lines (find, git, docker, etc.) Preview: command that shows detail for highlighted line (\\) Consumer: action on selected lines (xargs, while read, eval)</p>
-<h5 class="enc-h5">EXAMPLE: FZF THROUGH DOCKER CONTAINERS</h5>
-<pre class="enc-code">function fzf-docker()
+<h5 class="enc-h5">EXAMPLE: ARB THROUGH DOCKER CONTAINERS</h5>
+<pre class="enc-code">function arb-docker()
 docker ps -a --format &#x27;.ID .Names .Status&#x27; |
-fzf --preview &#x27;docker inspect 1 | head -50&#x27; |
+arb --fzf --preview &#x27;docker inspect 1 | head -50&#x27; |
 awk &#x27;print 1&#x27; |
 xargs -r docker logs --tail 100</pre>
 <p>Generator: docker ps. Preview: docker inspect. Consumer: docker logs.</p>
-<h5 class="enc-h5">EXAMPLE: FZF THROUGH TMUX SESSIONS</h5>
-<pre class="enc-code">function fzf-tmux-session()
+<h5 class="enc-h5">EXAMPLE: ARB THROUGH TMUX SESSIONS</h5>
+<pre class="enc-code">function arb-tmux-session()
 tmux list-sessions -F &#x27;#session_name: #session_windows windows&#x27; |
-fzf --preview &#x27;tmux list-windows -t 1&#x27; |
+arb --fzf --preview &#x27;tmux list-windows -t 1&#x27; |
 cut -d: -f1 |
 xargs tmux switch-client -t</pre>
 <p>Generator: tmux list-sessions. Consumer: tmux switch-client.</p>
 <h5 class="enc-h5">THE ACCEPT vs EDIT PATTERN</h5>
 <p><strong>ZPWR</strong> verbs come in two flavors: Accept verbs  Execute the selection immediately Example: verbsfzf selects a verb and runs it. Edit verbs    Insert the selection into $BUFFER for editing Example: filesearch inserts the path into your command line. The difference is in the consumer. Accept uses eval/exec. Edit uses BUFFER=$selection + zle redisplay.</p>
 <h5 class="enc-h5">MAKING IT A ZLE WIDGET</h5>
-<p>To bind your fzf verb to a key:</p>
-<pre class="enc-code">function my-fzf-widget()
-BUFFER=(my-generator | fzf)
+<p>To bind your arb --fzf verb to a key:</p>
+<pre class="enc-code">function my-arb-widget()
+BUFFER=(my-generator | arb --fzf)
 CURSOR=#BUFFER
 zle redisplay
-zle -N my-fzf-widget
-bindkey &#x27;FX&#x27; my-fzf-widget</pre>
-<p>Now Ctrl-F Ctrl-X triggers your custom fzf workflow.</p>
-<h5 class="enc-h5">TIPS FOR GOOD FZF EXPERIENCES</h5>
-<p>- Use –ansi if your generator outputs color codes - Use –delimiter and –nth to control what fzf matches on - Use -m for multi-select (toggle with Tab) - Use –header for context hints at the top - Preview window size: –preview-window=right:50%:wrap - Test with: echo &#x27;a&#x27; | fzf –preview &#x27;echo &#x27;</p>
+zle -N my-arb-widget
+bindkey &#x27;FX&#x27; my-arb-widget</pre>
+<p>Now Ctrl-F Ctrl-X triggers your custom arb --fzf workflow.</p>
+<h5 class="enc-h5">TIPS FOR GOOD ARB EXPERIENCES</h5>
+<p>- Use –ansi if your generator outputs color codes - Use –delimiter and –nth to control what arb --fzf matches on - Use -m for multi-select (toggle with Tab) - Use –header for context hints at the top - Preview window size: –preview-window=right:50%:wrap - Test with: echo &#x27;a&#x27; | arb --fzf –preview &#x27;echo &#x27;</p>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch30">
@@ -4162,15 +4166,15 @@ prefix + Alt-u   Clean plugins not in config</pre>
 <pre class="enc-code">set-option -g @plugin &#x27;tmux-plugins/tpm&#x27;
 set-option -g @plugin &#x27;tmux-plugins/tmux-resurrect&#x27;</pre>
 <h5 class="enc-h5">THE PLUGIN ROSTER (.tmuxplugins)</h5>
-<p>Tmux-plugins/tpm                Plugin manager itself tmux-plugins/tmux-sensible      Sane defaults for tmux tmux-plugins/tmux-resurrect     Session save/restore tmux-plugins/tmux-continuum      Auto-save sessions tmux-plugins/tmux-battery        Battery indicator tmux-plugins/tmux-prefix-highlight Highlight when prefix active tmux-plugins/tmux-yank           System clipboard integration MenkeTechnologies/tmux-thumbs     Quick copy with hints MenkeTechnologies/tmux-fzf-url    FZF through URLs in pane.</p>
+<p>Tmux-plugins/tpm                Plugin manager itself tmux-plugins/tmux-sensible      Sane defaults for tmux tmux-plugins/tmux-resurrect     Session save/restore tmux-plugins/tmux-continuum      Auto-save sessions tmux-plugins/tmux-battery        Battery indicator tmux-plugins/tmux-prefix-highlight Highlight when prefix active tmux-plugins/tmux-yank           System clipboard integration MenkeTechnologies/tmux-thumbs     Quick copy with hints MenkeTechnologies/tmux-fzf-url    ARB through URLs in pane.</p>
 <h5 class="enc-h5">tmux-resurrect: WHAT IT SAVES</h5>
 <p>- Pane layouts (splits, sizes, positions) - Working directories for each pane - Running programs (@resurrect-processes &#x27;:all:&#x27;) - Command history is NOT saved (that&#x27;s zsh&#x27;s job) Save: prefix+Ctrl-s. Restore: prefix+Ctrl-r.</p>
 <h5 class="enc-h5">tmux-continuum: AUTO-SAVE</h5>
 <p>Piggybacks on resurrect. Auto-saves every 15 minutes. @continuum-restore is commented out in <strong>ZPWR</strong> by default. Enable it to auto-restore on tmux server start.</p>
 <h5 class="enc-h5">tmux-fzf-url: URL PICKER</h5>
-<p>Scans the visible pane for URLs, opens them in fzf:</p>
-<pre class="enc-code">prefix + e   FZF through URLs, open selected in browser
-prefix + u   FZF through URLs, search mode</pre>
+<p>Scans the visible pane for URLs, opens them in arb --fzf:</p>
+<pre class="enc-code">prefix + e   ARB through URLs, open selected in browser
+prefix + u   ARB through URLs, search mode</pre>
 <p>Uses <strong>ZPWR_TMUX</strong>_HISTORY_LIMIT for scrollback depth.</p>
 <h5 class="enc-h5">CUSTOM SCRIPTS IN $<strong>ZPWR_TMUX</strong></h5>
 <p>Layout scripts create multi-pane environments:</p>
@@ -4313,10 +4317,10 @@ temprs -o 0 | jq .             # read top, pipe to jq</pre>
 <h5 class="enc-h5">NETWORK FLAGS</h5>
 <p>lsofrs -n           # inhibit hostname resolution (fast mode) lsofrs -P           # inhibit port-to-name conversion lsofrs -N           # select NFS files lsofrs -U           # select UNIX domain socket files.</p>
 <h5 class="enc-h5"><strong>ZPWR</strong> INTEGRATION</h5>
-<p>The zpwr lsof verb pipes lsof output through fzf for interactive process selection and killing:</p>
-<pre class="enc-code">zpwr lsof           # fzf over lsof, select PIDs to kill
+<p>The zpwr lsof verb pipes lsof output through arb --fzf for interactive process selection and killing:</p>
+<pre class="enc-code">zpwr lsof           # arb --fzf over lsof, select PIDs to kill
 zpwr lsofedit       # same but edit the kill command first</pre>
-<p>The zpwrLsoffzf widget (bound to ^F^H in viins and vicmd) runs sudo lsof -i | fzf -m, extracts PIDs with awk, and inserts them into your command line. Scan the local network like a deck jockey, pick your targets with fzf.</p>
+<p>The zpwrLsoffzf widget (bound to ^F^H in viins and vicmd) runs sudo lsof -i | arb --fzf -m, extracts PIDs with awk, and inserts them into your command line. Scan the local network like a deck jockey, pick your targets with arb --fzf.</p>
 <h5 class="enc-h5">FILES &amp; DIRECTORIES</h5>
 <p>lsofrs FILE...      # list processes using these files lsofrs –dir DIR    # open files in DIR (one level, like +d) lsofrs –dir-recurse DIR # recursive (like +D)</p>
 </div></section>
@@ -4407,14 +4411,14 @@ eza -I &#x27;*.pyc|__pycache__&#x27;   # ignore patterns</pre>
 <h5 class="enc-h5">DISCOVERY</h5>
 <p>bat –list-themes    # see all available color themes bat –list-languages # every syntax bat can highlight.</p>
 <h5 class="enc-h5">HOW <strong>ZPWR</strong> USES BAT</h5>
-<p>bat is the preview engine for fzf throughout zpwr:</p>
-<pre class="enc-code">fzf --preview &#x27;bat --color=always &#x27;</pre>
+<p>bat is the preview engine for arb --fzf throughout zpwr:</p>
+<pre class="enc-code">arb --fzf --preview &#x27;bat --color=always &#x27;</pre>
 <p>The full zpwr colorizer invocation:</p>
 <pre class="enc-code">bat --paging never --wrap character --color always
 --style=&quot;numbers,grid,changes,header&quot;</pre>
-<p>This is stored in $<strong>ZPWR_COLORIZER</strong> and expanded into: FZF_COLORIZER          — preview for generic fzf FZF_COLORIZER_FILE     — preview for file-specific fzf FZF_COLORIZER_FILE_TEXT — text file preview (uses -l ASP) When bat is unavailable, zpwr falls back to pygmentize.</p>
+<p>This is stored in $<strong>ZPWR_COLORIZER</strong> and expanded into: FZF_COLORIZER          — preview for generic arb --fzf FZF_COLORIZER_FILE     — preview for file-specific arb --fzf FZF_COLORIZER_FILE_TEXT — text file preview (uses -l ASP) When bat is unavailable, zpwr falls back to pygmentize.</p>
 <h5 class="enc-h5"><strong>ZPWR</strong> VERBS</h5>
-<p>zpwr filesearch and zpwr wordsearch both use bat in their fzf preview windows. Vimfilesearch, vimwordsearch, and the emacs variants (emacsfilesearch, emacswordsearch) all inherit the same bat-powered preview pipeline.</p>
+<p>zpwr filesearch and zpwr wordsearch both use bat in their arb --fzf preview windows. Vimfilesearch, vimwordsearch, and the emacs variants (emacsfilesearch, emacswordsearch) all inherit the same bat-powered preview pipeline.</p>
 <h5 class="enc-h5">STANDALONE USAGE</h5>
 <pre class="enc-code">bat src/main.rs              # highlighted source view
 bat -l json data.txt         # force language detection
@@ -4432,7 +4436,7 @@ bat -r 10:20 file.zsh        # show only lines 10-20</pre>
 <h5 class="enc-h5">BAT_THEME</h5>
 <pre class="enc-code">export BAT_THEME=&quot;Dracula&quot;</pre>
 <p>Set this in your env to change the default theme globally. Popular themes: Dracula, Monokai Extended, Nord, OneHalfDark, Solarized (Dark), TwoDark, ansi. Preview them all:</p>
-<pre class="enc-code">bat --list-themes | fzf --preview=&#x27;bat --theme= src/main.rs&#x27;</pre>
+<pre class="enc-code">bat --list-themes | arb --fzf --preview=&#x27;bat --theme= src/main.rs&#x27;</pre>
 <h5 class="enc-h5">STYLE COMPONENTS</h5>
 <pre class="enc-code">bat --style=numbers,changes,header</pre>
 <p>Components: full, auto, plain, numbers, changes, header, header-filename, header-filesize, grid, rule, snip. Combine with commas. &#x27;full&#x27; enables everything. &#x27;plain&#x27; disables everything — just colored text, no chrome.</p>
@@ -4481,21 +4485,21 @@ fd &#x27;test.*\.zsh&#x27;  # full regex support</pre>
 <p>The -x flag runs in parallel by default — your cores earn their keep. -X collects all results and passes them as one batch. This is the find | xargs pattern without the pipe.</p>
 </div></section>
 <section class="enc-section" id="s134">
-<h3 class="enc-section-title"><span class="enc-section-num">§134</span>fd: Integration with zpwr &amp; fzf</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§134</span>fd: Integration with zpwr &amp; arb --fzf</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">FD: INTEGRATION WITH ZPWR &amp; FZF</h4>
-<p>// fd feeds fzf. fzf feeds your brain. the pipeline of knowing. //</p>
+<h4 class="enc-h4">FD: INTEGRATION WITH ZPWR &amp; ARB</h4>
+<p>// fd feeds arb. arb feeds your brain. the pipeline of knowing. //</p>
 <h5 class="enc-h5">FZF_DEFAULT_COMMAND</h5>
 <p>zpwr sets FZF_DEFAULT_COMMAND to use find + ag by default:</p>
 <pre class="enc-code">export FZF_DEFAULT_COMMAND=&#x27;find * | ag -v &quot;.git/&quot;&#x27;</pre>
 <p>You can override this with fd for faster results:</p>
 <pre class="enc-code">export FZF_DEFAULT_COMMAND=&#x27;fd --type f --hidden --follow&#x27;</pre>
 <p>fd is faster because it parallelizes traversal and skips .gitignore entries without needing ag to filter them out.</p>
-<h5 class="enc-h5">FD + FZF PATTERNS</h5>
-<pre class="enc-code">fd -e zsh | fzf                 # fuzzy find zsh files
-fd -t f | fzf --preview &#x27;bat &#x27;  # find + preview
-vim (fd -t f | fzf)             # find, select, edit</pre>
-<p>This three-tool combo (fd + fzf + bat) is the holy trinity of file navigation. fd finds, fzf filters, bat previews.</p>
+<h5 class="enc-h5">FD + ARB PATTERNS</h5>
+<pre class="enc-code">fd -e zsh | arb --fzf                 # fuzzy find zsh files
+fd -t f | arb --fzf --preview &#x27;bat &#x27;  # find + preview
+vim (fd -t f | arb --fzf)             # find, select, edit</pre>
+<p>This three-tool combo (fd + arb --fzf + bat) is the holy trinity of file navigation. fd finds, arb --fzf filters, bat previews.</p>
 <h5 class="enc-h5">TEMPORAL &amp; SIZE FILTERS</h5>
 <p>fd –changed-within 1d  # modified in last 24 hours fd –changed-before 1w  # modified more than a week ago fd –size +1m           # files larger than 1 megabyte fd –size -10k          # files smaller than 10 kilobytes Units: b (bytes), k (kilobytes), m (megabytes), g (gigabytes). Time: s (seconds), m (minutes), h (hours), d (days), w (weeks).</p>
 <h5 class="enc-h5">FD + BAT</h5>
@@ -4550,16 +4554,16 @@ rg &#x27;fn main&#x27;         # literal or regex — rg auto-detects</pre>
 <pre class="enc-code">rg --type-add &#x27;zpwr:*.zsh&#x27; -t zpwr PATTERN</pre>
 <p>Define a custom type inline and use it immediately. Persist custom types in  (set RIPGREP_CONFIG_PATH).</p>
 <h5 class="enc-h5"><strong>ZPWR</strong> INTEGRATION</h5>
-<p>zpwr grep uses ag (silver searcher) piped into fzf:</p>
-<pre class="enc-code">zpwr grep            # ag into fzf for interactive search</pre>
-<p>zpwr wordsearch searches file contents with fzf preview:</p>
+<p>zpwr grep uses ag (silver searcher) piped into arb --fzf:</p>
+<pre class="enc-code">zpwr grep            # ag into arb --fzf for interactive search</pre>
+<p>zpwr wordsearch searches file contents with arb --fzf preview:</p>
 <pre class="enc-code">zpwr wordsearch      # search by word in subdirectory files</pre>
-<p>Both use bat-powered previews in the fzf window.</p>
-<h5 class="enc-h5">FZF + RG LIVE RELOAD</h5>
-<p>The ultimate interactive grep: rg feeds fzf, bat previews:</p>
+<p>Both use bat-powered previews in the arb --fzf window.</p>
+<h5 class="enc-h5">ARB + RG LIVE RELOAD</h5>
+<p>The ultimate interactive grep: rg feeds arb --fzf, bat previews:</p>
 <pre class="enc-code">rg --line-number PATTERN |
-fzf --delimiter : --preview &#x27;bat --highlight-line 2 1&#x27;</pre>
-<p>rg outputs file:line:match, fzf splits on :, bat highlights the matching line. Three tools, one seamless experience.</p>
+arb --fzf --delimiter : --preview &#x27;bat --highlight-line 2 1&#x27;</pre>
+<p>rg outputs file:line:match, arb --fzf splits on :, bat highlights the matching line. Three tools, one seamless experience.</p>
 <h5 class="enc-h5">CONFIGURATION</h5>
 <pre class="enc-code">export RIPGREP_CONFIG_PATH=~/.ripgreprc</pre>
 <p>Put default flags in this file, one per line: –smart-case, –hidden, –glob=!.git, –max-columns=200 Also: .rgignore in any directory works like .gitignore — project-specific patterns that rg will skip. .ignore files (used by ag too) are also respected by rg.</p>
@@ -4654,12 +4658,12 @@ nvim -S Session.vim  # restore session</pre>
 <h5 class="enc-h5"><strong>PATH</strong> QUOTING (zpwrGetFound)</h5>
 <pre class="enc-code">perl -pe &#x27;s@([~]*)([~].*)@1&quot;2&quot;@;s@\s+@ @g&#x27;</pre>
 <p>Wraps non-tilde paths in double quotes and collapses spaces. Handles filenames with spaces for safe shell consumption.</p>
-<h5 class="enc-h5">FZF RESULT FORMATTING (zpwrAgIntoFzf)</h5>
+<h5 class="enc-h5">ARB RESULT FORMATTING (zpwrAgIntoFzf)</h5>
 <pre class="enc-code">perl -pe &#x27;s@(.*?):(\d+):(.*)@+2 &quot;PWD/1&quot;@&#x27;</pre>
-<p>Converts grep output (file:line:match) into vim args (+line &quot;file&quot;). The brain behind zpwr grep -&gt; fzf -&gt; vim pipeline.</p>
+<p>Converts grep output (file:line:match) into vim args (+line &quot;file&quot;). The brain behind zpwr grep -&gt; arb --fzf -&gt; vim pipeline.</p>
 <h5 class="enc-h5">VERB LIST FORMATTING (zpwrVerbsFZF)</h5>
 <pre class="enc-code">perl -e &#x27;@a=&lt;&gt;;for(@a)print &quot;zpwr 1&quot; if m(\S+)\s+&#x27;</pre>
-<p>Reads verb list, extracts first word, prepends &#x27;zpwr &#x27;. Builds the command string that fzf executes on selection.</p>
+<p>Reads verb list, extracts first word, prepends &#x27;zpwr &#x27;. Builds the command string that arb --fzf executes on selection.</p>
 <h5 class="enc-h5">IN-PLACE RENAME (zpwrChangeNameZpwr)</h5>
 <pre class="enc-code">perl -i -pe &#x27;s@\bOLDNAME\b@NEWNAME@g&#x27; **/*(.)&#x27;</pre>
 <p>Renames all occurrences across all files. The  word boundary prevents partial matches. The **(.) glob hits all regular files.</p>
@@ -4888,9 +4892,9 @@ zpwr ports -k 3000         # kill whatever is on port 3000</pre>
 <h5 class="enc-h5">THE KILL FLAG</h5>
 <p>zpwr ports -k 3000 finds the PID on port 3000 and sends SIGTERM. Shows process name before killing. Use when a dev server refuses to die.</p>
 <h5 class="enc-h5">COMPANION VERBS</h5>
-<pre class="enc-code">zpwr lsof                 # interactive fzf over all lsof output
+<pre class="enc-code">zpwr lsof                 # interactive arb --fzf over all lsof output
 zpwr ps                   # grep through ps output
-zpwr kill                 # fzf kill from ps</pre>
+zpwr kill                 # arb --fzf kill from ps</pre>
 </div></section>
 <section class="enc-section" id="s152">
 <h3 class="enc-section-title"><span class="enc-section-num">§152</span>Stale File Finder</h3>
@@ -5024,9 +5028,9 @@ zpwr redo                   # redo last search as SQL update</pre>
 zpwr see                    # category search
 zpwr seee                   # timestamp search
 zpwr ser                    # random search
-zpwr sef                    # search into fzf
-zpwr searchall              # entire collection into fzf
-zpwr searchfull             # entire collection into fzf
+zpwr sef                    # search into arb --fzf
+zpwr searchall              # entire collection into arb --fzf
+zpwr searchfull             # entire collection into arb --fzf
 zpwr searchle               # category search (alias for see)
 zpwr searchlee              # timestamp search (alias for seee)
 zpwr learnsearch            # search the collection
@@ -5058,10 +5062,10 @@ zpwr droplearningcollection   # drop MySQL table</pre>
 <pre class="enc-code">zpwr regengitrepocache      # scan filesystem with fd/find
 zpwr regengitdirtyrepocache  # scan only dirty repos</pre>
 <h5 class="enc-h5">SEARCH &amp; BROWSE</h5>
-<pre class="enc-code">zpwr gitrepos               # all repos into fzf
-zpwr gitreposclean          # clean repos into fzf
-zpwr gitreposdirty          # dirty repos into fzf
-zpwr gitreposlist           # list all repos (no fzf)
+<pre class="enc-code">zpwr gitrepos               # all repos into arb --fzf
+zpwr gitreposclean          # clean repos into arb --fzf
+zpwr gitreposdirty          # dirty repos into arb --fzf
+zpwr gitreposlist           # list all repos (no arb --fzf)
 zpwr gitreposcleanlist      # list clean repos
 zpwr gitreposdirtylist      # list dirty repos</pre>
 <h5 class="enc-h5">CACHED VARIANTS</h5>
@@ -5080,24 +5084,24 @@ zpwr gitwho                 # contributor stats across all repos</pre>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch49">
-<h2 class="enc-chapter-title"><span class="enc-chapter-num">CH 49</span>FZF ARCHITECTURE</h2>
+<h2 class="enc-chapter-title"><span class="enc-chapter-num">CH 49</span>ARB ARCHITECTURE</h2>
 <section class="enc-section" id="s159">
-<h3 class="enc-section-title"><span class="enc-section-num">§159</span>FZF Brew &amp; Chrome</h3>
+<h3 class="enc-section-title"><span class="enc-section-num">§159</span>fzf-zsh-plugin: Brew &amp; Chrome</h3>
 <div class="enc-section-body">
-<h4 class="enc-h4">FZF BREW &amp; CHROME</h4>
+<h4 class="enc-h4">FZF-ZSH-PLUGIN: BREW &amp; CHROME</h4>
 <p>// fuzzy finding extends to your package manager and browser //</p>
-<p>The fzf-zsh-plugin adds fzf interfaces to Homebrew package management and Chrome browser data.</p>
+<p>The fzf-zsh-plugin adds fuzzy interfaces to Homebrew package management and Chrome browser data. It ships its own picker rather than going through <code>$ZPWR_FZF</code>.</p>
 <h5 class="enc-h5">HOMEBREW VERBS</h5>
-<pre class="enc-code">zpwr brewinstall            # fzf install formula
-zpwr brewuninstall          # fzf uninstall formula
-zpwr brewcaskinstall        # fzf install cask
-zpwr brewcaskuninstall      # fzf uninstall cask
-zpwr brewupdate             # fzf update formula</pre>
-<p>Each command pipes the available packages into fzf with multi-select. Pick one or many, then install/remove in one shot. No more googling package names.</p>
+<pre class="enc-code">zpwr brewinstall            # fuzzy install formula
+zpwr brewuninstall          # fuzzy uninstall formula
+zpwr brewcaskinstall        # fuzzy install cask
+zpwr brewcaskuninstall      # fuzzy uninstall cask
+zpwr brewupdate             # fuzzy update formula</pre>
+<p>Each command pipes the available packages into the picker with multi-select. Pick one or many, then install/remove in one shot. No more googling package names.</p>
 <h5 class="enc-h5">CHROME VERBS</h5>
-<pre class="enc-code">zpwr chromehistory          # search Chrome history in fzf
-zpwr chromebookmarks        # search Chrome bookmarks in fzf</pre>
-<p>Reads Chrome&#x27;s SQLite databases directly. Select a URL from fzf and open it in the browser.</p>
+<pre class="enc-code">zpwr chromehistory          # fuzzy search Chrome history
+zpwr chromebookmarks        # fuzzy search Chrome bookmarks</pre>
+<p>Reads Chrome&#x27;s SQLite databases directly. Select a URL from the picker and open it in the browser.</p>
 <p>Plugin: MenkeTechnologies/fzf-zsh-plugin.</p>
 </div></section>
 </div>
@@ -5160,7 +5164,7 @@ zpwr dfimage &lt;ID&gt;            # extract Dockerfile from image</pre>
 <p>// 30+ custom plugins from MenkeTechnologies //</p>
 <p><strong>ZPWR</strong> loads approximately 95 plugins via zinit. Over 30 are custom MenkeTechnologies creations that extend zpwr with additional verbs, aliases, completions, and integrations.</p>
 <h5 class="enc-h5">KEY PLUGINS</h5>
-<p>Zsh-learn              60 verbs, MySQL learning DB zsh-git-repo-cache    20 verbs, filesystem repo index fzf-zsh-plugin        14 verbs, brew/chrome fzf zsh-git-acp           318 aliases, git workflows zsh-docker-aliases    148 aliases, Docker shortcuts zsh-openshift-aliases 106 aliases, OpenShift zsh-expand            spell correct, abbreviation expand zsh-more-completions  many thousands of tab completions zsh-cargo-completion  32 Rust/Cargo aliases zsh-travis            8 functions, CI integration zsh-nginx             nginx management forgit                fzf-powered git (add, diff, log) zsh-z                 frecency directory jumping fzf-tab               fzf-powered tab completion zconvey               cross-session communication.</p>
+<p>Zsh-learn              60 verbs, MySQL learning DB zsh-git-repo-cache    20 verbs, filesystem repo index fzf-zsh-plugin        14 verbs, brew/chrome fuzzy pickers zsh-git-acp           318 aliases, git workflows zsh-docker-aliases    148 aliases, Docker shortcuts zsh-openshift-aliases 106 aliases, OpenShift zsh-expand            spell correct, abbreviation expand zsh-more-completions  many thousands of tab completions zsh-cargo-completion  32 Rust/Cargo aliases zsh-travis            8 functions, CI integration zsh-nginx             nginx management forgit                interactive git (add, diff, log) zsh-z                 frecency directory jumping fzf-tab               arb-powered tab completion zconvey               cross-session communication.</p>
 <h5 class="enc-h5">CONDITIONAL LOADING</h5>
 <p>Plugins for docker, dotnet, kubectl, ngrok, rails, and systemctl only load if those commands exist. No bloat on machines without those tools.</p>
 <h5 class="enc-h5">DEFERRED LOADING</h5>
@@ -5305,7 +5309,7 @@ zpwr catnviminforecentf    # cat custom vim info then recentf</pre>
 <h5 class="enc-h5">COMMIT &amp; PUSH</h5>
 <pre class="enc-code">zpwr gitcommit             # commit and push with arg message
 zpwr gitcommitcount        # count commits in current repo
-zpwr gitcommits            # search git commits with fzf
+zpwr gitcommits            # search git commits via vim :Commits
 zpwr clone                 # clone and cd to arg</pre>
 <h5 class="enc-h5">CONFIG &amp; IGNORES</h5>
 <pre class="enc-code">zpwr gitconfig             # edit git config file
@@ -5415,10 +5419,10 @@ zpwr web                   # cd to web dir
 zpwr zp                    # cd to ZPWR_REPO_NAME
 zpwr zpwr                  # cd to ZPWR_REPO_NAME
 zpwr zpz                   # cd to repo, checkout, rebase, push</pre>
-<h5 class="enc-h5">FRECENCY &amp; FZF</h5>
+<h5 class="enc-h5">FRECENCY &amp; ARB</h5>
 <pre class="enc-code">zpwr z                     # cd to z frecency ranked dir
 zpwr zcd                   # list then cd to z ranked dir
-zpwr dirsearch             # cd to a sub dir via fzf</pre>
+zpwr dirsearch             # cd to a sub dir via arb --fzf</pre>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch58">
@@ -5492,26 +5496,26 @@ zpwr all                   # banner, counts, clean, refresh, test, update</pre>
 <h3 class="enc-section-title"><span class="enc-section-num">§171</span>Forgit Reference</h3>
 <div class="enc-section-body">
 <h4 class="enc-h4">FORGIT REFERENCE</h4>
-<p>// 14 verbs for fzf-powered git //</p>
-<p>Forgit wraps common git operations in fzf interfaces. Interactive staging, diffing, stashing, and more.</p>
+<p>// 14 verbs for interactive git //</p>
+<p>Forgit wraps common git operations in interactive pickers. Interactive staging, diffing, stashing, and more.</p>
 <h5 class="enc-h5">STAGING &amp; DIFFING</h5>
-<pre class="enc-code">zpwr forgitadd             # fzf interactive git add
-zpwr forgitdiff            # fzf interactive git diff
-zpwr forgitreset           # fzf interactive git reset
-zpwr forgitrestore         # fzf interactive git restore</pre>
+<pre class="enc-code">zpwr forgitadd             # interactive git add
+zpwr forgitdiff            # interactive git diff
+zpwr forgitreset           # interactive git reset
+zpwr forgitrestore         # interactive git restore</pre>
 <h5 class="enc-h5">STASH &amp; CLEAN</h5>
-<pre class="enc-code">zpwr forgitstash           # fzf interactive stash show
-zpwr forgitclean           # fzf interactive git clean</pre>
+<pre class="enc-code">zpwr forgitstash           # interactive stash show
+zpwr forgitclean           # interactive git clean</pre>
 <h5 class="enc-h5">LOG &amp; INFO</h5>
-<pre class="enc-code">zpwr forgitlog             # fzf interactive git log
-zpwr forgitinfo            # fzf git info
-zpwr forgitwarn            # fzf git warn</pre>
+<pre class="enc-code">zpwr forgitlog             # interactive git log
+zpwr forgitinfo            # interactive git info
+zpwr forgitwarn            # interactive git warn</pre>
 <h5 class="enc-h5">GITIGNORE MANAGEMENT</h5>
-<pre class="enc-code">zpwr forgitignore          # fzf gitignore templates
-zpwr forgitignoreclean     # fzf gitignore clean
-zpwr forgitignoreget       # fzf gitignore get
-zpwr forgitignorelist      # fzf gitignore list
-zpwr forgitignoreupdate    # fzf gitignore update</pre>
+<pre class="enc-code">zpwr forgitignore          # interactive gitignore templates
+zpwr forgitignoreclean     # interactive gitignore clean
+zpwr forgitignoreget       # interactive gitignore get
+zpwr forgitignorelist      # interactive gitignore list
+zpwr forgitignoreupdate    # interactive gitignore update</pre>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch61">
@@ -5581,18 +5585,18 @@ zpwr eva                   # list all env vars</pre>
 <pre class="enc-code">zpwr e                     # count all zpwr env
 zpwr envcounts             # count all zpwr env
 zpwr environmentcounts     # count all zpwr env
-zpwr envcachesearch        # fzf search cached aliases, params, builtins
-zpwr environmentcachesearch# fzf search cached env
-zpwr envaccept             # accept from fzf env
-zpwr envedit               # edit from fzf env</pre>
+zpwr envcachesearch        # arb --fzf cached aliases, params, builtins
+zpwr environmentcachesearch# arb --fzf search cached env
+zpwr envaccept             # accept from arb --fzf env
+zpwr envedit               # edit from arb --fzf env</pre>
 <h5 class="enc-h5">KEYBINDING SEARCH</h5>
 <pre class="enc-code">zpwr allsearch             # search all keybindings
 zpwr vimsearch             # search vim keybindings
 zpwr zshsearch             # search zsh keybindings</pre>
 <h5 class="enc-h5">ZSH INTERNALS</h5>
 <pre class="enc-code">zpwr reload                # reparse env
-zpwr modules               # show zsh modules via fzf
-zpwr options               # show zsh options via fzf
+zpwr modules               # show zsh modules via arb --fzf
+zpwr options               # show zsh options via arb --fzf
 zpwr zstyle                # fuzzy search zstyle
 zpwr zcompdump             # edit zcompdump</pre>
 </div></section>
@@ -5630,13 +5634,13 @@ zpwr logincount            # count of logins by user</pre>
 <div class="enc-section-body">
 <h4 class="enc-h4">PROCESS &amp; NETWORK</h4>
 <p>// 15 verbs for procs, ports, and packets //</p>
-<p>Kill processes via fzf, monitor process trees, toggle Tor, ping LANs, and run network diagnostics.</p>
+<p>Kill processes via arb --fzf, monitor process trees, toggle Tor, ping LANs, and run network diagnostics.</p>
 <h5 class="enc-h5">PROCESS MANAGEMENT</h5>
 <pre class="enc-code">zpwr ps                    # ps -ef | grep arg
-zpwr kill                  # kill from ps output via fzf
-zpwr killedit              # edit kill from ps output via fzf
-zpwr lsof                  # kill from lsof output via fzf
-zpwr lsofedit              # edit kill from lsof output via fzf
+zpwr kill                  # kill from ps output via arb --fzf
+zpwr killedit              # edit kill from ps output via arb --fzf
+zpwr lsof                  # kill from lsof output via arb --fzf
+zpwr lsofedit              # edit kill from lsof output via arb --fzf
 zpwr pstreemonitor         # monitor process tree with watch</pre>
 <h5 class="enc-h5">NETWORK DIAGNOSTICS</h5>
 <pre class="enc-code">zpwr digs                  # run series of networking cmds on arg
@@ -5669,14 +5673,14 @@ zpwr clearlist             # clear and list the files
 zpwr clearls               # clear and list the files
 zpwr info                  # get info on command type with args</pre>
 <h5 class="enc-h5">SEARCH</h5>
-<pre class="enc-code">zpwr grep                  # grep through pwd with ag into fzf
+<pre class="enc-code">zpwr grep                  # grep through pwd with ag into arb --fzf
 zpwr search                # recursive grep search with context
-zpwr filesearch            # cat a file in a sub dir via fzf
-zpwr filesearchedit        # edit a file in a sub dir via fzf
-zpwr wordsearch            # cat a file by word via fzf
-zpwr wordsearchedit        # edit a file by word via fzf
-zpwr findsearch            # cat find drive for file via fzf
-zpwr findsearchedit        # edit find drive for file via fzf
+zpwr filesearch            # cat a file in a sub dir via arb --fzf
+zpwr filesearchedit        # edit a file in a sub dir via arb --fzf
+zpwr wordsearch            # cat a file by word via arb --fzf
+zpwr wordsearchedit        # edit a file by word via arb --fzf
+zpwr findsearch            # cat find drive for file via arb --fzf
+zpwr findsearchedit        # edit find drive for file via arb --fzf
 zpwr locatesearch          # accept locate drive for file
 zpwr locatesearchedit      # edit locate drive for file
 zpwr linecount             # get line count of search term
@@ -5684,7 +5688,7 @@ zpwr cfasd                 # cat the fasd frecency ranked file</pre>
 <h5 class="enc-h5">TRANSFORM &amp; MANAGE</h5>
 <pre class="enc-code">zpwr replacer              # find and replace text in files
 zpwr rename                # rename files
-zpwr man                   # fzf through man pages
+zpwr man                   # arb --fzf through man pages
 zpwr open                  # open with system
 zpwr opencommand           # get the command to open with system</pre>
 <h5 class="enc-h5">CONVERT &amp; UPLOAD</h5>
@@ -5729,12 +5733,12 @@ zpwr emacspluginlist       # total list of emacs plugins</pre>
 <pre class="enc-code">zpwr subcommands           # run subcommands for zpwr &lt;tab&gt;
 zpwr subcommandscount      # number of subcommands
 zpwr subcommandsedit       # edit subcommands for zpwr &lt;tab&gt;
-zpwr subcommandsfzf        # fzf subcommands for zpwr &lt;tab&gt;
+zpwr subcommandsfzf        # arb --fzf subcommands for zpwr &lt;tab&gt;
 zpwr subcommandslist       # list subcommands for zpwr &lt;tab&gt;
 zpwr verbs                 # run subcommands for zpwr &lt;tab&gt;
 zpwr verbscount            # number of verbs
 zpwr verbsedit             # edit subcommands for zpwr &lt;tab&gt;
-zpwr verbsfzf              # fzf subcommands for zpwr &lt;tab&gt;
+zpwr verbsfzf              # arb --fzf subcommands for zpwr &lt;tab&gt;
 zpwr verbslist             # list subcommands for zpwr &lt;tab&gt;
 zpwr help                  # list subcommands with color</pre>
 <h5 class="enc-h5">MISC INTROSPECTION</h5>
@@ -5763,8 +5767,8 @@ zpwr pygmentcolors         # show all pygment colors</pre>
 <h5 class="enc-h5">BACKUP &amp; HISTORY</h5>
 <pre class="enc-code">zpwr backup                # backup files
 zpwr backuphistory         # backup HISTFILE
-zpwr hist                  # exec history command via fzf
-zpwr histedit              # edit history command via fzf
+zpwr hist                  # exec history command via arb --fzf
+zpwr histedit              # edit history command via arb --fzf
 zpwr histfile              # edit history file</pre>
 <h5 class="enc-h5">FILE &amp; DIR CREATION</h5>
 <pre class="enc-code">zpwr makedir               # make a dir tree
@@ -5843,7 +5847,7 @@ zpwr tmuxload dev             # restore it later</pre>
 <pre class="enc-code">zpwr tmuxsave                 # save with timestamp name
 zpwr tmuxsave --list          # list saved layouts
 zpwr tmuxsave --delete dev    # remove a layout
-zpwr tmuxload                 # fzf picker (no args)
+zpwr tmuxload                 # arb --fzf picker (no args)
 zpwr tmuxload dev mywork      # restore as session &#x27;mywork&#x27;</pre>
 <h5 class="enc-h5">KEYBINDING</h5>
 <p>Prefix W                      # save layout (tmux keybinding)</p>
@@ -6188,13 +6192,13 @@ v     -&gt; multi mode (batch operations)
 b     -&gt; single open (open URL in each pane)
 g     -&gt; single google (search in each pane)</pre>
 <h5 class="enc-h5">URL HANDLING:</h5>
-<pre class="enc-keys">prefix e              fzf URL picker -&gt; open
-prefix u              fzf URL picker -&gt; search</pre>
+<pre class="enc-keys">prefix e              arb --fzf URL picker -&gt; open
+prefix u              arb --fzf URL picker -&gt; search</pre>
 <p>Both use tmux-fzf-url plugin with 30s timeout.</p>
 <h5 class="enc-h5">PASTE &amp; BUFFERS:</h5>
 <pre class="enc-keys">prefix P              paste buffer
 prefix ]              paste buffer (bracketed)
-prefix =              choose-buffer (fzf style)
+prefix =              choose-buffer (arb --fzf style)
 prefix #              list buffers
 prefix Ctrl-v         paste from system clipboard</pre>
 <h5 class="enc-h5">COPY MODE:</h5>
@@ -6285,12 +6289,12 @@ Ctrl-M (Enter)        zpwr magic enter (show status on empty)
 Ctrl-B                zpwr clipboard paste
 Ctrl-S                git add commit push (no check)
 Ctrl-K                zsh-learn-Learn (flashcard)</pre>
-<h5 class="enc-h5">COMPLETION &amp; FZF:</h5>
+<h5 class="enc-h5">COMPLETION &amp; ARB:</h5>
 <pre class="enc-keys">Tab (Ctrl-I)          fzf-completion
 Ctrl-D                list-choices
 Ctrl-L                clear-screen
-Ctrl-T                fzf file widget
-Alt-c                 fzf cd widget</pre>
+Ctrl-T                arb --fzf file widget
+Alt-c                 arb --fzf cd widget</pre>
 <h5 class="enc-h5">HISTORY:</h5>
 <pre class="enc-keys">Ctrl-N                down-history
 Ctrl-P                up-history
@@ -6312,12 +6316,12 @@ global aliases, and abbreviations before inserting.</pre>
 <div class="enc-section-body">
 <h4 class="enc-h4">ZSH INSERT MODE: CTRL-F &amp; CTRL-V CHORDS</h4>
 <p>two-key combos that unlock the full zpwr arsenal.</p>
-<h5 class="enc-h5">CTRL-F CHORDS (fzf &amp; actions):</h5>
-<pre class="enc-keys">Ctrl-F Ctrl-D         pipe buffer into fzf
-Ctrl-F Ctrl-F         cd + vim fzf file search (accept)
+<h5 class="enc-h5">CTRL-F CHORDS (arb --fzf &amp; actions):</h5>
+<pre class="enc-keys">Ctrl-F Ctrl-D         pipe buffer into arb --fzf
+Ctrl-F Ctrl-F         cd + vim arb --fzf file search (accept)
 Ctrl-F Ctrl-G         google search
-Ctrl-F Ctrl-H         lsof into fzf
-Ctrl-F Ctrl-I         ag (silver searcher) into fzf
+Ctrl-F Ctrl-H         lsof into arb --fzf
+Ctrl-F Ctrl-I         ag (silver searcher) into arb --fzf
 Ctrl-F Ctrl-J         zpwr verbs widget (accept)
 Ctrl-F Ctrl-K         alternate quotes around buffer
 Ctrl-F Ctrl-L         list choices
@@ -6331,26 +6335,26 @@ Ctrl-F Ctrl-V         edit command line in $<strong>EDITOR</strong>
 Ctrl-F j              zpwr verbs widget (accept)
 Ctrl-F n              zpwr verbs widget (browse)</pre>
 <h5 class="enc-h5">CTRL-V CHORDS (vim/fzf/navigation):</h5>
-<pre class="enc-keys">Ctrl-V Ctrl-@         vim fzf (open file in vim)
-Ctrl-V Space          vim fzf (open file in vim)
-Ctrl-V Ctrl-F         fasd fzf (frecency file open)
-Ctrl-V Ctrl-G         fzf cd widget
-Ctrl-V Ctrl-K         emacs fzf
-Ctrl-V Ctrl-L         z fzf (frecency dirs)
-Ctrl-V Ctrl-N         vim fzf sudo
-Ctrl-V Ctrl-O         fzf tab complete
+<pre class="enc-keys">Ctrl-V Ctrl-@         vim arb --fzf (open file in vim)
+Ctrl-V Space          vim arb --fzf (open file in vim)
+Ctrl-V Ctrl-F         fasd arb --fzf (frecency file open)
+Ctrl-V Ctrl-G         arb --fzf cd widget
+Ctrl-V Ctrl-K         emacs arb --fzf
+Ctrl-V Ctrl-L         z arb --fzf (frecency dirs)
+Ctrl-V Ctrl-N         vim arb --fzf sudo
+Ctrl-V Ctrl-O         arb --fzf tab complete
 Ctrl-V Ctrl-P         sudo command line toggle
 Ctrl-V Ctrl-R         history search multi-word
-Ctrl-V Ctrl-S         z fzf (alternate)
+Ctrl-V Ctrl-S         z arb --fzf (alternate)
 Ctrl-V Ctrl-V         vim all files widget (accept)
-Ctrl-V Ctrl-Z         fzf history widget
-Ctrl-V ,              fzf environment variables
-Ctrl-V .              fzf all keybindings</pre>
-<p>Ctrl-V //             locate fzf</p>
-<pre class="enc-keys">Ctrl-V /.             locate fzf + edit
-Ctrl-V ;              fzf surround
-Ctrl-V c              fzf git commits
-Ctrl-V k              fzf vim keybindings
+Ctrl-V Ctrl-Z         arb --fzf history widget
+Ctrl-V ,              arb --fzf environment variables
+Ctrl-V .              arb --fzf all keybindings</pre>
+<p>Ctrl-V //             locate arb --fzf</p>
+<pre class="enc-keys">Ctrl-V /.             locate arb --fzf + edit
+Ctrl-V ;              arb --fzf surround
+Ctrl-V c              arb --fzf git commits
+Ctrl-V k              arb --fzf vim keybindings
 Ctrl-V m              vim all files widget (browse)
 Ctrl-V v              vim all files widget (accept)</pre>
 <pre class="enc-keys">Ctrl-F is the action chord: search, edit, google, diff.
@@ -6410,7 +6414,7 @@ Ctrl-D is key: accept current match but keep menu open.</pre>
 <h3 class="enc-section-title"><span class="enc-section-num">§198</span>Vim Normal Mode Highlights</h3>
 <div class="enc-section-body">
 <h4 class="enc-h4">VIM NORMAL MODE: ZPWR HIGHLIGHTS</h4>
-<pre class="enc-keys">leader mappings, fzf integration, tmux synergy.
+<pre class="enc-keys">leader mappings, arb --fzf integration, tmux synergy.
 leader key is Space. only zpwr-specific bindings listed.</pre>
 <h5 class="enc-h5">FILE &amp; BUFFER (Space prefix):</h5>
 <pre class="enc-keys">Space w               :w! (force write)
@@ -6422,23 +6426,23 @@ Space an / Space ap   next / prev in arglist
 Space Tab             alternate or next buffer
 Space t               new tab
 Space s / Space v     horizontal / vertical split</pre>
-<h5 class="enc-h5">FZF INTEGRATION (Space prefix):</h5>
-<pre class="enc-keys">Space f               :Files! (fzf files)
-Space b               :Buffers! (fzf buffers)
-Space j               :Lines! (fzf lines)
+<h5 class="enc-h5">ARB INTEGRATION (Space prefix):</h5>
+<pre class="enc-keys">Space f               :Files! (arb --fzf files)
+Space b               :Buffers! (arb --fzf buffers)
+Space j               :Lines! (arb --fzf lines)
 Space ag              :Ag (silver searcher)
 Space aa              :Agg (ag variant)
 Space rg              :Rg (ripgrep)
-Space z               :Commits! (fzf git commits)
-Space ;               :Commands! (fzf commands)
-Space ,               :FZFMaps (fzf all mappings)
-Space ke / , / m / i  fzf keys / maps / nmap / imap
-Space ta / ma / env  fzf tags / marks / env vars
+Space z               :Commits! (arb --fzf git commits)
+Space ;               :Commands! (arb --fzf commands)
+Space ,               :FZFMaps (arb --fzf all mappings)
+Space ke / , / m / i  arb --fzf keys / maps / nmap / imap
+Space ta / ma / env  arb --fzf tags / marks / env vars
 Space / / .           locate all / colorscheme picker</pre>
 <h5 class="enc-h5">HISTORY (Space prefix):</h5>
-<pre class="enc-keys">Space hh              :History! (fzf file history)
-Space h/              :History/! (fzf search history)
-Space h:              :History:! (fzf command history)</pre>
+<pre class="enc-keys">Space hh              :History! (arb --fzf file history)
+Space h/              :History/! (arb --fzf search history)
+Space h:              :History:! (arb --fzf command history)</pre>
 <h5 class="enc-h5">SEARCH &amp; REPLACE (Space prefix):</h5>
 <pre class="enc-keys">Space r               replace word under cursor (whole file)
 Space g               global substitute word under cursor
@@ -6500,9 +6504,9 @@ w / b / e            CamelCaseMotion word movement</pre>
 <h4 class="enc-h4">=</h4>
 <h5 class="enc-h5">HOW TO SEARCH KEYBINDINGS:</h5>
 <h4 class="enc-h4">=</h4>
-<pre class="enc-keys">zpwr allsearch        search ALL keybindings in fzf
-zpwr vimsearch        search vim keybindings in fzf
-zpwr zshsearch        search zsh keybindings in fzf</pre>
+<pre class="enc-keys">zpwr allsearch        search ALL keybindings in arb --fzf
+zpwr vimsearch        search vim keybindings in arb --fzf
+zpwr zshsearch        search zsh keybindings in arb --fzf</pre>
 <h5 class="enc-h5">KEYBINDING CACHE FILES:</h5>
 <pre class="enc-keys"><strong>$ZPWR_LOCAL/zpwrAllKeybindings.txt</strong>
 <strong>$ZPWR_LOCAL/zpwr</strong>Vim,Zsh,TmuxKeybindings.txt</pre>
@@ -6512,7 +6516,7 @@ zpwr zshsearch        search zsh keybindings in fzf</pre>
 adding new bindings to refresh the searchable index.</pre>
 <pre class="enc-code">// the wizard does not memorize 4000 keybindings
 // the wizard searches them at the speed of thought
-// fzf is the oracle, the cache is the grimoire</pre>
+// arb --fzf is the oracle, the cache is the grimoire</pre>
 </div></section>
 </div>
 <div class="enc-chapter" id="ch75">

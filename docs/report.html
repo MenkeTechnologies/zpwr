@@ -75,7 +75,7 @@
             <a href="https://github.com/MenkeTechnologies/zpwr" target="_blank" rel="noopener noreferrer">GitHub</a>
           </nav>
           <p style="margin:0.35rem 0 0;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.03em;opacity:0.75;">
-            Neon-lit UNIX terminal OS &middot; zsh + tmux + vim/nvim + fzf + git + zinit &middot; 533 autoload functions &middot; 460 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 654 brew formulas
+            Neon-lit UNIX terminal OS &middot; zsh + tmux + vim/nvim + arb --fzf + git + zinit &middot; 533 autoload functions &middot; 460 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 654 brew formulas
           </p>
         </div>
         <div class="tutorial-toolbar">
@@ -264,7 +264,7 @@
       <div class="mapping-grid">
         <div class="mapping-card"><h4>MenkeTechnologies forks</h4><p>The maintainer's own forks shipped at the head of <code>.zshplugins</code>: <code>fasd-simple</code>, <code>forgit</code>, <code>fzf</code>, <code>fzf-tab</code>, <code>fzf-zsh-plugin</code>, <code>gh_reveal</code>, <code>jhipster-oh-my-zsh-plugin</code>, <code>kubectl-aliases</code>, <code>revolver</code>, <code>zconvey</code>.</p></div>
         <div class="mapping-card"><h4>Prompt</h4><p><code>romkatv/powerlevel10k</code> loaded with a custom ice line that runs <code>zpwrBindPowerline</code>, <code>zpwrBindPowerlineTmux</code>, <code>zpwrBindDirs</code>, and <code>zpwrPrecmd</code> as <code>atinit</code>.</p></div>
-        <div class="mapping-card"><h4>fzf integration</h4><p>fzf-zsh-plugin, fzf-tab, junegunn/fzf as the binary side; autoloaded <code>fzf/</code> completion shims tie fzf into <code>vim</code>, <code>emacs</code>, <code>zpwr</code>, <code>git</code>, <code>killall</code>, <code>printf</code>.</p></div>
+        <div class="mapping-card"><h4>fzf integration</h4><p>fzf-zsh-plugin, fzf-tab, junegunn/fzf supply the zsh glue, while the picker binary is <code>arb --fzf</code> (<code>$ZPWR_FZF</code>); autoloaded <code>fzf/</code> completion shims tie it into <code>vim</code>, <code>emacs</code>, <code>zpwr</code>, <code>git</code>, <code>killall</code>, <code>printf</code>.</p></div>
         <div class="mapping-card"><h4>OMZ</h4><p>Oh-my-zsh plugins / libs sniped via <code>zinit snippet OMZP::*</code> / <code>OMZL::*</code> with an <code>atload='zpwrOmzOverrides'</code> hook so ZPWR can rebind any keybinding OMZ steals.</p></div>
         <div class="mapping-card"><h4>Completion</h4><p>Compiled <code>.zwc</code> bytecode for completion cache; custom <code>_zpwr</code>, <code>_zcommand</code>, <code>_zcommand_mult</code>, <code>_p</code>, <code>_r</code>, <code>_f</code>, <code>_digs</code>, <code>_dfimage</code>, <code>_ssu</code>, <code>_ssd</code> in <code>autoload/comps/</code>.</p></div>
         <div class="mapping-card"><h4>Toggle</h4><p><code>ZPWR_PLUGIN_MANAGER</code> env var picks between <code>zinit</code> (default) and a no-plugin fallback. Tests in <code>tests/</code> exercise both paths.</p></div>

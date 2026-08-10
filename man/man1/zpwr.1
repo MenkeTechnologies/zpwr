@@ -348,6 +348,11 @@ Directory list cleared by
 Alacritty config path edited by
 .BR "zpwr alacritty" .
 .TP
+.B ZPWR_FZF
+The fuzzy picker command used by every search, selection and
+completion verb. Defaults to
+.RB ' "arb --fzf --ansi" '.
+.TP
 .B EDITOR
 Used by
 .B "zpwr edit"
@@ -464,7 +469,7 @@ Report bugs at
 .BR zsh (1),
 .BR zshall (1),
 .BR tmux (1),
-.BR fzf (1),
+.BR arb (1),
 .BR shellcheck (1),
 .BR zprof (1).
 .PP

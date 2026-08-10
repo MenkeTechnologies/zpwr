@@ -14,7 +14,7 @@ PAGE_CONTENT() {
     print "  ${B}${Y}FORGITLOG — THE COMMIT BROWSER${N}"
     print "  ${D}──────────────────────────────────────────────────────────${N}"
     print "  ${M}  zpwr forgitlog${N}"
-    print "  ${G}Opens your git history in fzf with commit previews.${N}"
+    print "  ${G}Opens your git history in arb --fzf with commit previews.${N}"
     print "  ${G}Each commit shows its full diff in the preview pane.${N}"
     print "  ${G}Search commits by message, author, or hash.${N}"
     print ""

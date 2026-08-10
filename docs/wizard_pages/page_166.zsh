@@ -14,7 +14,7 @@ PAGE_CONTENT() {
     print "  ${D}──────────────────────────────────────────────────────────${N}"
     print "  ${M}  zpwr gitcommit${N}${D}             # commit and push with arg message${N}"
     print "  ${M}  zpwr gitcommitcount${N}${D}        # count commits in current repo${N}"
-    print "  ${M}  zpwr gitcommits${N}${D}            # search git commits with fzf${N}"
+    print "  ${M}  zpwr gitcommits${N}${D}            # search git commits with arb --fzf${N}"
     print "  ${M}  zpwr clone${N}${D}                 # clone and cd to arg${N}"
     print ""
     print "  ${B}${Y}CONFIG & IGNORES${N}"
