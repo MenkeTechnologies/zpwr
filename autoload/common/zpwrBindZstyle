@@ -380,9 +380,9 @@ function zpwrBindZstyle(){
     zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmain|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' sort off
     #}}}***********************************************************
 
-    #{{{                    MARK:fzf-tab change fzf cmd
+    #{{{                    MARK:fzf-tab change picker cmd
     #**************************************************************
-    zstyle ':fzf-tab:*' command ${FZF_TAB_COMMAND:-fzf} $FZF_TAB_OPTS
+    zstyle ':fzf-tab:*' command ${FZF_TAB_COMMAND:-arb --fzf} $FZF_TAB_OPTS
     #}}}***********************************************************
 
 }

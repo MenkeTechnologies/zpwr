@@ -40,13 +40,13 @@ function zpwrTmuxLoad(){
     session_name="${2:-}"
 
     if [[ -z "$layout_name" ]]; then
-        # fzf picker if available
+        # arb --fzf picker if available
         layouts=( "$layout_dir"/*.zsh(N:t:r) )
         if (( ${#layouts} == 0 )); then
             zpwrLogConsoleErr "no saved layouts\nsave one with: zpwr tmuxsave <name>"
             return 1
         fi
-        if (( $+commands[arb] || $+commands[fzf] )); then
+        if (( $+commands[arb] )); then
             layout_name=$(printf '%s\n' "${layouts[@]}" | arb --fzf --prompt="layout> " --height=10)
             [[ -z "$layout_name" ]] && return 0
         else

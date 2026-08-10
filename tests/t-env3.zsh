@@ -406,9 +406,9 @@
     assert "$output" contains fd
 }
 
-@test 'ZPWR_FZF contains fzf' {
+@test 'ZPWR_FZF contains arb' {
     run printf "$ZPWR_FZF"
-    assert "$output" contains fzf
+    assert "$output" contains arb
 }
 
 @test 'ZPWR_EXA_COMMAND contains eza' {

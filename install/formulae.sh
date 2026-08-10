@@ -10,6 +10,7 @@ brew install ansible
 brew install ant
 brew install aom
 brew install apache-spark
+brew install arb
 brew install apr
 brew install apr-util
 brew install arduino-cli
@@ -115,7 +116,6 @@ brew install freetype
 brew install frei0r
 brew install fribidi
 brew install fswatch
-brew install fzf
 brew install gawk
 brew install gcc
 brew install gd

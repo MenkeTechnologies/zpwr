@@ -3,11 +3,27 @@
 
 function zpwrBindPenultimate(){
 
+    # Shell glue only -- widgets and completion shims.
     test -s "$ZPWR_ZINIT_FZF/shell/completion.zsh" \
         && source "$ZPWR_ZINIT_FZF/shell/completion.zsh"
 
-    export MANPATH="$ZPWR_ZINIT_FZF/fzf/man:$MANPATH"
-    source "$ZPWR_ZINIT_FZF/shell/key-bindings.zsh"
+    test -s "$ZPWR_ZINIT_FZF/shell/key-bindings.zsh" \
+        && source "$ZPWR_ZINIT_FZF/shell/key-bindings.zsh"
+
+    # Both files would otherwise exec the fzf binary, and both entry points are
+    # overridable: __fzf_comprun prefers _fzf_comprun when that is a function,
+    # and the ^T/^R/^[c widgets exec $(__fzfcmd). Point both at $ZPWR_FZF so no
+    # code path reaches fzf. These MUST come after the sources above --
+    # key-bindings.zsh defines __fzfcmd unconditionally and would clobber them.
+    function _fzf_comprun() {
+        # $1 is the command being completed; the rest are picker args
+        shift
+        ${=ZPWR_FZF} "$@"
+    }
+
+    function __fzfcmd() {
+        print -r -- "$ZPWR_FZF"
+    }
 
 }
 

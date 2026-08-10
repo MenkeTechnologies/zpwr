@@ -6,9 +6,9 @@ function zpwrBindFZFLate(){
     local base03 base02 base01 base00 base0 base1 base2 base3
     local yellow orange red magenta violet blue cyan green
 
-    # The picker is whatever ZPWR_FZF points at (arb --fzf by default, fzf if
-    # you set it back), so gate the bindings on either binary being present.
-    if zpwrCommandExists arb || zpwrCommandExists fzf; then
+    # The picker is whatever ZPWR_FZF points at -- arb --fzf. Gate every
+    # binding on arb being present.
+    if zpwrCommandExists arb; then
 
         function zpwrBatSetup() {
             export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
@@ -120,7 +120,7 @@ function zpwrBindFZFLate(){
         cyan="37"
         green="64"
 
-    # Solarized Dark color scheme for fzf
+    # Solarized Dark color scheme for the picker
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
             --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
             --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"

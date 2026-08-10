@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 # cache autoload +X functions,aliases, builtins,reswords into file
-# search with fzf
+# search with arb --fzf
 function zpwrClearListFZF(){
 
     {

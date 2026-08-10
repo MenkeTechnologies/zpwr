@@ -521,7 +521,10 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         done
     }
 
-    zinit ice as'program' lucid nocompile pick'bin/fzf' wait
+    # cloned for its shell glue only -- zpwrBindPenultimate sources
+    # shell/completion.zsh and shell/key-bindings.zsh directly, and both run
+    # $ZPWR_FZF (arb --fzf). Nothing here puts an fzf binary on $PATH.
+    zinit ice as'null' lucid nocompile wait
     zinit load MenkeTechnologies/fzf
 
 

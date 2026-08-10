@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
-##### Purpose: emit the --preview snippet for verbs fzf.
+##### Purpose: emit the --preview snippet for the verbs picker.
 #####          Delegates to scripts/fzfEnvPreview.zsh which
 #####          extracts the verb-target name and looks it up.
 #}}}***********************************************************

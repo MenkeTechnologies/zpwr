@@ -4,7 +4,7 @@
 ##### Author: MENKETECHNOLOGIES
 ##### Date: Fri Oct  4 17:27:00 EDT 2019
 ##### Purpose: zsh script to get env
-##### Notes: builds Key.txt (fzf input), Value.txt (per-entry
+##### Notes: builds Key.txt (picker input), Value.txt (per-entry
 #####        self-contained blocks, no separators) and Idx.txt
 #####        (name\ttype\toffset\tlength) for O(1) preview
 #####        lookup via tail -c +N | head -c LEN.

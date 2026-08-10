@@ -39,5 +39,5 @@ fi
 
 mode="${1:-plain}"
 
-# fzf substitutes {} with the selected line at preview time.
+# the picker substitutes {} with the selected line at preview time.
 printf '%s {} %q env\n' "$ZPWR_SCRIPTS/fzfEnvPreview.zsh" "$mode"

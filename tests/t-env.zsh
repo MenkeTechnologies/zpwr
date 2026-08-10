@@ -425,10 +425,10 @@
     assert $output contains sudo
 }
 
-@test 'ZPWR_FZF grep fzf' {
+@test 'ZPWR_FZF grep arb' {
 
     run printf $ZPWR_FZF
-    assert $output contains fzf
+    assert $output contains arb
 }
 
 @test 'ZPWR_FZF_LOGO' {

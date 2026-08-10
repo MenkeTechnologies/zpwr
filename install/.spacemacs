@@ -139,7 +139,7 @@ values."
            emamux
            company-ycmd
            real-auto-save
-           fzf highlight-symbol
+           highlight-symbol
            highlight-indent-guides
            ctags-update
            company-plsense

@@ -27,7 +27,7 @@ function zpwrPorts(){
         print "  ${D}>> LISTENING PORTS // NETWORK SCAN <<${N}"
         print ""
         print "  Show all listening ports with process info. Optionally filter"
-        print "  by port number or pipe through fzf for interactive selection."
+        print "  by port number or pipe through arb --fzf for interactive selection."
         print ""
         print "  ${B}USAGE:${N} zpwr ports ${D}[OPTIONS] [PORT]${N}"
         print ""

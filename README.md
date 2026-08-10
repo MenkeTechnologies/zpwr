@@ -859,7 +859,7 @@ With Zinit Turbo mode, despite the number of plugins and completions, total init
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 ```
 ## Startup Benchmark -- zpwr bench
-`zpwr bench [N]` runs N shell startups (default 10) and reports detailed performance metrics with a cyberpunk-styled output.  It reports system info, environment counts (functions, completions, aliases, plugins), per-run timing with a progress bar, percentile statistics (avg, p50, p99, min, max, spread), a phase breakdown showing time spent in each startup stage (instant prompt, env+aliases, plugin declarations, compsys, options+fzf), baseline comparison with delta percentage, and a persistent run history.  Save a baseline after optimizing and future runs will show whether startup got faster or slower.
+`zpwr bench [N]` runs N shell startups (default 10) and reports detailed performance metrics with a cyberpunk-styled output.  It reports system info, environment counts (functions, completions, aliases, plugins), per-run timing with a progress bar, percentile statistics (avg, p50, p99, min, max, spread), a phase breakdown showing time spent in each startup stage (instant prompt, env+aliases, plugin declarations, compsys, options+arb), baseline comparison with delta percentage, and a persistent run history.  Save a baseline after optimizing and future runs will show whether startup got faster or slower.
 
 ```sh
 zpwr bench -h      # cyberpunk help
@@ -909,7 +909,7 @@ zpwr tmuxload              # arb --fzf picker (if arb available)
 ```
 
 ## Health Check -- zpwr doctor
-`zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, fzf, tmux, stryke, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
+`zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, arb, tmux, stryke, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
 
 ```sh
 zpwr doctor -h  # cyberpunk help

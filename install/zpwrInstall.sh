@@ -187,7 +187,7 @@ EOF
 # 11) powerlevel10k prompt
 # 12) pathogen
 # 13) nerdtree
-# 14) fzf
+# 14) fzf zsh-plugin (shell glue only)
 # 15) powerline
 # 16) vim-airline
 # 17) zsh
@@ -790,20 +790,18 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zpwrPrettyPrintBox "Change default shell to zsh"
     sudo chsh -s "$(which zsh)"
 
-    zpwrPrettyPrintBox "Clone fzf"
+    # Only the plugin's shell glue is used -- widgets and completion shims,
+    # routed through $ZPWR_FZF (arb --fzf) by zpwrBindFZFLate. The bundled
+    # install --bin, which fetches the fzf binary, is deliberately not run.
+    zpwrPrettyPrintBox "Clone fzf zsh-plugin"
     git clone https://github.com/MenkeTechnologies/fzf.git "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf"
-    zpwrPrettyPrintBox "Link fzf"
+    zpwrPrettyPrintBox "Link fzf zsh-plugin"
     echo ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
     ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
-
-    zpwrPrettyPrintBox "Installing fzf"
-    "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf/install" --bin
 
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
     zpwrPrettyPrintBox "Installing OhMyZsh"
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/main/tools/zpwrInstall.sh)"
-    zpwrPrettyPrintBox "Installing fzf"
-    "$ZPWR_PLUGIN_MANAGER_HOME/custom/plugins/fzf/install" --bin
 
     zpwrPrettyPrintBox "Installing Zsh plugins"
     zpwrGoInstallerDir

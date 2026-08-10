@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
-##### Purpose: pure-zsh fzf preview for env cache search.
+##### Purpose: pure-zsh picker preview for env cache search.
 ##### Notes: hot path uses only zsh builtins — source, sysseek,
 #####        sysread. No awk/grep/tail/head fork on lookup or
 #####        extraction. The fzf-imposed preview process is the
@@ -15,7 +15,7 @@ setopt no_nomatch no_unset
 unsetopt multibyte    # ${#str} returns bytes — matches regen's offsets
 zmodload zsh/system   # sysseek / sysread
 
-# args: $1 = fzf-selected line, $2 = mode ('plain' or 'reg'), $3 = 'verbs' (optional)
+# args: $1 = picker-selected line, $2 = mode ('plain' or 'reg'), $3 = 'verbs' (optional)
 local line="$1"
 local mode="${2:-plain}"
 local src="${3:-env}"
