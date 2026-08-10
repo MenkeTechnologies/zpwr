@@ -225,7 +225,7 @@ function zpwrBench(){
         printf "  ${M}▸ Phase Breakdown ${D}(last run)${N}\n"
         printf "  ${D}──────────────────────────────────────────────────${N}\n"
 
-        phase_names=( "instant prompt" "env + aliases " "plugin decl   " "compsys       " "options + fzf " )
+        phase_names=( "instant prompt" "env + aliases " "plugin decl   " "compsys       " "options + arb " )
         phase_ms=()
         phase_ms+=( $(( (${last[1]} * 1000) )) )
         phase_ms+=( $(( (ts_plugins - ts_env) * 1000 )) )
