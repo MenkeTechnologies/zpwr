@@ -393,7 +393,7 @@ fi
 #fi
 fpath=( $ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS $ZPWR_COMPS $fpath )
 #}}}***********************************************************
-#
+
 #{{{                    MARK:Autoload
 #**************************************************************
 builtin autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t)
@@ -829,7 +829,6 @@ function zpwrBindMenu() {
 
 zpwrBindMenu
 #}}}***********************************************************
-
 
 #{{{                    MARK:Initialize Login
 #**************************************************************
