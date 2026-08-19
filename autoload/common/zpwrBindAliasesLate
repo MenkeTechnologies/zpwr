@@ -8,7 +8,7 @@ function zpwrBindAliasesLate(){
     alias vv="$ZPWR_VIM"
     alias vim="$ZPWR_VIM"
     alias vm="$ZPWR_VIM -u $ZPWR_ENV/.mininit.vim"
-    alias sv="$ZPWR_FULL_SUDO $ZPWR_VIM"
+    alias sv="$ZPWR_FULL_SUDO $ZPWR_ZMAX"
     #{{{                    MARK:Aliases
     #**************************************************************
     # portable aliases
