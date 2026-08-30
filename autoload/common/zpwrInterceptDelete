@@ -3,7 +3,13 @@
 function zpwrInterceptDelete(){
 
     #deleteMatching
-    zpwrExists autopair-delete && autopair-delete
+    if zpwrExists autopair-delete; then
+        autopair-delete
+    else
+        # Same as zpwrInterceptSurround: without zsh-autopair loaded
+        # nothing here deleted anything, so backspace did nothing.
+        zle .backward-delete-char
+    fi
     zpwrKeySender
 }
 

@@ -3,7 +3,15 @@
 function zpwrInterceptSurround(){
 
     #surround
-    zpwrExists autopair-insert && autopair-insert
+    if zpwrExists autopair-insert; then
+        autopair-insert
+    else
+        # zsh-autopair is not loaded (zshrs pairs natively at the ZLE
+        # dispatch layer, so ZPWR skips the plugin there). autopair-insert
+        # was the thing that actually inserted the key, so without a
+        # fallback this widget swallowed every `"` `'` ` ( [ { keystroke.
+        zle .self-insert
+    fi
     zpwrKeySender
 }
 
