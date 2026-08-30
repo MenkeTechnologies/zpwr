@@ -1,6 +1,18 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function nz(){
+    local zrs
+
+    # $SHELL is the login shell (zsh). When the current shell IS zshrs,
+    # exec'ing $SHELL would silently drop back to zsh on every restart,
+    # so re-exec zshrs instead. Falls through to $SHELL when zshrs is
+    # not on PATH, so `nz` can never leave the user without a shell.
+    zrs=${commands[zshrs]}
+
+    if [[ -n "$ZSHRS_VERSION" ]] && [[ -x "$zrs" ]]; then
+        builtin exec "$zrs"
+    fi
+
     builtin exec "$SHELL"
 }
 
