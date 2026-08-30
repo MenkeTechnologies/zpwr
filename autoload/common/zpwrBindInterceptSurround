@@ -5,13 +5,24 @@ function zpwrBindInterceptSurround() {
     zle -N zpwrInterceptDelete
     zle -N zpwrInterceptSurround
     zle -N zpwrSelfInsert
-    bindkey -M viins "^?" zpwrInterceptDelete
-    bindkey -M viins '"' zpwrInterceptSurround
-    bindkey -M viins "'" zpwrInterceptSurround
-    bindkey -M viins '`' zpwrInterceptSurround
-    bindkey -M viins "(" zpwrInterceptSurround
-    bindkey -M viins "[" zpwrInterceptSurround
-    bindkey -M viins "{" zpwrInterceptSurround
+    # These interceptors exist only to layer zpwrKeySender on top of
+    # zsh-autopair. zshrs's native pairing fires ONLY when the key is
+    # bound to `self-insert` itself -- a user widget that merely calls
+    # `zle .self-insert` bypasses it -- so binding them while the plugin
+    # is absent produced a lone `"` with no closing character. Leave
+    # those keys on self-insert there; the `zle -A` below still routes
+    # every keystroke through zpwrKeySender AND keeps pairing working,
+    # because aliasing self-insert (unlike binding a key to a widget)
+    # does not take the key off self-insert.
+    if zpwrExists autopair-insert; then
+        bindkey -M viins "^?" zpwrInterceptDelete
+        bindkey -M viins '"' zpwrInterceptSurround
+        bindkey -M viins "'" zpwrInterceptSurround
+        bindkey -M viins '`' zpwrInterceptSurround
+        bindkey -M viins "(" zpwrInterceptSurround
+        bindkey -M viins "[" zpwrInterceptSurround
+        bindkey -M viins "{" zpwrInterceptSurround
+    fi
 
     zle -A zpwrSelfInsert self-insert
 }
