@@ -500,6 +500,23 @@ zinit load \
 hlissner/zsh-autopair
 ```
 
+## Running under zshrs
+
+`zshrs` implements syntax highlighting, autosuggestions, autopair and
+history substring search inside the shell itself (`~/.zshrs/zshrs.toml`,
+section `[zle]`), and ships a native powerlevel10k prompt engine that
+also replaces `gitstatusd`. Loading the zsh plugin equivalents on top of
+those wraps every ZLE widget twice, so ZPWR skips the four plugins when
+it detects zshrs and sources the powerlevel10k theme directly, which is
+what activates the native engine.
+
+The switch is automatic: `ZPWR_NATIVE_ZLE` is set to `true` when
+`$ZSHRS_VERSION` is non-empty and `false` otherwise. Under stock zsh
+nothing changes -- the plugins load exactly as before. ZPWR's own
+keybindings (`zpwrBindInterceptSurround`, `zpwrBindFZFLate`,
+`zpwrDedupPaths` and the rest) run in both cases, at the same turbo
+slots.
+
 ## Environment Variables -- System Tuning Parameters
 These are the environment variables in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/env/.zpwr_re_env.sh` -- the dials and switches of the ZPWR cyberdeck. Override them in `~/.zpwr/local/.tokens.sh` to tune the system to your neural patterns.  `~/.zpwr/env/.zpwr_re_env.sh` is reread after user tokens file to update dependent variables.
 ```sh

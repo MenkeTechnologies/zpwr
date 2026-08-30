@@ -457,6 +457,20 @@ function zpwrTokenPost() {
 #{{{                    MARK:ZPWR_PLUGIN_MANAGER
 #**************************************************************
 ZPWR_VARS[phasePluginsTs]=$EPOCHREALTIME
+
+# zshrs implements these ZLE features natively -- see ~/.zshrs/zshrs.toml
+# [zle]: syntax_highlight, autosuggest, autopair, history_search -- and
+# ships an in-process powerlevel10k engine that also absorbs gitstatusd.
+# Loading the zsh plugin equivalents on top of the native ones wraps
+# every widget twice, which shows up as duplicated keystrokes and
+# "widgets can only be called when ZLE is active". Stock zsh is
+# unaffected: it keeps loading the plugins exactly as before.
+if [[ -n "$ZSHRS_VERSION" ]]; then
+    ZPWR_NATIVE_ZLE=true
+else
+    ZPWR_NATIVE_ZLE=false
+fi
+
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
     ZINIT[COMPINIT_OPTS]='-C -u'
@@ -470,9 +484,24 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     # load prompt synchronously for instant prompt compatibility
 
-    zinit ice lucid nocd nocompile atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd' \
-        atload'zpwrBindPrecmd; _p9k_precmd &> /dev/null'
-    zinit load romkatv/powerlevel10k
+    if [[ $ZPWR_NATIVE_ZLE == true ]]; then
+        # zshrs intercepts `source powerlevel10k.zsh-theme` and renders
+        # the prompt from its native engine instead of executing the
+        # ~13k lines of zsh theme. zinit's own loader does not reach
+        # that intercept, so source the theme file directly. The
+        # ~/.p10k.zsh config still applies -- the engine reads the same
+        # POWERLEVEL9K_* parameters. `_p9k_precmd` is an internal of the
+        # zsh theme and does not exist under the engine, so it is not
+        # called here; the engine renders at preprompt time itself.
+        zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd
+        builtin source \
+            "${ZINIT[PLUGINS_DIR]:-$ZPWR_PLUGIN_MANAGER_HOME/plugins}/romkatv---powerlevel10k/powerlevel10k.zsh-theme"
+        zpwrBindPrecmd
+    else
+        zinit ice lucid nocd nocompile atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd' \
+            atload'zpwrBindPrecmd; _p9k_precmd &> /dev/null'
+        zinit load romkatv/powerlevel10k
+    fi
 
     # late
     () {
@@ -540,10 +569,19 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit load \
         MenkeTechnologies/zconvey
 
-    # late bind autopair keystrokes
-    zinit ice lucid nocompile wait'0' atload='zpwrBindInterceptSurround'
-    zinit load \
-        hlissner/zsh-autopair
+    # late bind autopair keystrokes. zpwrBindInterceptSurround is
+    # zpwr's OWN surround/delete logic (it defines zpwrInterceptSurround
+    # et al), not part of zsh-autopair, so it must still run when the
+    # plugin is skipped -- carried on a null load at the same wait slot.
+    if [[ $ZPWR_NATIVE_ZLE == true ]]; then
+        zinit ice lucid nocompile nocd as'null' wait'0' atload='zpwrBindInterceptSurround'
+        zinit light \
+            MenkeTechnologies/zsh-zinit-final
+    else
+        zinit ice lucid nocompile wait'0' atload='zpwrBindInterceptSurround'
+        zinit load \
+            hlissner/zsh-autopair
+    fi
 
     # override OMZ/plugin aliases with own aliases
     zinit ice lucid nocompile wait'0a' \
@@ -557,16 +595,32 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         MenkeTechnologies/zsh-autocomplete
     fi
 
-    # late bind keystrokes, must come before syntax highlight
-    zinit ice lucid nocompile wait'0c' atload'zpwrBindHistorySubstring'
-    zinit load \
-        zsh-users/zsh-history-substring-search
+    # late bind keystrokes, must come before syntax highlight.
+    # zshrs's native history search hooks the STANDARD widgets
+    # (up-line-or-history / up-history / down-*), so plain Up and Down
+    # already do substring search there and no rebinding is needed --
+    # zpwrBindHistorySubstring is a no-op anyway, since it guards on
+    # `zpwrExists history-substring-search-up`.
+    if [[ $ZPWR_NATIVE_ZLE != true ]]; then
+        zinit ice lucid nocompile wait'0c' atload'zpwrBindHistorySubstring'
+        zinit load \
+            zsh-users/zsh-history-substring-search
+    fi
 
-    # late , must come before syntax highlight
-    zinit ice lucid nocompile wait'0a' \
-        atload'_zsh_autosuggest_start; zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
-    zinit load \
-        zsh-users/zsh-autosuggestions
+    # late , must come before syntax highlight. Only
+    # `_zsh_autosuggest_start` belongs to the plugin; the three zpwr
+    # bind hooks are independent and must still run at this wait slot.
+    if [[ $ZPWR_NATIVE_ZLE == true ]]; then
+        zinit ice lucid nocompile nocd as'null' wait'0a' \
+            atload'zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
+        zinit light \
+            MenkeTechnologies/zsh-zinit-final
+    else
+        zinit ice lucid nocompile wait'0a' \
+            atload'_zsh_autosuggest_start; zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
+        zinit load \
+            zsh-users/zsh-autosuggestions
+    fi
 
     # late loaded, must be last to load
     # runs ZLE keybindings to override other late loaders
@@ -585,9 +639,18 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit light \
         MenkeTechnologies/zsh-zinit-final
 
-    zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" nocompletions atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
-    zinit load \
-        $ZPWR_ZDHARMA/fast-syntax-highlighting
+    # zshrs highlights natively; the zpwr atload hooks are unrelated to
+    # F-Sy-H and still have to fire at this slot.
+    if [[ $ZPWR_NATIVE_ZLE == true ]]; then
+        zinit ice lucid nocompile nocd as'null' wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" nocompletions \
+            atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
+        zinit light \
+            MenkeTechnologies/zsh-zinit-final
+    else
+        zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" nocompletions atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
+        zinit load \
+            $ZPWR_ZDHARMA/fast-syntax-highlighting
+    fi
 
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
 
