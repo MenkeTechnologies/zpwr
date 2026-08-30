@@ -27,7 +27,16 @@ function zpwrBindAliasesLate(){
     alias llo="'builtin' command' 'tail' -n +1 -F $ZPWR_LOGFILE"
     zpwrExists rlwrap && alias plr="'builtin' 'command' 'rlwrap' -A -pgreen -S'perl> ' stryke -wnE'p eval()//\$@'"
     alias cpan='"builtin" command rlwrap cpan'
-    alias nz='"builtin" "exec" "zsh"'
+    # Restart the CURRENT shell. Under zshrs, exec'ing `zsh` would
+    # silently drop back to zsh on every restart. `nz` is an alias, and
+    # aliases cannot branch at call time, so pick the target here --
+    # $ZSHRS_VERSION is already set by the time this runs. Falls back to
+    # zsh when zshrs is somehow not on PATH, so nz always yields a shell.
+    if [[ -n "$ZSHRS_VERSION" ]] && zpwrExists zshrs; then
+        alias nz='"builtin" "exec" "zshrs"'
+    else
+        alias nz='"builtin" "exec" "zsh"'
+    fi
     alias ll="zpwrClearList"
     alias la="zpwrClearList"
     alias l="zpwrClearList"
