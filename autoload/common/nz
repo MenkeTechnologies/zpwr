@@ -4,13 +4,20 @@ function nz(){
     local zrs
 
     # $SHELL is the login shell (zsh). When the current shell IS zshrs,
-    # exec'ing $SHELL would silently drop back to zsh on every restart,
-    # so re-exec zshrs instead. Falls through to $SHELL when zshrs is
-    # not on PATH, so `nz` can never leave the user without a shell.
+    # exec'ing $SHELL would silently drop back to zsh on every restart.
     zrs=${commands[zshrs]}
 
     if [[ -n "$ZSHRS_VERSION" ]] && [[ -x "$zrs" ]]; then
-        builtin exec "$zrs"
+        # zshrs has no compiled-in default fpath the way zsh does: with
+        # FPATH absent from the environment it starts with an EMPTY
+        # fpath, and every autoload in the new shell fails --
+        #   zsh: is-at-least: function definition file not found
+        #   zsh: colors: function definition file not found
+        #   zsh: add-zsh-hook: function definition file not found
+        # zsh does not export FPATH by default, so carry it across the
+        # exec explicitly. Harmless under zsh, which would rebuild fpath
+        # from its own defaults anyway.
+        builtin exec env FPATH="${(j.:.)fpath}" "$zrs"
     fi
 
     builtin exec "$SHELL"

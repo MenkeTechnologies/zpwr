@@ -32,9 +32,11 @@ function zpwrBindAliasesLate(){
     # aliases cannot branch at call time, so pick the target here --
     # $ZSHRS_VERSION is already set by the time this runs. Falls back to
     # zsh when zshrs is somehow not on PATH, so nz always yields a shell.
-    if [[ -n "$ZSHRS_VERSION" ]] && zpwrExists zshrs; then
-        alias nz='"builtin" "exec" "zshrs"'
-    else
+    # Under zshrs leave `nz` as the autoloaded FUNCTION: restarting into
+    # zshrs needs FPATH exported across the exec (zshrs has no built-in
+    # default fpath), which an alias cannot do. Defining the alias here
+    # would shadow that function.
+    if [[ -z "$ZSHRS_VERSION" ]]; then
         alias nz='"builtin" "exec" "zsh"'
     fi
     alias ll="zpwrClearList"
