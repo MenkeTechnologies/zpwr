@@ -171,6 +171,12 @@
     assert "$out" same_as 'zpwrPrecmdDrain,_jenv_export_hook|zpwrPrecmd,_zshz_precmd'
 }
 
+@test 'zpwrPrecmdDrain pulls hooks back when tokens-post widens the sync list' {
+    local out
+    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; ZPWR_PRECMD_SYNC_HOOKS=_jenv_export_hook; precmd_functions=(_zshz_precmd _jenv_export_hook); zpwrBindPrecmd; ZPWR_PRECMD_SYNC_HOOKS="_jenv_export_hook _zshz_precmd"; zpwrPrecmdDrain; zpwrPrecmdDrain; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
+    assert "$out" same_as 'zpwrPrecmdDrain,_zshz_precmd,_jenv_export_hook|zpwrPrecmd'
+}
+
 @test 'zpwrPrecmdDrain catches hooks registered after the initial bind' {
     local out
     out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; ZPWR_PRECMD_SYNC_HOOKS=; precmd_functions=(_p9k_precmd); zpwrBindPrecmd; precmd_functions+=(__turbo_late_hook); zpwrPrecmdDrain; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')

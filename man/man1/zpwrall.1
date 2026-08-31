@@ -1966,6 +1966,12 @@ which sets
 .B JAVA_HOME
 from
 .BR .java-version .
+Override it in
+.IR ~/.zpwr/local/.tokens-post.sh ;
+the drain reconciles in both directions, so a hook added to the list
+there is pulled back off
+.B async_precmd_functions
+even though that file is sourced after the prompt hooks are first bound.
 .TP
 .B ZPWR_LEARN
 Include all the zpwr learning functions.

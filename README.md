@@ -531,7 +531,11 @@ including hooks registered later by turbo-loaded plugins such as
 `ZPWR_PRECMD_SYNC_HOOKS`: hooks whose result feeds the next command
 rather than the prompt stay synchronous, which is why
 `_jenv_export_hook` (it sets `JAVA_HOME` from `.java-version`) is listed
-there by default. Under stock zsh nothing moves; `zpwrPrecmd` stays on
+there by default. Override it in `~/.zpwr/local/.tokens-post.sh` -- the
+drain reconciles in both directions, so a hook added to the list there
+is pulled back off `async_precmd_functions` even though that file is
+sourced after the prompt hooks are first bound. Under stock zsh nothing
+moves; `zpwrPrecmd` stays on
 `precmd_functions` exactly as before. `zpwr top` reports both arrays in
 its hook count.
 
@@ -672,7 +676,7 @@ export ZPWR_OPTS=
 # precmd hooks that must stay synchronous under zshrs: their result feeds
 # the next command, not the prompt. _jenv_export_hook sets JAVA_HOME from
 # .java-version, so deferring it would run the first command after a cd
-# against the previous JDK.
+# against the previous JDK. Override in ~/.zpwr/local/.tokens-post.sh
 export ZPWR_PRECMD_SYNC_HOOKS="_jenv_export_hook"
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"

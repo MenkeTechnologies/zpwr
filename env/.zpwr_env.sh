@@ -150,7 +150,7 @@ export ZPWR_OPTS=
 # precmd hooks that must stay synchronous under zshrs: their result feeds
 # the next command, not the prompt. _jenv_export_hook sets JAVA_HOME from
 # .java-version, so deferring it would run the first command after a cd
-# against the previous JDK.
+# against the previous JDK. Override in ~/.zpwr/local/.tokens-post.sh
 export ZPWR_PRECMD_SYNC_HOOKS="_jenv_export_hook"
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"

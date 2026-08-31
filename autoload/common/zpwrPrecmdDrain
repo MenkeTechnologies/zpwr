@@ -10,20 +10,29 @@
 # ZPWR_PRECMD_SYNC_HOOKS is the exception list: hooks whose result feeds
 # the NEXT command rather than the prompt must stay synchronous.
 #
+# The reconcile runs in BOTH directions, so a hook named there is pulled
+# back out of async_precmd_functions. zpwrBindPrecmd binds well before
+# ~/.zpwr/local/.tokens-post.sh is sourced at the wait'0a' turbo slot,
+# and a one-way drain would leave a hook the user marked sync stranded
+# on the async array forever.
+#
 # This stays on precmd_functions itself so hooks registered later by
 # turbo-loaded plugins (zbrowse, zconvey, zsh-z) get drained too.
 function zpwrPrecmdDrain(){
 
-    local -a sync_only rest keep merged
+    local -a sync_only back keep rest merged
 
     sync_only=( ${(z)ZPWR_PRECMD_SYNC_HOOKS} )
+
+    back=( ${async_precmd_functions:*sync_only} )
     keep=( ${precmd_functions:*sync_only} )
     rest=( ${${precmd_functions:|sync_only}:#zpwrPrecmdDrain} )
-    (( $#rest )) || return 0
+    (( $#rest || $#back )) || return 0
 
-    merged=( $async_precmd_functions $rest )
+    merged=( ${async_precmd_functions:|sync_only} $rest )
     async_precmd_functions=( ${(u)merged} )
-    precmd_functions=( zpwrPrecmdDrain $keep )
+    merged=( $back $keep )
+    precmd_functions=( zpwrPrecmdDrain ${(u)merged} )
 }
 
 zpwrPrecmdDrain "$@"
