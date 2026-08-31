@@ -517,6 +517,20 @@ keybindings (`zpwrBindInterceptSurround`, `zpwrBindFZFLate`,
 `zpwrDedupPaths` and the rest) run in both cases, at the same turbo
 slots.
 
+Prompt hooks follow the same split. `zshrs` adds an `async_precmd`
+lifecycle hook with no zsh equivalent: its functions run on the shared
+worker pool AFTER the prompt is rendered, writing into the global
+parameter table, so a slow hook never stalls the prompt -- it simply
+updates a prompt or two later. Because zshrs builds the prompt with its
+native p10k engine rather than the theme's `_p9k_precmd`, no precmd hook
+holds prompt content, so ZPWR moves all of them across: `zpwrBindPrecmd`
+leaves only `zpwrPrecmdDrain` on `precmd_functions`, and that hook
+transfers every other entry to `async_precmd_functions` on each prompt --
+including hooks registered later by turbo-loaded plugins such as
+`zbrowse`, `zconvey` and `zsh-z`. Under stock zsh nothing moves;
+`zpwrPrecmd` stays on `precmd_functions` exactly as before. `zpwr top`
+reports both arrays in its hook count.
+
 ## Environment Variables -- System Tuning Parameters
 These are the environment variables in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/env/.zpwr_re_env.sh` -- the dials and switches of the ZPWR cyberdeck. Override them in `~/.zpwr/local/.tokens.sh` to tune the system to your neural patterns.  `~/.zpwr/env/.zpwr_re_env.sh` is reread after user tokens file to update dependent variables.
 ```sh
@@ -649,7 +663,7 @@ export ZPWR_MARKER_COLOR='0;1;4;37;44m'
 export ZPWR_PYGMENTIZE_COLOR="emacs"
 # zpwr colorizer = bat or pygmentize
 export ZPWR_COLORIZER=bat
-# zsh options set in precmd fn before prompt
+# zsh options captured by zpwrPrecmd: precmd under zsh, async_precmd under zshrs
 export ZPWR_OPTS=
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"

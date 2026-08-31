@@ -85,7 +85,7 @@ function zpwrTop(){
         nex=${#parameters[(R)scalar-export]}
         nfp=${#fpath} npa=${#path} nnd=${#nameddirs}
         njobs=${#jobstates} nds=${#dirstack} nwid=${#widgets}
-        nhooks=$((${#precmd_functions}+${#preexec_functions}+${#chpwd_functions}))
+        nhooks=$((${#precmd_functions}+${#async_precmd_functions}+${#preexec_functions}+${#chpwd_functions}))
         nzf=${#functions[(I)(#i)*zpwr*]}
         nza=${#aliases[(R)(#i)*zpwr*]}
         nzv=${#ZPWR_VARS} nzverbs=${#ZPWR_VERBS}
@@ -225,7 +225,7 @@ function zpwrTop(){
         print -r "  ${D}//${N} ${B}children${N}       ${nch}${K}"
         print -r "  ${D}//${N} ${B}jobs${N}           ${njobs}${K}"
         print -r "  ${D}//${N} ${B}zle widgets${N}    ${nwid}${K}"
-        print -r "  ${D}//${N} ${B}hooks${N}          ${nhooks}  ${D}(precmd:${#precmd_functions} preexec:${#preexec_functions} chpwd:${#chpwd_functions})${N}${K}"
+        print -r "  ${D}//${N} ${B}hooks${N}          ${nhooks}  ${D}(precmd:${#precmd_functions} async:${#async_precmd_functions} preexec:${#preexec_functions} chpwd:${#chpwd_functions})${N}${K}"
         print -r "  ${D}//${N} ${B}options set${N}    ${nopts}${K}"
 
         print -r "${K}"

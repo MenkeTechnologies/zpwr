@@ -1950,9 +1950,11 @@ Set to
 to use the powerlevel10k prompt.
 .TP
 .B ZPWR_OPTS
-zsh options set in
-.B precmd
-before the prompt.
+zsh options captured by
+.B zpwrPrecmd
+before the prompt, or on
+.B async_precmd
+after it under zshrs.
 .TP
 .B ZPWR_LEARN
 Include all the zpwr learning functions.

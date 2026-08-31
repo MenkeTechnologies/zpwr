@@ -4,10 +4,30 @@ function zpwrBindPrecmd(){
     # zinit dirs showing in prompt
     unset ___pdir_path ___pdir_orig ___oldcd;
 
-    precmd_functions=(
-        zpwrPrecmd
-        ${(@)precmd_functions:#zpwrPrecmd}
-    )
+    # zshrs adds an `async_precmd` lifecycle hook with no zsh equivalent:
+    # its functions run on the shared worker pool AFTER the prompt is
+    # rendered, and their writes land in the global param table, so they
+    # can never stall the prompt. The prompt itself comes from zshrs's
+    # native p10k engine, not from the theme's _p9k_precmd, so EVERY
+    # precmd hook is safe to defer. zpwrPrecmdDrain stays on
+    # precmd_functions and moves the rest across on each prompt, which
+    # also catches hooks registered later by turbo-loaded plugins.
+    if [[ -n "$ZSHRS_VERSION" ]]; then
+        async_precmd_functions=(
+            zpwrPrecmd
+            ${(@)async_precmd_functions:#zpwrPrecmd}
+        )
+        precmd_functions=(
+            zpwrPrecmdDrain
+            ${(@)precmd_functions:#(zpwrPrecmd|zpwrPrecmdDrain)}
+        )
+        zpwrPrecmdDrain
+    else
+        precmd_functions=(
+            zpwrPrecmd
+            ${(@)precmd_functions:#zpwrPrecmd}
+        )
+    fi
 
 }
 

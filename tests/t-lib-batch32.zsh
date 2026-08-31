@@ -148,6 +148,30 @@
     assert $state equals 0
 }
 
+@test 'autoload common zpwrPrecmdDrain passes zsh -n' {
+    run zsh -n "$ZPWR/autoload/common/zpwrPrecmdDrain"
+    assert $state equals 0
+}
+
+@test 'zpwrBindPrecmd keeps hooks synchronous under stock zsh' {
+    local out
+    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd; precmd_functions=(_p9k_do_nothing _p9k_precmd); zpwrBindPrecmd; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
+    assert "$out" same_as 'zpwrPrecmd,_p9k_do_nothing,_p9k_precmd|'
+}
+
+@test 'zpwrBindPrecmd drains every precmd hook to async_precmd under zshrs' {
+    local out
+    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; precmd_functions=(_p9k_do_nothing _zshz_precmd _p9k_precmd); zpwrBindPrecmd; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
+    assert "$out" same_as 'zpwrPrecmdDrain|zpwrPrecmd,_p9k_do_nothing,_zshz_precmd,_p9k_precmd'
+}
+
+@test 'zpwrPrecmdDrain catches hooks registered after the initial bind' {
+    local out
+    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; precmd_functions=(_p9k_precmd); zpwrBindPrecmd; precmd_functions+=(__turbo_late_hook); zpwrPrecmdDrain; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
+    assert "$out" same_as 'zpwrPrecmdDrain|zpwrPrecmd,_p9k_precmd,__turbo_late_hook'
+}
+
+
 @test 'autoload common zpwrBindPreexecChpwd passes zsh -n' {
     run zsh -n "$ZPWR/autoload/common/zpwrBindPreexecChpwd"
     assert $state equals 0
