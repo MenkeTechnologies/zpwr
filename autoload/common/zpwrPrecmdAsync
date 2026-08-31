@@ -1,0 +1,38 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+# Move the hooks named in ZPWR_PRECMD_ASYNC_HOOKS onto zshrs's
+# async_precmd hook, where they run on the worker pool AFTER the prompt
+# paints instead of blocking it.
+#
+# This is an ALLOW LIST, not a drain. async_precmd hooks execute on a
+# pool worker against the SHARED global parameter and function tables,
+# so a hook that walks or rewrites those tables races the main thread --
+# zbrowse's __zbrowse_precmd snapshots ${(qkv)parameters[@]} whole, and
+# deferring it hung interactive shells. Only hooks known to publish a
+# small value the prompt reads belong here.
+#
+# The reconcile runs in BOTH directions, so removing a name from the
+# list returns that hook to precmd_functions. zpwrBindPrecmd binds well
+# before ~/.zpwr/local/.tokens-post.sh is sourced at the wait'0a' turbo
+# slot, and a one-way move would strand a hook on the async array.
+#
+# This stays on precmd_functions itself so a listed hook registered
+# later by a turbo-loaded plugin still gets moved.
+function zpwrPrecmdAsync(){
+
+    local -a want go back merged
+
+    want=( ${(z)ZPWR_PRECMD_ASYNC_HOOKS} )
+
+    go=( ${precmd_functions:*want} )
+    back=( ${async_precmd_functions:|want} )
+    (( $#go || $#back )) || return 0
+
+    merged=( ${async_precmd_functions:*want} $go )
+    async_precmd_functions=( ${(u)merged} )
+    merged=( ${precmd_functions:|want} $back )
+    precmd_functions=( zpwrPrecmdAsync ${${(u)merged}:#zpwrPrecmdAsync} )
+}
+
+zpwrPrecmdAsync "$@"

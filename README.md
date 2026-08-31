@@ -521,23 +521,25 @@ Prompt hooks follow the same split. `zshrs` adds an `async_precmd`
 lifecycle hook with no zsh equivalent: its functions run on the shared
 worker pool AFTER the prompt is rendered, writing into the global
 parameter table, so a slow hook never stalls the prompt -- it simply
-updates a prompt or two later. Because zshrs builds the prompt with its
-native p10k engine rather than the theme's `_p9k_precmd`, no precmd hook
-holds prompt content, so ZPWR moves them across: `zpwrBindPrecmd` leaves
-only `zpwrPrecmdDrain` on `precmd_functions`, and that hook transfers
-every other entry to `async_precmd_functions` on each prompt --
-including hooks registered later by turbo-loaded plugins such as
-`zbrowse`, `zconvey` and `zsh-z`. The exception is
-`ZPWR_PRECMD_SYNC_HOOKS`: hooks whose result feeds the next command
-rather than the prompt stay synchronous, which is why
-`_jenv_export_hook` (it sets `JAVA_HOME` from `.java-version`) is listed
-there by default. Override it in `~/.zpwr/local/.tokens-post.sh` -- the
-drain reconciles in both directions, so a hook added to the list there
-is pulled back off `async_precmd_functions` even though that file is
+updates a prompt or two later.
+
+That pool worker shares the parameter and function tables with the main
+thread, so this is an allow list rather than a blanket move: only the
+hooks named in `ZPWR_PRECMD_ASYNC_HOOKS` are deferred, and the default
+is `zpwrPrecmd` alone (it publishes `ZPWR_OPTS` for the p10k
+`CUSTOM_ENV` segment, which reads whatever value is currently there).
+Hooks that walk or rewrite the parameter table are not safe to defer --
+`zbrowse`'s `__zbrowse_precmd` snapshots `${(qkv)parameters[@]}` whole,
+and running it on a worker hung interactive shells.
+
+`zpwrPrecmdAsync` stays on `precmd_functions` and reconciles the two
+arrays on each prompt, in both directions: a name added to the list
+moves to `async_precmd_functions`, a name removed comes back. That also
+catches a listed hook registered later by a turbo-loaded plugin, and
+lets `~/.zpwr/local/.tokens-post.sh` change the list even though it is
 sourced after the prompt hooks are first bound. Under stock zsh nothing
-moves; `zpwrPrecmd` stays on
-`precmd_functions` exactly as before. `zpwr top` reports both arrays in
-its hook count.
+moves; `zpwrPrecmd` stays on `precmd_functions` exactly as before.
+`zpwr top` reports both arrays in its hook count.
 
 ## Environment Variables -- System Tuning Parameters
 These are the environment variables in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/env/.zpwr_re_env.sh` -- the dials and switches of the ZPWR cyberdeck. Override them in `~/.zpwr/local/.tokens.sh` to tune the system to your neural patterns.  `~/.zpwr/env/.zpwr_re_env.sh` is reread after user tokens file to update dependent variables.
@@ -673,11 +675,11 @@ export ZPWR_PYGMENTIZE_COLOR="emacs"
 export ZPWR_COLORIZER=bat
 # zsh options captured by zpwrPrecmd: precmd under zsh, async_precmd under zshrs
 export ZPWR_OPTS=
-# precmd hooks that must stay synchronous under zshrs: their result feeds
-# the next command, not the prompt. _jenv_export_hook sets JAVA_HOME from
-# .java-version, so deferring it would run the first command after a cd
-# against the previous JDK. Override in ~/.zpwr/local/.tokens-post.sh
-export ZPWR_PRECMD_SYNC_HOOKS="_jenv_export_hook"
+# precmd hooks moved to zshrs's async_precmd hook, which runs them on the
+# worker pool after the prompt paints. Allow list, not a drain: async hooks
+# share the global parameter table with the main thread, so a hook that walks
+# or rewrites it (zbrowse) hangs the shell. Override in .tokens-post.sh
+export ZPWR_PRECMD_ASYNC_HOOKS="zpwrPrecmd"
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework

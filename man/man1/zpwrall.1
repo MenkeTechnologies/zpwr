@@ -1956,21 +1956,20 @@ before the prompt, or on
 .B async_precmd
 after it under zshrs.
 .TP
-.B ZPWR_PRECMD_SYNC_HOOKS
-Space-separated precmd hooks that must keep running before the prompt
-under zshrs, where every other hook is moved to
-.BR async_precmd .
+.B ZPWR_PRECMD_ASYNC_HOOKS
+Space-separated precmd hooks moved to zshrs's
+.B async_precmd
+hook, which runs them on the worker pool after the prompt paints.
+An allow list: async hooks share the global parameter table with the
+main thread, so a hook that walks or rewrites it hangs the shell.
 Defaults to
-.BR _jenv_export_hook ,
-which sets
-.B JAVA_HOME
-from
-.BR .java-version .
+.BR zpwrPrecmd .
 Override it in
 .IR ~/.zpwr/local/.tokens-post.sh ;
-the drain reconciles in both directions, so a hook added to the list
-there is pulled back off
-.B async_precmd_functions
+.B zpwrPrecmdAsync
+reconciles in both directions, so a name removed from the list returns
+to
+.B precmd_functions
 even though that file is sourced after the prompt hooks are first bound.
 .TP
 .B ZPWR_LEARN

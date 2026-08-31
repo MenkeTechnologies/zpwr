@@ -147,11 +147,11 @@ export ZPWR_PYGMENTIZE_COLOR="emacs"
 export ZPWR_COLORIZER=bat
 # zsh options captured by zpwrPrecmd: precmd under zsh, async_precmd under zshrs
 export ZPWR_OPTS=
-# precmd hooks that must stay synchronous under zshrs: their result feeds
-# the next command, not the prompt. _jenv_export_hook sets JAVA_HOME from
-# .java-version, so deferring it would run the first command after a cd
-# against the previous JDK. Override in ~/.zpwr/local/.tokens-post.sh
-export ZPWR_PRECMD_SYNC_HOOKS="_jenv_export_hook"
+# precmd hooks moved to zshrs's async_precmd hook, which runs them on the
+# worker pool after the prompt paints. Allow list, not a drain: async hooks
+# share the global parameter table with the main thread, so a hook that walks
+# or rewrites it (zbrowse) hangs the shell. Override in .tokens-post.sh
+export ZPWR_PRECMD_ASYNC_HOOKS="zpwrPrecmd"
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
