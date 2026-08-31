@@ -1956,6 +1956,17 @@ before the prompt, or on
 .B async_precmd
 after it under zshrs.
 .TP
+.B ZPWR_PRECMD_SYNC_HOOKS
+Space-separated precmd hooks that must keep running before the prompt
+under zshrs, where every other hook is moved to
+.BR async_precmd .
+Defaults to
+.BR _jenv_export_hook ,
+which sets
+.B JAVA_HOME
+from
+.BR .java-version .
+.TP
 .B ZPWR_LEARN
 Include all the zpwr learning functions.
 .TP

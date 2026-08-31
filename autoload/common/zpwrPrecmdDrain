@@ -2,24 +2,28 @@
 # vim: set ft=sh:
 
 # Under zshrs, move every registered precmd hook onto the async_precmd
-# hook so none of them runs before the prompt paints. zshrs renders the
-# prompt from its native p10k engine (preprompt_render), not from the
-# zsh theme's _p9k_precmd, so draining precmd_functions costs no prompt
-# content -- the async hooks write into the shared global param table
-# and the next render picks the values up.
+# hook so none of them runs before the prompt paints. zshrs intercepts
+# the powerlevel10k theme source and renders from its native engine, so
+# no precmd hook holds prompt content -- the async hooks write into the
+# shared global param table and the next render picks the values up.
+#
+# ZPWR_PRECMD_SYNC_HOOKS is the exception list: hooks whose result feeds
+# the NEXT command rather than the prompt must stay synchronous.
 #
 # This stays on precmd_functions itself so hooks registered later by
 # turbo-loaded plugins (zbrowse, zconvey, zsh-z) get drained too.
 function zpwrPrecmdDrain(){
 
-    local -a rest merged
+    local -a sync_only rest keep merged
 
-    rest=( ${(@)precmd_functions:#zpwrPrecmdDrain} )
+    sync_only=( ${(z)ZPWR_PRECMD_SYNC_HOOKS} )
+    keep=( ${precmd_functions:*sync_only} )
+    rest=( ${${precmd_functions:|sync_only}:#zpwrPrecmdDrain} )
     (( $#rest )) || return 0
 
     merged=( $async_precmd_functions $rest )
     async_precmd_functions=( ${(u)merged} )
-    precmd_functions=( zpwrPrecmdDrain )
+    precmd_functions=( zpwrPrecmdDrain $keep )
 }
 
 zpwrPrecmdDrain "$@"

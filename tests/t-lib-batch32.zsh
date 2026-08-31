@@ -161,13 +161,19 @@
 
 @test 'zpwrBindPrecmd drains every precmd hook to async_precmd under zshrs' {
     local out
-    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; precmd_functions=(_p9k_do_nothing _zshz_precmd _p9k_precmd); zpwrBindPrecmd; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
+    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; ZPWR_PRECMD_SYNC_HOOKS=; precmd_functions=(_p9k_do_nothing _zshz_precmd _p9k_precmd); zpwrBindPrecmd; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
     assert "$out" same_as 'zpwrPrecmdDrain|zpwrPrecmd,_p9k_do_nothing,_zshz_precmd,_p9k_precmd'
+}
+
+@test 'zpwrPrecmdDrain keeps ZPWR_PRECMD_SYNC_HOOKS synchronous' {
+    local out
+    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; ZPWR_PRECMD_SYNC_HOOKS=_jenv_export_hook; precmd_functions=(_zshz_precmd _jenv_export_hook); zpwrBindPrecmd; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
+    assert "$out" same_as 'zpwrPrecmdDrain,_jenv_export_hook|zpwrPrecmd,_zshz_precmd'
 }
 
 @test 'zpwrPrecmdDrain catches hooks registered after the initial bind' {
     local out
-    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; precmd_functions=(_p9k_precmd); zpwrBindPrecmd; precmd_functions+=(__turbo_late_hook); zpwrPrecmdDrain; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
+    out=$(zsh -fc 'fpath=('"$ZPWR"'/autoload/common $fpath); autoload -Uz zpwrBindPrecmd zpwrPrecmdDrain; ZSHRS_VERSION=0.0.0; ZPWR_PRECMD_SYNC_HOOKS=; precmd_functions=(_p9k_precmd); zpwrBindPrecmd; precmd_functions+=(__turbo_late_hook); zpwrPrecmdDrain; print "${(j:,:)precmd_functions}|${(j:,:)async_precmd_functions}"')
     assert "$out" same_as 'zpwrPrecmdDrain|zpwrPrecmd,_p9k_precmd,__turbo_late_hook'
 }
 

@@ -523,13 +523,17 @@ worker pool AFTER the prompt is rendered, writing into the global
 parameter table, so a slow hook never stalls the prompt -- it simply
 updates a prompt or two later. Because zshrs builds the prompt with its
 native p10k engine rather than the theme's `_p9k_precmd`, no precmd hook
-holds prompt content, so ZPWR moves all of them across: `zpwrBindPrecmd`
-leaves only `zpwrPrecmdDrain` on `precmd_functions`, and that hook
-transfers every other entry to `async_precmd_functions` on each prompt --
+holds prompt content, so ZPWR moves them across: `zpwrBindPrecmd` leaves
+only `zpwrPrecmdDrain` on `precmd_functions`, and that hook transfers
+every other entry to `async_precmd_functions` on each prompt --
 including hooks registered later by turbo-loaded plugins such as
-`zbrowse`, `zconvey` and `zsh-z`. Under stock zsh nothing moves;
-`zpwrPrecmd` stays on `precmd_functions` exactly as before. `zpwr top`
-reports both arrays in its hook count.
+`zbrowse`, `zconvey` and `zsh-z`. The exception is
+`ZPWR_PRECMD_SYNC_HOOKS`: hooks whose result feeds the next command
+rather than the prompt stay synchronous, which is why
+`_jenv_export_hook` (it sets `JAVA_HOME` from `.java-version`) is listed
+there by default. Under stock zsh nothing moves; `zpwrPrecmd` stays on
+`precmd_functions` exactly as before. `zpwr top` reports both arrays in
+its hook count.
 
 ## Environment Variables -- System Tuning Parameters
 These are the environment variables in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/env/.zpwr_re_env.sh` -- the dials and switches of the ZPWR cyberdeck. Override them in `~/.zpwr/local/.tokens.sh` to tune the system to your neural patterns.  `~/.zpwr/env/.zpwr_re_env.sh` is reread after user tokens file to update dependent variables.
@@ -665,6 +669,11 @@ export ZPWR_PYGMENTIZE_COLOR="emacs"
 export ZPWR_COLORIZER=bat
 # zsh options captured by zpwrPrecmd: precmd under zsh, async_precmd under zshrs
 export ZPWR_OPTS=
+# precmd hooks that must stay synchronous under zshrs: their result feeds
+# the next command, not the prompt. _jenv_export_hook sets JAVA_HOME from
+# .java-version, so deferring it would run the first command after a cd
+# against the previous JDK.
+export ZPWR_PRECMD_SYNC_HOOKS="_jenv_export_hook"
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
