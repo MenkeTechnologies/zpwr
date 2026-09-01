@@ -393,9 +393,9 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID 2>/dev/null | stryke -lane '$"=" ";pr
 
 # bind vim text objects on command line, depends on zsh having visual and operator pendings modes in zle
 #
-    version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"
+    version=${(j::)${(s:.:)ZSH_VERSION}[1,2]}
 
-    if (( $version > 5.2 )); then
+    if (( $version > 52 )); then
         for km in viopp visual; do
             bindkey -M $km -- '-' vi-up-line-or-history
             for c in ${(s..):-'()[]{}<>bB'}; do
