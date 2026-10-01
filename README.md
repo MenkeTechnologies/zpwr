@@ -1,7 +1,7 @@
 ```
  _______ _______ _  _  _ ______
 |____   |_____  | |  \| |_____/
-    /  / |_____] |_|\_| |    \_  v48.9.4
+    /  / |_____] |_|\_| |    \_  v48.9.6
 >>> JACK INTO THE GRID <<<
 ```
 
@@ -153,7 +153,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 504 zpwr subcommands (460 from the in-repo dispatcher table, the rest registered by the zinit-installed MenkeTechnologies plugins) -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 457 zpwr subcommands (`zpwr verbscount`) -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 177 centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 47k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed

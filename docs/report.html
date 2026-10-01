@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="ZPWR — Engineering report. Neon-lit UNIX terminal OS: 1,277 tracked files, ~107k zsh+sh lines, 533 autoload functions, 462 verb keys (460 unique spellings, 373 distinct functions), 216 zsh bindkeys, 80 tmux binds, 48 zinit plugins, 654 brew formulas/casks, 149 test files, 79k test lines, 14,278 zunit cases, 217-page wizard encyclopedia, 6,348 commits, 618 tags, ~9 years.">
+  <meta name="description" content="ZPWR — Engineering report. Neon-lit UNIX terminal OS: 1,278 tracked files, ~107k zsh+sh lines, 534 autoload functions, 462 verb keys (460 unique spellings, 373 distinct functions), 216 zsh bindkeys, 80 tmux binds, 48 zinit plugins, 654 brew formulas/casks, 149 test files, 79k test lines, 14,283 zunit cases, 217-page wizard encyclopedia, 6,371 commits, 620 tags, ~9 years.">
   <title>ZPWR &mdash; Engineering Report</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,7 +75,7 @@
             <a href="https://github.com/MenkeTechnologies/zpwr" target="_blank" rel="noopener noreferrer">GitHub</a>
           </nav>
           <p style="margin:0.35rem 0 0;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.03em;opacity:0.75;">
-            Neon-lit UNIX terminal OS &middot; zsh + tmux + vim/nvim + arb --fzf + git + zinit &middot; 533 autoload functions &middot; 460 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 654 brew formulas
+            Neon-lit UNIX terminal OS &middot; zsh + tmux + vim/nvim + arb --fzf + git + zinit &middot; 534 autoload functions &middot; 460 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 654 brew formulas
           </p>
         </div>
         <div class="tutorial-toolbar">
@@ -99,30 +99,30 @@
       <!-- SECTION 1: EXECUTIVE SUMMARY           -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">&gt;_</span>EXECUTIVE SUMMARY</h2>
-      <p class="tutorial-subtitle">ZPWR is a heavily-instrumented terminal operating environment for zsh: a curated <code>autoload</code> tree, a <code>zinit</code>-managed plugin stack, an interactive tmux cockpit, a unified <code>zpwr &lt;verb&gt;</code> dispatcher, and a self-installing toolchain that pulls down hundreds of CLI utilities on macOS and Linux. The project began as a fork of Hashrocket's Dotmatrix in 2017 and has grown into a single-user cyberdeck: <strong>1,277 tracked files, ~107k zsh+sh lines, 533 autoload functions, 462 verb keys (460 unique spellings) mapping to 373 distinct zpwr functions, 216 zsh keybindings, 80 tmux bindings, 48 zinit plugins, 654 brew formulas/casks installed, 149 test files / 79k lines of zunit (14,278 <code>@test</code> cases), 217 wizard encyclopedia pages, 39 screenshots, 6,348 commits across 618 tags spanning ~9 years</strong> &mdash; built almost entirely by one engineer (10,604 of 10,605 commits across all branches; the other 1 is from early collaborator MichaelDimmitt).</p>
+      <p class="tutorial-subtitle">ZPWR is a heavily-instrumented terminal operating environment for zsh: a curated <code>autoload</code> tree, a <code>zinit</code>-managed plugin stack, an interactive tmux cockpit, a unified <code>zpwr &lt;verb&gt;</code> dispatcher, and a self-installing toolchain that pulls down hundreds of CLI utilities on macOS and Linux. The project began as a fork of Hashrocket's Dotmatrix in 2017 and has grown into a single-user cyberdeck: <strong>1,278 tracked files, ~107k zsh+sh lines, 534 autoload functions, 462 verb keys (460 unique spellings) mapping to 373 distinct zpwr functions, 216 zsh keybindings, 80 tmux bindings, 48 zinit plugins, 654 brew formulas/casks installed, 149 test files / 79k lines of zunit (14,283 <code>@test</code> cases), 217 wizard encyclopedia pages, 39 screenshots, 6,371 commits across 620 tags spanning ~9 years</strong> &mdash; built almost entirely by one engineer (10,627 of 10,628 commits across all branches; the other 1 is from early collaborator MichaelDimmitt).</p>
 
       <div class="stat-grid">
-        <div class="stat-card"><div class="stat-val">1,277</div><div class="stat-label">Tracked Files</div></div>
-        <div class="stat-card"><div class="stat-val">107,387</div><div class="stat-label">Zsh + Sh Lines</div></div>
-        <div class="stat-card"><div class="stat-val accent">533</div><div class="stat-label">Autoload Functions</div></div>
+        <div class="stat-card"><div class="stat-val">1,278</div><div class="stat-label">Tracked Files</div></div>
+        <div class="stat-card"><div class="stat-val">107,444</div><div class="stat-label">Zsh + Sh Lines</div></div>
+        <div class="stat-card"><div class="stat-val accent">534</div><div class="stat-label">Autoload Functions</div></div>
         <div class="stat-card"><div class="stat-val accent">462</div><div class="stat-label">Verb Keys (zpwr)</div></div>
         <div class="stat-card"><div class="stat-val green">149</div><div class="stat-label">Test Files</div></div>
-        <div class="stat-card"><div class="stat-val">79,657</div><div class="stat-label">Test Lines</div></div>
-        <div class="stat-card"><div class="stat-val">14,278</div><div class="stat-label">zunit Cases</div></div>
+        <div class="stat-card"><div class="stat-val">79,689</div><div class="stat-label">Test Lines</div></div>
+        <div class="stat-card"><div class="stat-val">14,283</div><div class="stat-label">zunit Cases</div></div>
         <div class="stat-card"><div class="stat-val">80</div><div class="stat-label">Tmux Bindings</div></div>
         <div class="stat-card"><div class="stat-val">48</div><div class="stat-label">Zinit Plugins</div></div>
-        <div class="stat-card"><div class="stat-val">6,348</div><div class="stat-label">Git Commits</div></div>
-        <div class="stat-card"><div class="stat-val">618</div><div class="stat-label">Git Tags</div></div>
+        <div class="stat-card"><div class="stat-val">6,371</div><div class="stat-label">Git Commits</div></div>
+        <div class="stat-card"><div class="stat-val">620</div><div class="stat-label">Git Tags</div></div>
         <div class="stat-card"><div class="stat-val">~9</div><div class="stat-label">Years Active</div></div>
       </div>
 
       <div style="margin:1.2rem 0;">
-        <p style="font-size:11px;color:var(--text-muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;font-family:'Orbitron',sans-serif;font-weight:700;">Source Distribution &mdash; 107,387 zsh+sh lines</p>
+        <p style="font-size:11px;color:var(--text-muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;font-family:'Orbitron',sans-serif;font-weight:700;">Source Distribution &mdash; 107,444 zsh+sh lines</p>
         <div class="bar-wrap" style="height:26px;">
-          <div class="bar-fill cyan" style="width:88.3%;"></div>
-          <span class="bar-pct" style="font-size:12px;">94,753 .zsh / 12,599 .sh &middot; 88.3% .zsh</span>
+          <div class="bar-fill cyan" style="width:88.2%;"></div>
+          <span class="bar-pct" style="font-size:12px;">94,811 .zsh / 12,633 .sh &middot; 88.2% .zsh</span>
         </div>
-        <p style="font-size:10px;color:var(--text-muted);margin-top:4px;">Counted from 383 tracked <code>.zsh</code> files and 175 <code>.sh</code> files (<code>git ls-files</code>, excluding <code>.git/</code>). Side scripts add <code>.vim</code> (4 files, 4,748 lines), <code>.py</code> (3 files, 2,618 lines), <code>.pl</code> (7 files, 458 lines), <code>.stk</code> (8 files, 235 lines), <code>.js</code> (1 file, 304 lines).</p>
+        <p style="font-size:10px;color:var(--text-muted);margin-top:4px;">Counted from 383 tracked <code>.zsh</code> files and 175 <code>.sh</code> files (<code>git ls-files</code>, excluding <code>.git/</code>). Side scripts add <code>.vim</code> (4 files, 4,748 lines), <code>.py</code> (3 files, 2,618 lines), <code>.pl</code> (7 files, 458 lines), <code>.stk</code> (8 files, 219 lines), <code>.js</code> (1 file, 395 lines).</p>
       </div>
 
       <hr class="section-rule">
@@ -143,17 +143,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>autoload/</td><td class="num">533</td><td class="num">20,422</td><td>Per-function autoload tree. <code>fpath</code>-loaded on shell start. 470 in <code>common/</code>, 21 in <code>fzf/</code>, 15 in <code>comps/</code>, 12 in <code>comp_utils/</code>, 6 in <code>darwin/</code>, 5 in <code>linux/</code>, 4 in <code>systemctl/</code>.</td></tr>
-          <tr><td>env/</td><td class="num">9</td><td class="num">3,303</td><td>Environment, exported vars, p10k config, verb dispatch table (<code>zpwr.zsh</code> &mdash; 553 lines, 462 verb keys). Counts <em>tracked</em> files; <code>.zwc</code> bytecode shadows are generated, not committed.</td></tr>
-          <tr><td>install/</td><td class="num">107</td><td class="num">82,150</td><td>One-shot installers: 25 shell scripts, package manifests, <code>casks.sh</code>/<code>formulae.sh</code> with 654 brew formulas/casks, vim/nvim configs, JetBrains/iTerm/Alacritty configs, systemd units.</td></tr>
+          <tr><td>autoload/</td><td class="num">534</td><td class="num">20,546</td><td>Per-function autoload tree. <code>fpath</code>-loaded on shell start. 471 in <code>common/</code>, 21 in <code>fzf/</code>, 15 in <code>comps/</code>, 12 in <code>comp_utils/</code>, 6 in <code>darwin/</code>, 5 in <code>linux/</code>, 4 in <code>systemctl/</code>.</td></tr>
+          <tr><td>env/</td><td class="num">9</td><td class="num">3,308</td><td>Environment, exported vars, p10k config, verb dispatch table (<code>zpwr.zsh</code> &mdash; 553 lines, 462 verb keys). Counts <em>tracked</em> files; <code>.zwc</code> bytecode shadows are generated, not committed.</td></tr>
+          <tr><td>install/</td><td class="num">107</td><td class="num">82,214</td><td>One-shot installers: 25 shell scripts, package manifests, <code>casks.sh</code>/<code>formulae.sh</code> with 654 brew formulas/casks, vim/nvim configs, JetBrains/iTerm/Alacritty configs, systemd units.</td></tr>
           <tr><td>local/</td><td class="num">241</td><td class="num">5,512,872</td><td>Runtime cache: <code>.cache/completions</code>, git-repo dirty/clean caches, alias caches, zcompdump, generated keybindings, snapshot tarballs. Regenerated by <code>zpwr regen</code> verbs.</td></tr>
-          <tr><td>man/</td><td class="num">2</td><td class="num">2,907</td><td><code>man1/zpwr.1</code> (8 KB, top-level man page) + <code>man1/zpwrall.1</code> (53 KB, comprehensive meta page covering every verb and option).</td></tr>
+          <tr><td>man/</td><td class="num">2</td><td class="num">2,929</td><td><code>man1/zpwr.1</code> (8 KB, top-level man page) + <code>man1/zpwrall.1</code> (53 KB, comprehensive meta page covering every verb and option).</td></tr>
           <tr><td>scripts/</td><td class="num">179</td><td class="num">15,591</td><td>Standalone CLI utilities not autoloaded as functions, across <code>scripts/</code> root and subdirs. Range from one-off shell wrappers to long-running monitors.</td></tr>
-          <tr><td>tests/</td><td class="num">150</td><td class="num">79,657</td><td>149 zunit test files (one <code>_support/testfile</code> fixture). Probes every autoload function, env var, syntax check, and behavioral contract &mdash; 14,278 <code>@test</code> cases in total.</td></tr>
+          <tr><td>tests/</td><td class="num">150</td><td class="num">79,689</td><td>149 zunit test files (one <code>_support/testfile</code> fixture). Probes every autoload function, env var, syntax check, and behavioral contract &mdash; 14,283 <code>@test</code> cases in total.</td></tr>
           <tr><td>tmux/</td><td class="num">24</td><td class="num">883</td><td>tmux configurations: per-version (<code>tmux_lt_21</code>, <code>tmux_ge_21</code>, ..., <code>tmux_ge_31</code>), per-OS (<code>tmux-mac</code>, <code>tmux-linux</code>, <code>tmux-wsl</code>), and pane layouts (<code>four-panes</code>, <code>eight-panes</code>, <code>sixteen-panes</code>, <code>thirtytwo-panes</code>, REPL variants).</td></tr>
-          <tr><td>docs/</td><td class="num">262</td><td class="num">24,191</td><td>HTML encyclopedia (<code>index.html</code>), CSS theme (<code>hud-static.css</code>, <code>tutorial.css</code>), <code>hud-theme.js</code>, this engineering report (<code>report.html</code>), 39 screenshots, 217 <code>wizard_pages/page_NNN.zsh</code> source pages.</td></tr>
+          <tr><td>docs/</td><td class="num">262</td><td class="num">24,216</td><td>HTML encyclopedia (<code>index.html</code>), CSS theme (<code>hud-static.css</code>, <code>tutorial.css</code>), <code>hud-theme.js</code>, this engineering report (<code>report.html</code>), 39 screenshots, 217 <code>wizard_pages/page_NNN.zsh</code> source pages.</td></tr>
         </tbody>
-        <tfoot><tr class="total-row"><td>TOTAL (tracked)</td><td class="num">1,277</td><td class="num">227k</td><td>Tracked source files via <code>git ls-files</code>; <code>local/</code> line totals above are an on-disk runtime snapshot, not committed.</td></tr></tfoot>
+        <tfoot><tr class="total-row"><td>TOTAL (tracked)</td><td class="num">1,278</td><td class="num">227k</td><td>Tracked source files via <code>git ls-files</code>; <code>local/</code> line totals above are an on-disk runtime snapshot, not committed.</td></tr></tfoot>
       </table>
 
       <hr class="section-rule">
@@ -162,14 +162,14 @@
       <!-- SECTION 2: AUTOLOAD TREE                -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">#</span>AUTOLOAD TREE</h2>
-      <p class="tutorial-subtitle"><code>autoload/</code> is the heart of ZPWR. Every entry in this tree is one function file, picked up by zsh's <code>autoload -Uz</code> mechanism the first time it's called &mdash; so a fresh shell pays no cost for functions it never uses. 533 files across 7 subdirectories partitioned by platform (<code>darwin/</code>, <code>linux/</code>, <code>systemctl/</code>), tooling (<code>fzf/</code>, <code>comps/</code>, <code>comp_utils/</code>), and the catch-all <code>common/</code> (87% of all autoloads).</p>
+      <p class="tutorial-subtitle"><code>autoload/</code> is the heart of ZPWR. Every entry in this tree is one function file, picked up by zsh's <code>autoload -Uz</code> mechanism the first time it's called &mdash; so a fresh shell pays no cost for functions it never uses. 534 files across 7 subdirectories partitioned by platform (<code>darwin/</code>, <code>linux/</code>, <code>systemctl/</code>), tooling (<code>fzf/</code>, <code>comps/</code>, <code>comp_utils/</code>), and the catch-all <code>common/</code> (87% of all autoloads).</p>
 
       <table class="file-table">
         <thead>
           <tr><th>Subdirectory</th><th class="num">Files</th><th class="num">Lines</th><th>Description</th></tr>
         </thead>
         <tbody>
-          <tr><td>autoload/common/</td><td class="num">470</td><td class="num">18,615</td><td>The verb implementations themselves &mdash; 373 distinct <code>zpwr*</code> functions plus short-name helpers (<code>z</code>, <code>zal</code>, <code>zhc</code>, <code>cv</code>, ...). Mostly one function per file at ~40 lines each.</td></tr>
+          <tr><td>autoload/common/</td><td class="num">471</td><td class="num">18,739</td><td>The verb implementations themselves &mdash; 373 distinct <code>zpwr*</code> functions plus short-name helpers (<code>z</code>, <code>zal</code>, <code>zhc</code>, <code>cv</code>, ...). Mostly one function per file at ~40 lines each.</td></tr>
           <tr><td>autoload/fzf/</td><td class="num">21</td><td class="num">249</td><td>fzf completion shims: <code>_fzf_complete_zpwr</code>, <code>_fzf_complete_git</code>, <code>_fzf_complete_vim</code>, plus post-processors (<code>___fzf_complete_*_post</code>).</td></tr>
           <tr><td>autoload/comps/</td><td class="num">15</td><td class="num">730</td><td>zsh completion functions (<code>_zpwr</code> &mdash; 405 lines &mdash; <code>_zcommand</code>, <code>_p</code>, <code>_r</code>, <code>_f</code>, <code>_digs</code>). Drive Tab-completion for ZPWR verbs and shortened aliases.</td></tr>
           <tr><td>autoload/comp_utils/</td><td class="num">12</td><td class="num">447</td><td>Helpers consumed by the completion functions: <code>_files</code>, <code>_parameters</code>, <code>_megacomplete</code>, <code>_complete_hist</code>, <code>_complete_clipboard</code>, fasd dir/file expanders.</td></tr>
@@ -177,7 +177,7 @@
           <tr><td>autoload/linux/</td><td class="num">5</td><td class="num">177</td><td>Linux-only: <code>zpwrLinuxBanner</code>, <code>zpwrLinuxPlugins</code>, <code>zpwrAttachSetup</code>, <code>tailufw</code>, <code>scriptToPDF</code>.</td></tr>
           <tr><td>autoload/systemctl/</td><td class="num">4</td><td class="num">112</td><td>systemd helpers: <code>ssu</code>/<code>ssd</code> (start/stop), <code>restart</code>, <code>restartZabbixAgent</code>. Only fpath'd on Linux hosts.</td></tr>
         </tbody>
-        <tfoot><tr class="total-row"><td>TOTAL</td><td class="num">533</td><td class="num">20,422</td><td>+5 <code>.zwc</code> compiled bytecode shadows in <code>common/</code> for hot-loaded functions.</td></tr></tfoot>
+        <tfoot><tr class="total-row"><td>TOTAL</td><td class="num">534</td><td class="num">20,546</td><td>+5 <code>.zwc</code> compiled bytecode shadows in <code>common/</code> for hot-loaded functions.</td></tr></tfoot>
       </table>
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:11px;color:var(--accent);letter-spacing:1.5px;margin:1.5rem 0 0.5rem;">// FUNCTION CATEGORIES (autoload/common)</h3>
@@ -313,7 +313,7 @@
         <div class="stat-card"><div class="stat-val accent">654</div><div class="stat-label">Brew Formulas/Casks</div></div>
         <div class="stat-card"><div class="stat-val">579</div><div class="stat-label">Formulae / 75 Casks</div></div>
         <div class="stat-card"><div class="stat-val">25</div><div class="stat-label">Shell Installers</div></div>
-        <div class="stat-card"><div class="stat-val">82,150</div><div class="stat-label">install/ Lines</div></div>
+        <div class="stat-card"><div class="stat-val">82,214</div><div class="stat-label">install/ Lines</div></div>
       </div>
 
       <table class="file-table" style="margin-top:1.2rem;">
@@ -348,12 +348,12 @@
       <!-- SECTION 7: TEST SUITE                   -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">%</span>TEST SUITE</h2>
-      <p class="tutorial-subtitle"><strong>149 zunit test files / 79,657 lines / 14,278 <code>@test</code> cases</strong>. The suite probes every autoload function for existence, source-syntax validity, function-body presence, and correct <code>whence</code>/<code>wordtype</code> classification &mdash; then asserts on env-var exports, env-var values, alias bindings, plugin registration, and behavior of the most-used verbs. Naming convention: <code>t-&lt;area&gt;-&lt;dim&gt;-&lt;scope&gt;.zsh</code> (e.g. <code>t-autoload-subdir-body-all.zsh</code> &mdash; "autoload, subdir, body presence, all functions"). Each <code>t-*-all.zsh</code> iterates every name and emits one zunit case per name, so the file count understates total assertions.</p>
+      <p class="tutorial-subtitle"><strong>149 zunit test files / 79,689 lines / 14,283 <code>@test</code> cases</strong>. The suite probes every autoload function for existence, source-syntax validity, function-body presence, and correct <code>whence</code>/<code>wordtype</code> classification &mdash; then asserts on env-var exports, env-var values, alias bindings, plugin registration, and behavior of the most-used verbs. Naming convention: <code>t-&lt;area&gt;-&lt;dim&gt;-&lt;scope&gt;.zsh</code> (e.g. <code>t-autoload-subdir-body-all.zsh</code> &mdash; "autoload, subdir, body presence, all functions"). Each <code>t-*-all.zsh</code> iterates every name and emits one zunit case per name, so the file count understates total assertions.</p>
 
       <div class="stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));">
         <div class="stat-card"><div class="stat-val accent">149</div><div class="stat-label">Test Files (.zsh)</div></div>
-        <div class="stat-card"><div class="stat-val">79,657</div><div class="stat-label">Test Lines</div></div>
-        <div class="stat-card"><div class="stat-val">14,278</div><div class="stat-label"><code>@test</code> cases</div></div>
+        <div class="stat-card"><div class="stat-val">79,689</div><div class="stat-label">Test Lines</div></div>
+        <div class="stat-card"><div class="stat-val">14,283</div><div class="stat-label"><code>@test</code> cases</div></div>
       </div>
 
       <table class="file-table" style="margin-top:1.2rem;">
@@ -422,16 +422,16 @@
       <!-- SECTION 10: HISTORY                     -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">?</span>HISTORY</h2>
-      <p class="tutorial-subtitle">ZPWR began life as a fork of Hashrocket's Dotmatrix in <strong>May 2017</strong> and has been continuously developed since &mdash; <strong>6,348 commits, 618 tags, 9 years</strong>. <code>git shortlog</code> attributes 10,604 of 10,605 commits (across all branches) to MenkeTechnologies; the remaining 1 is from an early collaborator (MichaelDimmitt). The active version line is <code>v48.x</code> (latest tag <code>v48.9.4</code>). Recent commits show ongoing migration to the new <code>stryke</code> shell and <code>perlrs</code> (Rust replacement for perl) across helper scripts.</p>
+      <p class="tutorial-subtitle">ZPWR began life as a fork of Hashrocket's Dotmatrix in <strong>May 2017</strong> and has been continuously developed since &mdash; <strong>6,371 commits, 620 tags, 9 years</strong>. <code>git shortlog</code> attributes 10,627 of 10,628 commits (across all branches) to MenkeTechnologies; the remaining 1 is from an early collaborator (MichaelDimmitt). The active version line is <code>v48.x</code> (latest tag <code>v48.9.6</code>). Recent commits show ongoing migration to the new <code>stryke</code> shell and <code>perlrs</code> (Rust replacement for perl) across helper scripts.</p>
 
       <div class="stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));">
-        <div class="stat-card"><div class="stat-val">6,348</div><div class="stat-label">Commits</div></div>
-        <div class="stat-card"><div class="stat-val accent">618</div><div class="stat-label">Tags</div></div>
-        <div class="stat-card"><div class="stat-val">~9</div><div class="stat-label">Years (2017-05 &rarr; 2026-06)</div></div>
-        <div class="stat-card"><div class="stat-val">v48.9.4</div><div class="stat-label">Latest tag</div></div>
-        <div class="stat-card"><div class="stat-val">517,491</div><div class="stat-label">Total insertions</div></div>
-        <div class="stat-card"><div class="stat-val">291,121</div><div class="stat-label">Total deletions</div></div>
-        <div class="stat-card"><div class="stat-val">123</div><div class="stat-label">Commits in 2026 (YTD)</div></div>
+        <div class="stat-card"><div class="stat-val">6,371</div><div class="stat-label">Commits</div></div>
+        <div class="stat-card"><div class="stat-val accent">620</div><div class="stat-label">Tags</div></div>
+        <div class="stat-card"><div class="stat-val">~9</div><div class="stat-label">Years (2017-05 &rarr; 2026-09)</div></div>
+        <div class="stat-card"><div class="stat-val">v48.9.6</div><div class="stat-label">Latest tag</div></div>
+        <div class="stat-card"><div class="stat-val">519,922</div><div class="stat-label">Total insertions</div></div>
+        <div class="stat-card"><div class="stat-val">293,053</div><div class="stat-label">Total deletions</div></div>
+        <div class="stat-card"><div class="stat-val">185</div><div class="stat-label">Commits in 2026 (YTD)</div></div>
         <div class="stat-card"><div class="stat-val">2</div><div class="stat-label">Contributors</div></div>
       </div>
 
@@ -469,7 +469,7 @@
       <p class="tutorial-subtitle">Why ZPWR is shaped the way it is. Each call-out below is a decision the project could have gone the other way on, with the reasoning for the path taken.</p>
 
       <div class="feature-grid">
-        <div class="feature-card"><h4>Autoload over Source</h4><p>Every function is a separate file under <code>autoload/common/</code>, picked up by zsh's <code>autoload -Uz</code> mechanism the first time it's called. A fresh shell never reads a function it doesn't use &mdash; cold start stays under <code>$ZPWR_BENCH</code>-able levels even with 533 functions on disk.</p></div>
+        <div class="feature-card"><h4>Autoload over Source</h4><p>Every function is a separate file under <code>autoload/common/</code>, picked up by zsh's <code>autoload -Uz</code> mechanism the first time it's called. A fresh shell never reads a function it doesn't use &mdash; cold start stays under <code>$ZPWR_BENCH</code>-able levels even with 534 functions on disk.</p></div>
         <div class="feature-card"><h4>Verb Table over Subcommand Files</h4><p>462 verbs route through one associative array in <code>env/zpwr.zsh</code> rather than 462 dispatch files. Alias spellings cost one extra key, not a duplicate file; the completion file walks the same table for Tab descriptions.</p></div>
         <div class="feature-card"><h4>One Repo, Many Toolchains</h4><p><code>install/</code> doesn't just install zsh plugins &mdash; it owns the brew formulas, npm globals, vim/nvim configs, JetBrains keymap, iTerm colors, and systemd units. A new machine reaches parity with one <code>install/s</code> invocation; nothing assumed about the host.</p></div>
         <div class="feature-card"><h4>Cached Everything (<code>local/</code>)</h4><p>Git-repo dirty state, alias usage rankings, completion bytecode, encyclopedia render, zcompdump, snapshot tarballs &mdash; all under <code>local/</code>. The <code>zpwr regen</code> verb family rebuilds caches in dependency order; <code>zpwr clean</code> family blows them away when contamination is suspected.</p></div>
@@ -484,7 +484,7 @@
     </main>
 
     <footer style="text-align:center;padding:2rem;font-size:10px;color:var(--text-muted);font-family:'Orbitron',sans-serif;letter-spacing:2px;">
-      ZPWR ENGINEERING REPORT &middot; 1,277 TRACKED FILES &middot; 107,387 ZSH+SH LINES &middot; 533 AUTOLOAD FNS &middot; 462 VERBS &middot; 216 ZSH BINDKEYS / 80 TMUX BINDS &middot; 48 ZINIT PLUGINS &middot; 654 BREW FORMULAS &middot; 149 TEST FILES / 79K LINES / 14,278 CASES &middot; 217 WIZARD PAGES &middot; 6,348 COMMITS &middot; 618 TAGS &middot; MENKETECHNOLOGIES
+      ZPWR ENGINEERING REPORT &middot; 1,278 TRACKED FILES &middot; 107,444 ZSH+SH LINES &middot; 534 AUTOLOAD FNS &middot; 462 VERBS &middot; 216 ZSH BINDKEYS / 80 TMUX BINDS &middot; 48 ZINIT PLUGINS &middot; 654 BREW FORMULAS &middot; 149 TEST FILES / 79K LINES / 14,283 CASES &middot; 217 WIZARD PAGES &middot; 6,371 COMMITS &middot; 620 TAGS &middot; MENKETECHNOLOGIES
     </footer>
   </div>
 

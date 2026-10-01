@@ -14,7 +14,7 @@ At the foundation lies the **environment system**, a network of over 175 environ
 
 Above this foundation sits the **verb system**, the primary interface through which users interact with ZPWR's capabilities. 460 subcommands are registered in a central associative array (`ZPWR_VERBS`), each mapping a verb name to a function and a description. Typing `zpwr` followed by a tab presents a colorized menu of every available command, complete with grouped descriptions and neon-styled separators. This design prioritizes discoverability — a user need not memorize commands but can browse and search them interactively, aided by arb --fzf fuzzy finding via `zpwr verbs`.
 
-The **autoload system** organizes 533 zsh functions across 7 subdirectories, separated by concern: common utilities, `fzf/` picker completion shims, completion functions, platform-specific logic for Darwin and Linux, and systemd management. These functions are lazily loaded, compiled to `.zwc` bytecode for performance, and automatically available when invoked. This approach mirrors the philosophy of modern plugin architectures while remaining rooted in zsh's native autoload mechanism.
+The **autoload system** organizes 534 zsh functions across 7 subdirectories, separated by concern: common utilities, `fzf/` picker completion shims, completion functions, platform-specific logic for Darwin and Linux, and systemd management. These functions are lazily loaded, compiled to `.zwc` bytecode for performance, and automatically available when invoked. This approach mirrors the philosophy of modern plugin architectures while remaining rooted in zsh's native autoload mechanism.
 
 ## The Plugin Ecosystem
 
