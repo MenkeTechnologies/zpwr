@@ -503,6 +503,7 @@ brew install sphinx-doc
 brew install sqlite
 brew install srt
 brew install srtp
+brew install stryke
 brew install subversion
 brew install swi-prolog
 brew install swig
@@ -575,5 +576,7 @@ brew install zplug
 brew install zsh
 brew install zsh-lovers
 brew install zshdb
+brew install zshrs
 brew install zstd
+brew install ztmux
 brew install zzz

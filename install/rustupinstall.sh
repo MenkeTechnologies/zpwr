@@ -13,6 +13,9 @@ fi
 
 source common.sh
 
+# rustup installs cargo here; without it on PATH every ins call reinstalls
+# rustup and never sees binaries an earlier ins already put there
+export PATH="$HOME/.cargo/bin:$PATH"
 
 while true; do
     if zpwrCommandExists curl;then
@@ -26,10 +29,6 @@ function ins() {
     e="$2"
 
     zpwrCommandExists "$e" || {
-        zpwrPrettyPrintBox "Installing Rustup if cargo does not exist"
-        zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-        zpwrPrettyPrintBox "Updating rustup"
-        "$HOME/.cargo/bin/rustup" update
         zpwrPrettyPrintBox "Installing "$p" with cargo"
         "$HOME/.cargo/bin/cargo" install "$p"
     }
@@ -47,9 +46,20 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         exit 1'
 fi
 
+zpwrPrettyPrintBox "Installing Rustup if cargo does not exist"
+zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+zpwrPrettyPrintBox "Updating rustup"
+"$HOME/.cargo/bin/rustup" update
+
 ins pythonrs pythonrs
 ins powerliners powerliners
-ins arb arb
+# crates.io `arb` is an unrelated Flutter localization tool that also
+# installs an `arb` binary; MenkeTech arb is published as `arblang`
+if "$HOME/.cargo/bin/cargo" install --list 2>/dev/null | grep -q "^arb v"; then
+    zpwrPrettyPrintBox "Removing crates.io arb, which is not MenkeTech arb"
+    "$HOME/.cargo/bin/cargo" uninstall arb
+fi
+ins arblang arb
 ins grcrs grcrs
 ins htoprs htoprs
 ins ztmux ztmux

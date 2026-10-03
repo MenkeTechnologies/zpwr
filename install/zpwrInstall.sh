@@ -839,8 +839,13 @@ if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     wait $PLUGIN_PID
 fi
 
+# cargo installed arb, stryke, ztmux and zshrs in a background shell; this
+# shell's PATH predates ~/.cargo/bin, so startMux.sh and the login shell
+# lookup below would not find them
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # login shell: zshrs when cargo installed it, stock zsh otherwise
-loginShell="$(command -v zshrs || command -v "$HOME/.cargo/bin/zshrs" || command -v zsh)"
+loginShell="$(command -v zshrs || command -v zsh)"
 if ! grep -qx "$loginShell" /etc/shells; then
     zpwrPrettyPrintBox "Adding $loginShell to /etc/shells"
     echo "$loginShell" | sudo tee -a /etc/shells >/dev/null

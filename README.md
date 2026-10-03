@@ -131,7 +131,7 @@ git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && 
 
 The installer will confirm what will be installed and overwritten before executing.
 
-The installer builds [zshrs](https://github.com/MenkeTechnologies/zshrs) with `cargo install zshrs`, adds it to `/etc/shells` and makes it your login shell with `chsh`.  If zshrs is not on `PATH` when the cargo installer finishes, it falls back to stock zsh.
+The installer builds the Rust toolchain with cargo in the background -- [zshrs](https://github.com/MenkeTechnologies/zshrs), [stryke](https://github.com/MenkeTechnologies/strykelang) (crate `strykelang`), [arb](https://github.com/MenkeTechnologies/arb) (crate `arblang`; the crates.io `arb` is an unrelated tool and is uninstalled if found), ztmux and the rest of `install/rustupinstall.sh` -- then adds zshrs to `/etc/shells` and makes it your login shell with `chsh`.  If zshrs is not on `PATH` when the cargo installer finishes, it falls back to stock zsh.
 
 Zinit will install plugins on first shell after install.
 
