@@ -62,7 +62,11 @@ function zpwrBindFinal(){
         export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
     fi
 
-    builtin export SHELL="$(which zsh)"
+    if [[ -n $ZSHRS_VERSION ]]; then
+        builtin export SHELL="$(which zshrs)"
+    else
+        builtin export SHELL="$(which zsh)"
+    fi
 
     bindkey -M viins '^r' redo
     bindkey -M vicmd '^r' redo
