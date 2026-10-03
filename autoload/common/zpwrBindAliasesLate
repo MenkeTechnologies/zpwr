@@ -118,10 +118,10 @@ function zpwrBindAliasesLate(){
 
     #{{{                    MARK:ALIASES for editing config files
     #**************************************************************
-    alias vrc='${=ZPWR_VIM} -S $HOME/.vim/sessions/vrc.vim $HOME/.vimrc'
-    alias brc='${=ZPWR_VIM} -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
-    alias zrc='${=ZPWR_VIM} -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
-    alias trc='${=ZPWR_VIM} -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
+    alias vrc='${=ZPWR_ZMAX} -S $HOME/.vim/sessions/vrc.vim $HOME/.vimrc'
+    alias brc='${=ZPWR_ZMAX} -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
+    alias zrc='${=ZPWR_ZMAX} -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
+    alias trc='${=ZPWR_ZMAX} -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
     alias tok='"builtin" cd $ZPWR; ${=ZPWR_VIM} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
     alias vtok='"builtin" cd $ZPWR; ${=ZPWR_ZMAX} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
     alias conf='"builtin" cd $ZPWR; ${=ZPWR_VIM} $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
