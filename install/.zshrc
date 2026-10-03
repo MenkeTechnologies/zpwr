@@ -158,7 +158,8 @@ fi
 builtin export LC_ALL="en_US.UTF-8"
 # stop delay when entering normal mode
 builtin export KEYTIMEOUT="$ZPWR_KEYTIMEOUT"
-builtin export SHELL="${commands[zsh]}"
+# under zshrs keep $SHELL as login(1) set it, so tmux panes start zshrs
+[[ -n "$ZSHRS_VERSION" ]] || builtin export SHELL="${commands[zsh]}"
 # default vi-backward-delete-char does not delete paste insert point
 builtin export AUTOPAIR_BKSPC_WIDGET='.backward-delete-char'
 #}}}***********************************************************
