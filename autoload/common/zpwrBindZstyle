@@ -6,6 +6,9 @@ function zpwrBindZstyle(){
     #**************************************************************
     zpwrMonthlyCachingPolicy () {
         # rebuild if cache is more than a month old
+        # $1 is one known file: glob it case-sensitively so NO_CASE_GLOB does not
+        # turn every component of its path into an opendir+readdir on each TAB.
+        setopt localoptions caseglob
         local -a oldp
         oldp=( "$1"(Nm+31) )
         (( $#oldp ))
@@ -13,6 +16,9 @@ function zpwrBindZstyle(){
 
     zpwrWeeklyCachingPolicy () {
         # rebuild if cache is more than a week old
+        # $1 is one known file: glob it case-sensitively so NO_CASE_GLOB does not
+        # turn every component of its path into an opendir+readdir on each TAB.
+        setopt localoptions caseglob
         local -a oldp
         oldp=( "$1"(Nm+7) )
         (( $#oldp ))
@@ -20,6 +26,9 @@ function zpwrBindZstyle(){
 
     zpwrDailyCachingPolicy () {
         # rebuild if cache is more than a day old
+        # $1 is one known file: glob it case-sensitively so NO_CASE_GLOB does not
+        # turn every component of its path into an opendir+readdir on each TAB.
+        setopt localoptions caseglob
         local -a oldp
         oldp=( "$1"(Nm+1) )
         (( $#oldp ))
