@@ -4,14 +4,16 @@ __zpwr_aliases(){
 
     local k v
 
-    # Braces, not a subshell: the test has no side effects to isolate, and a
-    # subshell copies the whole shell state on every TAB.
-    if { ! (( $+__aliases_ary )) || _cache_invalid alias_cache; } && ! _retrieve_cache alias_cache; then
+    # Built from the live table, not a cache file: $aliases is already in
+    # memory, and a file written before the aliases were defined stayed
+    # "fresh" for a month while offering none of them. Rebuilt when the
+    # table changes size.
+    typeset -ga __aliases_ary
+    if (( ${#__aliases_ary} != ${#aliases} )); then
+        __aliases_ary=()
         for k v in ${(kv)aliases}; do
             __aliases_ary+=($k:"${(q)v}")
         done
-
-        _store_cache alias_cache __aliases_ary
     fi
 
     # With no matcher (the first matcher-list pass) compadd keeps only words
