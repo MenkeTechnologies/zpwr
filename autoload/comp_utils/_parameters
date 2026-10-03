@@ -32,7 +32,13 @@ function _parameters() {
     typeset -a ary
     maxLen=50
     for i in "${(@M)${(@k)parameters[(R)${pattern[2]}~*local*]}:#${~pfilt}*}"; do
-        ary+=($i:"${${(P)i}:0:100}")
+        # A hideval parameter ($functions, $commands, $userdirs, ...) never shows
+        # its value, and building it walks the whole table: describe its type.
+        if [[ $parameters[$i] == *hideval* ]]; then
+            ary+=($i:"$parameters[$i]")
+        else
+            ary+=($i:"${${(P)i}:0:100}")
+        fi
     done
 
     for i in "$fakes[@]"; do

@@ -2,9 +2,18 @@
 # vim: set ft=sh:
 function _complete_hist(){
 
-    typeset -a last_ten
+    # The last 200 events, as `fc -l -200` lists them minus the event number:
+    # words joined by single spaces, newlines shown as \n. Read from $history
+    # directly instead of piping fc through an external filter on every TAB.
+    local -a last_ten
+    local -i n
+    local e
 
-    last_ten=( ${(f)"$(fc -l -200 2>/dev/null | stryke -lane 'print "@F[1..$#F]"')"} )
+    for (( n = HISTCMD - 200; n < HISTCMD; n++ )); do
+        (( n > 0 )) || continue
+        e=${history[$n]//$'\n'/\\n}
+        [[ -n $e ]] && last_ten+=( "${(j: :)${=e}}" )
+    done
     _wanted last-ten expl 'last commands' compadd -Qa last_ten
 }
 
