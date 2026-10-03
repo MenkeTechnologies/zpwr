@@ -787,9 +787,6 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         mkdir -pv $ZPWR_PLUGIN_MANAGER_HOME/plugins/
     fi
 
-    zpwrPrettyPrintBox "Change default shell to zsh"
-    sudo chsh -s "$(which zsh)"
-
     # Only the plugin's shell glue is used -- widgets and completion shims,
     # routed through $ZPWR_FZF (arb --fzf) by zpwrBindFZFLate. The bundled
     # install --bin, which fetches the fzf binary, is deliberately not run.
@@ -842,8 +839,16 @@ if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     wait $PLUGIN_PID
 fi
 
-# must have zsh at this point
-export SHELL="$(which zsh)"
+# login shell: zshrs when cargo installed it, stock zsh otherwise
+loginShell="$(command -v zshrs || command -v "$HOME/.cargo/bin/zshrs" || command -v zsh)"
+if ! grep -qx "$loginShell" /etc/shells; then
+    zpwrPrettyPrintBox "Adding $loginShell to /etc/shells"
+    echo "$loginShell" | sudo tee -a /etc/shells >/dev/null
+fi
+zpwrPrettyPrintBox "Change default shell to $loginShell"
+sudo chsh -s "$loginShell" "$USER"
+# ztmux default-shell is $SHELL, so panes start the login shell
+export SHELL="$loginShell"
 
 # powerliners (the Rust port of powerline-status) puts the
 # powerline / powerline-daemon / powerline-config / powerline-render

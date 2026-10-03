@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In a world where developers increasingly rely on graphical interfaces, cloud-hosted editors, and browser-based tooling, there exists a countermovement — a digital underground of power users who believe the terminal is not merely a tool but a way of life. ZPWR stands as a monument to that philosophy. Born from a fork of Hashrocket's Dotmatrix project and hand-forged over years into a sprawling system of more than 190,000 lines of code, ZPWR is a cyberpunk-themed terminal operating system built on the trinity of zsh, tmux, and vim. Its tagline captures its ethos with poetic precision: *"If your terminal isn't glowing, you're not running ZPWR."*
+In a world where developers increasingly rely on graphical interfaces, cloud-hosted editors, and browser-based tooling, there exists a countermovement — a digital underground of power users who believe the terminal is not merely a tool but a way of life. ZPWR stands as a monument to that philosophy. Born from a fork of Hashrocket's Dotmatrix project and hand-forged over years into a sprawling system of more than 190,000 lines of code, ZPWR is a cyberpunk-themed terminal operating system built on the trinity of zshrs, tmux, and vim. [zshrs](https://github.com/MenkeTechnologies/zshrs), the JIT-compiled Rust drop-in replacement for zsh, is its login shell; stock zsh remains supported. Its tagline captures its ethos with poetic precision: *"If your terminal isn't glowing, you're not running ZPWR."*
 
 ZPWR is not a dotfiles repository in the conventional sense. It is an opinionated, batteries-included distribution for the command line — a neural interface that transforms a blinking cursor into a neon-coded cockpit for software development, system administration, and digital exploration.
 

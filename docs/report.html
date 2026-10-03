@@ -75,7 +75,7 @@
             <a href="https://github.com/MenkeTechnologies/zpwr" target="_blank" rel="noopener noreferrer">GitHub</a>
           </nav>
           <p style="margin:0.35rem 0 0;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:0.03em;opacity:0.75;">
-            Neon-lit UNIX terminal OS &middot; zsh + tmux + vim/nvim + arb --fzf + git + zinit &middot; 534 autoload functions &middot; 460 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 654 brew formulas
+            Neon-lit UNIX terminal OS &middot; zshrs + tmux + vim/nvim + arb --fzf + git + zinit &middot; 534 autoload functions &middot; 460 <code>zpwr</code> verbs &middot; 80 tmux bindings &middot; 654 brew formulas
           </p>
         </div>
         <div class="tutorial-toolbar">
@@ -422,7 +422,7 @@
       <!-- SECTION 10: HISTORY                     -->
       <!-- ═══════════════════════════════════════ -->
       <h2 class="tutorial-title"><span class="step-hash">?</span>HISTORY</h2>
-      <p class="tutorial-subtitle">ZPWR began life as a fork of Hashrocket's Dotmatrix in <strong>May 2017</strong> and has been continuously developed since &mdash; <strong>6,371 commits, 620 tags, 9 years</strong>. <code>git shortlog</code> attributes 10,627 of 10,628 commits (across all branches) to MenkeTechnologies; the remaining 1 is from an early collaborator (MichaelDimmitt). The active version line is <code>v48.x</code> (latest tag <code>v48.9.6</code>). Recent commits show ongoing migration to the new <code>stryke</code> shell and <code>perlrs</code> (Rust replacement for perl) across helper scripts.</p>
+      <p class="tutorial-subtitle">ZPWR began life as a fork of Hashrocket's Dotmatrix in <strong>May 2017</strong> and has been continuously developed since &mdash; <strong>6,371 commits, 620 tags, 9 years</strong>. <code>git shortlog</code> attributes 10,627 of 10,628 commits (across all branches) to MenkeTechnologies; the remaining 1 is from an early collaborator (MichaelDimmitt). The active version line is <code>v48.x</code> (latest tag <code>v48.9.6</code>). ZPWR now runs on <code>zshrs</code> as its login shell; recent commits also show <code>perlrs</code> (Rust replacement for perl) replacing perl across helper scripts.</p>
 
       <div class="stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));">
         <div class="stat-card"><div class="stat-val">6,371</div><div class="stat-label">Commits</div></div>
@@ -478,7 +478,7 @@
         <div class="feature-card"><h4>Tests as Reflection Probes</h4><p>The 79k-line zunit suite is mostly "for each name in <em>X</em>, assert <em>Y</em>." Drift in autoload coverage, env-var exports, or alias bindings surfaces as a failing case &mdash; before the contributor finds out at runtime that a shell rebind silently dropped a function.</p></div>
         <div class="feature-card"><h4>Wizard as Source-of-Truth</h4><p>217 zsh "wizard pages" double as in-shell viewers (<code>zpwr wizard N</code>) and as the input to <code>docs/index.html</code>. One copy of every fact &mdash; the encyclopedia and the in-shell help never drift, because they're regenerated from the same files.</p></div>
         <div class="feature-card"><h4>OMZ Snippet, Not Full Theme</h4><p>OMZ plugins/libraries are sniped via <code>zinit snippet OMZP::*</code> / <code>OMZL::*</code> instead of installing the whole framework. Saves the bulk; <code>atload='zpwrOmzOverrides'</code> hook rebinds any keybinding OMZ trampled.</p></div>
-        <div class="feature-card"><h4>Stryke is the Bet</h4><p>The README announces ZPWR will migrate to <a href="https://github.com/MenkeTechnologies/zshrs" target="_blank" rel="noopener noreferrer">zshrs</a> (the Rust login shell built on <a href="https://github.com/MenkeTechnologies/strykelang" target="_blank" rel="noopener noreferrer">strykelang</a>) "soon". Current commits show <code>perlrs</code> already replacing perl in helper scripts &mdash; the migration is already in flight one binary at a time, not a flag-day port.</p></div>
+        <div class="feature-card"><h4>zshrs is the Host</h4><p>ZPWR runs on <a href="https://github.com/MenkeTechnologies/zshrs" target="_blank" rel="noopener noreferrer">zshrs</a>, the Rust drop-in zsh replacement that shares the fusevm bytecode VM with <a href="https://github.com/MenkeTechnologies/strykelang" target="_blank" rel="noopener noreferrer">strykelang</a>. The installer runs <code>cargo install zshrs</code> and <code>chsh</code>es to it; under zshrs the rc skips the four ZLE plugins it implements natively, sources p10k so its native engine renders the prompt, and moves allow-listed precmd hooks to <code>async_precmd</code>. Stock zsh still loads the same rc unchanged.</p></div>
       </div>
 
     </main>

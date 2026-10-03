@@ -59,6 +59,7 @@ ins git-delta git-delta
 ins lsofrs lsofrs
 ins awkrs awkrs
 ins strykelang stryke
+ins zshrs zshrs
 ins nmaprs nmaprs
 ins storageshower storageshower
 ins iftoprs iftoprs

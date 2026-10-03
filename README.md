@@ -18,7 +18,7 @@
 
 ![tmux final](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
 
-ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zshrs, vimlrs and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface — autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a ztmux cockpit that turns your terminal into a multi-pane command center. Began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix); evolved into a sprawling cyberdeck OS for the command line. Will be migrating to [zshrs](https://github.com/MenkeTechnologies/zshrs) — a next-gen, highly parallel login shell designed as a drop-in replacement for zsh. If your terminal isn't glowing, you're not running ZPWR.
+ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zshrs, vimlrs and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface — autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a ztmux cockpit that turns your terminal into a multi-pane command center. Began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix); evolved into a sprawling cyberdeck OS for the command line. Runs on [zshrs](https://github.com/MenkeTechnologies/zshrs) — the JIT-compiled, highly parallel Rust login shell and drop-in replacement for zsh — which the installer sets as your login shell; stock zsh remains supported. If your terminal isn't glowing, you're not running ZPWR.
 
 ### [`Read the Docs`](https://menketechnologies.github.io/zpwr/) &middot; [`Engineering Report`](https://menketechnologies.github.io/zpwr/report.html) · [`strykelang`](https://github.com/MenkeTechnologies/strykelang) · [`zshrs`](https://github.com/MenkeTechnologies/zshrs) · [`zsh-more-completions`](https://github.com/MenkeTechnologies/zsh-more-completions)
 
@@ -131,12 +131,14 @@ git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && 
 
 The installer will confirm what will be installed and overwritten before executing.
 
-Zinit will install plugins on first zsh after install.
+The installer builds [zshrs](https://github.com/MenkeTechnologies/zshrs) with `cargo install zshrs`, adds it to `/etc/shells` and makes it your login shell with `chsh`.  If zshrs is not on `PATH` when the cargo installer finishes, it falls back to stock zsh.
+
+Zinit will install plugins on first shell after install.
 
 ## Full Installation to Custom `$ZPWR` -- Choose Your Safehouse
 To install to a custom directory, clone the project to custom directory and start the installer.  ZPWR will pick up its location and export ZPWR to that directory.
 This also means you can move ZPWR after install after updating the sym links that are in `$HOME`.  First `export ZPWR_INSTALL=<mydirectory>/install` in current shell.  Replace `<mydirectory>` with your new install dir and keep `/install` in the export.
-Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
+Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new shell with `exec zshrs` (or `exec zsh` under stock zsh) and all environment variables will be set accordingly.
 
 ## Installation Options to `~/.zpwr/install/zpwrInstall.sh`
 ```sh
@@ -501,6 +503,14 @@ hlissner/zsh-autopair
 ```
 
 ## Running under zshrs
+
+zshrs is the ZPWR host shell.  The installer puts it on `PATH` via cargo and sets it as the login shell; to switch an existing install by hand:
+```sh
+cargo install zshrs        # or: brew tap MenkeTechnologies/menketech && brew install zshrs
+sudo sh -c "echo \"$(command -v zshrs)\" >> /etc/shells"
+chsh -s "$(command -v zshrs)"
+```
+Under zshrs `install/.zshrc` leaves `$SHELL` as `login(1)` set it, so ztmux panes (`default-shell $SHELL`) start zshrs too, and `nz` re-execs zshrs rather than zsh.  The rc files still load under stock zsh with identical behavior apart from the differences below.
 
 `zshrs` implements syntax highlighting, autosuggestions, autopair and
 history substring search inside the shell itself (`~/.zshrs/zshrs.toml`,

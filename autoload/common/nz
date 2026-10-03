@@ -3,7 +3,7 @@
 function nz(){
     local zrs
 
-    # $SHELL is the login shell (zsh). When the current shell IS zshrs,
+    # $SHELL can still name zsh (pre-zshrs installs). When the current shell IS zshrs,
     # exec'ing $SHELL would silently drop back to zsh on every restart.
     zrs=${commands[zshrs]}
 
