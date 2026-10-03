@@ -4,7 +4,9 @@ __zpwr_aliases(){
 
     local k v
 
-    if ( ! (( $+__aliases_ary )) || _cache_invalid alias_cache ) && ! _retrieve_cache alias_cache; then
+    # Braces, not a subshell: the test has no side effects to isolate, and a
+    # subshell copies the whole shell state on every TAB.
+    if { ! (( $+__aliases_ary )) || _cache_invalid alias_cache; } && ! _retrieve_cache alias_cache; then
         for k v in ${(kv)aliases}; do
             __aliases_ary+=($k:"${(q)v}")
         done
@@ -12,7 +14,16 @@ __zpwr_aliases(){
         _store_cache alias_cache __aliases_ary
     fi
 
-    _describe -t aliases alias __aliases_ary
+    # With no matcher (the first matcher-list pass) compadd keeps only words
+    # that start with $PREFIX; hand _describe just those. A `:` in $PREFIX
+    # would need the escaping the `name:desc` entries use, so it gets them all.
+    local -a cands
+    if [[ -z $_matcher && $PREFIX != *[:\\]* ]]; then
+        cands=( ${(M)__aliases_ary:#${(b)PREFIX}*} )
+    else
+        cands=( "$__aliases_ary[@]" )
+    fi
+    _describe -t aliases alias cands
 }
 
 __zpwr_aliases "$@"

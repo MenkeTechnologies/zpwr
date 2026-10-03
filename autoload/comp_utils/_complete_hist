@@ -7,11 +7,17 @@ function _complete_hist(){
     # directly instead of piping fc through an external filter on every TAB.
     local -a last_ten
     local -i n
-    local e
+    local e pre
+
+    # With no matcher (the first matcher-list pass) compadd keeps only words
+    # that start with $PREFIX, so skip the others before normalizing them.
+    [[ -z $_matcher ]] && pre=${(b)PREFIX}
 
     for (( n = HISTCMD - 200; n < HISTCMD; n++ )); do
         (( n > 0 )) || continue
-        e=${history[$n]//$'\n'/\\n}
+        e=$history[$n]
+        [[ -n $pre && $e != ${~pre}* && $e != [[:space:]]* ]] && continue
+        e=${e//$'\n'/\\n}
         [[ -n $e ]] && last_ten+=( "${(j: :)${=e}}" )
     done
     _wanted last-ten expl 'last commands' compadd -Qa last_ten

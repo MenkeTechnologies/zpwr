@@ -6,7 +6,9 @@ __zpwr_galiases(){
     local galiasesAry
     local k v
 
-    if ( ! (( $+__galiases_ary )) || _cache_invalid galias_cache ) && ! _retrieve_cache galias_cache; then
+    # Braces, not a subshell: the test has no side effects to isolate, and a
+    # subshell copies the whole shell state on every TAB.
+    if { ! (( $+__galiases_ary )) || _cache_invalid galias_cache; } && ! _retrieve_cache galias_cache; then
         for k v in ${(kv)galiases}; do
             __galiases_ary+=($k:"${(q)v}")
         done
@@ -14,7 +16,16 @@ __zpwr_galiases(){
         _store_cache galias_cache __galiases_ary
     fi
 
-    _describe -t global-aliases 'global alias' __galiases_ary
+    # With no matcher (the first matcher-list pass) compadd keeps only words
+    # that start with $PREFIX; hand _describe just those. A `:` in $PREFIX
+    # would need the escaping the `name:desc` entries use, so it gets them all.
+    local -a cands
+    if [[ -z $_matcher && $PREFIX != *[:\\]* ]]; then
+        cands=( ${(M)__galiases_ary:#${(b)PREFIX}*} )
+    else
+        cands=( "$__galiases_ary[@]" )
+    fi
+    _describe -t global-aliases 'global alias' cands
 }
 
 __zpwr_galiases "$@"
