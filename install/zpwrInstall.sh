@@ -744,6 +744,11 @@ if [[ $justConfig != true ]]; then
     zpwrFileMustExist go_install.sh
     source go_install.sh
 
+    zpwrPrettyPrintBox "Installing zvcs and zmax"
+    zpwrGoInstallerDir
+    zpwrFileMustExist zvcs_zmax_install.sh
+    source zvcs_zmax_install.sh
+
     if ! test -f /usr/local/sbin/iftop;then
         zpwrPrettyPrintBox "No iftop so installing"
         zpwrInstallerUpdate iftop "$ZPWR_DISTRO_FAMILY"

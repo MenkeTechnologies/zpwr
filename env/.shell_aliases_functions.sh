@@ -140,6 +140,11 @@ if [[ "$PATH" != *"$ZPWR_SCRIPTS"* ]]; then
 #{{{                    MARK:Rust Config
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
+    # zvcs serves `git` once `zvcs zshadow` has populated ~/.zvcs
+    if [[ -x "$HOME/.zvcs/bin/git" ]]; then
+        export PATH="$HOME/.zvcs/bin:$PATH"
+        export MANPATH="$HOME/.zvcs/man:$MANPATH"
+    fi
     if zpwrCommandExists eza; then
         alias eza="$ZPWR_EXA_COMMAND"
     fi
