@@ -21,6 +21,9 @@ function zpwrMagicEnter () {
         if [[ $ZPWR_PROMPT == powerlevel10k ]]; then
             echo
             echo
+            echo
+            echo
+            echo
         fi
         zpwrExists _p9k_precmd_impl && _p9k_precmd_impl
         zle reset-prompt
