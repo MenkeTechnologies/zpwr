@@ -35,9 +35,8 @@ to
 the install root (typically
 .IR ~/.zpwr ).
 .PP
-ZPWR ships 457 verbs at runtime
-(\fBzpwr verbscount\fP), 2k+ aliases, 47k+ completions via
-zsh-more-completions, and a
+ZPWR ships a verb table (\fBzpwr verbscount\fP prints its size), shell
+aliases, completions via zsh-more-completions, and a
 tmux cockpit. Tab completion on
 .B zpwr
 .RI < TAB >
@@ -295,8 +294,6 @@ git
 .RB ( clone ", " colorsdiff ),
 docker
 .RB ( dockerwipe ", " dfimage ),
-encyclopedia regeneration
-.RB ( regenpdf ),
 and hundreds more \(em is enumerated by
 .BR "zpwr help" .
 .SH EXIT STATUS
@@ -330,7 +327,7 @@ entries.
 .TP
 .B ZPWR_LOGFILE
 Destination for
-.BR zpwr " " "logdebug | logerror | loginfo | logwarn"
+.BR zpwr " " "logdebug | logerror | loginfo | logtrace"
 and
 .BR taillog .
 .TP

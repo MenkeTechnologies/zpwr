@@ -21,10 +21,10 @@ environment. It contains every section of
 .BR zpwr (1)
 plus full enumerations of:
 .IP \(bu 2
-all 461 dispatcher verbs (alphabetic, with short description and the
+every dispatcher verb (alphabetic, with short description and the
 underlying command/function);
 .IP \(bu 2
-all 88+ documented
+the documented
 .B ZPWR_*
 environment variables;
 .IP \(bu 2
@@ -82,15 +82,15 @@ the install root (typically
 .PP
 ZPWR ships:
 .IP \(bu 2
-461+ dispatcher verbs across 26 alphabetic groups;
+dispatcher verbs grouped alphabetically;
 .IP \(bu 2
-538+ autoloaded zsh functions in
+autoloaded zsh functions in
 .IR $ZPWR/autoload/ ;
 .IP \(bu 2
-174+ standalone scripts in
+standalone scripts in
 .IR $ZPWR/scripts/ ;
 .IP \(bu 2
-147+ test cases under
+zunit tests under
 .IR $ZPWR/tests/ ;
 .IP \(bu 2
 a full tmux cockpit
@@ -1008,7 +1008,7 @@ edit kill from lsof output \(em \fIzpwrKillLsofVerbEdit\fP
 make a dir tree \(em \fIjd\fP
 .TP
 .B makefile
-make a dir tree with file at end \(em \fIj\fP
+make a dir tree with file at end then edit it \(em \fIj\fP
 .TP
 .B man
 arb \-\-fzf through man pages \(em \fIfm\fP
@@ -2029,7 +2029,7 @@ The
 shell-function entry point.
 .TP
 .I ~/.zpwr/autoload/
-538+ autoloaded zsh functions, organized into
+Autoloaded zsh functions, organized into
 .BR common/ ,
 .BR linux/ ,
 .BR darwin/ ,
@@ -2039,23 +2039,21 @@ shell-function entry point.
 .BR systemctl/ .
 .TP
 .I ~/.zpwr/scripts/
-174+ standalone shell scripts dispatched by verbs.
+Standalone shell scripts dispatched by verbs.
 .TP
 .I ~/.zpwr/tests/
-147+ zunit test files (
+zunit test files (
 .B "zpwr test"
 runs them).
 .TP
 .I ~/.zpwr/install/
-Installer scripts and seed dotfiles (54 entries).
+Installer scripts and seed dotfiles.
 .TP
 .I ~/.zpwr/tmux/
-Tmux config tree (25 files), including powerline themes and
-.BR tmm_*
-scripts.
+Tmux config tree (per-version and per-OS configs, pane layouts).
 .TP
 .I ~/.zpwr/docs/
-Encyclopedia LaTeX/HTML/PDF and 219+ wizard pages used by
+Encyclopedia LaTeX/HTML/PDF and wizard pages used by
 .BR "zpwr docs / wizard" .
 .TP
 .I ~/.zpwr/man/man1/
@@ -2135,8 +2133,8 @@ Search vim keybindings (
 .BR zpwrFzfVimKeybind ).
 .PP
 The cache files
-.IR $ZPWR/zpwrAllKeybindings.txt " and "
-.I $ZPWR/zpwrVimKeybindings.txt
+.IR $ZPWR_LOCAL/zpwrAllKeybindings.txt " and "
+.I $ZPWR_LOCAL/zpwrVimKeybindings.txt
 back the search; regenerate with
 .BR "zpwr regenkeybindings" .
 .SH CACHES AND COMPILATION
@@ -2175,16 +2173,22 @@ purge subsets.
 .B env cache
 .B "zpwr regenenvcache"
 writes
-.IR $ZPWR/zpwrEnvKey.txt " and " $ZPWR/zpwrEnvValue.txt ;
+.IR $ZPWR_LOCAL/zpwrEnvKey.txt " and " $ZPWR_LOCAL/zpwrEnvValue.txt ;
 .B envcachesearch
 queries it via arb \-\-fzf.
 .TP
 .B ctags / gtags
 .B "zpwr regenctags"
 writes
-.IR ~/tags ;
+.IR $ZPWR_SCRIPTS/tags
+(copied to
+.IR ~/tags );
 .B "zpwr regengtags"
-runs the same plus GNU global;
+writes GNU global
+.RB ( GTAGS ", " GPATH ", " GRTAGS )
+to
+.I ~/
+with the ctags parser;
 .B regengtagspygments
 and
 .B regengtagstype
