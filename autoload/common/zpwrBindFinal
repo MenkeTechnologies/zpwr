@@ -63,9 +63,9 @@ function zpwrBindFinal(){
     fi
 
     if [[ -n $ZSHRS_VERSION ]]; then
-        builtin export SHELL="$(which zshrs)"
+        builtin export SHELL="${${commands[zshrs]}:a}"
     else
-        builtin export SHELL="$(which zsh)"
+        builtin export SHELL="${${commands[zsh]}:a}"
     fi
 
     bindkey -M viins '^r' redo
