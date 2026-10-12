@@ -152,6 +152,12 @@ if [[ "$PATH" != *"$ZPWR_SCRIPTS"* ]]; then
 #**************************************************************
     export GOPATH="$HOME/go"
 
+    # drop PATH entries that do not exist (static lists above, /etc/paths.d, inherited env)
+    if [[ -n "$ZSH_VERSION" ]]; then
+        typeset -U path
+        path=( ${^path}(N-/) )
+    fi
+
 fi
 #}}}
 
