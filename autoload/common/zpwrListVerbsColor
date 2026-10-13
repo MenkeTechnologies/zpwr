@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zpwrListVerbs(){
+function zpwrListVerbsColor(){
 
     builtin emulate -L zsh
     setopt nullglob globdots extendedglob
@@ -52,4 +52,4 @@ function zpwrListVerbs(){
     printf "\n${reset}"
 }
 
-zpwrListVerbs "$@"
+zpwrListVerbsColor "$@"
