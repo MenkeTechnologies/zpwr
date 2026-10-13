@@ -49,7 +49,7 @@ PAGE_CONTENT() {
     print "  ${M}  zpwr lsof${N}${D}                           # list open files (enhanced)${N}"
     print "  ${M}  zpwr lsofedit${N}${D}                       # lsof then edit result${N}"
     print ""
-    print "  ${D}  zpwr lsof wraps lsof with arb --fzf filtering.${N}"
+    print "  ${D}  zpwr lsof wraps lsofrs with arb --fzf filtering.${N}"
     print "  ${D}  Useful when tracking down which process holds a file${N}"
     print "  ${D}  or which files a process has open.${N}"
     print ""

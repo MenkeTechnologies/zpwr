@@ -1,0 +1,29 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrLsofFillDown(){
+    # lsofrs elides COMMAND/PID/USER on rows continuing the previous
+    # process and leaves spaces inside command names unescaped; repeat
+    # the elided columns and join command words with _ so every row has
+    # the lsof column layout (PID is always the second field)
+    command awk '
+        /^COMMAND/ { pidEnd = index($0, "PID") + 2; print; next }
+        {
+            head = substr($0, 1, pidEnd)
+            if (head ~ /^[ \t]*$/) {
+                print cmd, pid, user, substr($0, pidEnd + 1)
+                next
+            }
+            sub(/ +$/, "", head)
+            n = match(head, /[0-9]+$/)
+            pid = substr(head, n)
+            cmd = substr(head, 1, n - 1)
+            sub(/ +$/, "", cmd)
+            gsub(/ /, "_", cmd)
+            split(substr($0, pidEnd + 1), rest)
+            user = rest[1]
+            print cmd, pid, substr($0, pidEnd + 1)
+        }
+    '
+}
+
+zpwrLsofFillDown "$@"

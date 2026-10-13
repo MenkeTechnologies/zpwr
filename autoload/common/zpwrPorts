@@ -71,7 +71,7 @@ function zpwrPorts(){
         _bb
         printf "\n"
 
-        pids=( $(command lsof -ti :"$port_filter" 2>/dev/null) )
+        pids=( $(command lsofrs -ti :"$port_filter" 2>/dev/null) )
         if (( $#pids == 0 )); then
             printf "  ${D}No process found on port %s${N}\n\n" "$port_filter"
             return 0
@@ -95,9 +95,9 @@ function zpwrPorts(){
     local -i count=0
 
     if [[ -n "$port_filter" ]]; then
-        lsof_cmd="command lsof -nP -iTCP:$port_filter -sTCP:LISTEN"
+        lsof_cmd="command lsofrs -nP -iTCP:$port_filter -sTCP:LISTEN | zpwrLsofFillDown"
     else
-        lsof_cmd="command lsof -nP -iTCP -sTCP:LISTEN"
+        lsof_cmd="command lsofrs -nP -iTCP -sTCP:LISTEN | zpwrLsofFillDown"
     fi
 
     # header

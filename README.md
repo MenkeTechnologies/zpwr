@@ -185,7 +185,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - ergonomic, repeating ztmux keybindings for next and previous windows
 - zsh keybindings to arb --fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimfilesearch`
 - zsh keybindings to arb --fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimwordsearch`
-- zsh keybindings to arb --fzf search of network processes with lsof return PIDs `zpwr lsof` -- scan the local net like a deck jockey
+- zsh keybindings to arb --fzf search of network processes with lsofrs return PIDs `zpwr lsof` -- scan the local net like a deck jockey
 - zsh function to cache all git directories `zpwr regengitrepocache`
 - zsh function to edit the cached git-directory list `zpwr gitreposfile`
 - zsh function to refresh the dirty-repo cache and run a command in every dirty repo `zpwr gitreposdirtyexec` -- find every repo with uncommitted cargo

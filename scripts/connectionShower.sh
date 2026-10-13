@@ -7,4 +7,4 @@
 ##### Notes:
 #}}}***********************************************************
 
-bash myWatchNoBlink.sh "sudo lsof -i | sed s@""$(whoami)""@@" 1
+bash myWatchNoBlink.sh "sudo lsofrs -i | zsh $ZPWR_AUTOLOAD_COMMON/zpwrLsofFillDown | sed s@""$(whoami)""@@" 1
