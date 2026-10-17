@@ -1848,11 +1848,16 @@ Typing leading quote/paren/bracket inserts the trailing one after the caret.
 .B ZPWR_VIM
 Default vim command (override in tokens file).
 .TP
+.B ZPWR_ZMAX
+Editor opened by the picker-driven editor widgets and verbs. Defaults to
+.BR vim ,
+upgraded to zmax (else nvim) once PATH is assembled.
+.TP
 .B ZPWR_EDITOR_TO_VIM
 Set
 .B EDITOR
 to
-.BR $ZPWR_VIM .
+.BR $ZPWR_ZMAX .
 .TP
 .B ZPWR_EMACS
 Emacs command.
@@ -1914,6 +1919,11 @@ Sudo prefix added on permission denied.
 .B ZPWR_FULL_SUDO
 Sudo for aliases and expansion.
 .SS Tmux
+.TP
+.B ZPWR_ZTMUX
+Multiplexer command. Defaults to
+.BR tmux ,
+upgraded to ztmux once PATH is assembled.
 .TP
 .B ZPWR_TMUX_PREFIX_MAC
 Tmux prefix on macOS.

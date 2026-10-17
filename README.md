@@ -627,7 +627,11 @@ export ZPWR_DEFAULT_OMZ_THEME=simonoff
 export ZPWR_DELIMITER_CHAR='%'
 # the default vim command, override in tokens file
 export ZPWR_VIM='nvim'
-# set EDITOR to $ZPWR_VIM command
+# the editor opened by the picker-driven (arb --fzf) editor widgets/verbs;
+# static default is vim, upgraded to zmax (else nvim) once PATH is assembled.
+# override in tokens file to pin a specific editor
+export ZPWR_ZMAX='vim'
+# set EDITOR to $ZPWR_ZMAX (zmax, else nvim, else vim) command
 export ZPWR_EDITOR_TO_VIM='true'
 # the emacs command
 export ZPWR_EMACS='command emacs -nw'
@@ -722,6 +726,9 @@ export ZPWR_SURROUND=true
 export ZPWR_TABSTOP=__________
 # include tabstop aliases
 export ZPWR_TABSTOP_ALIASES=true
+# the multiplexer command: tmux, upgraded to ztmux once PATH is assembled.
+# override in tokens file to pin a specific binary
+export ZPWR_ZTMUX='tmux'
 # the ztmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
 # the ztmux prefix on linux
