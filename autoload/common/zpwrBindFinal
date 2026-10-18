@@ -62,6 +62,12 @@ function zpwrBindFinal(){
         export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
     fi
 
+    # cargo-installed tools (stryke, arb, ztmux, zshrs, ...) are installed here by install/rustupinstall.sh;
+    # nothing else in zpwr puts it on PATH
+    if [[ -d "$HOME/.cargo/bin" && ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
+        export PATH="$HOME/.cargo/bin:$PATH"
+    fi
+
     if [[ -n $ZSHRS_VERSION ]]; then
         builtin export SHELL="${${commands[zshrs]}:a}"
     else
