@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrBindZvcsShadow(){
+
+    # zvcs serves git only while ~/.zvcs/bin precedes every stock git on PATH:
+    # hub (alias git=hub), editors and scripts exec the first git they find,
+    # and a stock git never writes the zcommands log. Plugins loaded after
+    # .shell_aliases_functions.sh put /opt/homebrew/bin back in front, so this
+    # runs in the last turbo atload.
+    local zvcs_bin="$HOME/.zvcs/bin"
+
+    [[ -x "$zvcs_bin/git" ]] || return 0
+    path=( "$zvcs_bin" ${path:#$zvcs_bin} )
+}
+
+zpwrBindZvcsShadow "$@"

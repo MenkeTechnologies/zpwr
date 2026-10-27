@@ -644,11 +644,11 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     # F-Sy-H and still have to fire at this slot.
     if [[ $ZPWR_NATIVE_ZLE == true ]]; then
         zinit ice lucid nocompile nocd as'null' wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" nocompletions \
-            atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
+            atload='zpwrDedupPaths;zpwrBindZvcsShadow;zpwrBindPreexecChpwd'
         zinit light \
             MenkeTechnologies/zsh-zinit-final
     else
-        zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" nocompletions atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
+        zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}a" nocompletions atload='zpwrDedupPaths;zpwrBindZvcsShadow;zpwrBindPreexecChpwd'
         zinit load \
             $ZPWR_ZDHARMA/fast-syntax-highlighting
     fi
