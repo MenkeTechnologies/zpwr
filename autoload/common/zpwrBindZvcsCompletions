@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrBindZvcsCompletions(){
+
+    # `git zshadow` installs the zvcs-forked _git (the z* verbs and the
+    # dashed git-<verb> links in ~/.zvcs/bin) in ~/.zvcs/completions. It
+    # completes only if that dir precedes every other _git on fpath,
+    # zsh-more-completions' override_src included, when compinit runs.
+    local zvcs_comps="$HOME/.zvcs/completions"
+
+    [[ -f "$zvcs_comps/_git" ]] || return 0
+    fpath=( "$zvcs_comps" ${fpath:#$zvcs_comps} )
+}
+
+zpwrBindZvcsCompletions "$@"

@@ -480,6 +480,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     #override zicompinit
     zicompinit() {
+        zpwrBindZvcsCompletions
         compinit -u -d ${ZINIT[ZCOMPDUMP_PATH]:-${ZDOTDIR:-$HOME}/.zcompdump} "${(Q@)${(z@)ZINIT[COMPINIT_OPTS]}}" 2>/dev/null
     }
 
@@ -663,6 +664,7 @@ elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
 
     builtin source "$ZPWR_PLUGIN_MANAGER_HOME/oh-my-zsh.sh"
 
+    zpwrBindZvcsCompletions
     if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
         # Load only from secure directories
         compinit -i -C -d "$ZSH_COMPDUMP"
