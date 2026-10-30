@@ -1,0 +1,4 @@
+#compdef banner.stk
+# Source: script source ~/.zpwr/scripts/banner.stk
+
+_nothing

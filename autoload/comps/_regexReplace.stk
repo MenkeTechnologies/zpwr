@@ -1,0 +1,18 @@
+#compdef regexReplace.stk
+# Source: script source ~/.zpwr/scripts/regexReplace.stk
+
+function _regexReplace.stk(){
+
+    local -a arguments
+
+    arguments=(
+        '(- *)'{-h,--help}'[show usage and exit]'
+        {-r+,--regex=}'[replace this regex (default carriage return)]:regex:'
+        '--replacement=[replace regex with this string (default empty)]:replacement string:'
+        '*:file or directory:_files'
+    )
+
+    _arguments -s -S $arguments
+}
+
+_regexReplace.stk "$@"

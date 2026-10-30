@@ -1,0 +1,4 @@
+#compdef gitSdiffColorizer.stk
+# Source: script source ~/.zpwr/scripts/gitSdiffColorizer.stk
+
+_nothing

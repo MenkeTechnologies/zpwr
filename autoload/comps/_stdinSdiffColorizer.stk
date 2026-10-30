@@ -1,0 +1,15 @@
+#compdef stdinSdiffColorizer.stk
+# Source: script source ~/.zpwr/scripts/stdinSdiffColorizer.stk
+
+function _stdinSdiffColorizer.stk(){
+
+    local -a arguments
+
+    arguments=(
+        '1:number of columns (default tput cols):'
+    )
+
+    _arguments -s -S $arguments
+}
+
+_stdinSdiffColorizer.stk "$@"

@@ -1,0 +1,4 @@
+#compdef animation
+# Source: script source ~/.zpwr/scripts/animation
+
+_nothing

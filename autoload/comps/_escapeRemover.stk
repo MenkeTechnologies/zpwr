@@ -1,0 +1,4 @@
+#compdef escapeRemover.stk
+# Source: script source ~/.zpwr/scripts/escapeRemover.stk
+
+_nothing

@@ -1,0 +1,10 @@
+#compdef c.stk
+# Source: script source ~/.zpwr/scripts/c.stk
+
+local -a arguments
+
+arguments=(
+  '*:file:_files'
+)
+
+_arguments -s -S $arguments

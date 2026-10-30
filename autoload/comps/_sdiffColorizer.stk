@@ -1,0 +1,16 @@
+#compdef sdiffColorizer.stk
+# Source: script source ~/.zpwr/scripts/sdiffColorizer.stk
+
+function _sdiffColorizer.stk(){
+
+    local -a arguments
+
+    arguments=(
+        '1:first file:_files'
+        '2:second file:_files'
+    )
+
+    _arguments -s -S $arguments
+}
+
+_sdiffColorizer.stk "$@"
